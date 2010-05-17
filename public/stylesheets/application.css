@@ -1,0 +1,33 @@
+#flash_notice {
+  font-size: 11px;
+  background-color: #CFC;
+  border: solid 1px #6C6;
+  padding: 5px 8px;
+  margin-top: 10px;
+}
+
+#flash_error {
+  font-size: 11px;
+  background-color: #FCC;
+  border: solid 1px #C66;
+  padding: 5px 8px;
+  margin-top: 10px;
+}
+
+#flash_alert {
+  font-size: 11px;
+  background-color: #FCC;
+  border: solid 1px #C66;
+  padding: 5px 8px;
+  margin-top: 10px;
+}
+
+.space {
+  padding: 0px 3px 0px 3px;
+}
+
+.css1 { font-size: 1.0em; }
+.css2 { font-size: 1.2em; }
+.css3 { font-size: 1.4em; }
+.css4 { font-size: 1.6em; }
+

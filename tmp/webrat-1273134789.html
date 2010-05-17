@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Experiences: index</title>
+  <link href="/stylesheets/scaffold.css?1273129715" media="screen" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<p style="color: green"></p>
+
+<h1>Listing experiences</h1>
+
+<table>
+  <tr>
+    <th>Content</th>
+  </tr>
+
+
+  <tr>
+    <td><a href="/experiences/1">ruby</a></td>
+    <td><a href="/experiences/1">Show</a></td>
+    <td><a href="/experiences/1/edit">Edit</a></td>
+    <td><a href="/experiences/1" onclick="if (confirm('Are you sure?')) { var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method'); m.setAttribute('value', 'delete'); f.appendChild(m);f.submit(); };return false;">Destroy</a></td>
+  </tr>
+
+  <tr>
+    <td><a href="/experiences/2">rails</a></td>
+    <td><a href="/experiences/2">Show</a></td>
+    <td><a href="/experiences/2/edit">Edit</a></td>
+    <td><a href="/experiences/2" onclick="if (confirm('Are you sure?')) { var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method'); m.setAttribute('value', 'delete'); f.appendChild(m);f.submit(); };return false;">Destroy</a></td>
+  </tr>
+
+</table>
+
+<br />
+
+<a href="/experiences/new">New experience</a>
+
+
+</body>
+</html>

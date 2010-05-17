@@ -1,0 +1,24 @@
+<% form_for @goal do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :title, "Goal Name"%><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :content, "Detail" %><br />
+    <%= f.text_area :content, :size => '30x5' %>
+  </p>
+  <p>
+    <%= f.label :start_at %><br />
+    <%= f.date_select :start_at, :use_month_numbers => true  %>
+  </p>
+  <p>
+    <%= f.label :tag %><br />
+    <%= f.text_field :tag_list %>
+  </p>
+  <p>
+    <%= f.label :state %><br />
+    <%= f.select :state, GOAL_STATES.map{|k,v| [v, k]} %>
+  </p>
+  <p><%= f.submit "Submit" %></p>
+<% end %>

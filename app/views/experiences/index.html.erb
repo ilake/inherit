@@ -1,0 +1,40 @@
+<% title "#{@user.username} experiences" %>
+<h1><%= @user.username %> experiences</h1>
+
+<table>
+  <tr>
+    <th>Type</th>
+    <th>Goal</th>
+    <th>Content</th>
+    <th>Tags</th>
+    <th>Start At</th>
+    <th>End At</th>
+  </tr>
+
+<% @experiences.each do |experience| %>
+  <tr>
+    <td><%= EXP_TYPE[experience.exp_type] if experience.exp_type %></td>
+    <td><%= link_to experience.goal.title, experience.goal if experience.goal %></td>
+    <td><%= link_to truncate_u(experience.content), experience %></td>
+    <td>
+      <% tag_link experience %>
+    </td>
+    <td><%= experience.start_at.to_s(:date) if experience.start_at %></td>
+    <td><%= experience.end_at.to_s(:date) if experience.end_at %></td>
+    <td><%= link_to 'Show', user_experience_path(@user, experience) %></td>
+
+    <% if can? :update, experience %>
+      <td><%= link_to 'Edit', edit_experience_path(experience) %></td>
+    <% end %>
+    <% if can? :destroy, experience %>
+      <td><%= link_to 'Destroy', experience, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<% if can? :create, Experience %>
+  <%= link_to 'New experience', new_user_experience_path(current_user) %>
+<% end %>

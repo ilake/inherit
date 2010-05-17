@@ -1,0 +1,25 @@
+<h1>Home</h1>
+<h3>User's goals and experiences</h3>
+
+<ul>
+  <% @users.each do |u| %>
+    <li>
+      <%= link_to "#{u.username} goals", user_goals_path(u)%>
+      <%= link_to "#{u.username} experiences", user_experiences_path(u)%>
+    </li>
+  <% end %>
+</ul>
+
+<h3>experiences tags</h3>
+<div>
+  <% tag_cloud(@exp_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
+    <%= link_to tag.name, tagging_url(tag.name), :class => css_class %>
+  <% end %>
+</div>
+
+<h3>goals tags</h3>
+<div>
+  <% tag_cloud(@goal_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
+    <%= link_to tag.name, tagging_url(tag.name), :class => css_class %>
+  <% end %>
+</div>

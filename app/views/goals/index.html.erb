@@ -1,0 +1,32 @@
+<% title "#{@user.username} goals" %>
+
+<h1><%= @user.username %> goals</h1>
+<table>
+  <tr>
+    <th>title</th>
+    <th>detail</th>
+    <th>Tags</th>
+    <th>Start At</th>
+    <th>State</th>
+  </tr>
+  <% for goal in @goals %>
+    <tr>
+      <td><%=h goal.title %></td>
+      <td><%=h truncate_u(goal.content) %></td>
+      <td><%=h tag_link goal %></td>
+      <td><%=h goal.start_at %></td>
+      <td><%=h goal.state %></td>
+      <td><%= link_to "Show", goal %></td>
+    <% if can? :update, goal %>
+      <td><%= link_to "Edit", edit_goal_path(goal) %></td>
+    <% end %>
+    <% if can? :destroy, goal%>
+      <td><%= link_to "Destroy", goal, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% end %>
+    </tr>
+  <% end %>
+</table>
+
+<% if can? :create, Goal%>
+  <p><%= link_to "New Goal", new_goal_path %></p>
+<% end %>

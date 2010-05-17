@@ -1,0 +1,28 @@
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :content %><br />
+    <%= f.text_area :content, :size => '30x5' %>
+  </p>
+  <p>
+    <%= f.label :start_at %><br />
+    <%= f.datetime_select :start_at, :use_month_numbers => true %>
+  </p>
+  <p>
+    <%= f.label :end_at %><br />
+    <%= f.datetime_select :end_at, :use_month_numbers => true %>
+  </p>
+  <p>
+    <%= f.label :exp_type, '影響' %><br />
+    <%= f.select :exp_type, EXP_TYPE.map{|k,v| [v, k] }%>
+  </p>
+  <p>
+    <%= f.label :goal_id, 'Goal'%><br />
+    <%= f.select :goal_id, current_user.goals.map{|g|[g.title, g.id]}, {:prompt => 'Select Goal'}%>
+  </p>
+  <p>
+    <%= f.label :tag %><br />
+    <%= f.text_field :tag_list %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>

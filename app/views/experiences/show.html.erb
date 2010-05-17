@@ -1,0 +1,52 @@
+<% title "#{@experience.user.username} experiences" %>
+<h2>
+  <%= link_to "#{@experience.user.username} experiences", @experience.user %>
+</h2>
+<p>
+  <b>Content:</b>
+  <h1><%=h @experience.content %></h1>
+</p>
+
+<% if can? :update, @experience %>
+  <%= link_to 'Edit', edit_experience_path(@experience) %>
+<% end %>
+
+<h3>類似經驗</h3>
+  <ul>
+    <% @experience.find_related_tags.each do |e| %>
+      <li><%= link_to truncate_u(e.content), e%></li>
+    <% end %>
+  </ul>
+  <hr >
+  <h3>Votes</h3>
+  GOOD :<%= @experience.votes_for %>
+  BAD :<%= @experience.votes_against %>
+
+  <%# unless @experience.voted_by?(current_user)%>
+    <% form_for @vote do |f| %>
+      <%= hidden_field_tag :voteable_type, @vote.voteable_type %>
+      <%= hidden_field_tag :exp_id, @experience.id%>
+      <p>
+        Bad: <%= radio_button_tag :vote, false %>
+        Good: <%= radio_button_tag :vote, true %>
+      </p>
+      <p><%= f.submit "Submit" %></p>
+    <% end %>
+  <%# end %>
+
+
+
+  <hr >
+<h3>New Comment</h3>
+<%= render :partial => 'comments/form' %>
+
+<h3>Comments</h3>
+<ul>
+  <% @comments.each do |c| %>
+    <li>
+      <%= c.comment %>
+    </li>
+  <% end %>
+</ul>
+
+

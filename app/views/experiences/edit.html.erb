@@ -1,0 +1,8 @@
+<h1>Editing experience</h1>
+
+<% form_for(@experience) do |f| %>
+  <%= render :partial => 'form', :locals => {:f => f} %>
+<% end %>
+
+<%= link_to 'Show', @experience %> |
+<%= link_to 'Back', user_experiences_path(current_user) %>

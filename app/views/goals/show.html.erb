@@ -1,0 +1,45 @@
+<% title "#{@goal.user.username} goal #{@goal.title}" %>
+
+<h2>
+  <%= link_to "THE USER", user_goals_path(@goal.user) %>
+</h2>
+<p>
+  <strong>Start At:</strong>
+  <%=h @goal.start_at %>
+</p>
+<p>
+  <strong>Title:</strong>
+  <%=h @goal.title %>
+</p>
+<p>
+  <strong>Content:</strong>
+  <%=h @goal.content %>
+</p>
+<p>
+  <strong>State:</strong>
+  <%=h @goal.state %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_goal_path(@goal) %> |
+  <%= link_to "Destroy", @goal, :confirm => 'Are you sure?', :method => :delete %> |
+</p>
+
+<h3>類似目標</h3>
+  <ul>
+    <% @goal.find_related_tags.each do |g| %>
+      <li><%= link_to truncate_u(g.title), g%></li>
+    <% end %>
+  </ul>
+  <hr >
+
+<h3><%= @goal.title %> experiences</h3>
+<ul>
+  <% @goal.experiences.each do |e| %>
+    <li><%= link_to truncate_u(e.content), e%> <%= e.start_at.to_s(:date) %></li>
+  <% end %>
+</ul>
+
+<% if can? :create, Experience %>
+  <%= link_to 'New experience', new_goal_experience_path(@goal) %>
+<% end %>
