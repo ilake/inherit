@@ -23,6 +23,9 @@ Rails::Initializer.run do |config|
   config.gem 'devise', :version => '1.0.7'
   config.gem 'cancan'
   config.gem "acts-as-taggable-on", :source => "http://gemcutter.org", :version => '2.0.0.rc1'
+  config.gem 'hoptoad_notifier'
+  config.gem 'tiny_mce'
+  config.gem 'sanitize'
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named

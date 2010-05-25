@@ -1,3 +1,8 @@
+/* body */
+body {
+/*  font-family: 'Droid Serif', arial, serif; */
+}
+
 #flash_notice {
   font-size: 11px;
   background-color: #CFC;
@@ -31,3 +36,203 @@
 .css3 { font-size: 1.4em; }
 .css4 { font-size: 1.6em; }
 
+
+/* homepage */
+#homepage_container {
+  margin-left:auto;
+  margin-right:auto;
+  position:relative;
+  width:800px;
+}
+
+/* header */
+#homepage_header {
+  border-color:#E1ECFE;
+  border-style:solid;
+  border-width:1px;
+  height:67px
+}
+
+#hompage_logo {
+  float:left;
+  height:67px;
+  margin-left:20px;
+  position:relative;
+  width:200px;
+}
+
+#login {
+  color:#FFFFFF;
+  float:right;
+  margin-bottom:0;
+  margin-left:0;
+  margin-right:15px;
+  margin-top:26px;
+  position:relative;
+  text-align:right;
+}
+/* header end */
+
+#overview {
+  height:81px;
+  margin-bottom:0;
+  margin-top:10;
+  position:relative;
+  padding:10px;
+}
+
+#leftitem {
+  margin-top:20px;
+  width:528px;
+  float:left;
+}
+
+#latest_exp {
+  border: 1px solid #EFEFEF;
+  padding: 5px;
+}
+
+#exp_tags {
+  margin-top:20px;
+  border: 1px solid #EFEFEF;
+  padding: 5px;
+}
+
+#rightitem {
+  margin-top:20px;
+  width:241px;
+  float:right;
+  background:#FFFFDF;
+  border:#FDEEA6 1px solid;
+  padding:18px 10px;
+  *padding:16px 10px;
+  position:relative;
+}
+
+/* common site */
+#container {
+  margin-bottom:0;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:0;
+  width:960px !important;
+}
+
+#dashboard {
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px #cccccc solid;
+  height: 23px;
+  vertical-align: middle;
+}
+#dashboard ul li {
+  float: left;
+}
+
+#dashboard ul #dashboard_options {
+  float: right;
+}
+
+#logo {
+  float: left;
+  width: 130px;
+  height: auto;
+  background: none;
+}
+
+#header {
+  overflow: hidden;
+  height: 40px;
+}
+
+#menus {
+  float: right;
+  height: auto;
+  background: none;
+}
+
+#main_menu li {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+#main_menu a {
+  display: block;
+  float: left;
+  padding: 7px 10px 4px 12px;
+  border-bottom: none;
+  color: #777;
+}
+
+/* user home */
+#home_content {
+  width:590px;
+  float:left;
+}
+
+#home_sidebar {
+  width:300px;
+  margin-top:75px;
+  padding-bottom:150px;
+  float:right;
+}
+
+#home_latest_exps {
+  border:1px solid #EFEFEF;
+}
+
+#page_head {
+  font-size:23px;
+  font-weight:bold;
+  line-height:30px;
+  padding-bottom:15px;
+  padding-top:30px;
+}
+
+#home_user_exps {
+  border: 1px solid #d7d7d7;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+#location {
+  height:30px;
+  padding:15px;
+  float: left;
+  width: 130px;
+  height: auto;
+  background: none;
+}
+
+
+/* User experience index page */
+#exp_chart {
+  height:250px;
+  margin-bottom:50px;
+  margin-top:20px;
+  border:3px solid #EFEFEF;
+}
+/* User experience index page END */
+
+/* User experience show page */
+#exp_show_main {
+  float:right;
+  width:700px;
+  padding:5px;
+}
+
+#exp_show_side {
+  float:left;
+  width:200px;
+  padding:5px;
+}
+
+#exp_show_time {
+  margin-right:10px;
+}
+
+#exp_show_content {
+  margin-bottom:40px;
+}
+/* User experience show page END */

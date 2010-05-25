@@ -1,7 +1,10 @@
+<% content_for :head do %>
+  <%= include_tiny_mce_if_needed %>
+<% end %>
   <%= f.error_messages %>
   <p>
     <%= f.label :content %><br />
-    <%= f.text_area :content, :size => '30x5' %>
+    <%= f.text_area :content, :size => '30x5', :class => "mceEditor" %>
   </p>
   <p>
     <%= f.label :start_at %><br />
@@ -13,7 +16,7 @@
   </p>
   <p>
     <%= f.label :exp_type, '影響' %><br />
-    <%= f.select :exp_type, EXP_TYPE.map{|k,v| [v, k] }%>
+    <%= f.select :exp_type, EXP_TYPE.to_select_options%>
   </p>
   <p>
     <%= f.label :goal_id, 'Goal'%><br />

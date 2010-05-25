@@ -5,6 +5,7 @@
   <tr>
     <th>title</th>
     <th>detail</th>
+    <th>experiences_count</th>
     <th>Tags</th>
     <th>Start At</th>
     <th>State</th>
@@ -13,6 +14,7 @@
     <tr>
       <td><%=h goal.title %></td>
       <td><%=h truncate_u(goal.content) %></td>
+      <td><%=h goal.experiences_count %></td>
       <td><%=h tag_link goal %></td>
       <td><%=h goal.start_at %></td>
       <td><%=h goal.state %></td>

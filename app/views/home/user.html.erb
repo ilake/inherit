@@ -1,0 +1,34 @@
+<div id='home_content'>
+  <div id="page_head">
+    <span lang="Hello" class="translatable">Hello</span> <%= current_user.username %>!
+  </div>
+  <h4>你的經驗</h4>
+  <div id='home_user_exps'>
+    <ul>
+      <% @user_experiences.each do |experience| %>
+        <li><%= link_to truncate_u(Sanitize.clean(experience.content), 20), experience %></li>
+      <% end %>
+    </ul>
+  </div>
+  <h4>最新經驗</h4>
+  <div id='home_latest_exps'>
+    <ul>
+      <% @latest_experiences.each do |experience| %>
+        <li>
+          <%= link_to experience.user.username, user_experiences_path(experience.user) %>
+          <%= link_to truncate_u(Sanitize.clean(experience.content), 40), experience %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<div id='home_sidebar'>
+  <h4>類似經驗</h4>
+  <div id='home_latest_exps'>
+    <ul>
+      <% @near_experience.find_related_tags.each do |experience| %>
+        <li> <%= link_to truncate_u(Sanitize.clean(experience.content), 40), experience %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

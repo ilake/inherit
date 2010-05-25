@@ -1,25 +1,52 @@
-<h1>Home</h1>
-<h3>User's goals and experiences</h3>
-
-<ul>
-  <% @users.each do |u| %>
-    <li>
-      <%= link_to "#{u.username} goals", user_goals_path(u)%>
-      <%= link_to "#{u.username} experiences", user_experiences_path(u)%>
-    </li>
-  <% end %>
-</ul>
-
-<h3>experiences tags</h3>
-<div>
-  <% tag_cloud(@exp_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
-    <%= link_to tag.name, tagging_url(tag.name), :class => css_class %>
-  <% end %>
+<div id="homepage_header">
+  <h1 id='hompage_logo'>Experiences.</h1>
+  <div id='login'>
+    <%= link_to "現在就加入", new_user_registration_path %> 
+    |
+    <%= link_to "登錄", new_user_session_path %>
+  </div>
 </div>
 
-<h3>goals tags</h3>
-<div>
-  <% tag_cloud(@goal_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
-    <%= link_to tag.name, tagging_url(tag.name), :class => css_class %>
-  <% end %>
+<div id="overview">
+  <h1>紀錄你的人生，分享你的經驗</h1>
 </div>
+<div id="leftitem">
+  <div id='latest_exp'>
+    <h3>最新經驗</h3>
+    <ul>
+      <% @experiences.each do |experience| %>
+        <li><%= link_to truncate_u(Sanitize.clean(experience.content), 30), experience %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div id='exp_tags'>
+    <h3>經驗類型</h3>
+    <div>
+      <% tag_cloud(@exp_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
+        <%= link_to tag.name, tagging_url(tag.name), :class => css_class %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div id="rightitem">
+  <form method="post" action="/users"><div style="margin: 0pt; padding: 0pt; display: inline;">
+      <input type="hidden" value="RciXluAjQBO7ysdH2xzr22V+NCkkvkS01SoXZsZi3Nk=" name="authenticity_token"></div>  
+    <p><label for="user_email">Email</label></p>
+    <p><input type="text" value="" size="15" name="user[email]" id="user_email"></p>
+
+    <p><label for="user_username">Username</label></p>
+    <p><input type="text" size="15" name="user[username]" id="user_username"></p>
+
+    <p><label for="user_password">Password</label></p>
+    <p><input type="password" size="15" name="user[password]" id="user_password"></p>
+
+    <p><label for="user_password_confirmation">Password confirmation</label></p>
+    <p><input type="password" size="15" name="user[password_confirmation]" id="user_password_confirmation"></p>
+
+    <p><input type="submit" value="Sign up" name="commit" id="user_submit"></p>
+  </form>
+</div>
+
+

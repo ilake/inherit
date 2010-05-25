@@ -1,0 +1,16 @@
+<% form_for @profile, :url => user_profile_path(current_user), :method => :put do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :birthday %><br />
+    <%= f.date_select :birthday, :start_year => 1920, :use_month_numbers => true %>
+  </p>
+  <p>
+    <%= f.label :gender %><br />
+    <%= f.select :gender, GENDER_TYPE.to_select_options %>
+  </p>
+  <p>
+    <%= country_select("profile", "location_list") %>
+  </p>
+
+  <p><%= f.submit "Submit" %></p>
+<% end %>

@@ -1,12 +1,15 @@
 class ExperiencesController < ApplicationController
+  uses_tiny_mce(:options => AppConfig.simple_mce_options, :only => [:new, :edit]) if defined?(AppConfig)
   before_filter :authenticate_user!, :except => [:index , :show]
   before_filter :user_selected, :only => [:index]
-  #load_and_authorize_resource :nested => :user
+  load_and_authorize_resource :nested => :user
 
   # GET /experiences
   # GET /experiences.xml
   def index
-    @experiences = user_selected.experiences.descend_by_start_at.find(:all, :include => [:goal])
+    experiences = user_selected.experiences.descend_by_start_at.find(:all, :include => [:goal])
+    @experience_groups = experiences.group_by{|e| e.start_at.at_beginning_of_month}
+    @goals = user_selected.goals.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -50,6 +53,7 @@ class ExperiencesController < ApplicationController
     @experience = current_user.experiences.new(params[:experience])
     respond_to do |format|
       if @experience.save
+        current_user.tag(@experience, :with => @experience.tag_list)
         flash[:notice] = 'Experience was successfully created.'
         format.html { redirect_to user_experiences_path(current_user) }
         format.xml  { render :xml => @experience, :status => :created, :location => @experience }
@@ -66,6 +70,8 @@ class ExperiencesController < ApplicationController
     @experience = current_user.experiences.find(params[:id])
     respond_to do |format|
       if @experience.update_attributes(params[:experience])
+        current_user.tag(@experience, :with => @experience.tag_list.to_s, :on => :tags)
+
         flash[:notice] = 'Experience was successfully updated.'
         format.html { redirect_to user_experiences_path(current_user) }
         format.xml  { head :ok }

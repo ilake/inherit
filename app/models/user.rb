@@ -25,6 +25,7 @@
 
 class User < ActiveRecord::Base
   acts_as_voter
+  acts_as_tagger
 
   # Include default devise modules. Others available are:
   # :http_authenticatable, :token_authenticatable, :lockable, :timeoutable and :activatable
@@ -37,11 +38,13 @@ class User < ActiveRecord::Base
   validates_presence_of :username
   validates_uniqueness_of :username
 
+  has_one :profile, :dependent => :destroy
 
   has_many :goals
   has_many :experiences
   has_many :comments
 
+  delegate :location_list, :to => :profile
 
   def to_param
     "#{id}-#{username}"
@@ -54,4 +57,10 @@ class User < ActiveRecord::Base
   def is_guest?
     !id
   end
+
+  private
+  def after_create
+    self.create_profile
+  end
+
 end

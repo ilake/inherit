@@ -1,0 +1,20 @@
+<% title "Profile" %>
+
+<p>
+  <strong>Birthday:</strong>
+  <%=h @profile.birthday %>
+</p>
+<p>
+  <strong>Gender:</strong>
+  <%= GENDER_TYPE[@profile.gender.to_s] %>
+</p>
+<p>
+  <strong>Location:</strong>
+  <%= @profile.location_list %>
+</p>
+
+<p>
+  <% if can? :update, @profile %>
+    <%= link_to "Edit", edit_user_profile_path(current_user)%>
+  <% end %>
+</p>

@@ -3,6 +3,7 @@
 
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
+  helper_method :current_user_location
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   # Scrub sensitive parameters from your log
@@ -16,5 +17,9 @@ class ApplicationController < ActionController::Base
   private
   def user_selected
     @user ||= User.find(params[:user_id])
+  end
+
+  def current_user_location
+    session[:current_location] ||= current_user.location_list.to_s
   end
 end

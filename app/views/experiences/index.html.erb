@@ -1,36 +1,80 @@
 <% title "#{@user.username} experiences" %>
-<h1><%= @user.username %> experiences</h1>
+<div id='exp_chart'>
+
+</div>
+
+<h2>Goals</h2>
+<table>
+  <tr>
+    <th>title</th>
+    <th>detail</th>
+    <th>experiences_count</th>
+    <th>Tags</th>
+    <th>Start At</th>
+    <th>State</th>
+  </tr>
+  <% for goal in @goals %>
+    <tr>
+      <td><%=h goal.title %></td>
+      <td><%=h truncate_u(goal.content) %></td>
+      <td><%=h goal.experiences_count %></td>
+      <td><%h tag_link goal %></td>
+      <td><%=h goal.start_at.to_s(:date) if goal.start_at %></td>
+      <td><%=h goal.state %></td>
+      <td><%= link_to "Show", goal %></td>
+    <% if can? :update, goal %>
+      <td><%= link_to "Edit", edit_goal_path(goal) %></td>
+    <% end %>
+    <% if can? :destroy, goal%>
+      <td><%= link_to "Destroy", goal, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% end %>
+    </tr>
+  <% end %>
+</table>
+
+<% if can? :create, Goal%>
+  <p><%= link_to "New Goal", new_goal_path %></p>
+<% end %>
+
+<h2>experiences</h2>
 
 <table>
   <tr>
-    <th>Type</th>
-    <th>Goal</th>
-    <th>Content</th>
-    <th>Tags</th>
     <th>Start At</th>
     <th>End At</th>
+    <th>Content</th>
+    <th>Type</th>
+    <th>Goal</th>
+    <th>Tags</th>
+    <th>Location</th>
   </tr>
 
-<% @experiences.each do |experience| %>
-  <tr>
-    <td><%= EXP_TYPE[experience.exp_type] if experience.exp_type %></td>
-    <td><%= link_to experience.goal.title, experience.goal if experience.goal %></td>
-    <td><%= link_to truncate_u(experience.content), experience %></td>
-    <td>
-      <% tag_link experience %>
-    </td>
-    <td><%= experience.start_at.to_s(:date) if experience.start_at %></td>
-    <td><%= experience.end_at.to_s(:date) if experience.end_at %></td>
-    <td><%= link_to 'Show', user_experience_path(@user, experience) %></td>
+  <% @experience_groups.keys.each do |time| %>
+    <tr><td><h3><%= time.to_s(:ym)%></h3></td></tr>
+    <% @experience_groups[time].each do |experience| %>
+      <tr>
+        <td><%= experience.start_at.to_s(:date) if experience.start_at %></td>
+        <td><%= experience.end_at.to_s(:date) if experience.end_at %></td>
+        <td><%= link_to truncate_u(Sanitize.clean(experience.content), 30), experience %></td>
+        <td><%= EXP_TYPE[experience.exp_type] if experience.exp_type %></td>
+        <td><%= link_to experience.goal.title, experience.goal if experience.goal %></td>
+        <td>
+          <% tag_link experience %>
+        </td>
+        <td>
+          <%= experience.location_list %>
+        </td>
+        <td><%= link_to 'Show', user_experience_path(@user, experience) %></td>
 
-    <% if can? :update, experience %>
-      <td><%= link_to 'Edit', edit_experience_path(experience) %></td>
+        <% if can? :update, experience %>
+          <td><%= link_to 'Edit', edit_experience_path(experience) %></td>
+        <% end %>
+        <% if can? :destroy, experience %>
+          <td><%= link_to 'Destroy', experience, :confirm => 'Are you sure?', :method => :delete %></td>
+        <% end %>
+      </tr>
     <% end %>
-    <% if can? :destroy, experience %>
-      <td><%= link_to 'Destroy', experience, :confirm => 'Are you sure?', :method => :delete %></td>
-    <% end %>
-  </tr>
-<% end %>
+  <% end %>
 </table>
 
 <br />

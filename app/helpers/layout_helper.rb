@@ -20,4 +20,12 @@ module LayoutHelper
     args = args.map { |arg| arg == :defaults ? arg : arg.to_s }
     content_for(:head) { javascript_include_tag(*args) }
   end
+
+  def user_current_view_location(location)
+    s = []
+    s << link_to_unless_current('World', home_url(:location => 'World'))
+    s << link_to_unless_current(current_user_location, home_url(current_user_location))
+    s.join(' > ')
+  end
+
 end

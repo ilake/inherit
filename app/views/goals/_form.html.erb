@@ -18,7 +18,7 @@
   </p>
   <p>
     <%= f.label :state %><br />
-    <%= f.select :state, GOAL_STATES.map{|k,v| [v, k]} %>
+    <%= f.select :state, GOAL_STATES.to_select_options %>
   </p>
   <p><%= f.submit "Submit" %></p>
 <% end %>
