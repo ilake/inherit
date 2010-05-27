@@ -46,6 +46,8 @@ class User < ActiveRecord::Base
 
   delegate :location_list, :birthday, :to => :profile
 
+  after_create :init
+
   def to_param
     "#{id}-#{username}"
   end
@@ -59,7 +61,7 @@ class User < ActiveRecord::Base
   end
 
   private
-  def after_create
+  def init
     self.create_profile
   end
 

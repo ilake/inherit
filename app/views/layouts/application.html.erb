@@ -27,12 +27,12 @@
           <% end %>
         </li>
       </div>
+
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, :id => "flash_#{name}" %>
+      <% end %>
+
       <div id='header'>
-        <% flash.each do |name, msg| %>
-          <%= content_tag :div, msg, :id => "flash_#{name}" %>
-        <% end %>
-
-
         <div id='logo'>
           <h2 id='logo'>傳承.</h2>
         </div>

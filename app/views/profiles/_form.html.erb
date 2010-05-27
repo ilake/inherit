@@ -2,7 +2,7 @@
   <%= f.error_messages %>
   <p>
     <%= f.label :birthday %><br />
-    <%= f.date_select :birthday, :start_year => 1920, :use_month_numbers => true %>
+    <%= f.date_select :birthday, :start_year => 1920, :use_month_numbers => true, :default => {:month => 1, :day => 1} %>
   </p>
   <p>
     <%= f.label :gender %><br />

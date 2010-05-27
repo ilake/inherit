@@ -1,7 +1,7 @@
 class CreateGoals < ActiveRecord::Migration
   def self.up
     create_table :goals do |t|
-      t.text :title, :default => "New Goal"
+      t.string :title, :default => ""
       t.text :content, :default => ""
       t.string :state, :limit => 10, :default => "working"
       t.references :user
