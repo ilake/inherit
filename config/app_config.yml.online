@@ -1,0 +1,39 @@
+development:
+  goal_states: 
+    working: 'Working'
+    done: 'Done'
+    pending: 'Pending'
+  exp_type:
+    normal: 'Normal'
+    useful: 'Useful'
+    milestone: 'Milestone'
+  gender_type:
+    'true': 'Male'
+    'false': 'Female'
+
+production:
+  goal_states: 
+    working: 'Working'
+    done: 'Done'
+    pending: 'Pending'
+  exp_type:
+    normal: 'Normal'
+    useful: 'Useful'
+    milestone: 'Milestone'
+  gender_type:
+    'true': 'Male'
+    'false': 'Female'
+
+test:
+  goal_states: 
+    working: 'Working'
+    done: 'Done'
+    pending: 'Pending'
+  exp_type:
+    normal: 'Normal'
+    useful: 'Useful'
+    milestone: 'Milestone'
+  gender_type:
+    'true': 'Male'
+    'false': 'Female'
+
