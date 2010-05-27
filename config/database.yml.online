@@ -27,6 +27,7 @@ development:
   username: root
   password: 0okm9ijn
   host: localhost
+  reconnect: true
   encoding: utf8
 
 test:
@@ -34,6 +35,7 @@ test:
   database: eexp_test
   username: root
   password:
+  reconnect: true
   host: localhost
 
 production:
@@ -42,6 +44,7 @@ production:
   username: root
   password: 0okm9ijn
   host: localhost
+  reconnect: true
   encoding: utf8
 
 cucumber:
