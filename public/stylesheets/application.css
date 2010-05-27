@@ -213,6 +213,14 @@ body {
   margin-top:20px;
   border:3px solid #EFEFEF;
 }
+
+#goal_list {
+  margin-bottom:20px;
+  border-bottom:3px solid #EFEFEF;
+}
+
+#exp_list {
+}
 /* User experience index page END */
 
 /* User experience show page */

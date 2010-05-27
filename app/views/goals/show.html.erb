@@ -1,8 +1,4 @@
 <% title "#{@goal.user.username} goal #{@goal.title}" %>
-
-<h2>
-  <%= link_to "THE USER", user_goals_path(@goal.user) %>
-</h2>
 <p>
   <strong>Start At:</strong>
   <%=h @goal.start_at %>
@@ -13,7 +9,7 @@
 </p>
 <p>
   <strong>Content:</strong>
-  <%=h @goal.content %>
+  <%= @goal.content %>
 </p>
 <p>
   <strong>State:</strong>

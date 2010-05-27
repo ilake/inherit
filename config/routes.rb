@@ -1,14 +1,14 @@
 ActionController::Routing::Routes.draw do |map|
   map.devise_for :users
 
-  map.resources :goals
+  map.resources :goals, :as => :categories
   map.resources :experiences
   map.resource :profile, :except => [:new, :create]
 
   map.resources :users do |user|
     user.resource :profile, :except => [:new, :create]
     user.resources :experiences
-    user.resources :goals
+    user.resources :goals, :as => :categories
   end
   map.resources :goals do |goal|
     goal.resources :experiences

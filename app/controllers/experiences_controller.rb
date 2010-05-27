@@ -7,9 +7,20 @@ class ExperiencesController < ApplicationController
   # GET /experiences
   # GET /experiences.xml
   def index
-    experiences = user_selected.experiences.descend_by_start_at.find(:all, :include => [:goal])
-    @experience_groups = experiences.group_by{|e| e.start_at.at_beginning_of_month}
+    @experiences = user_selected.experiences.descend_by_start_at.find(:all, :include => [:goal])
+    @experience_groups = @experiences.group_by{|e| e.start_at.at_beginning_of_month}
     @goals = user_selected.goals.all
+
+    @events = @experiences.map{ |e|
+      end_time_hash = e.start_at.to_s(:date) == e.end_at.to_s(:date) ? {} : {'end' =>  e.end_at.to_s(:date)}
+      {
+      'start' => e.start_at.to_s(:date),
+      'title' => ApplicationController.helpers.truncate_u(Sanitize.clean(e.content), 20),
+      'description' => e.content,
+      'color' => "##{rand(10)}#{rand(10)}#{rand(10)}",
+      'icon' => "/images/timeline/dark-red-circle.png"
+      }.merge!(end_time_hash)
+    }.to_json
 
     respond_to do |format|
       format.html # index.html.erb
@@ -21,7 +32,7 @@ class ExperiencesController < ApplicationController
   # GET /experiences/1.xml
   def show
     @experience = Experience.find(params[:id])
-    @comments = @experience.comments.recent.all
+    @comments = @experience.comments.recent.find(:all, :include => :user)
 
     @comment = @experience.comments.new
     @vote = @experience.votes.new
@@ -53,7 +64,7 @@ class ExperiencesController < ApplicationController
     @experience = current_user.experiences.new(params[:experience])
     respond_to do |format|
       if @experience.save
-        current_user.tag(@experience, :with => @experience.tag_list)
+        current_user.tag(@experience, :with => @experience.tag_list, :on => :tags)
         flash[:notice] = 'Experience was successfully created.'
         format.html { redirect_to user_experiences_path(current_user) }
         format.xml  { render :xml => @experience, :status => :created, :location => @experience }

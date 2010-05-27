@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
   has_many :experiences
   has_many :comments
 
-  delegate :location_list, :to => :profile
+  delegate :location_list, :birthday, :to => :profile
 
   def to_param
     "#{id}-#{username}"

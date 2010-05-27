@@ -9,7 +9,7 @@ class HomeController < ApplicationController
   end
 
   def user
-    params[:location] ||= current_user.location_list
+    params[:location] ||= current_user.try(:location_list)
     @user_experiences = current_user.experiences.descend_by_updated_at.limit(5) 
     @latest_experiences = Experience.location_with(params[:location]).descend_by_updated_at.limit(5).all(:include => :user)
     @near_experience = Experience.tagged_with(current_user.owned_tags.map{|t| t.name}.rand).limit(1)[0]

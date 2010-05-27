@@ -4,15 +4,15 @@
   <%= f.error_messages %>
   <p>
     <%= f.label :content %><br />
-    <%= f.text_area :content, :size => '30x5', :class => "mceEditor" %>
+    <%= f.text_area :content, :size => '60x20', :class => "mceEditor" %>
   </p>
   <p>
     <%= f.label :start_at %><br />
-    <%= f.datetime_select :start_at, :use_month_numbers => true %>
+    <%= f.date_select :start_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950 %>
   </p>
   <p>
     <%= f.label :end_at %><br />
-    <%= f.datetime_select :end_at, :use_month_numbers => true %>
+    <%= f.date_select :end_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950  %>
   </p>
   <p>
     <%= f.label :exp_type, '影響' %><br />

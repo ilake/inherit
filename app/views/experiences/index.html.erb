@@ -1,9 +1,13 @@
 <% title "#{@user.username} experiences" %>
 <div id='exp_chart'>
-
 </div>
 
-<h2>Goals</h2>
+<div id='goal_list'>
+  <h2>Goals / Category
+    <% if can? :create, Goal%>
+      <%= link_to "Create Your Goal", new_goal_path %>
+    <% end %>
+  </h2>
 <table>
   <tr>
     <th>title</th>
@@ -15,13 +19,12 @@
   </tr>
   <% for goal in @goals %>
     <tr>
-      <td><%=h goal.title %></td>
-      <td><%=h truncate_u(goal.content) %></td>
+      <td><%=link_to h(goal.title), goal %></td>
+      <td><%=h truncate_u(Sanitize.clean(goal.content), 12) %></td>
       <td><%=h goal.experiences_count %></td>
       <td><%h tag_link goal %></td>
       <td><%=h goal.start_at.to_s(:date) if goal.start_at %></td>
       <td><%=h goal.state %></td>
-      <td><%= link_to "Show", goal %></td>
     <% if can? :update, goal %>
       <td><%= link_to "Edit", edit_goal_path(goal) %></td>
     <% end %>
@@ -31,13 +34,13 @@
     </tr>
   <% end %>
 </table>
-
-<% if can? :create, Goal%>
-  <p><%= link_to "New Goal", new_goal_path %></p>
-<% end %>
-
-<h2>experiences</h2>
-
+</div>
+<div id='exp_list'>
+  <h2>experiences
+    <% if can? :create, Experience %>
+      <%= link_to 'Create Your Experience', new_user_experience_path(current_user) %>
+    <% end %>
+  </h2>
 <table>
   <tr>
     <th>Start At</th>
@@ -55,7 +58,7 @@
       <tr>
         <td><%= experience.start_at.to_s(:date) if experience.start_at %></td>
         <td><%= experience.end_at.to_s(:date) if experience.end_at %></td>
-        <td><%= link_to truncate_u(Sanitize.clean(experience.content), 30), experience %></td>
+        <td><%= link_to truncate_u(Sanitize.clean(experience.content), 15), experience %></td>
         <td><%= EXP_TYPE[experience.exp_type] if experience.exp_type %></td>
         <td><%= link_to experience.goal.title, experience.goal if experience.goal %></td>
         <td>
@@ -64,7 +67,6 @@
         <td>
           <%= experience.location_list %>
         </td>
-        <td><%= link_to 'Show', user_experience_path(@user, experience) %></td>
 
         <% if can? :update, experience %>
           <td><%= link_to 'Edit', edit_experience_path(experience) %></td>
@@ -76,9 +78,90 @@
     <% end %>
   <% end %>
 </table>
+</div>
 
-<br />
+<% content_for :head do %>
+  <script>
+    Timeline_ajax_url= '/javascripts/timeline/timeline_ajax/simile-ajax-api.js';
+    Timeline_urlPrefix='/javascripts/timeline/timeline_js/';
+    Timeline_parameters="bundle=true";
+  </script>
 
-<% if can? :create, Experience %>
-  <%= link_to 'New experience', new_user_experience_path(current_user) %>
+  <%= javascript_include_tag 'timeline/timeline_js/timeline-api.js' %>
+
+  <script>
+    var timeline_data = {  // save as a global variable
+      'dateTimeFormat': 'iso8601',
+      'wikiURL': "http://simile.mit.edu/shelf/",
+      'wikiSection': "Simile Cubism Timeline",
+
+      'events' : <%= @events %>
+    }
+  </script>
+
+   <script>        
+        var tl;
+        function onLoad() {
+            var tl_el = document.getElementById("exp_chart");
+            var eventSource1 = new Timeline.DefaultEventSource();
+            
+            var theme1 = Timeline.ClassicTheme.create();
+            theme1.event.bubble.width = 350;   // modify it
+            theme1.event.bubble.height = 300;
+            theme1.event.track.height = 15;
+            theme1.event.tape.height = 10;
+
+            theme1.timeline_start = new Date('<%= @user.try(:birthday).try(:to_s, :js_date) || Time.now.ago(1.years).to_s(:js_date)%>');
+            theme1.timeline_stop  = new Date;
+            
+			// 置中
+      var d = Timeline.DateTime.parseGregorianDateTime(new Date('<%= @experiences.first.try(:start_at).try(:to_s, :js_date) || Time.now %>'));
+            var bandInfos = [
+                Timeline.createBandInfo({
+                    width:          "80%", // set to a minimum, autoWidth will then adjust
+                    intervalUnit:   Timeline.DateTime.MONTH, 
+                    intervalPixels: 150,
+                    eventSource:    eventSource1,
+                    date:           d,
+                    theme:          theme1,
+                    timeZone:       8,
+                    layout:         'original'  // original, overview, detailed
+                }),
+                Timeline.createBandInfo({
+                    width:          "20%", // set to a minimum, autoWidth will then adjust
+                    intervalUnit:   Timeline.DateTime.YEAR, 
+                    intervalPixels: 100,
+                    eventSource:    eventSource1,
+                    date:           d,
+                    theme:          theme1,
+                    timeZone:       8,
+                    layout:         'overview'  // original, overview, detailed
+                })
+            ];
+			
+			bandInfos[1].syncWith = 0;
+			bandInfos[1].highlight = true;
+                                                            
+            // create the Timeline
+            tl = Timeline.create(tl_el, bandInfos, Timeline.HORIZONTAL);
+            
+            var url = '.'; // The base url for image, icon and background image
+                           // references in the data
+            eventSource1.loadJSON(timeline_data, url); // The data was stored into the 
+                                                       // timeline_data variable.
+            tl.layout(); // display the Timeline
+        }
+        
+        var resizeTimerID = null;
+        function onResize() {
+            if (resizeTimerID == null) {
+                resizeTimerID = window.setTimeout(function() {
+                    resizeTimerID = null;
+                    tl.layout();
+                }, 500);
+            }
+        }
+   </script>
 <% end %>
+
+

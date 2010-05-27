@@ -17,7 +17,7 @@
       <span id='exp_show_time'>
         <%= @experience.start_at.to_s(:fulltime )%> ~ <%= @experience.end_at.to_s(:fulltime) %> 
       </span>
-      Author: <%= link_to "#{@experience.user.username}", @experience.user %>
+      Author: <%= link_to "#{@experience.user.username}",  user_experiences_path(@experience.user) %>
       <% if can? :update, @experience %>
         <%= link_to 'Edit', edit_experience_path(@experience) %>
       <% end %>

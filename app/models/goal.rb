@@ -24,4 +24,9 @@ class Goal < ActiveRecord::Base
   has_many :experiences
 
   validates_presence_of :content, :title
+
+  def to_param
+    "#{id}-#{title}"
+  end
+
 end

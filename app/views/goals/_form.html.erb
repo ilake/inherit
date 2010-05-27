@@ -1,3 +1,6 @@
+<% content_for :head do %>
+  <%= include_tiny_mce_if_needed %>
+<% end %>
 <% form_for @goal do |f| %>
   <%= f.error_messages %>
   <p>
@@ -6,7 +9,7 @@
   </p>
   <p>
     <%= f.label :content, "Detail" %><br />
-    <%= f.text_area :content, :size => '30x5' %>
+    <%= f.text_area :content, :size => '60x20', :class => "mceEditor"  %>
   </p>
   <p>
     <%= f.label :start_at %><br />
