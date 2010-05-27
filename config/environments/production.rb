@@ -10,6 +10,17 @@ config.action_controller.perform_caching             = true
 config.action_view.cache_template_loading            = true
 config.action_mailer.default_url_options = { :host => 'fb.iwakela.com' }
 
+ActionMailer::Base.delivery_method = :smtp
+ActionMailer::Base.smtp_settings = {
+  :enable_starttls_auto => true,
+  :address => "smtp.gmail.com",
+  :port => "587",
+  :domain => "localhost.localdomain",
+  :authentication => :plain,
+  :user_name => "lake.ilakela@gmail.com",
+  :password => "-pl,0okm9ijn"
+}
+
 # See everything in the log (default is :info)
 # config.log_level = :debug
 
