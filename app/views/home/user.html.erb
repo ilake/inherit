@@ -26,7 +26,7 @@
   <h4>類似經驗</h4>
   <div id='home_latest_exps'>
     <ul>
-      <% @near_experience.find_related_tags.each do |experience| %>
+      <% @near_experience.try(:find_related_tags).try(:each) do |experience| %>
         <li> <%= link_to truncate_u(Sanitize.clean(experience.content), 40), experience %></li>
       <% end %>
     </ul>
