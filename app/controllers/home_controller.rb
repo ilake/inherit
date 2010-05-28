@@ -1,9 +1,11 @@
 class HomeController < ApplicationController
   before_filter :user_auth, :only => [:index]
+  before_filter :authenticate_user!, :only => [:user]
 
   def index
     @experiences = Experience.limit(5).descend_by_updated_at
     @exp_tags = Experience.tag_counts_on(:tags, :limit => 20)
+    @user = User.new
 
     render :layout => 'homepage'
   end

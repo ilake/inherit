@@ -31,22 +31,22 @@
 </div>
 
 <div id="rightitem">
-  <form method="post" action="/users"><div style="margin: 0pt; padding: 0pt; display: inline;">
-      <input type="hidden" value="RciXluAjQBO7ysdH2xzr22V+NCkkvkS01SoXZsZi3Nk=" name="authenticity_token"></div>  
-    <p><label for="user_email">Email</label></p>
-    <p><input type="text" value="" size="15" name="user[email]" id="user_email"></p>
+  <% form_for @user do %>
+    <div style="margin: 0pt; padding: 0pt; display: inline;">
+      <p><label for="user_email">Email</label></p>
+      <p><input type="text" value="" size="15" name="user[email]" id="user_email"></p>
 
-    <p><label for="user_username">Username</label></p>
-    <p><input type="text" size="15" name="user[username]" id="user_username"></p>
+      <p><label for="user_username">Username</label></p>
+      <p><input type="text" size="15" name="user[username]" id="user_username"></p>
 
-    <p><label for="user_password">Password</label></p>
-    <p><input type="password" size="15" name="user[password]" id="user_password"></p>
+      <p><label for="user_password">Password</label></p>
+      <p><input type="password" size="15" name="user[password]" id="user_password"></p>
 
-    <p><label for="user_password_confirmation">Password confirmation</label></p>
-    <p><input type="password" size="15" name="user[password_confirmation]" id="user_password_confirmation"></p>
+      <p><label for="user_password_confirmation">Password confirmation</label></p>
+      <p><input type="password" size="15" name="user[password_confirmation]" id="user_password_confirmation"></p>
 
-    <p><input type="submit" value="Sign up" name="commit" id="user_submit"></p>
-  </form>
+      <p><input type="submit" value="Sign up" name="commit" id="user_submit"></p>
+    <% end %>
 </div>
 
 
