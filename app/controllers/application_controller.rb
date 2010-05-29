@@ -20,7 +20,8 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user_location
-    session[:current_location] ||= current_user.try(:location_list).try(:to_s)
+    #session[:current_location] ||= current_user.try(:location_list).try(:to_s)
+    current_user.try(:location_list).try(:to_s)
   end
 
   def force_set_profile
