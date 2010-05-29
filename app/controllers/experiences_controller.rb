@@ -3,6 +3,7 @@ class ExperiencesController < ApplicationController
   before_filter :authenticate_user!, :except => [:index , :show]
   before_filter :user_selected, :only => [:index]
   load_and_authorize_resource :nested => :user
+  before_filter :force_set_profile
 
   # GET /experiences
   # GET /experiences.xml

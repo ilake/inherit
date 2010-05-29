@@ -22,4 +22,8 @@ class ApplicationController < ActionController::Base
   def current_user_location
     session[:current_location] ||= current_user.try(:location_list).try(:to_s)
   end
+
+  def force_set_profile
+    redirect_to edit_user_profile_path(current_user) if current_user && current_user.try(:birthday).blank?
+  end
 end
