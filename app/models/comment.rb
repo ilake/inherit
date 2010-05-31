@@ -1,14 +1,14 @@
 # == Schema Information
-# Schema version: 20100516044707
+# Schema version: 20100531043838
 #
 # Table name: comments
 #
-#  id               :integer         not null, primary key
+#  id               :integer(4)      not null, primary key
 #  title            :string(50)      default("")
-#  comment          :text            default("")
-#  commentable_id   :integer
+#  comment          :text
+#  commentable_id   :integer(4)
 #  commentable_type :string(255)
-#  user_id          :integer
+#  user_id          :integer(4)
 #  created_at       :datetime
 #  updated_at       :datetime
 #

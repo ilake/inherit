@@ -1,17 +1,18 @@
 # == Schema Information
-# Schema version: 20100516132734
+# Schema version: 20100531043838
 #
 # Table name: experiences
 #
-#  id         :integer         not null, primary key
+#  id         :integer(4)      not null, primary key
 #  content    :text
-#  user_id    :integer
+#  user_id    :integer(4)
 #  start_at   :datetime
 #  end_at     :datetime
 #  created_at :datetime
 #  updated_at :datetime
-#  goal_id    :integer
+#  goal_id    :integer(4)
 #  exp_type   :string(255)     default("normal")
+#  until_now  :boolean(1)
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

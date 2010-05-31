@@ -1,18 +1,18 @@
 # == Schema Information
-# Schema version: 20100518231924
+# Schema version: 20100531043838
 #
 # Table name: goals
 #
-#  id                :integer         not null, primary key
-#  title             :text            default("New Goal")
-#  content           :text            default("")
+#  id                :integer(4)      not null, primary key
+#  title             :string(255)     default("")
+#  content           :text
 #  state             :string(10)      default("working")
-#  user_id           :integer
+#  user_id           :integer(4)
 #  start_at          :time
 #  end_at            :time
 #  created_at        :datetime
 #  updated_at        :datetime
-#  experiences_count :integer         default(0), not null
+#  experiences_count :integer(4)      default(0), not null
 #
 
 one:

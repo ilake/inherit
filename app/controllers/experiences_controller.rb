@@ -13,7 +13,8 @@ class ExperiencesController < ApplicationController
     @goals = user_selected.goals.all
 
     @events = @experiences.map{ |e|
-      end_time_hash = e.start_at.to_s(:date) == e.end_at.to_s(:date) ? {} : {'end' =>  e.end_at.to_s(:date)}
+      #Does not have end_at or start_at equal to end_at
+      end_time_hash = e.end_at_hash
       {
       'start' => e.start_at.to_s(:date),
       'title' => ApplicationController.helpers.truncate_u(Sanitize.clean(e.content), 20),
@@ -47,7 +48,7 @@ class ExperiencesController < ApplicationController
   # GET /experiences/new
   # GET /experiences/new.xml
   def new
-    @experience = Experience.new(:goal_id => params[:goal_id])
+    @experience = Experience.new(:goal_id => params[:goal_id], :end_at => Time.now)
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @experience }

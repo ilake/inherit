@@ -1,19 +1,65 @@
 <% content_for :head do %>
   <%= include_tiny_mce_if_needed %>
 <% end %>
+
+<% content_for :bottom_js do %>
+  <script type='text/javascript'>
+    function detect_end_at(){
+      if ($('#experience_end_at_exist').attr('checked')) {
+        $('#end_at_date select').attr('disabled', false);
+        }
+      else {
+        $('#end_at_date select').attr('disabled', true);
+      }
+      $('#experience_until_now').attr('checked', false);
+    }
+
+    function detect_until_now(){
+      if ($('#experience_until_now').attr('checked')) {
+        $('#end_at_date select').attr('disabled', true);
+        }
+      else {
+        $('#end_at_date select').attr('disabled', false);
+      }
+      $('#experience_end_at_exist').attr('checked', false);
+    }
+
+    $(document).ready(function(){
+        detect_end_at();
+        $('#experience_end_at_exist').change(function(){
+          detect_end_at();
+        });
+
+        $('#experience_until_now').change(function(){
+          detect_until_now();
+        });
+    });
+  </script>
+<% end %>
+
   <%= f.error_messages %>
   <p>
     <%= f.label :content %><br />
     <%= f.text_area :content, :size => '60x20', :class => "mceEditor" %>
   </p>
-  <p>
-    <%= f.label :start_at %><br />
-    <%= f.date_select :start_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :default => {:day => 1, :month => 1} %>
-  </p>
-  <p>
-    <%= f.label :end_at %><br />
-    <%= f.date_select :end_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :default => {:day => 1, :month => 1} %>
-  </p>
+  <div>
+    <p>
+      <%= f.label :start_at %><br />
+      <%= f.date_select :start_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :default => {:day => 1, :month => 1} %>
+    </p>
+    <p>
+      <%= f.label :end_at %><br />
+      <%= f.check_box :end_at_exist %>
+      <span id='end_at_date'>
+        <%= f.date_select :end_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :default => {:day => 1, :month => 1} %>
+      </span>
+      <div id='end_at_untilnow'>
+        <%= f.check_box :until_now %>
+        現在持續進行
+      </div>
+    </p>
+  </div>
+
   <p>
     <%= f.label :exp_type, '影響' %><br />
     <%= f.select :exp_type, EXP_TYPE.to_select_options%>

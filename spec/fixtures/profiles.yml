@@ -1,12 +1,12 @@
 # == Schema Information
-# Schema version: 20100518021948
+# Schema version: 20100531043838
 #
 # Table name: profiles
 #
-#  id         :integer         not null, primary key
+#  id         :integer(4)      not null, primary key
 #  birthday   :date
-#  gender     :boolean
-#  user_id    :integer
+#  gender     :boolean(1)
+#  user_id    :integer(4)
 #  created_at :datetime
 #  updated_at :datetime
 #
