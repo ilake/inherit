@@ -2,41 +2,6 @@
   <%= include_tiny_mce_if_needed %>
 <% end %>
 
-<% content_for :bottom_js do %>
-  <script type='text/javascript'>
-    function detect_end_at(){
-      if ($('#experience_end_at_exist').attr('checked')) {
-        $('#end_at_date select').attr('disabled', false);
-        }
-      else {
-        $('#end_at_date select').attr('disabled', true);
-      }
-      $('#experience_until_now').attr('checked', false);
-    }
-
-    function detect_until_now(){
-      if ($('#experience_until_now').attr('checked')) {
-        $('#end_at_date select').attr('disabled', true);
-        }
-      else {
-        $('#end_at_date select').attr('disabled', false);
-      }
-      $('#experience_end_at_exist').attr('checked', false);
-    }
-
-    $(document).ready(function(){
-        detect_end_at();
-        $('#experience_end_at_exist').change(function(){
-          detect_end_at();
-        });
-
-        $('#experience_until_now').change(function(){
-          detect_until_now();
-        });
-    });
-  </script>
-<% end %>
-
   <%= f.error_messages %>
   <p>
     <%= f.label :content %><br />

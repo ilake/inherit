@@ -10,6 +10,7 @@
   </h2>
 <table>
   <tr>
+    <th>Category</th>
     <th>title</th>
     <th>detail</th>
     <th>experiences_count</th>
@@ -19,6 +20,7 @@
   </tr>
   <% for goal in @goals %>
     <tr>
+      <td><%=link_to h(goal.title), user_experiences_path(@user, :goal_id => goal.id) %></td>
       <td><%=link_to h(goal.title), goal %></td>
       <td><%=h truncate_u(Sanitize.clean(goal.content), 12) %></td>
       <td><%=h goal.experiences_count %></td>
@@ -108,7 +110,7 @@
         theme1.event.track.height = 15;
         theme1.event.tape.height = 10;
 
-        theme1.timeline_start = new Date('<%= @user.try(:birthday).try(:to_s, :js_date) || Time.now.ago(1.years).to_s(:js_date)%>');
+        theme1.timeline_start = new Date('<%= timeline_start_time(@user, @experiences) %>');
         theme1.timeline_stop  = new Date;
         
   // 置中

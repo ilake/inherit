@@ -8,7 +8,7 @@ class ExperiencesController < ApplicationController
   # GET /experiences
   # GET /experiences.xml
   def index
-    @experiences = user_selected.experiences.descend_by_start_at.find(:all, :include => [:goal])
+    @experiences = user_selected.experiences.goal_categroy(params[:goal_id]).descend_by_start_at.find(:all, :include => [:goal])
     @experience_groups = @experiences.group_by{|e| e.start_at.at_beginning_of_month}
     @goals = user_selected.goals.all
 

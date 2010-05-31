@@ -22,6 +22,14 @@ class Experience < ActiveRecord::Base
 
   acts_as_commentable
   acts_as_voteable
+
+  named_scope :goal_categroy, Proc.new{|goal_id| 
+    if goal_id
+      {:conditions => {:goal_id => goal_id}}
+    else
+      {}
+    end
+  }
   attr_accessible :start_at, :end_at, :content, :goal_id, :tag_list, :exp_type, :location_list, :until_now, :end_at_exist
 
   belongs_to :user
@@ -56,7 +64,7 @@ class Experience < ActiveRecord::Base
   def end_at_hash
     if self.until_now 
       {'end' => Time.now.to_s(:date)}
-    elsif !self.end_at_exist || self.start_at.to_s(:date) == self.end_at.to_s(:date) 
+    elsif !self.end_at_exist || self.start_at > self.end_at
       {}
     else
       {'end' => self.end_at.to_s(:date)}
