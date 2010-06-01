@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100531043838
+# Schema version: 20100601024031
 #
 # Table name: experiences
 #
@@ -13,6 +13,7 @@
 #  goal_id    :integer(4)
 #  exp_type   :string(255)     default("normal")
 #  until_now  :boolean(1)
+#  public     :boolean(1)      default(TRUE)
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

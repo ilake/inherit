@@ -23,5 +23,9 @@
     <%= f.label :state %><br />
     <%= f.select :state, GOAL_STATES.to_select_options %>
   </p>
+  <p>
+    <%= f.label :public, '公開' %><br />
+    <%= f.check_box :public %>
+  </p>
   <p><%= f.submit "Submit" %></p>
 <% end %>

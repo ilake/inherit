@@ -60,6 +60,10 @@ class User < ActiveRecord::Base
     !id
   end
 
+  def is_owner?(current_user)
+    @is_owner ||= self == current_user
+  end
+
   private
   def init
     self.create_profile

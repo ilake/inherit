@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100531043838
+# Schema version: 20100601024031
 #
 # Table name: experiences
 #
@@ -13,6 +13,7 @@
 #  goal_id    :integer(4)
 #  exp_type   :string(255)     default("normal")
 #  until_now  :boolean(1)
+#  public     :boolean(1)      default(TRUE)
 #
 
 class Experience < ActiveRecord::Base
@@ -30,7 +31,8 @@ class Experience < ActiveRecord::Base
       {}
     end
   }
-  attr_accessible :start_at, :end_at, :content, :goal_id, :tag_list, :exp_type, :location_list, :until_now, :end_at_exist
+
+  attr_accessible :start_at, :end_at, :content, :goal_id, :tag_list, :exp_type, :location_list, :until_now, :end_at_exist, :public
 
   belongs_to :user
   belongs_to :goal

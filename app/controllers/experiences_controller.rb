@@ -8,9 +8,9 @@ class ExperiencesController < ApplicationController
   # GET /experiences
   # GET /experiences.xml
   def index
-    @experiences = user_selected.experiences.goal_categroy(params[:goal_id]).descend_by_start_at.find(:all, :include => [:goal])
+    @experiences = user_selected.experiences.show_policy(@user.is_owner?(current_user)).goal_categroy(params[:goal_id]).descend_by_start_at.find(:all, :include => [:goal])
     @experience_groups = @experiences.group_by{|e| e.start_at.at_beginning_of_month}
-    @goals = user_selected.goals.all
+    @goals = user_selected.goals.show_policy(@user.is_owner?(current_user)).all
 
     @events = @experiences.map{ |e|
       #Does not have end_at or start_at equal to end_at

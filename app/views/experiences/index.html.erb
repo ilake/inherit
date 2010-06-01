@@ -13,17 +13,15 @@
     <th>Category</th>
     <th>title</th>
     <th>detail</th>
-    <th>experiences_count</th>
     <th>Tags</th>
     <th>Start At</th>
     <th>State</th>
   </tr>
   <% for goal in @goals %>
     <tr>
-      <td><%=link_to h(goal.title), user_experiences_path(@user, :goal_id => goal.id) %></td>
+      <td><%=link_to h(goal.title), user_exps_path(@user, goal) %></td>
       <td><%=link_to h(goal.title), goal %></td>
       <td><%=h truncate_u(Sanitize.clean(goal.content), 12) %></td>
-      <td><%=h goal.experiences_count %></td>
       <td><%h tag_link goal %></td>
       <td><%=h goal.start_at.to_s(:date) if goal.start_at %></td>
       <td><%=h goal.state %></td>
