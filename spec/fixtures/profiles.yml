@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100531043838
+# Schema version: 20100601130536
 #
 # Table name: profiles
 #
@@ -9,6 +9,7 @@
 #  user_id    :integer(4)
 #  created_at :datetime
 #  updated_at :datetime
+#  intro      :text
 #
 
 one:

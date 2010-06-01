@@ -12,6 +12,14 @@
   <strong>Location:</strong>
   <%= @profile.location_list %>
 </p>
+<p>
+  <strong>Intro:</strong>
+  <%= @profile.intro %>
+</p>
+<p>
+  <strong>tag:</strong>
+  <%= @profile.tag_list %>
+</p>
 
 <p>
   <% if can? :update, @profile %>
