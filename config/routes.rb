@@ -5,8 +5,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :experiences
   map.resource :profile, :except => [:new, :create]
 
-  map.user_exps "users/:user_id/experiences/:goal_id",
-    :controller => 'experiences', :action => 'index',  :goal => nil
+  map.search "search/:search", :controller =>'search', :action => 'index', :search => nil
+
+  map.user_exps "users/:user_id/:goal_id/experiences", :controller => 'experiences', :action => 'index',  :goal => nil
+
   map.resources :users do |user|
     user.resource :profile, :except => [:new, :create]
     user.resources :experiences

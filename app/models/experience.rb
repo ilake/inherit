@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100601024031
+# Schema version: 20100606092954
 #
 # Table name: experiences
 #
@@ -14,15 +14,26 @@
 #  exp_type   :string(255)     default("normal")
 #  until_now  :boolean(1)
 #  public     :boolean(1)      default(TRUE)
+#  tags_list  :text
 #
 
 class Experience < ActiveRecord::Base
+  attr_accessible :start_at, :end_at, :content, :goal_id, :tag_list, :exp_type, :location_list, :until_now, :end_at_exist, :public
+
   acts_as_taggable
   acts_as_taggable_on :tags
   acts_as_taggable_on :locations
 
   acts_as_commentable
   acts_as_voteable
+
+  belongs_to :user
+  belongs_to :goal
+
+  validates_presence_of :user_id, :content
+
+  before_create :default_set_user_location
+  before_save :set_tags_list
 
   named_scope :goal_categroy, Proc.new{|goal_id| 
     if goal_id
@@ -32,14 +43,13 @@ class Experience < ActiveRecord::Base
     end
   }
 
-  attr_accessible :start_at, :end_at, :content, :goal_id, :tag_list, :exp_type, :location_list, :until_now, :end_at_exist, :public
 
-  belongs_to :user
-  belongs_to :goal
-
-  validates_presence_of :user_id, :content
-
-  before_create :default_set_user_location
+  define_index do
+    indexes content
+    indexes tags_list
+    where "public = '1'"
+    group_by "user_id"
+  end
 
   def default_set_user_location
     self.location_list = self.user.location_list
@@ -79,6 +89,11 @@ class Experience < ActiveRecord::Base
     elsif end_at
       self.end_at.to_s(:date)
     end
+  end
+
+  private
+  def set_tags_list
+    self.tags_list = tag_list.join(" ")
   end
 
 end

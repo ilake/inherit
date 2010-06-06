@@ -1,0 +1,37 @@
+<%# form_tag search_url, :method => :get do %>
+  <!--p>
+    Search: <%#= text_field_tag :search %>
+  </p>
+  <p>
+    <%#= check_box_tag :user_date_check %>
+    <span id='user_start_at_date'>
+      user born range: <%#= text_field_tag :age_start_at, current_user.try(:birthday).try(:to_s, :date) || Time.now.ago(30.years)%>
+    </span>
+    <span id='user_start_at_date'>
+      ~ <%#= text_field_tag :age_end_at, current_user.try(:birthday).try(:since, 5.years).try(:to_s, :date) || Time.now.ago(25.years) %>
+    </span>
+  </p-->
+  <%#= submit_tag 'Search', :name => nil %>
+<%# end %>
+
+<h3>有類似背景的使用者</h3>
+<ul>
+  <% @profiles.each do |p|%>
+    <li>
+      <%= link_to p.user.username, user_experiences_path(p.user)%>
+      <%= link_to p.intro, user_profile_path(p.user) %>
+    </li>
+  <% end %>
+</ul>
+<p>
+  <%= link_to "Write You Profile", edit_user_profile_path(current_user)%>
+</p>
+<h3>有類似的經驗</h3>
+<ul>
+  <% @experiences.each do |experience|%>
+    <li><%= link_to truncate_u(Sanitize.clean(experience.content), 15), experience %></li>
+  <% end %>
+</ul>
+<p>
+  <%= link_to 'Share Your Experience', new_user_experience_path(current_user) %>
+</p>

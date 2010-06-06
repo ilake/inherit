@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100601130536
+# Schema version: 20100606092954
 #
 # Table name: profiles
 #
@@ -10,6 +10,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  intro      :text
+#  tags_list  :text
 #
 
 one:
