@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   helper_method :current_user_location
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
+  before_filter :authenticate_inviter
 
   # Scrub sensitive parameters from your log
   filter_parameter_logging :password
@@ -26,5 +27,12 @@ class ApplicationController < ActionController::Base
 
   def force_set_profile
     redirect_to edit_user_profile_path(current_user) if current_user && current_user.try(:birthday).blank?
+  end
+
+  def authenticate_inviter
+    authenticate_or_request_with_http_basic do |name, password|
+      name == 'i' && password == 'lovetaiwan'
+    end
+    warden.custom_failure! if performed? 
   end
 end
