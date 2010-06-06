@@ -30,7 +30,7 @@ Rails::Initializer.run do |config|
   #config.gem 'thinking-sphinx', :lib => 'thinking_sphinx', :version => '1.3.16'
   config.gem 'ts-delayed-delta', :lib => 'thinking_sphinx/deltas/delayed_delta', :version => '>= 1.0.0', :source => 'http://gemcutter.org'
   config.gem 'chronic'
-  config.gem 'javan-whenever', :lib => false, :source => 'http://gems.github.com'
+  config.gem 'whenever', :lib => false, :source => 'http://rubygems.org'
 
 
   # Only load the plugins named here, in the order given (default is alphabetical).
