@@ -43,5 +43,9 @@ development:
 test:
   port: 9313
 production:
+  <<: *development
   port: 9312
-  pid_file: log/searchd.production.pid
+  config_file: "config/ENVIRONMENT.sphinx.conf"
+  searchd_log_file: "log/searchd.log"
+  query_log_file: "log/searchd.query.log"
+  pid_file: "log/searchd.production.pid"

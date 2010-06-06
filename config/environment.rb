@@ -29,6 +29,7 @@ Rails::Initializer.run do |config|
   config.gem 'riddle'
   #config.gem 'thinking-sphinx', :lib => 'thinking_sphinx', :version => '1.3.16'
   config.gem 'ts-delayed-delta', :lib => 'thinking_sphinx/deltas/delayed_delta', :version => '>= 1.0.0', :source => 'http://gemcutter.org'
+  config.gem 'javan-whenever', :lib => false, :source => 'http://gems.github.com'
 
 
   # Only load the plugins named here, in the order given (default is alphabetical).
