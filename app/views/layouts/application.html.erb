@@ -51,15 +51,17 @@
             <% end %>
             <li>
               <% form_tag search_url, :method => :get do %>
-                Search: <%= text_field_tag :search %>
+                Search: <%= text_field_tag :search, nil, :size => 10 %>
                 <%= submit_tag 'Search', :name => nil %>
               <% end %>
+            </li>
+            <li>
+              <div id="cse" style="width: 200px;">Loading</div>
             </li>
           </ul>
         </div>
 
       </div>
-
 
     <div id='layout'>
       <%= yield %>
@@ -69,5 +71,16 @@
   </div>
   <%= yield :bottom_js %>
   <%= javascript_include_tag 'application' %>
+      <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+      <script type="text/javascript">
+        google.load('search', '1');
+        google.setOnLoadCallback(function() {
+            var customSearchControl = new google.search.CustomSearchControl('002732166184002343049:9tb3p8oqkj4');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            customSearchControl.draw('cse');
+            }, true);
+          </script>
+          <link rel="stylesheet" href="http://www.google.com/cse/style/look/default.css" type="text/css" /> 
+
 </body>
 </html>

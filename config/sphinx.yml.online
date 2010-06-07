@@ -72,6 +72,6 @@ production:
   mem_limit: 32M
   read_timeout: 5
   max_children: 300
-  max_matches: 100000
+  max_matches: 1000
   sql_ranged_throttle: 0
   sql_range_step: 5000
