@@ -17,8 +17,8 @@ class ExperiencesController < ApplicationController
       end_time_hash = e.end_at_hash
       {
       'start' => e.start_at.to_s(:date),
-      'title' => ApplicationController.helpers.truncate_u(Sanitize.clean(e.content), 20),
-      'description' => e.content,
+      'title' => app_helpers.truncate_u(Sanitize.clean(e.content), 20),
+      'description' => "#{app_helpers.link_to '編輯', edit_experience_path(e)}#{e.content}",
       'color' => "##{rand(10)}#{rand(10)}#{rand(10)}",
       'icon' => "/images/timeline/dark-red-circle.png"
       }.merge!(end_time_hash)

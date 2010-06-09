@@ -16,6 +16,10 @@ class ApplicationController < ActionController::Base
   end
 
   private
+  def app_helpers
+    @app_helpers ||= ApplicationController.helpers
+  end
+  
   def user_selected
     @user ||= User.find(params[:user_id])
   end
