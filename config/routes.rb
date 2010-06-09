@@ -10,7 +10,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.search "search/:search", :controller =>'search', :action => 'index', :search => nil
 
-  map.user_exps "users/:user_id/:goal_id/experiences", :controller => 'experiences', :action => 'index',  :goal_id => nil
+  map.user_exps "users/:user_id/:goal_id/experiences", :controller => 'experiences', :action => 'index'
 
   map.resources :users do |user|
     user.resource :profile, :except => [:new, :create]

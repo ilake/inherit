@@ -68,10 +68,10 @@ class ExperiencesController < ApplicationController
   # POST /experiences.xml
   def create
     @experience = current_user.experiences.new(params[:experience])
-    @question = Question.find(params[:question_id]) if params[:question_id]
+    @question = Question.find(params[:question_id]) if !params[:question_id].blank?
     respond_to do |format|
       if @experience.save
-        @experience.answer_questions << @question
+        @experience.answer_questions << @question if @question
         current_user.tag(@experience, :with => @experience.tag_list, :on => :tags)
         flash[:notice] = 'Experience was successfully created.'
         format.html { 
@@ -93,7 +93,7 @@ class ExperiencesController < ApplicationController
   # PUT /experiences/1.xml
   def update
     @experience = current_user.experiences.find(params[:id])
-    @question = Question.find(params[:question_id]) if params[:question_id]
+    @question = Question.find(params[:question_id]) if !params[:question_id].blank?
     respond_to do |format|
       if @experience.update_attributes(params[:experience])
         current_user.tag(@experience, :with => @experience.tag_list.to_s, :on => :tags)

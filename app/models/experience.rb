@@ -37,6 +37,7 @@ class Experience < ActiveRecord::Base
 
   before_create :default_set_user_location
   before_save :set_tags_list
+  before_save :format_content
 
   named_scope :goal_categroy, Proc.new{|goal_id| 
     if goal_id
@@ -94,9 +95,12 @@ class Experience < ActiveRecord::Base
     end
   end
 
+  def format_content
+    write_attribute(:content, Sanitize.clean(CGI::unescapeHTML(content), Sanitize::Config::CUSTOM))
+  end
+
   private
   def set_tags_list
     self.tags_list = tag_list.join(" ")
   end
-
 end
