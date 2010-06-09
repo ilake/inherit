@@ -1,0 +1,15 @@
+<% content_for :head do %>
+  <%= include_tiny_mce_if_needed %>
+<% end %>
+<% form_for @question do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :content %><br />
+    <%= f.text_area :content, :size => '60x20', :class => "mceEditor" %>
+  </p>
+  <p><%= f.submit "Submit" %></p>
+<% end %>

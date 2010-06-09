@@ -6,11 +6,11 @@ class Ability
 
     can :read, :all
     if user.is_not_guest?
-      can :create, [Experience, Goal]
-      can :update, [Experience, Goal, Profile] do |obj|
+      can :create, [Experience, Goal, Question]
+      can :update, [Experience, Goal, Profile, Question] do |obj|
         obj.try(:user) == user
       end
-      can :destroy, [Experience, Goal] do |obj|
+      can :destroy, [Experience, Goal, Question] do |obj|
         obj.try(:user) == user
       end
 

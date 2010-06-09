@@ -49,6 +49,8 @@
             <% else %>
               <li><%= link_to "首頁", root_url %></li>
             <% end %>
+            <li><%= link_to "解惑", questions_path %>
+            </li>
             <li>
               <% form_tag search_url, :method => :get do %>
                 Search: <%= text_field_tag :search, nil, :size => 10 %>

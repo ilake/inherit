@@ -1,0 +1,22 @@
+# == Schema Information
+# Schema version: 20100607231917
+#
+# Table name: questions
+#
+#  id         :integer(4)      not null, primary key
+#  title      :string(255)
+#  content    :text
+#  user_id    :integer(4)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
+class Question < ActiveRecord::Base
+  acts_as_commentable
+
+  attr_accessible :title, :content
+
+  validates_presence_of :title, :content
+
+  belongs_to :user
+end

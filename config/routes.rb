@@ -1,6 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+
   map.devise_for :users
 
+  map.resources :questions
   map.resources :goals, :as => :categories
   map.resources :experiences
   map.resource :profile, :except => [:new, :create]

@@ -43,6 +43,7 @@ class User < ActiveRecord::Base
   has_many :goals
   has_many :experiences
   has_many :comments
+  has_many :questions
 
   delegate :location_list, :birthday, :to => :profile
 

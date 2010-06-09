@@ -1,0 +1,30 @@
+<% title "Question" %>
+
+<p>
+  <strong>Title:</strong>
+  <%=h @question.title %>
+</p>
+<p>
+  <strong>Content:</strong>
+  <%= @question.content %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_question_path(@question) %> |
+  <%= link_to "Destroy", @question, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", questions_path %>
+</p>
+
+  <hr >
+  <h3>New Comment</h3>
+  <%= render :partial => 'comments/form' %>
+
+  <h3>Comments</h3>
+  <ul>
+    <% @comments.each do |c| %>
+      <li>
+        <%= link_to c.user.username, user_experiences_path(c.user) %>
+        <%= c.comment %>
+      </li>
+    <% end %>
+  </ul>

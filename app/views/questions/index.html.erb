@@ -1,0 +1,19 @@
+<% title "Questions" %>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Content</th>
+  </tr>
+  <% for question in @questions %>
+    <tr>
+      <td><%=h question.title %></td>
+      <td><%= truncate_u(Sanitize.clean(question.content), 12) %></td>
+      <td><%= link_to "Show", question %></td>
+      <td><%= link_to "Edit", edit_question_path(question) %></td>
+      <td><%= link_to "Destroy", question, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Question", new_question_path %></p>
