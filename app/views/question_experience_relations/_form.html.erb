@@ -1,0 +1,12 @@
+<% form_for @question_experience_relation do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :question_id %><br />
+    <%= f.text_field :question_id %>
+  </p>
+  <p>
+    <%= f.label :experience_id %><br />
+    <%= f.text_field :experience_id %>
+  </p>
+  <p><%= f.submit "Submit" %></p>
+<% end %>

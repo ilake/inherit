@@ -1,0 +1,19 @@
+<% title "Question Experience Relations" %>
+
+<table>
+  <tr>
+    <th>Question</th>
+    <th>Experience</th>
+  </tr>
+  <% for question_experience_relation in @question_experience_relations %>
+    <tr>
+      <td><%=h question_experience_relation.question_id %></td>
+      <td><%=h question_experience_relation.experience_id %></td>
+      <td><%= link_to "Show", question_experience_relation %></td>
+      <td><%= link_to "Edit", edit_question_experience_relation_path(question_experience_relation) %></td>
+      <td><%= link_to "Destroy", question_experience_relation, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Question Experience Relation", new_question_experience_relation_path %></p>

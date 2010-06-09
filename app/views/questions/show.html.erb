@@ -14,8 +14,16 @@
   <%= link_to "Destroy", @question, :confirm => 'Are you sure?', :method => :delete %> |
   <%= link_to "View All", questions_path %>
 </p>
-
-  <hr >
+<hr >
+<h3>Someone's experience</h3>
+  <%= link_to 'Share Your Experience for her/him', new_user_experience_path(current_user, :question_id => @question) %>
+  <ul>
+    <% @experiences.each do |experience| %>
+      <li>
+        <%= link_to truncate_u(Sanitize.clean(experience.content), 15), experience %>
+      </li>
+    <% end %>
+  </ul>
   <h3>New Comment</h3>
   <%= render :partial => 'comments/form' %>
 

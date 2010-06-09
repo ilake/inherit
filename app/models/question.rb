@@ -12,11 +12,16 @@
 #
 
 class Question < ActiveRecord::Base
+  attr_accessible :title, :content
   acts_as_commentable
 
-  attr_accessible :title, :content
+  belongs_to :user
+  has_many :question_experience_relations
+  has_many :experiences, :through => :question_experience_relations, :source => :experience
 
   validates_presence_of :title, :content
 
-  belongs_to :user
+  def to_param
+    "#{id}-#{title}"
+  end
 end

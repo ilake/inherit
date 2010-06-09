@@ -37,6 +37,14 @@
   <% end %>
 
 
+<h3>Experience for some questions</h3>
+  <ul>
+    <% @questions.each do |question| %>
+      <li>
+        <%= link_to truncate_u(Sanitize.clean(question.content), 15), question %>
+      </li>
+    <% end %>
+  </ul>
 
   <hr >
   <h3>New Comment</h3>

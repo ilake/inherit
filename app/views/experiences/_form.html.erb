@@ -1,6 +1,10 @@
 <% content_for :head do %>
   <%= include_tiny_mce_if_needed %>
 <% end %>
+<p>
+  <%= @question.try(:content)%>
+  <%= hidden_field_tag :question_id, @question.try(:id) %>
+</p>
 
   <%= f.error_messages %>
   <div>

@@ -1,0 +1,16 @@
+<% title "Question Experience Relation" %>
+
+<p>
+  <strong>Question:</strong>
+  <%=h @question_experience_relation.question_id %>
+</p>
+<p>
+  <strong>Experience:</strong>
+  <%=h @question_experience_relation.experience_id %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_question_experience_relation_path(@question_experience_relation) %> |
+  <%= link_to "Destroy", @question_experience_relation, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", question_experience_relations_path %>
+</p>

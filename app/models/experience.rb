@@ -30,6 +30,9 @@ class Experience < ActiveRecord::Base
   belongs_to :user
   belongs_to :goal
 
+  has_many :question_experience_relations, :dependent => :destroy
+  has_many :answer_questions, :through => :question_experience_relations, :source => :question
+
   validates_presence_of :user_id, :content
 
   before_create :default_set_user_location

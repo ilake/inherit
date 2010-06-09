@@ -6,6 +6,8 @@ class CreateExperiences < ActiveRecord::Migration
       t.datetime :start_at, :end_at
       t.timestamps
     end
+
+    add_index :experiences, :user_id
   end
 
   def self.down

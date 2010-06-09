@@ -35,6 +35,7 @@ class ExperiencesController < ApplicationController
   def show
     @experience = Experience.find(params[:id])
     @comments = @experience.comments.recent.find(:all, :include => :user)
+    @questions = @experience.answer_questions.limit(5)
 
     @comment = @experience.comments.new
     @vote = @experience.votes.new
@@ -49,6 +50,9 @@ class ExperiencesController < ApplicationController
   # GET /experiences/new.xml
   def new
     @experience = Experience.new(:goal_id => params[:goal_id], :end_at => Time.now)
+    if params[:question_id]
+      @question = Question.find(params[:question_id])
+    end
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @experience }
@@ -64,11 +68,19 @@ class ExperiencesController < ApplicationController
   # POST /experiences.xml
   def create
     @experience = current_user.experiences.new(params[:experience])
+    @question = Question.find(params[:question_id]) if params[:question_id]
     respond_to do |format|
       if @experience.save
+        @experience.answer_questions << @question
         current_user.tag(@experience, :with => @experience.tag_list, :on => :tags)
         flash[:notice] = 'Experience was successfully created.'
-        format.html { redirect_to user_experiences_path(current_user) }
+        format.html { 
+          if @question
+            respond_to @question
+          else
+            redirect_to user_experiences_path(current_user) 
+          end
+        }
         format.xml  { render :xml => @experience, :status => :created, :location => @experience }
       else
         format.html { render :action => "new" }
@@ -81,6 +93,7 @@ class ExperiencesController < ApplicationController
   # PUT /experiences/1.xml
   def update
     @experience = current_user.experiences.find(params[:id])
+    @question = Question.find(params[:question_id]) if params[:question_id]
     respond_to do |format|
       if @experience.update_attributes(params[:experience])
         current_user.tag(@experience, :with => @experience.tag_list.to_s, :on => :tags)

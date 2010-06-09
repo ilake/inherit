@@ -6,6 +6,8 @@ class CreateProfiles < ActiveRecord::Migration
       t.references :user
       t.timestamps
     end
+
+    add_index :profiles, :user_id
   end
   
   def self.down

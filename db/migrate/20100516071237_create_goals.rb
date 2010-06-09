@@ -9,6 +9,8 @@ class CreateGoals < ActiveRecord::Migration
       t.time :end_at
       t.timestamps
     end
+
+    add_index :goals, :user_id
   end
   
   def self.down

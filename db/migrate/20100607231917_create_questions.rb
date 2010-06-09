@@ -6,6 +6,8 @@ class CreateQuestions < ActiveRecord::Migration
       t.belongs_to :user
       t.timestamps
     end
+
+    add_index :questions, :user_id
   end
   
   def self.down
