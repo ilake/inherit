@@ -12,7 +12,7 @@ class ExperiencesController < ApplicationController
     @experience_groups = @experiences.group_by{|e| e.start_at.at_beginning_of_month}
     @goals = user_selected.goals.show_policy(@user.is_owner?(current_user)).all
 
-    @events = @experiences.map{ |e|
+    events = @experiences.map{ |e|
       #Does not have end_at or start_at equal to end_at
       end_time_hash = e.end_at_hash
       {
@@ -22,7 +22,18 @@ class ExperiencesController < ApplicationController
       'color' => "##{rand(10)}#{rand(10)}#{rand(10)}",
       'icon' => "/images/timeline/dark-red-circle.png"
       }.merge!(end_time_hash)
-    }.to_json
+    }
+
+     @goals.each { |g|
+       events << {
+          'start' => g.start_at.to_s(:date),
+          'title' => g.title,
+          'description' => "#{app_helpers.link_to '編輯', edit_goal_path(g)}#{g.content}",
+          'color' => "##{rand(10)}#{rand(10)}#{rand(10)}",
+          'icon' => "/images/timeline/#{['gray', 'green', 'red'].rand}-circle.png"
+       }
+    }
+    @events = events.to_json
 
     respond_to do |format|
       format.html # index.html.erb
