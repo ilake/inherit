@@ -8,12 +8,8 @@
     <%= f.text_field :title %>
   </p>
   <p>
-    <%= f.label :content, "Detail" %><br />
-    <%= f.text_area :content, :size => '60x20', :class => "mceEditor"  %>
-  </p>
-  <p>
     <%= f.label :start_at %><br />
-    <%= f.date_select :start_at, :use_month_numbers => true  %>
+    <%= f.date_select :start_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950  %>
   </p>
   <p>
     <%= f.label :tag %><br />
@@ -26,6 +22,10 @@
   <p>
     <%= f.label :public, '公開' %><br />
     <%= f.check_box :public %>
+  </p>
+  <p>
+    <%= f.label :content, "Detail" %><br />
+    <%= f.text_area :content, :size => '60x20', :class => "mceEditor"  %>
   </p>
   <p><%= f.submit "Submit" %></p>
 <% end %>
