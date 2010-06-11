@@ -23,7 +23,7 @@ class Goal < ActiveRecord::Base
   belongs_to :user
   has_many :experiences
 
-  validates_presence_of :content, :title
+  validates_presence_of :content, :title, :start_at
 
   def to_param
     "#{id}-#{title}"
