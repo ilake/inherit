@@ -20,7 +20,7 @@ class Profile < ActiveRecord::Base
   acts_as_taggable_on :locations
 
   belongs_to :user
-  validates_presence_of :intro
+  validates_presence_of :intro, :tag_list, :on => :update
 
   before_save :set_tags_list
 

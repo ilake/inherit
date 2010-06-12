@@ -14,6 +14,7 @@
 #
 
 class Comment < ActiveRecord::Base
+  after_create :deliver_comment_notification
 
   include ActsAsCommentable::Comment
 
@@ -29,4 +30,20 @@ class Comment < ActiveRecord::Base
   # NOTE: Comments belong to a user
   belongs_to :user
 
+  def mail_receiver
+    #下過comment的
+    commenter_ids = Comment.find(:all, :conditions => {:commentable_id => self.commentable_id, :commentable_type => self.commentable_type}).map{|c| c.user_id}
+    #加入這筆comment 所要談論object 的擁有者
+    commenter_ids << self.commentable.user_id
+    commenter_ids.uniq!
+    #扣掉本筆comment的擁有者
+    commenter_ids.delete(self.user_id)
+
+    users = User.find(:all, :conditions => {:id => commenter_ids})
+  end
+
+  private
+  def deliver_comment_notification
+    Delayed::Job.enqueue(CommentMailingJob.new(self.id))
+  end
 end
