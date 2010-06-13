@@ -1,5 +1,8 @@
 <% title "Question" %>
-
+<p>
+  <strong>Author:</strong>
+  <%= link_to @question.user.username, user_experiences_path(@question.user) %>
+</p>
 <p>
   <strong>Title:</strong>
   <%=h @question.title %>

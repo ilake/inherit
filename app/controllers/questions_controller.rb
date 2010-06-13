@@ -10,7 +10,7 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.find(params[:id])
     @comments = @question.comments.recent.find(:all, :include => :user)
-    @experiences = @question.experiences.limit(5)
+    @experiences = @question.experiences.descend_by_updated_at.limit(5)
 
     @comment = @question.comments.new
   end

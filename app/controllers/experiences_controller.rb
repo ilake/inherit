@@ -87,7 +87,7 @@ class ExperiencesController < ApplicationController
         flash[:notice] = 'Experience was successfully created.'
         format.html { 
           if @question
-            respond_to @question
+            redirect_to @question
           else
             redirect_to user_experiences_path(current_user) 
           end

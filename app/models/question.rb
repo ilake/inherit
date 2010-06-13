@@ -16,7 +16,7 @@ class Question < ActiveRecord::Base
   acts_as_commentable
 
   belongs_to :user
-  has_many :question_experience_relations
+  has_many :question_experience_relations, :dependent => :destroy
   has_many :experiences, :through => :question_experience_relations, :source => :experience
 
   validates_presence_of :title, :content

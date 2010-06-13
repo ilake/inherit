@@ -8,4 +8,11 @@ class NotificationMailer < ActionMailer::Base
     body          :comment => comment
   end
 
+  def question_notification(users, experience)
+    bcc           users.map{|u| u.email}
+    from          "notifications@inherit.com"
+    subject       "Inherit Question Notification"
+    sent_on       Time.now
+    body          :experience => experience
+  end
 end
