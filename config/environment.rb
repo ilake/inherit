@@ -31,6 +31,7 @@ Rails::Initializer.run do |config|
   config.gem 'ts-delayed-delta', :lib => 'thinking_sphinx/deltas/delayed_delta', :version => '>= 1.0.0', :source => 'http://gemcutter.org'
   config.gem 'chronic'
   config.gem 'whenever', :lib => false, :source => 'http://rubygems.org'
+  config.gem 'daemons'
 
 
   # Only load the plugins named here, in the order given (default is alphabetical).
