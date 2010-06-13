@@ -4,6 +4,7 @@ set :application, 'inherit'
 
 set :user, 'root'
 set :hosting, 'webbynode'
+set :env, 'production'
 set :deploy_to, "/var/rails/inherit_deploy"
 role :web, 'inherit.iwakela.com'
 role :app, 'inherit.iwakela.com'
@@ -92,13 +93,32 @@ namespace :inherit do
   end
 
   task :deploy_all do 
+    delayed_job::stop
     sphinx_stop
     update
     gem_install
     sphinx_start
     start
+    delayed_job::start
     update_crontab
     chown if hosting == 'webbynode'
   end
 
+end
+
+namespace :delayed_job do
+  desc "Start delayed_job process" 
+  task :start, :roles => :app do
+    run "cd #{current_path}; ruby script/delayed_job start -- #{env}" 
+  end
+
+  desc "Stop delayed_job process" 
+  task :stop, :roles => :app do
+    run "cd #{current_path}; script/delayed_job stop -- #{env}" 
+  end
+
+  desc "Restart delayed_job process" 
+  task :restart, :roles => :app do
+    run "cd #{current_path}; script/delayed_job restart -- #{env}" 
+  end
 end
