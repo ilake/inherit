@@ -1,3 +1,15 @@
+# == Schema Information
+# Schema version: 20100613100537
+#
+# Table name: question_experience_relations
+#
+#  id            :integer(4)      not null, primary key
+#  question_id   :integer(4)
+#  experience_id :integer(4)
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+
 class QuestionExperienceRelation < ActiveRecord::Base
   attr_accessible :question_id, :experience_id
 

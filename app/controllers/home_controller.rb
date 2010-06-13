@@ -1,6 +1,5 @@
 class HomeController < ApplicationController
   before_filter :user_auth, :only => [:index]
-  before_filter :authenticate_user!, :only => [:user]
   before_filter :force_set_profile
 
   def index

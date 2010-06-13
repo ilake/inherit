@@ -1,3 +1,15 @@
+# == Schema Information
+# Schema version: 20100613100537
+#
+# Table name: question_experience_relations
+#
+#  id            :integer(4)      not null, primary key
+#  question_id   :integer(4)
+#  experience_id :integer(4)
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+
 one:
   question_id: 1
   experience_id: 1

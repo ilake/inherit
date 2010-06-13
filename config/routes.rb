@@ -3,6 +3,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.devise_for :users
 
+  map.resources :fans
   map.resources :questions
   map.resources :goals, :as => :categories
   map.resources :experiences

@@ -11,6 +11,7 @@ class ExperiencesController < ApplicationController
     @experiences = user_selected.experiences.show_policy(@user.is_owner?(current_user)).goal_categroy(params[:goal_id]).descend_by_start_at.find(:all, :include => [:goal])
     @experience_groups = @experiences.group_by{|e| e.start_at.at_beginning_of_month}
     @goals = user_selected.goals.show_policy(@user.is_owner?(current_user)).all
+    @fan = @user.fan(current_user)
 
     events = @experiences.map{ |e|
       #Does not have end_at or start_at equal to end_at

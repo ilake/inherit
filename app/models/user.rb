@@ -26,6 +26,7 @@
 class User < ActiveRecord::Base
   acts_as_voter
   acts_as_tagger
+  acts_as_fannable
 
   # Include default devise modules. Others available are:
   # :http_authenticatable, :token_authenticatable, :lockable, :timeoutable and :activatable

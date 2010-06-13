@@ -3,6 +3,20 @@
 <div id='exp_chart'>
 </div>
 
+<% if !@user.is_owner?(current_user)%>
+  <h2>Follow?
+    <% if @fan.new_record? %>
+      <% form_for @fan do |f| %>
+        <%= f.hidden_field :fannable_id %>
+        <%= f.hidden_field :fannable_type %>
+        <%= f.hidden_field :user_id %>
+        <%= f.submit "Follow it", :name => nil%>
+      <% end %>
+    <% else %>
+      <%= link_to 'unlike', @fan, :confirm => 'Are you sure?', :method => :delete %>
+    <% end %>
+  </h2>
+<% end %>
 <div id='goal_list'>
   <h2>Goals / Category
     <% if can? :create, Goal%>
