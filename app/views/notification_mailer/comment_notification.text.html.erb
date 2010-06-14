@@ -1,3 +1,7 @@
-you have comment <%= @comment.comment %>
+<p>
+  have new comment <%= @comment.comment %>
+</p>
 
-<%= link_to 'you could see it here', "http://#{ActionMailer::Base.default_url_options[:host]}#{url_for(@comment.commentable)}" %>
+<p>
+  <%= link_to 'you could see it here', "http://#{ActionMailer::Base.default_url_options[:host]}#{url_for(@comment.commentable)}" %>
+</p>

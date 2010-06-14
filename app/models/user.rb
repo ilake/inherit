@@ -66,6 +66,11 @@ class User < ActiveRecord::Base
     @is_owner ||= self == current_user
   end
 
+  def user_fans
+    user_ids = self.fans.map{|f| f.user_id }
+    User.find(:all, :conditions => {:id => user_ids })
+  end
+
   private
   def init
     self.create_profile

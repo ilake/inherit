@@ -1,0 +1,7 @@
+<p>
+  Your follow have new experience <%= @experience.content %>
+</p>
+
+<p>
+<%= link_to 'you could see it here', "http://#{ActionMailer::Base.default_url_options[:host]}#{url_for(@experience)}" %>
+</p>

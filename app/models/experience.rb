@@ -38,6 +38,7 @@ class Experience < ActiveRecord::Base
   before_create :default_set_user_location
   before_save :set_tags_list
   before_save :format_content
+  after_create :deliver_experience_notification
 
   named_scope :goal_categroy, Proc.new{|goal_id| 
     if goal_id
@@ -102,5 +103,9 @@ class Experience < ActiveRecord::Base
   private
   def set_tags_list
     self.tags_list = tag_list.join(" ")
+  end
+
+  def deliver_experience_notification
+    Delayed::Job.enqueue(ExperienceMailingJob.new(self.id, self.user_id)) if self.public
   end
 end

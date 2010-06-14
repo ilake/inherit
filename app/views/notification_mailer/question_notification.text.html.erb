@@ -1,3 +1,10 @@
-Newone share experience <%= @experience.content%>
+<p>
+  Because <%= link_to @question.title,  "http://#{ActionMailer::Base.default_url_options[:host]}#{url_for(@question)}" %>
+</p>
+<p>
+Someone share experience <%= ApplicationController.helpers.truncate_u(Sanitize.clean(@experience.content),50) %>
+</p>
 
+<p>
 <%= link_to 'you could see it here', "http://#{ActionMailer::Base.default_url_options[:host]}#{url_for(@experience)}" %>
+</p>
