@@ -97,13 +97,14 @@
 
 <% content_for :head do %>
   <script>
-    Timeline_ajax_url= '/javascripts/timeline/timeline_ajax/simile-ajax-api.js';
-    Timeline_urlPrefix='/javascripts/timeline/timeline_js/';
+    Timeline_ajax_url= '<%= javascript_path "timeline/timeline_ajax/simile-ajax-api.js" %>';
+    Timeline_urlPrefix='<%= "#{ActionController::Base.asset_host}/javascripts/timeline/timeline_js/" %>';
     Timeline_parameters="bundle=true";
   </script>
 
   <%= javascript_include_tag 'timeline/timeline_js/timeline-api.js' %>
-
+<% end %>
+<% content_for :bottom_js do %>
   <script>
     var timeline_data = {  // save as a global variable
       'dateTimeFormat': 'iso8601',
@@ -124,7 +125,7 @@
         theme1.event.tape.height = 10;
 
         theme1.timeline_start = new Date('<%= timeline_start_time(@user, @experiences) %>');
-        theme1.timeline_stop  = new Date;
+        theme1.timeline_stop  = new Date();
         
   // 置中
   var d = Timeline.DateTime.parseGregorianDateTime(new Date('<%= @experiences.first.try(:start_at).try(:to_s, :js_date) || Time.now %>'));
