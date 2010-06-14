@@ -5,6 +5,7 @@ ActionController::Routing::Routes.draw do |map|
 
   #因為我解不掉在controller 用link_to 做刪除動作的bug, 所以只好work around 
   map.destroy_experience "experiences/:id/destroy", :controller => 'experiences', :action => 'destroy'
+  map.destroy_goal "categories/:id/destroy", :controller => 'goals', :action => 'destroy'
   map.resources :fans
   map.resources :questions
   map.resources :goals, :as => :categories
