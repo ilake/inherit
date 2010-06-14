@@ -125,11 +125,13 @@
         theme1.event.track.height = 15;
         theme1.event.tape.height = 10;
 
-        theme1.timeline_start = new Date(<%= timeline_start_time(@user, @experiences) %>);
-        theme1.timeline_stop  = new Date();
+        theme1.timeline_start = new Date(<%= timeline_start_time(@user) %>);
+        var t = new Date();
+        var year = t.getFullYear();
+        theme1.timeline_stop  = new Date(year+5, 12, 31);
         
   // 置中
-        var d = Timeline.DateTime.parseGregorianDateTime(new Date(<%= @experiences.first.try(:start_at).try(:to_s, :js_date) || Time.now %>));
+        var d = Timeline.DateTime.parseGregorianDateTime(new Date(<%= @experiences.first.try(:start_at).try(:to_s, :js_date) %>));
         var bandInfos = [
             Timeline.createBandInfo({
                 width:          "80%", // set to a minimum, autoWidth will then adjust
