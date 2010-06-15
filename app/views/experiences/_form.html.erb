@@ -10,13 +10,13 @@
   <div>
     <p>
       <%= f.label :start_at %><br />
-      <%= f.date_select :start_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :default => {:day => 1, :month => 1} %>
+      <%= f.date_select :start_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950 %>
     </p>
     <p>
       <%= f.label :end_at %><br />
       <%= f.check_box :end_at_exist %>
       <span id='end_at_date'>
-        <%= f.date_select :end_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :default => {:day => 1, :month => 1} %>
+        <%= f.date_select :end_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950 %>
       </span>
       <div id='end_at_untilnow'>
         <%= f.check_box :until_now %>
@@ -44,6 +44,10 @@
   <p>
     <%= f.label :content %><br />
     <%= f.text_area :content, :size => '60x20', :class => "mceEditor" %>
+  </p>
+  <p>
+    <%= f.label :content, 'Select the color you like' %><br />
+    <%= f.text_field "color", :id => 'colorPicker' %>
   </p>
   <p>
     <%= f.submit 'Update' %>

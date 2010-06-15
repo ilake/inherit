@@ -45,6 +45,7 @@ $(document).ready(function(){
 
     $('#user_date_check').change(function(){
       detect_user_date();
-      });
+    });
 
+    $('#colorPicker').colorPicker();
 });

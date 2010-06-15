@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100606092954
+# Schema version: 20100615095343
 #
 # Table name: experiences
 #
@@ -15,10 +15,11 @@
 #  until_now  :boolean(1)
 #  public     :boolean(1)      default(TRUE)
 #  tags_list  :text
+#  color      :string(7)       default("#E1ECFE")
 #
 
 class Experience < ActiveRecord::Base
-  attr_accessible :start_at, :end_at, :content, :goal_id, :tag_list, :exp_type, :location_list, :until_now, :end_at_exist, :public
+  attr_accessible :start_at, :end_at, :content, :goal_id, :tag_list, :exp_type, :location_list, :until_now, :end_at_exist, :public, :color
 
   acts_as_taggable
   acts_as_taggable_on :tags

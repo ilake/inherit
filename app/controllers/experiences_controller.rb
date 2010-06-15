@@ -20,7 +20,7 @@ class ExperiencesController < ApplicationController
       'start' => e.start_at.to_s(:date),
       'title' => app_helpers.truncate_u(Sanitize.clean(e.content), 20),
       'description' => "#{app_helpers.link_to '編輯', edit_experience_path(e) if can? :update, e}#{app_helpers.link_to('刪除', destroy_experience_path(e), :confirm => 'Are you sure') if can? :destroy, e} #{e.content}",
-      'color' => "##{rand(10)}#{rand(10)}#{rand(10)}",
+      'color' => e.color,
       'icon' => "/images/timeline/dark-red-circle.png"
       }.merge!(end_time_hash)
     }
