@@ -1,5 +1,8 @@
 class FansController < ApplicationController
   before_filter :authenticate_user!, :except => [:index , :show]
+  def index
+    @users = User.find(params[:user_id]).user_fans
+  end
 
   def create
     fan = Fan.new(params[:fan])

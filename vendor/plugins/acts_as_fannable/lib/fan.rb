@@ -1,18 +1,19 @@
 class Fan < ActiveRecord::Base
   belongs_to :fannable, :polymorphic => true
   validates_uniqueness_of :user_id, :scope => [:fannable_id, :fannable_type]
+  after_create :increase_fans
+  after_destroy :decrease_fans
+    
+  #Models are liked by users 
+  belongs_to :user
 
   def validate_on_create # is only run the first time a new object is saved
     #不能自己follow 自己
     if fannable_type == 'User' && fannable_id == user_id
       errors.add("user_requirement", "can't be youself")
     end
-
   end
-    
-  #Models are liked by users 
-  belongs_to :user
-    
+
   #find methods to help find fannable elements
   def self.find_fannables_by_user(user)
     find(:all,
@@ -33,4 +34,12 @@ class Fan < ActiveRecord::Base
     fannable_element.constantize.find(fannable_id)
   end
   
+  private
+  def increase_fans
+    fannable_type.constantize.increment_counter(:fans_count, self.fannable_id)
+  end
+
+  def decrease_fans
+    fannable_type.constantize.decrement_counter(:fans_count, self.fannable_id)
+  end
 end

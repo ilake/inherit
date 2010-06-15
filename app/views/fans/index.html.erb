@@ -1,0 +1,8 @@
+<h2>fans</h2>
+<ul>
+  <% @users.each do |u| %>
+    <li>
+      <%= link_to "#{u.username}",  user_experiences_path(u) %>
+    </li>
+<% end %>
+</ul>

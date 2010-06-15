@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100615095343
+# Schema version: 20100615130941
 #
 # Table name: experiences
 #
@@ -15,7 +15,7 @@
 #  until_now  :boolean(1)
 #  public     :boolean(1)      default(TRUE)
 #  tags_list  :text
-#  color      :string(7)       default("#E1ECFE")
+#  color      :string(7)       default("#64E827")
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

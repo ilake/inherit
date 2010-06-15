@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100531043838
+# Schema version: 20100615130941
 #
 # Table name: users
 #
@@ -21,6 +21,7 @@
 #  created_at           :datetime
 #  updated_at           :datetime
 #  username             :string(255)
+#  fans_count           :integer(4)      default(0)
 #
 
 class User < ActiveRecord::Base

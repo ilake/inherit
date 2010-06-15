@@ -20,6 +20,7 @@ ActionController::Routing::Routes.draw do |map|
     user.resource :profile, :except => [:new, :create]
     user.resources :experiences
     user.resources :goals, :as => :categories
+    user.resources :fans
   end
   map.resources :goals do |goal|
     goal.resources :experiences
