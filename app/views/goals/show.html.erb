@@ -17,8 +17,13 @@
 </p>
 
 <p>
-  <%= link_to "Edit", edit_goal_path(@goal) %> |
-  <%= link_to "Destroy", @goal, :confirm => 'Are you sure?', :method => :delete %> |
+  <% if can? :update, @goal %>
+    <%= link_to "Edit", edit_goal_path(@goal) %> |
+  <% end %>
+
+  <% if can? :destroy, @goal %>
+    <%= link_to "Destroy", @goal, :confirm => 'Are you sure?', :method => :delete %> |
+  <% end %>
 </p>
 
 <h3>類似目標</h3>
