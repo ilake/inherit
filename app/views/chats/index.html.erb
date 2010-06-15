@@ -1,0 +1,26 @@
+<% title "Chats" %>
+
+<table>
+  <tr>
+    <th></th>
+    <th>Comment</th>
+  </tr>
+  <% for chat in @chats %>
+    <tr>
+      <% if can? :destroy, chat %>
+        <td><%= link_to "Destroy origin", chat, :confirm => 'Are you sure?', :method => :delete %></td>
+      <% end %>
+      <td><%=h chat.content %></td>
+      <% chat.children.each do |c|%>
+        <td><%= c.content %></td>
+        <% if can? :destroy, c %>
+          <td><%= link_to "Destroy reply", c, :confirm => 'Are you sure?', :method => :delete %></td>
+        <% end %>
+      <% end %>
+      <td>
+        <%= link_to "reply", reply_new_chat_path(:chat_id => chat) if current_user.admin? %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+<%= render :partial => 'form' %>

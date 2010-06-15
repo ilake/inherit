@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100615130941
+# Schema version: 20100615174736
 #
 # Table name: users
 #
@@ -22,6 +22,7 @@
 #  updated_at           :datetime
 #  username             :string(255)
 #  fans_count           :integer(4)      default(0)
+#  admin                :boolean(1)
 #
 
 class User < ActiveRecord::Base
@@ -46,6 +47,7 @@ class User < ActiveRecord::Base
   has_many :experiences
   has_many :comments
   has_many :questions
+  has_many :chats
 
   delegate :location_list, :birthday, :to => :profile
 

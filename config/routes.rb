@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :chats, :new => {:reply => :get}
+
   map.resources :question_experience_relations
 
   map.devise_for :users

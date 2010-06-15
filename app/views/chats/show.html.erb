@@ -1,0 +1,12 @@
+<% title "Chat" %>
+
+<p>
+  <strong>Content:</strong>
+  <%=h @chat.content %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_chat_path(@chat) %> |
+  <%= link_to "Destroy", @chat, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", chats_path %>
+</p>

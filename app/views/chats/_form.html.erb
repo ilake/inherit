@@ -1,0 +1,9 @@
+<% form_for @chat do |f| %>
+  <%= f.error_messages %>
+    <%= f.hidden_field :parent_id %>
+  <p>
+    <%= f.label :content %><br />
+    <%= f.text_area :content, :size => '30x3' %>
+  </p>
+  <p><%= f.submit "Submit" %></p>
+<% end %>
