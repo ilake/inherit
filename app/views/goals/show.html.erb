@@ -1,5 +1,9 @@
 <% title "#{@goal.user.username} goal #{@goal.title}" %>
 <p>
+  <strong>Author:</strong>
+  <%= link_to "#{@goal.user.username}",  user_experiences_path(@goal.user) %>
+</p>
+<p>
   <strong>Start At:</strong>
   <%=h @goal.start_at %>
 </p>
