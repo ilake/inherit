@@ -2,7 +2,7 @@ class ChatsController < ApplicationController
   before_filter :authenticate_user!, :except => [:index , :show]
 
   def index
-    @chats = Chat.origin.find(:all, :include => :user)
+    @chats = Chat.origin.find(:all, :include => [:user, :children])
     @chat = Chat.new
   end
   

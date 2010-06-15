@@ -1,0 +1,10 @@
+<p>
+  Because <%= link_to @chat.content,  "http://#{ActionMailer::Base.default_url_options[:host]}#{url_for(@chat)}" %>
+</p>
+<p>
+Someone reply you <%= ApplicationController.helpers.truncate_u(Sanitize.clean(@reply.content),20) %>
+</p>
+
+<p>
+<%= link_to 'you could see it here', "http://#{ActionMailer::Base.default_url_options[:host]}#{url_for(@chat)}" %>
+</p>

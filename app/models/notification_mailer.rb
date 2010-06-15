@@ -1,5 +1,12 @@
 class NotificationMailer < ActionMailer::Base
 
+  def chat_notification(user, chat, reply)
+    bcc           user.email
+    from          "notifications@inherit.com"
+    subject       "Chat Comment Notification"
+    sent_on       Time.now
+    body          :chat => chat, :reply => reply
+  end
   def comment_notification(users, comment)
     bcc           users.map{|u| u.email}
     from          "notifications@inherit.com"

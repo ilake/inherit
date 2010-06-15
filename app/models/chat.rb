@@ -20,4 +20,12 @@ class Chat < ActiveRecord::Base
   acts_as_tree
 
   belongs_to :user
+
+  after_create :deliver_chat_notification
+
+  private
+  def deliver_chat_notification
+    #回應發給發問者
+    Delayed::Job.enqueue(ChatMailingJob.new(self.id)) if self.parent
+  end
 end
