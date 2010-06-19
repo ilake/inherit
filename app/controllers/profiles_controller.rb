@@ -17,7 +17,7 @@ class ProfilesController < ApplicationController
   def update
     @profile = current_user.profile
     if @profile.update_attributes(params[:profile])
-      session[:current_location] = current_user.location_list.to_s
+      session[:hometown] = current_user.location_list.to_s
 
       flash[:notice] = "Successfully updated profile."
       redirect_to user_profile_path(current_user)

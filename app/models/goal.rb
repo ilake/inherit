@@ -18,15 +18,22 @@
 class Goal < ActiveRecord::Base
   acts_as_taggable
   acts_as_taggable_on :tags
-  attr_accessible :start_at, :title, :content, :state, :tag_list, :public
+  acts_as_taggable_on :locations
+  attr_accessible :start_at, :title, :content, :state, :tag_list, :public, :location_list
 
   belongs_to :user
   has_many :experiences
 
   validates_presence_of :content, :title, :start_at
+  before_create :default_set_user_location
 
   def to_param
     "#{id}-#{title}"
+  end
+
+  private
+  def default_set_user_location
+    self.location_list = self.user.location_list
   end
 
 end

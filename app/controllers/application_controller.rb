@@ -3,7 +3,7 @@
 
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
-  helper_method :current_user_location
+  helper_method :current_user_location, :user_hometown
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   before_filter :authenticate_inviter
 
@@ -21,12 +21,17 @@ class ApplicationController < ActionController::Base
   end
   
   def user_selected
-    @user ||= User.find(params[:user_id])
+    @user ||= User.find(params[:user_id]) if params[:user_id]
+    @user ||= current_user
   end
 
   def current_user_location
-    #session[:current_location] ||= current_user.try(:location_list).try(:to_s)
-    current_user.try(:location_list).try(:to_s)
+    session[:current_location] = params[:location] if params[:location]
+    session[:current_location] ||= user_hometown
+  end
+
+  def user_hometown
+    session[:hometown] ||= current_user.try(:location_list).try(:to_s)
   end
 
   def force_set_profile

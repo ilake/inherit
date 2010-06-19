@@ -2,7 +2,7 @@ class ChatsController < ApplicationController
   before_filter :authenticate_user!, :except => [:index , :show]
 
   def index
-    @chats = Chat.origin.find(:all, :include => [:user, :children])
+    @chats = Chat.location_with(current_user_location).origin.find(:all, :include => [:user, :children])
     @chat = Chat.new
   end
   

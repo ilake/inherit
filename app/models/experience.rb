@@ -57,10 +57,6 @@ class Experience < ActiveRecord::Base
     group_by "user_id"
   end
 
-  def default_set_user_location
-    self.location_list = self.user.location_list
-  end
-
   def self.location_with(location)
     if location == 'World' || location.blank?
       scope = Experience.scoped({:include => :user})
@@ -109,4 +105,9 @@ class Experience < ActiveRecord::Base
   def deliver_experience_notification
     Delayed::Job.enqueue(ExperienceMailingJob.new(self.id, self.user_id)) if self.public
   end
+
+  def default_set_user_location
+    self.location_list = self.user.location_list
+  end
+
 end

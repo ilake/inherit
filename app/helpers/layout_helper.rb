@@ -23,8 +23,13 @@ module LayoutHelper
 
   def user_current_view_location(location)
     s = []
-    s << link_to_unless_current('World', home_url(:location => 'World'))
-    s << link_to_unless_current(current_user_location, home_url(current_user_location)) if current_user_location
+    if current_user_location == "World"
+      s << 'World'
+      s << link_to(user_hometown, :location => user_hometown) if user_hometown
+    else
+      s << link_to('World', :location => 'World')
+      s << user_hometown if user_hometown
+    end
     s.join(' > ')
   end
 

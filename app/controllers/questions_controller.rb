@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
   load_and_authorize_resource :nested => :user
 
   def index
-    @questions = Question.all
+    @questions = Question.location_with(current_user_location).all
   end
   
   def show
