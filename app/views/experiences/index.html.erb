@@ -21,7 +21,7 @@
   <h2>Follow <%= link_to @user.user_ifollow_count, ifollow_user_fans_path(@user) %> </h2>
 <div id='goal_list'>
   <h2>Goals / Category
-    <% if can? :create, Goal%>
+    <% if can? :create, Goal && @user.is_owner?(current_user)%>
       <%= link_to "Create Your Goal", new_goal_path %>
     <% end %>
   </h2>
@@ -54,7 +54,7 @@
 </div>
 <div id='exp_list'>
   <h2>experiences
-    <% if can? :create, Experience %>
+    <% if can? :create, Experience && @user.is_owner?(current_user) %>
       <%= link_to 'Create Your Experience', new_user_experience_path(current_user) %>
     <% end %>
   </h2>

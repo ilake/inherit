@@ -48,6 +48,7 @@ class Experience < ActiveRecord::Base
       {}
     end
   }
+  named_scope :this_week, lambda{{:conditions => {:updated_at => Time.now.ago(7.days)..Time.now}}}
 
 
   define_index do

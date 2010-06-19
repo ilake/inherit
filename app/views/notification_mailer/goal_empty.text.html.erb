@@ -1,0 +1,12 @@
+<p>
+  <%= @user.username %> you don't have goal yet
+</p>
+<p>
+  Do you want to try to create a new one
+  <%= link_to "Create Your Goal", new_goal_url %>
+</p>
+<p>
+  or
+  find what others doing for their goal
+  <%= link_to 'others experiences', home_url %>
+</p>

@@ -1,0 +1,10 @@
+<p>
+  <%= @user.username %> you have <%= @goals.size %> goals
+</p>
+<p>
+  <%= @goals.join(', ')%>
+</p>
+<p>
+  Record what you do for your goal
+  <%= link_to "Create Your Experience", new_experience_url %>
+</p>
