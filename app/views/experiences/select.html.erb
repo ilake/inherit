@@ -1,0 +1,9 @@
+<h2><%= link_to @question.title, @question %></h2>
+<ul>
+  <% @experiences.each do |e|%>
+    <li>
+      <%= link_to truncate_u(Sanitize.clean(e.content), 15), e %>
+      <%= button_to 'submit', question_experience_relations_path(:question_id => @question.id, :experience_id => e)%>
+    </li>
+  <% end %>
+</ul>

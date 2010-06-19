@@ -4,6 +4,7 @@
 <p>
   <%= @question.try(:content)%>
   <%= hidden_field_tag :question_id, @question.try(:id) %>
+  <%= link_to 'Share the experience exist', select_user_experiences_path(:user_id => current_user, :question_id => @question.id) if @question %>
 </p>
 
   <%= f.error_messages %>

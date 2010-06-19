@@ -21,7 +21,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :users do |user|
     user.resource :profile, :except => [:new, :create]
-    user.resources :experiences
+    user.resources :experiences, :collection => { :select => :get }
     user.resources :goals, :as => :categories
     user.resources :fans, :collection => { :ifollow => :get }
   end

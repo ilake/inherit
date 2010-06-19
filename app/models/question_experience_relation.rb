@@ -17,6 +17,7 @@ class QuestionExperienceRelation < ActiveRecord::Base
   belongs_to :experience
 
   after_create :deliver_question_notification
+  validates_uniqueness_of :question_id, :scope => :experience_id
 
   def mail_receiver
     #分給它過experience的

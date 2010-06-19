@@ -131,4 +131,9 @@ class ExperiencesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def select
+    @experiences = current_user.experiences.public_equals(true)
+    @question = Question.find(params[:question_id])
+  end
 end

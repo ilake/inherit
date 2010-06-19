@@ -12,13 +12,13 @@ class QuestionExperienceRelationsController < ApplicationController
   end
   
   def create
-    @question_experience_relation = QuestionExperienceRelation.new(params[:question_experience_relation])
-    if @question_experience_relation.save
+    question_experience_relation = QuestionExperienceRelation.new(:question_id => params[:question_id], :experience_id => params[:experience_id])
+    if question_experience_relation.save
       flash[:notice] = "Successfully created question experience relation."
-      redirect_to @question_experience_relation
     else
-      render :action => 'new'
+      flash[:error] = "You have already share for it."
     end
+    redirect_to :back
   end
   
   def edit
