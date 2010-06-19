@@ -22,11 +22,11 @@ every 1.hour do
   rake "thinking_sphinx:index"
 end
 
-every :sunday, :at => '12am' do
+every :sunday, :at => '3 am' do
   rake "notify:goal_empty"
 end
 
-every :sunday, :at => '13am' do
+every :sunday, :at => '4 am' do
   rake "notify:exp_empty"
 end
 
