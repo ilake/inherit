@@ -11,10 +11,11 @@ class HomeController < ApplicationController
   end
 
   def user
+
     if user_signed_in?
-      params[:location] ||= current_user.try(:location_list)
+      #params[:location] ||= current_user.try(:location_list)
       @user_experiences = current_user.experiences.descend_by_updated_at.limit(5) 
-      @latest_experiences = Experience.location_with(params[:location]).descend_by_updated_at.limit(5).all(:include => :user)
+      @latest_experiences = Experience.location_with(current_user_location).descend_by_updated_at.limit(5).all(:include => :user)
       @near_experience = if current_user.owned_tags.blank?
                            Experience.tally({  :at_least => 1, 
                                             :at_most => 10000,  
@@ -28,7 +29,7 @@ class HomeController < ApplicationController
                            Experience.tagged_with(current_user.owned_tags.map{|t| t.name}.rand).limit(1).first
                          end
     else
-      @latest_experiences = Experience.location_with(params[:location]).descend_by_updated_at.limit(5).all(:include => :user)
+      @latest_experiences = Experience.location_with(current_user_location).descend_by_updated_at.limit(5).all(:include => :user)
       @near_experience = Experience.last
     end
   end

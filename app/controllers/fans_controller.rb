@@ -4,6 +4,11 @@ class FansController < ApplicationController
     @users = User.find(params[:user_id]).user_fans
   end
 
+  def ifollow
+    @users = User.find(params[:user_id]).ifollow
+    render :action => 'index'
+  end
+
   def create
     fan = Fan.new(params[:fan])
     if fan.save

@@ -3,6 +3,9 @@ class Fan < ActiveRecord::Base
   validates_uniqueness_of :user_id, :scope => [:fannable_id, :fannable_type]
   after_create :increase_fans
   after_destroy :decrease_fans
+  #追蹤user follow 的人數
+  after_create :increase_user_ifollow, :if => Proc.new{|fan| fan.fannable_type == 'User'}
+  after_destroy :decrease_user_ifollow, :if => Proc.new{|fan| fan.fannable_type == 'User'}
     
   #Models are liked by users 
   belongs_to :user
@@ -41,5 +44,13 @@ class Fan < ActiveRecord::Base
 
   def decrease_fans
     fannable_type.constantize.decrement_counter(:fans_count, self.fannable_id)
+  end
+
+  def increase_user_ifollow
+    User.increment_counter(:user_ifollow_count, self.user_id)
+  end
+
+  def decrease_user_ifollow
+    User.decrement_counter(:user_ifollow_count, self.user_id)
   end
 end

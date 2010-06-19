@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+
   map.resources :chats, :new => {:reply => :get}
 
   map.resources :question_experience_relations
@@ -22,7 +23,7 @@ ActionController::Routing::Routes.draw do |map|
     user.resource :profile, :except => [:new, :create]
     user.resources :experiences
     user.resources :goals, :as => :categories
-    user.resources :fans
+    user.resources :fans, :collection => { :ifollow => :get }
   end
   map.resources :goals do |goal|
     goal.resources :experiences
@@ -31,8 +32,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :votes
   map.resources :comments
   map.resources :taggings
-  
+
   map.home "home/:location", :controller => 'home', :action => 'user',  :location => nil
+  
 
   map.root :controller => 'home'
 end

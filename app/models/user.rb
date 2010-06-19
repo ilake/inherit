@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100615174736
+# Schema version: 20100619042250
 #
 # Table name: users
 #
@@ -23,6 +23,7 @@
 #  username             :string(255)
 #  fans_count           :integer(4)      default(0)
 #  admin                :boolean(1)
+#  ifollow_count        :integer(4)      default(0)
 #
 
 class User < ActiveRecord::Base
@@ -71,6 +72,11 @@ class User < ActiveRecord::Base
 
   def user_fans
     user_ids = self.fans.map{|f| f.user_id }
+    User.find(:all, :conditions => {:id => user_ids })
+  end
+
+  def ifollow
+    user_ids = Fan.find(:all, :conditions => {:user_id => self.id, :fannable_type => 'User'}).map{|f| f.fannable_id}
     User.find(:all, :conditions => {:id => user_ids })
   end
 
