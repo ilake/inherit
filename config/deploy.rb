@@ -92,6 +92,10 @@ namespace :inherit do
     run "echo $PATH"
   end
 
+  task :fp_symlink, :roles => [:app] do
+    run "cd #{current_path} && rake asset_fingerprint:symlinks:generate RAILS_ENV=#{env}"
+  end
+
   task :deploy_all do 
     delayed_job::stop
     sphinx_stop
@@ -101,6 +105,7 @@ namespace :inherit do
     start
     delayed_job::start
     update_crontab
+    fp_symlink
     chown if hosting == 'webbynode'
   end
 
