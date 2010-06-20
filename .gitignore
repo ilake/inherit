@@ -1,6 +1,7 @@
 log/*.log
 log/
 config/development.sphinx.conf
+config/production.sphinx.conf
 db/sphinx/
 tmp/**/*
 .DS_Store
@@ -15,3 +16,4 @@ public/dispatch.rb
 public/h.rb
 tags
 *.swp
+
