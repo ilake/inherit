@@ -2,7 +2,7 @@ class ChatsController < ApplicationController
   before_filter :authenticate_user!, :except => [:index , :show]
 
   def index
-    @chats = Chat.location_with(current_user_location).origin.find(:all, :include => [:user, :children])
+    @chats = Chat.location_with(current_user_location).origin.descend_by_created_at.paginate :per_page => 15, :page => params[:page], :include => [:user, :children]
     @chat = Chat.new
   end
   

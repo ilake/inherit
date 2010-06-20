@@ -110,8 +110,9 @@ namespace :inherit do
     delayed_job::start
     update_crontab
     fp_symlink
-    checkout_public
+    #checkout_public
     chown if hosting == 'webbynode'
+    checkout_public
   end
 
 end

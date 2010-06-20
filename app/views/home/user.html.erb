@@ -1,18 +1,4 @@
 <div id='home_content'>
-  <% if user_signed_in? %>
-    <div id="page_head">
-      <span lang="Hello" class="translatable">Hello</span> <%= current_user.username %>!
-    </div>
-    <h4>你的經驗</h4>
-    <div id='home_user_exps'>
-      <ul>
-        <% @user_experiences.each do |experience| %>
-          <li><%= link_to truncate_u(Sanitize.clean(experience.content), 20), experience %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <h4>最新經驗</h4>
   <div id='home_latest_exps'>
     <ul>

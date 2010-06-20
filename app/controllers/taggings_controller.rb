@@ -4,7 +4,8 @@ class TaggingsController < ApplicationController
   end
   
   def show
-    @taggable_objs = params[:taggable_type].try(:constantize).try(:tagged_with, params[:id])
+    #@taggable_objs = params[:taggable_type].try(:constantize).try(:tagged_with, params[:id])
+    @taggable_objs = params[:taggable_type].try(:constantize).try(:all, :joins => :tags, :conditions => {:tags => {:name => params[:id]}})
     @taggable_objs ||= []
   end
   

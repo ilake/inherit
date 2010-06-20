@@ -22,6 +22,7 @@ class Chat < ActiveRecord::Base
 
   belongs_to :user
 
+  before_create :default_set_user_location
   after_create :deliver_chat_notification
 
   def self.location_with(location)

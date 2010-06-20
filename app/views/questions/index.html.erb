@@ -1,4 +1,5 @@
 <% title "Questions" %>
+<p><%= link_to "New Question", new_question_path %></p>
 
 <table>
   <tr>
@@ -15,5 +16,4 @@
     </tr>
   <% end %>
 </table>
-
-<p><%= link_to "New Question", new_question_path %></p>
+<%= will_paginate @questions %>

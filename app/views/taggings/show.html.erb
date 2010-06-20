@@ -3,7 +3,6 @@
 <table>
   <tr>
     <th>Content</th>
-    <th>Tags</th>
     <th>Start At</th>
     <th>End At</th>
   </tr>
@@ -11,9 +10,6 @@
 <% @taggable_objs.each do |obj| %>
   <tr>
     <td><%= link_to obj.content, obj%></td>
-    <td>
-      <% tag_link obj %>
-    </td>
     <td><%= obj.start_at.to_s(:date) if obj.start_at %></td>
     <td><%= obj.end_at.to_s(:date) if obj.end_at %></td>
   </tr>

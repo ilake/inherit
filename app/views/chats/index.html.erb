@@ -1,9 +1,10 @@
 <% title "Chats" %>
 
+<%= render :partial => 'form' %>
 <table>
   <tr>
     <th></th>
-    <th>Comment</th>
+    <th>Suggestion</th>
   </tr>
   <% for chat in @chats %>
     <tr>
@@ -23,4 +24,4 @@
     </tr>
   <% end %>
 </table>
-<%= render :partial => 'form' %>
+<%= will_paginate @chats %>

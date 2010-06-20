@@ -26,7 +26,7 @@
     <h3>經驗類型</h3>
     <div>
       <% tag_cloud(@exp_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
-        <%= link_to tag.name, tagging_url(tag.name), :class => css_class %>
+        <%= link_to tag.name, tagging_url(tag.name, :taggable_type => 'Experience'), :class => css_class %>
       <% end %>
     </div>
   </div>
