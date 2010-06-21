@@ -1,5 +1,5 @@
 <div id="homepage_header">
-  <h1 id='hompage_logo'>傳承</h1>
+  <h1 id='homepage_logo'>傳 承</h1>
   <div id='login'>
     <%= link_to "現在就加入", new_user_registration_path %> 
     |
@@ -7,48 +7,41 @@
   </div>
 </div>
 
-<div id="overview">
-  <h3>記錄你的人生，分享你的經驗; 你的經驗   可能就是他人的明燈</h3>
-  <h3>Share your goal , share what you do for it </h3>
-  <h3>For you it is your goal reminder, for others is director</h3>
-</div>
-<div id="leftitem">
-  <div id='latest_exp'>
-    <h3>最新經驗</h3>
-    <ul>
-      <% @experiences.each do |experience| %>
-        <li><%= link_to truncate_u(Sanitize.clean(experience.content), 30), experience %></li>
-      <% end %>
-    </ul>
+  <div id="overview">
+    <h4><!--不這樣都會偏掉我不會處理 orz -->　　</h4>
+    <h2>記錄你的人生，分享你的經驗 </h2>
+    <h2>你今日的經驗可能就是他人的明燈</h2>
   </div>
+  <div id='introduce'>
+    <div id="leftitem">
+      <p class='intro'>如果你已有一些目標計畫</p>
+      <p>我們將會定期提醒您的目標，也希望你可以分享著努力的經驗，同時你也可以認識到其他一同朝著相同目標努力的人, 可以參考彼此的經驗。</p>
+    </div>
 
-  <div id='exp_tags'>
-    <h3>經驗類型</h3>
-    <div>
-      <% tag_cloud(@exp_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
-        <%= link_to tag.name, tagging_url(tag.name, :taggable_type => 'Experience'), :class => css_class %>
-      <% end %>
+    <div id="rightitem">
+      <p class='intro'>如果你還不知道做什麼</p>
+      <p>你可以找到和自己相同自己背景的人們，看到其他人都在做些什麼，來幫助您找到自己的目標。</p>
     </div>
   </div>
-</div>
-
-<div id="rightitem">
-  <% form_for @user do %>
-    <div style="margin: 0pt; padding: 0pt; display: inline;">
-      <p><label for="user_email">Email</label></p>
-      <p><input type="text" value="" size="15" name="user[email]" id="user_email"></p>
-
-      <p><label for="user_username">Username</label></p>
-      <p><input type="text" size="15" name="user[username]" id="user_username"></p>
-
-      <p><label for="user_password">Password</label></p>
-      <p><input type="password" size="15" name="user[password]" id="user_password"></p>
-
-      <p><label for="user_password_confirmation">Password confirmation</label></p>
-      <p><input type="password" size="15" name="user[password_confirmation]" id="user_password_confirmation"></p>
-
-      <p><input type="submit" value="Sign up" name="commit" id="user_submit"></p>
-    <% end %>
-</div>
+  <div class='clear'></div>
+  <div id='come_in'>
+    <h2><%= link_to '進來看看', home_url %></h2>
+  </div>
+  <div class='clear'></div>
+  <div id='demo'>
+    <h2>Some Demo<h2>
+    <div class='demo-item'>
+      <%= image_tag('demo1.png')%>
+    </div>
+    <div class='demo-item'>
+      <%= image_tag('demo1.png')%>
+    </div>
+    <div class='demo-item'>
+      <%= image_tag('demo1.png')%>
+    </div>
+    <div class='demo-item'>
+      <%= image_tag('demo1.png')%>
+    </div>
+  </div>
 
 

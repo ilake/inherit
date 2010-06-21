@@ -3,14 +3,11 @@ class HomeController < ApplicationController
   before_filter :force_set_profile
 
   def index
-    @experiences = Experience.limit(5).descend_by_updated_at
-    @exp_tags = Experience.tag_counts_on(:tags, :limit => 20)
-    @user = User.new
-
     render :layout => 'homepage'
   end
 
   def user
+    @exp_tags = Experience.tag_counts_on(:tags, :limit => 20)
 
     if user_signed_in?
       #params[:location] ||= current_user.try(:location_list)

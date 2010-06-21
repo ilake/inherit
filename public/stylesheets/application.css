@@ -31,6 +31,10 @@ body {
   padding: 0px 3px 0px 3px;
 }
 
+.clear {
+  clear: both;
+}
+
 .css1 { font-size: 1.0em; }
 .css2 { font-size: 1.2em; }
 .css3 { font-size: 1.4em; }
@@ -42,23 +46,23 @@ body {
   margin-left:auto;
   margin-right:auto;
   position:relative;
+  text-align:left;
   width:800px;
 }
 
 /* header */
 #homepage_header {
-  border-color:#E1ECFE;
-  border-style:solid;
-  border-width:1px;
-  height:67px
+  height:87px
 }
 
-#hompage_logo {
+#homepage_logo {
   float:left;
-  height:67px;
+  height:87px;
   margin-left:20px;
   position:relative;
   width:200px;
+  font-size:42px;
+  color:#003366;
 }
 
 #login {
@@ -74,39 +78,61 @@ body {
 /* header end */
 
 #overview {
-  height:81px;
   margin-bottom:0;
-  margin-top:10;
-  position:relative;
-  padding:10px;
+  margin-top:10px;
+  padding-bottom:10px;
+  background-color: #fff9aa;
+  color: #222;
+  text-align:center;
+}
+
+#overview h2{
+  line-height: 36px;
+}
+#overview h4{
 }
 
 #leftitem {
   margin-top:20px;
-  width:528px;
+  width:355px;
   float:left;
 }
-
-#latest_exp {
-  border: 1px solid #EFEFEF;
-  padding: 5px;
-}
-
-#exp_tags {
-  margin-top:20px;
-  border: 1px solid #EFEFEF;
-  padding: 5px;
+#leftitem p{
+  line-height: 24px;
 }
 
 #rightitem {
   margin-top:20px;
-  width:241px;
+  width:355px;
   float:right;
-  background:#FFFFDF;
-  border:#FDEEA6 1px solid;
-  padding:18px 10px;
-  *padding:16px 10px;
-  position:relative;
+}
+
+#rightitem p{
+  line-height: 24px;
+}
+
+#come_in h2{
+  text-align: center;
+}
+
+#come_in a{
+  color: #ff9900;
+}
+
+#demo {
+  margin-top:70px;
+  border-top:5px solid #ddd;
+  text-align: center;
+}
+#demo h2{
+  margin-bottom:10px;
+}
+
+.demo-item{
+  float:left;
+  text-align: center;
+  padding:10px;
+  width: 380px;
 }
 
 /* common site */
