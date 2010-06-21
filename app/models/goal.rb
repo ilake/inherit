@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100601034013
+# Schema version: 20100620155656
 #
 # Table name: goals
 #
@@ -13,6 +13,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  public     :boolean(1)      default(TRUE)
+#  tags_list  :text
 #
 
 class Goal < ActiveRecord::Base
@@ -25,13 +26,27 @@ class Goal < ActiveRecord::Base
   has_many :experiences
 
   validates_presence_of :content, :title, :start_at
+  before_save :set_tags_list
   before_create :default_set_user_location
+
+
+  define_index do
+    indexes content
+    indexes title
+    indexes tags_list
+    where "public = '1'"
+    group_by "user_id"
+  end
 
   def to_param
     "#{id}-#{title}"
   end
 
   private
+  def set_tags_list
+    self.tags_list = tag_list.join(" ")
+  end
+
   def default_set_user_location
     self.location_list = self.user.location_list
   end

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100619042250
+# Schema version: 20100620155656
 #
 # Table name: users
 #
@@ -23,7 +23,7 @@
 #  username             :string(255)
 #  fans_count           :integer(4)      default(0)
 #  admin                :boolean(1)
-#  ifollow_count        :integer(4)      default(0)
+#  user_ifollow_count   :integer(4)      default(0)
 #
 
 class User < ActiveRecord::Base
