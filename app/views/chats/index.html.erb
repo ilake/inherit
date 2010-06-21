@@ -19,7 +19,7 @@
         <% end %>
       <% end %>
       <td>
-        <%= link_to "reply", reply_new_chat_path(:chat_id => chat) if current_user.admin? %>
+        <%= link_to "reply", reply_new_chat_path(:chat_id => chat) if current_user.try(:admin?) %>
       </td>
     </tr>
   <% end %>
