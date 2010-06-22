@@ -9,7 +9,8 @@
     <%= f.select :gender, GENDER_TYPE.to_select_options %>
   </p>
   <p>
-    <%= country_select("profile", "location_list") %>
+    <%#= country_select("profile", "location_list") %>
+    <%= localized_country_select(:profile, :location_list, [], :include_blank => 'Please choose...') %>
   </p>
   <p>
     <%= f.label :intro, '自我介紹' %><br />

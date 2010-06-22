@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_location, :user_hometown
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   before_filter :authenticate_inviter
+  before_filter :ip_location
 
   # Scrub sensitive parameters from your log
   filter_parameter_logging :password
@@ -28,10 +29,16 @@ class ApplicationController < ActionController::Base
   def current_user_location
     session[:current_location] = params[:location] if params[:location]
     session[:current_location] ||= user_hometown
+    session[:current_location] ||= ip_location
   end
 
   def user_hometown
     session[:hometown] ||= current_user.try(:location_list).try(:to_s)
+  end
+
+  def ip_location
+    client_ip = (RAILS_ENV == 'development') ? '60.251.181.109' : request.remote_ip
+    session[:ip_location] ||= LocalizedCountrySelect::localized_countries_hash.fetch(IP_COUNTRY.country(client_ip)[3])
   end
 
   def force_set_profile

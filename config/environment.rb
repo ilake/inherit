@@ -32,6 +32,7 @@ Rails::Initializer.run do |config|
   config.gem 'chronic'
   config.gem 'whenever', :lib => false, :source => 'http://rubygems.org'
   config.gem 'daemons'
+  config.gem 'geoip'
 
 
   # Only load the plugins named here, in the order given (default is alphabetical).
