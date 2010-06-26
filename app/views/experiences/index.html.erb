@@ -74,7 +74,7 @@
       <tr>
         <td class='time'><%= experience.start_at.to_s(:date) if experience.start_at %></td>
         <td class='time'><%= experience.end_at_date %></td>
-        <td class='exp_content'><%= link_to truncate_u(Sanitize.clean(experience.content), 50), experience %></td>
+        <td class='exp_content'><%= link_to truncate_u(Sanitize.clean(experience.content), 40), experience %></td>
       </tr>
     <% end %>
   <% end %>
