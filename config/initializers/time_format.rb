@@ -4,5 +4,6 @@ ActiveSupport::CoreExtensions::Time::Conversions::DATE_FORMATS.merge!(
   :hm => "%H:%M",
   :date => "%Y-%m-%d",
   :ym => '%Y - %m',
-  :js_date => '%Y, %m, %d'
+  :js_date => '%Y, %m, %d',
+  :md => "%m-%d"
 )     
