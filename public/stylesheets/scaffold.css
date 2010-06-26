@@ -57,3 +57,12 @@ a:visited, a:hover { color: #666; }
   list-style: square;
 }
 
+li {
+  list-style-image:none;
+  list-style-position:outside;
+  list-style-type:none;
+}
+
+h2 {
+  color: #555555;
+}

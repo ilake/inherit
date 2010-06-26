@@ -40,6 +40,13 @@ body {
 .css3 { font-size: 1.4em; }
 .css4 { font-size: 1.6em; }
 
+.grid-top {
+  float:left;
+  padding-bottom:5px;
+  margin-bottom:5px;
+  border-bottom: 1px solid #E8E8E8;
+}
+
 
 /* homepage */
 #homepage_container {
@@ -144,6 +151,20 @@ body {
   width:960px !important;
 }
 
+#footer {
+  clear: both;
+  height:36px;
+  left: 0;
+  bottom: 0;
+  text-align: center;
+  margin-top: 300px;
+  width: 100%;
+  z-index: 9999;
+  border-top: 2px solid #a66;
+  line-height: 4em;
+  color: #fff;
+}
+
 #dashboard {
   margin: 0;
   padding: 0;
@@ -168,7 +189,7 @@ body {
 
 #header {
   overflow: hidden;
-  height: 125px;
+  height: 65px;
 }
 
 #menus {
@@ -233,15 +254,85 @@ body {
   height:250px;
   margin-bottom:50px;
   margin-top:20px;
-  border:3px solid #EFEFEF;
+  border:1px solid #EFEFEF;
 }
 
 #goal_list {
-  margin-bottom:20px;
-  border-bottom:3px solid #EFEFEF;
+  float:left;
+  width:230px;
+  padding:5px;
+}
+
+#goal_list div{
+  height:30px;
+  width:230px;
+  line-height: 20px;
+}
+
+#goal_list a{
+  text-decoration:none;
+  color:#838383;
+  font-size: 21px;
+}
+
+#goal_list #new_goal{
+  text-align:center;
+}
+
+#new_goal span {
+  border: 1px solid #000000;
+  padding: 6px 15px 6px 15px;
+}
+
+#goal_list #new_goal a{
+  color:#000000;
+  font-size: 18px;
+}
+
+a.goal_here {
+  border-bottom-color:#C1C1C1;
+  border-bottom-style:solid;
+  border-bottom-width:3px;
 }
 
 #exp_list {
+  float:left;
+  width:700px;
+  padding:5px;
+}
+
+#exp_list td{
+  padding:2px;
+  height:30px;
+  line-height: 20px;
+}
+
+.time {
+  color: #999999;
+}
+
+td.exp_content {
+  padding-left:35px;
+}
+
+#trigger_follow {
+  float:left;
+}
+
+#fans_area {
+  float:left;
+  width: 230px;
+  padding:5px;
+}
+
+#fans_area span{
+  padding-left:5px;
+}
+
+#goal_detail {
+  float:left;
+  width: 700px;
+  padding:5px;
 }
 /* User experience index page END */
 

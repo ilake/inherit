@@ -8,16 +8,20 @@
     <%= f.text_field :title %>
   </p>
   <p>
-    <%= f.label :start_at %><br />
-    <%= f.date_select :start_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950  %>
-  </p>
-  <p>
     <%= f.label :tag %><br />
     <%= f.text_field :tag_list %>
   </p>
   <p>
     <%= f.label :state %><br />
     <%= f.select :state, GOAL_STATES.to_select_options %>
+  </p>
+  <p>
+    <%= f.label :start_at %><br />
+    <%= f.date_select :start_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950  %>
+  </p>
+  <p>
+    <%= f.label :start_at %><br />
+    <%= f.date_select :start_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950  %>
   </p>
   <p>
     <%= f.label :public, '公開' %><br />

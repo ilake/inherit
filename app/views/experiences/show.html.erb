@@ -18,6 +18,15 @@
         <%= @experience.start_at.to_s(:fulltime )%> ~ <%= @experience.try(:end_at).try(:to_s, :fulltime) %> 
       </span>
       Author: <%= link_to "#{@experience.user.username}",  user_experiences_path(@experience.user) %>
+      <span>
+        <% tag_link @experience %>
+      </span>
+      <span>
+        <%= @experience.location_list %>
+      </span>
+      <span><%= EXP_TYPE[@experience.exp_type] if @experience.exp_type %></span>
+      <span><%= link_to @experience.goal.title, @experience.goal if @experience.goal %></span>
+
       <% if can? :update, @experience %>
         <%= link_to 'Edit', edit_experience_path(@experience) %>
       <% end %>

@@ -1,4 +1,4 @@
-body, td, pre {color:#000; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:15px; margin:8px;line-height:2;}
+body, td, pre {color:#000; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:16px; margin:8px;}
 body {background:#FFF;}
 body.mceForceColors {background:#FFF; color:#000;}
 h1 {font-size: 2em}
@@ -33,5 +33,3 @@ scrollbar-track-color:#F5F5F5;
 
 img:-moz-broken {-moz-force-broken-image-icon:1; width:24px; height:24px}
 font[face=mceinline] {font-family:inherit !important}
-
-
