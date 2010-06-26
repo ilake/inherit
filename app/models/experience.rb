@@ -88,9 +88,9 @@ class Experience < ActiveRecord::Base
 
   def end_at_date
     if self.until_now
-      Time.now.to_s(:date)
+      "~ #{Time.now.to_s(:date)}"
     elsif end_at
-      self.end_at.to_s(:date)
+      "~ #{self.end_at.to_s(:date)}"
     end
   end
 

@@ -72,8 +72,10 @@
     <tr><td><h3><%= time.to_s(:ym)%></h3></td></tr>
     <% @experience_groups[time].each do |experience| %>
       <tr>
-        <td class='time'><%= experience.start_at.to_s(:md) if experience.start_at %></td>
-        <td class='time'><%= experience.end_at_date %></td>
+        <td class='time'>
+          <%= experience.start_at.to_s(:md) if experience.start_at %>
+          <%= experience.end_at_date %>
+        </td>
         <td class='exp_content'><%= link_to truncate_u(Sanitize.clean(experience.content), 30), experience %></td>
       </tr>
     <% end %>
