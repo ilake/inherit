@@ -18,21 +18,29 @@
         <%= @experience.start_at.to_s(:fulltime )%> ~ <%= @experience.try(:end_at).try(:to_s, :fulltime) %> 
       </span>
       Author: <%= link_to "#{@experience.user.username}",  user_experiences_path(@experience.user) %>
-      <span>
-        <% tag_link @experience %>
-      </span>
-      <span>
-        <%= @experience.location_list %>
-      </span>
-      <span><%= EXP_TYPE[@experience.exp_type] if @experience.exp_type %></span>
-      <span><%= link_to @experience.goal.title, @experience.goal if @experience.goal %></span>
+      created_at: <%= @experience.updated_at.to_s(:fulltime) %>
 
       <% if can? :update, @experience %>
         <%= link_to 'Edit', edit_experience_path(@experience) %>
       <% end %>
+      <% if can? :destroy, @experience %>
+        <td><%= link_to 'Destroy', @experience, :confirm => 'Are you sure?', :method => :delete %></td>
+      <% end %>
+
     </div>
+    <p><%= link_to @experience.goal.title, @experience.goal if @experience.goal %></p>
     <p>
       <%= @experience.content %>
+    </p>
+    <p><%= EXP_TYPE[@experience.exp_type] if @experience.exp_type %></p>
+    <p>
+      <% tag_link @experience %>
+    </p>
+    <p>
+      <%= @experience.location_list %>
+    </p>
+    <p>
+      <%= link_to 'Back',  user_experiences_path(@experience.user) %>
     </p>
 
   </div>

@@ -19,8 +19,13 @@ class ExperiencesController < ApplicationController
       end_time_hash = e.end_at_hash
       {
       'start' => e.start_at.to_s(:date),
-      'title' => app_helpers.truncate_u(Sanitize.clean(e.content), 20),
-      'description' => "#{app_helpers.link_to '編輯', edit_experience_path(e) if can? :update, e}#{app_helpers.link_to('刪除', destroy_experience_path(e), :confirm => 'Are you sure') if can? :destroy, e} #{e.content}",
+      'title' => app_helpers.truncate_u(Sanitize.clean(e.content), 10),
+      'description' => "
+      #{app_helpers.link_to '編輯', edit_experience_path(e) if can? :update, e}
+      #{app_helpers.link_to('刪除', destroy_experience_path(e), :confirm => 'Are you sure') if can? :destroy, e}
+      #{app_helpers.link_to('詳細內容', experience_path(e), :popup => true)}
+      <br /> 
+      #{app_helpers.truncate_u(Sanitize.clean(e.content), 100)}",
       'color' => e.color,
       'icon' => "/images/timeline/dark-red-circle.png"
       }.merge!(end_time_hash)
@@ -91,7 +96,8 @@ class ExperiencesController < ApplicationController
           if @question
             redirect_to @question
           else
-            redirect_to user_experiences_path(current_user) 
+            #redirect_to user_experiences_path(current_user) 
+            redirect_to @experience
           end
         }
         format.xml  { render :xml => @experience, :status => :created, :location => @experience }
@@ -112,7 +118,10 @@ class ExperiencesController < ApplicationController
         current_user.tag(@experience, :with => @experience.tag_list.to_s, :on => :tags)
 
         flash[:notice] = 'Experience was successfully updated.'
-        format.html { redirect_to user_experiences_path(current_user) }
+        format.html { 
+          redirect_to @experience
+          #redirect_to user_experiences_path(current_user) 
+        }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
