@@ -96,9 +96,9 @@ namespace :inherit do
     run "cd #{current_path} && rake asset_fingerprint:symlinks:generate RAILS_ENV=#{env}"
   end
 
-  task :checkout_public, :roles => [:app] do
-    run "cd #{current_path} && git checkout public/"
-  end
+#  task :checkout_public, :roles => [:app] do
+#    run "cd #{current_path} && git checkout public/"
+#  end
 
   task :deploy_all do 
     delayed_job::stop
@@ -112,7 +112,7 @@ namespace :inherit do
     fp_symlink
     #checkout_public
     chown if hosting == 'webbynode'
-    checkout_public
+    #checkout_public
   end
 
 end
