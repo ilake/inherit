@@ -24,8 +24,6 @@ Rails::Initializer.run do |config|
   config.gem 'cancan'
   config.gem "acts-as-taggable-on", :source => "http://gemcutter.org", :version => '2.0.0.rc1'
   config.gem 'hoptoad_notifier'
-  #安裝之後要把tiny_mce 註解掉
-  #config.gem 'tiny_mce'
   config.gem 'sanitize'
   config.gem 'riddle'
   #config.gem 'thinking-sphinx', :lib => 'thinking_sphinx', :version => '1.3.16'
