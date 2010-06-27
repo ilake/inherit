@@ -60,7 +60,7 @@ class Experience < ActiveRecord::Base
 
   def self.location_with(location)
     if location == 'World' || location.blank?
-      scope = Experience.scoped({:include => :user})
+      scope = Experience.scoped#({:include => :user})
     else
       tagged_with(location, :on => :locations)
     end

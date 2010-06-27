@@ -42,6 +42,14 @@ class Goal < ActiveRecord::Base
     "#{id}-#{title}"
   end
 
+  def self.location_with(location)
+    if location == 'World' || location.blank?
+      scope = Goal.scoped#({:include => :user})
+    else
+      tagged_with(location, :on => :locations)
+    end
+  end
+
   private
   def set_tags_list
     self.tags_list = tag_list.join(" ")

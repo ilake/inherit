@@ -4,8 +4,13 @@
 </div>
 
 <div class='grid-top'>
+  <div id='profile_area'>
+    <%= link_to "#{@user.username} 簡介", user_profile_path(@user), :popup => true %>
+  </div>
   <div id='fans_area'>
-    <span id='exp_follower'>我的粉絲 <%= link_to @user.fans_count, user_fans_path(@user) %></span>
+    <span id='exp_follower'>
+      粉絲 <%= link_to @user.fans_count, user_fans_path(@user) %>
+    </span>
     <% if !@user.is_owner?(current_user)%>
       <span>
         <% if @fan.new_record? %>
@@ -16,12 +21,12 @@
             <%= f.submit "訂閱", :name => nil%>
           <% end %>
         <% else %>
-          <%= link_to '取消訂閱', @fan, :confirm => 'Are you sure?', :method => :delete %>
+          <%= link_to '取消訂閱', @fan, :confirm => 'Are you sure?', :method => :delete, :id => 'trigger_follow' %>
         <% end %>
       </span>
     <% end %>
     <span id='exp_ifollew'>
-      我的訂閱 <%= link_to @user.user_ifollow_count, ifollow_user_fans_path(@user) %> 
+      訂閱 <%= link_to @user.user_ifollow_count, ifollow_user_fans_path(@user) %> 
     </span>
   </div>
   <% if @current_goal %>

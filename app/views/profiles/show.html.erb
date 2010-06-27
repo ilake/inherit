@@ -21,8 +21,12 @@
   <%= @profile.tag_list %>
 </p>
 
-<p>
-  <% if can? :update, @profile %>
+<% if can? :update, @profile %>
+  <p>
     <%= link_to "Edit", edit_user_profile_path(current_user)%>
-  <% end %>
+  </p>
+<% end %>
+
+<p>
+  <%= link_to "回到個人頁面", user_experiences_path(@user) %>
 </p>
