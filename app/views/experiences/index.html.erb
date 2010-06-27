@@ -50,7 +50,7 @@
       <% for goal in @goals %>
         <div>
           <%=link_to h(goal.title), user_exps_path(@user, goal),
-            ( current_page?(user_exps_path(@user, goal)) ? {:class => 'goal_here'} : nil) %>
+            ( goal.id == params[:goal_id].to_i ? {:class => 'goal_here'} : nil) %>
         </div>
       <% end %>
       <% if can?(:create, Goal) && @user.is_owner?(current_user)%>
@@ -76,7 +76,7 @@
           <%= experience.start_at.to_s(:md) if experience.start_at %>
           <%= experience.end_at_date %>
         </td>
-        <td class='exp_content'><%= link_to truncate_u(Sanitize.clean(experience.content), 30), experience %></td>
+        <td class='exp_content'><%= link_to truncate_u(Sanitize.clean(experience.content), 30), experience, :popup => true %></td>
       </tr>
     <% end %>
   <% end %>
