@@ -24,6 +24,11 @@ class ApplicationController < ActionController::Base
   def user_selected
     @user ||= User.find(params[:user_id]) if params[:user_id]
     @user ||= current_user
+    unless @user
+      flash[:error] = 'Please login first'
+      redirect_to new_user_session_path
+    end
+    return @user
   end
 
   def current_user_location

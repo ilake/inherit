@@ -14,9 +14,6 @@
   <div id='container'>
     <div id="dashboard">
       <ul>
-        <li>
-          <%= link_to_unless_current 'Home', root_url %>
-        </li>
         <li id='dashboard_options'>
           <% if user_signed_in? %>
             <%= current_user.username %>

@@ -6,6 +6,7 @@ db/sphinx/
 tmp/**/*
 .DS_Store
 public/cache/**/*
+public/cache/
 doc/api
 doc/app
 config/*.yml

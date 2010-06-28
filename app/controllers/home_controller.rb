@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  caches_page :index
   before_filter :user_auth, :only => [:index]
   before_filter :force_set_profile
 
@@ -7,10 +8,8 @@ class HomeController < ApplicationController
   end
 
   def user
-
     @experiences = Experience.location_with(current_user_location).descend_by_updated_at.limit(10).all
     @goals = Goal.location_with(current_user_location).descend_by_updated_at.limit(10).all
-
 
     exp_ids = @experiences.map{|e| e.id }
     @exp_tags = Experience.tag_counts_on(:tags, :limit => 20, :conditions => {:id => exp_ids})
