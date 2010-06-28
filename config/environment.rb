@@ -55,3 +55,8 @@ Rails::Initializer.run do |config|
   config.action_controller.page_cache_directory = RAILS_ROOT + '/public/cache/'
 end
 
+begin
+  CacheStore = Moneta::Memcache.new(:server => "127.0.0.1")
+rescue
+  CacheStore = Moneta::BasicFile.new(:path => "tmp/cache")
+end

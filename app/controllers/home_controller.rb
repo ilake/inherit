@@ -8,14 +8,24 @@ class HomeController < ApplicationController
   end
 
   def user
-    @experiences = Experience.location_with(current_user_location).descend_by_updated_at.limit(10).all
-    @goals = Goal.location_with(current_user_location).descend_by_updated_at.limit(10).all
+    @experiences = Handcache.compressed_get_and_set("explore_experiences", :expires_in => 60) do  
+      Experience.location_with(current_user_location).descend_by_updated_at.limit(10).all
+    end  
 
-    exp_ids = @experiences.map{|e| e.id }
-    @exp_tags = Experience.tag_counts_on(:tags, :limit => 20, :conditions => {:id => exp_ids})
+    @goals = Handcache.compressed_get_and_set("explore_goals", :expires_in => 60) do  
+      Goal.location_with(current_user_location).descend_by_updated_at.limit(10).all
+    end  
 
-    goal_ids = @goals.map{|g| g.id }
-    @goal_tags = Goal.tag_counts_on(:tags, :limit => 20, :conditions => {:id => goal_ids})
+    @exp_tags = Handcache.compressed_get_and_set("explore_exp_tags", :expires_in => 60) do  
+      exp_ids = @experiences.map{|e| e.id }
+      Experience.tag_counts_on(:tags, :limit => 20, :conditions => {:id => exp_ids})
+    end  
+
+    @goal_tags = Handcache.compressed_get_and_set("explore_goal_tags", :expires_in => 60) do  
+      goal_ids = @goals.map{|g| g.id }
+      Goal.tag_counts_on(:tags, :limit => 20, :conditions => {:id => goal_ids})
+    end  
+
   end
 
   private
