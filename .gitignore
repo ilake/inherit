@@ -7,6 +7,7 @@ tmp/**/*
 .DS_Store
 public/cache/**/*
 public/cache/
+public/action_cache/*/*
 doc/api
 doc/app
 config/*.yml

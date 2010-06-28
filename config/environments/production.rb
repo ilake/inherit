@@ -21,6 +21,7 @@ ActionMailer::Base.smtp_settings = {
   :password => "-pl,0okm9ijn"
 }
 
+  config.cache_store = :file_store, File.join(RAILS_ROOT, 'public', 'system', 'action_cache')
   config.action_controller.page_cache_directory = File.join(RAILS_ROOT, 'public', 'system', 'cache')
 
 # See everything in the log (default is :info)
