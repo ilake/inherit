@@ -56,7 +56,8 @@ Rails::Initializer.run do |config|
 end
 
 begin
-  CacheStore = Moneta::Memcache.new(:server => "127.0.0.1")
+  #CacheStore = Moneta::Memcache.new(:server => "127.0.0.1")
+  CacheStore = Moneta::BasicFile.new(:path => "tmp/cache")
 rescue
   CacheStore = Moneta::BasicFile.new(:path => "tmp/cache")
 end
