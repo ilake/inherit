@@ -49,6 +49,7 @@ class Experience < ActiveRecord::Base
     end
   }
   named_scope :this_week, lambda{{:conditions => {:updated_at => Time.now.ago(7.days)..Time.now}}}
+  named_scope :is_belong_one_goal, {:conditions => "goal_id is not NULL"}
 
 
   define_index do
