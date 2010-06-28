@@ -97,11 +97,21 @@ namespace :inherit do
   end
 
   task :flush_page_cache, :roles => :app do
-    if flush_cache
-      run <<-CMD
+    run <<-CMD
       rm -rf #{shared_path}/system/cache/*
     CMD
-    end
+  end
+
+  task :disable_web, :roles => :web do
+    on_rollback { delete "#{shared_path}/system/maintenance.html" }
+
+    maintenance = render("./app/views/layouts/maintenance.rhtml" )
+
+    put maintenance, "#{shared_path}/system/maintenance.html", :mode => 0644
+  end
+
+  task :enable_web, :roles => :web do
+    on_rollback { delete "#{shared_path}/system/maintenance.html" }
   end
 
   task :deploy_all do 
