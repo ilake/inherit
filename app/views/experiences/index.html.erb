@@ -32,7 +32,6 @@
   <% if @current_goal %>
     <div id='goal_detail'>
       <%= link_to truncate_u(Sanitize.clean(@current_goal.content), 18), @current_goal %>
-      <%h tag_link @current_goal %>
       <%=h @current_goal.start_at.to_s(:date) if @current_goal.start_at %>
       <%=h @current_goal.state %>
       <% if can? :update, @current_goal %>
@@ -69,7 +68,7 @@
 <div id='exp_list'>
   <h2>經驗
     <% if can?(:create, Experience) && @user.is_owner?(current_user) %>
-      <%= link_to ' ( 新增 ) ', new_user_experience_path(current_user) %>
+      <span id='new_exp'><%= link_to ' ( 新增 ) ', new_user_experience_path(current_user) %></span>
     <% end %>
   </h2>
 <table>
@@ -81,7 +80,9 @@
           <%= experience.start_at.to_s(:md) if experience.start_at %>
           <%= experience.end_at_date %>
         </td>
-        <td class='exp_content'><%= link_to truncate_u(Sanitize.clean(experience.content), 30), experience, :popup => true %></td>
+        <td class='exp_content'>
+          <%= link_to truncate_u(Sanitize.clean(experience.content), 30), experience, :popup => true %>
+        </td>
       </tr>
     <% end %>
   <% end %>

@@ -3,6 +3,9 @@ body {
 /*  font-family: 'Droid Serif', arial, serif; */
 }
 
+label {
+  font-weight:bold;
+}
 #flash_notice {
   font-size: 11px;
   background-color: #CFC;
@@ -184,6 +187,8 @@ body {
   width: 130px;
   height: auto;
   background: none;
+  font-weight:bold;
+  color:#003366;
 }
 
 #header {
@@ -226,11 +231,6 @@ body {
   float:left;
 }
 
-#home_content a{
-  color: #0AA7D6;
-  text-decoration: none;
-}
-
 #home_sidebar {
   width:445px;
   float:right;
@@ -248,7 +248,7 @@ body {
   border-bottom: 1px solid #E8E8E8;
 }
 
-#home_sidebar a{
+.goal_cell a{
   color: #0AA7D6;
   text-decoration: none;
 }
@@ -300,32 +300,15 @@ body {
   line-height: 20px;
 }
 
-#goal_list a{
-  text-decoration:none;
-  color:#838383;
-  font-size: 21px;
-}
 
 #goal_list #new_goal{
   text-align:center;
 }
 
 #goal_list #new_goal span {
-  border: 1px solid #000000;
+  border: 1px solid #0AA7F8;
   padding: 6px 15px 6px 15px;
 }
-
-#goal_list #new_goal a{
-  color:#000000;
-  font-size: 18px;
-}
-
-a.goal_here {
-  border-bottom-color:#C1C1C1;
-  border-bottom-style:solid;
-  border-bottom-width:3px;
-}
-
 #exp_list {
   float:left;
   width:700px;
@@ -334,16 +317,16 @@ a.goal_here {
 
 #exp_list td{
   padding:2px;
-  height:30px;
+  height:40px;
   line-height: 20px;
 }
 
 .time {
-  color: #999999;
+  color: #666666;
 }
 
-td.exp_content {
-  padding-left:35px;
+#exp_list td.exp_content {
+  padding-left:25px;
 }
 
 #trigger_follow {
@@ -371,6 +354,7 @@ td.exp_content {
   width: 570px;
   padding:5px;
 }
+
 /* User experience index page END */
 
 /* User experience show page */
@@ -388,9 +372,146 @@ td.exp_content {
 
 #exp_show_time {
   margin-right:10px;
+  font-weight: bolder;
+  font-size:20px;
 }
 
 #exp_show_content {
   margin-bottom:40px;
 }
 /* User experience show page END */
+
+/* comments */
+.commentlist .comment h3 {
+  background: #efe;
+  padding: 0.2em 0.5em;
+  border: 1px solid #afa;
+  font-size: 1em;
+  margin: 0.5em 0;
+  color: #555;
+}
+
+/* chats */
+.chat {
+  margin-bottom:30px;
+}
+
+.chatlist .chat h3 {
+  background: #efe;
+  padding: 0.2em 0.5em;
+  border: 1px solid #afa;
+  font-size: 1em;
+  margin: 0.5em 0;
+  color: #555;
+}
+
+.chatlist .chat_reply h3 {
+  background: #ff9;
+  padding: 0.2em 0.5em;
+  border: 1px solid #afa;
+  font-size: 1em;
+  color: #555;
+}
+
+.chat_reply {
+  margin-left:30px;
+}
+/* anchor */
+#goal_list a, #exp_list a{
+  color: #333333;
+  text-decoration: none;
+}
+
+.exp_cell a, #new_exp a, .exp_author a, .question_title a, .top-function-menu a, .exp_anchor a, .goal_anchor a{
+  color: #0AA7F8;
+  text-decoration: none;
+}
+
+.exp_author a{
+  padding: 0px 3px 0px 3px;
+  font-weight:bold;
+}
+
+.exp_function a, .question_function a {
+  color: #990000;
+  text-decoration: none;
+  padding: 0px 3px 0px 3px;
+}
+
+.exp_tags a, .goal_tags a{
+  color: #FFCC00;
+}
+
+#goal_list a{
+  font-size: 21px;
+}
+
+.share_function a{
+  color: #F06;
+  font-weight:bold;
+  font-size: 18px;
+}
+
+
+#goal_list a:hover, #exp_list a:hover {
+  text-decoration: underline;
+}
+
+#goal_list #new_goal a{
+  color: #0AA7F8;
+  font-size: 18px;
+}
+
+a.goal_here {
+  border-bottom-color:#0AA7F8;
+  border-bottom-style:solid;
+  border-bottom-width:3px;
+}
+
+/* Question */
+#questionlist {
+  border-collapse:collapse;
+  color:#000000;
+  font-family:Verdana,Arial,Helvetica,sans-serif;
+  font-size:100%;
+  font-size-adjust:none;
+  font-style:normal;
+  font-variant:normal;
+  font-weight:normal;
+  line-height:normal;
+  text-align:left;
+}
+td.question_title{ width: 400px}
+
+#questionlist tr, th, td{
+  padding:10px;
+}
+.top-function-menu {
+  background-color:#E1ECFE;
+  font-weight:bold;
+  margin-bottom:10px;
+  margin-top:10px;
+  padding-bottom:10px;
+  padding-left:10px;
+  padding-right:10px;
+  padding-top:10px;
+}
+
+.search_item_list {
+  width:680px;
+}
+
+.search_item_list h3 {
+  background: #3274D0;
+  padding: 0.2em 0.5em;
+  font-size: 1em;
+  margin: 0.5em 0;
+  color: #fff;
+}
+
+
+.search_item_list h3 a{
+  color: #fff;
+  float:right;
+  text-decoration: none;
+}

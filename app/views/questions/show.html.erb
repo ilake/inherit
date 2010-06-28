@@ -1,41 +1,51 @@
 <% title "Question" %>
 <p>
-  <strong>Author:</strong>
-  <%= link_to @question.user.username, user_experiences_path(@question.user) %>
-</p>
-<p>
   <strong>Title:</strong>
   <%=h @question.title %>
+  <span class='exp_author'> 
+    By <%= link_to @question.user.username, user_experiences_path(@question.user) %>
+  </span>
+
+  <% if can? :update, @question %>
+    <span class='question_function'>
+      <%= link_to '編輯', edit_question_path(@question) %>
+    </span>
+  <% end %>
+  <span class='question_function'>
+    <% if can? :destroy, @question %>
+      <%= link_to '刪除', @question, :confirm => '你確定嗎?', :method => :delete %>
+    </span>
+  <% end %>
 </p>
 <p>
-  <strong>Content:</strong>
   <%= @question.content %>
 </p>
 
 <p>
-  <%= link_to "Edit", edit_question_path(@question) %> |
-  <%= link_to "Destroy", @question, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", questions_path %>
+  <span class='question_function'><%= link_to "回到列表", questions_path %></span>
 </p>
 <hr >
-<h3>Someone's experience</h3>
-  <%= link_to 'Share Your Experience for her/him', new_experience_path(:question_id => @question) %>
+<h3>相關經驗</h3>
   <ul>
     <% @experiences.each do |experience| %>
       <li>
-        <%= link_to truncate_u(Sanitize.clean(experience.content), 15), experience %>
+        <span class='exp_cell'>
+          <%= link_to truncate_u(Sanitize.clean(experience.content), 15), experience %>
+        </span>
       </li>
     <% end %>
   </ul>
-  <h3>New Comment</h3>
+  <span class='share_function'>
+    <%= link_to '分享你的經驗給他', new_experience_path(:question_id => @question) %>
+  </span>
   <%= render :partial => 'comments/form' %>
 
-  <h3>Comments</h3>
-  <ul>
+  <h3>回覆</h3>
+  <div class='commentlist'>
     <% @comments.each do |c| %>
-      <li>
-        <%= link_to c.user.username, user_experiences_path(c.user) %>
-        <%= c.comment %>
-      </li>
+      <div class='comment'>
+        <h3><span class='exp_author'><%= link_to c.user.username, user_experiences_path(c.user) %></span> 說...</h3>
+        <div><%= Sanitize.clean(c.comment) %></div>
+      </div>
     <% end %>
-  </ul>
+  </div>

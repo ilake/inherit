@@ -13,25 +13,36 @@
   </p-->
   <%#= submit_tag 'Search', :name => nil %>
 <%# end %>
+<div class='search_item_list'>
+  <% if action_name != 'experiences' %>
+    <div class='search_goal_items'>
+      <h3>目標<%= link_to "#{@goals.total_entries}個結果- 秀全部", search_goals_path(:search => params[:search]) %></h3>
+      <ul>
+        <% @goals.each do |goal|%>
+          <li class='goal_anchor'><%= link_to truncate_u(Sanitize.clean(goal.title), 15), goal %></li>
+        <% end %>
+      </ul>
+      <%= will_paginate @goals if action_name == 'goals' %>
+      <p class='share_function'>
+        <%= link_to '分享你的目標', new_user_goal_path(current_user) %>
+      </p>
+    </div>
+  <% end %>
 
-<h3>有類似背景的使用者</h3>
-<ul>
-  <% @profiles.each do |p|%>
-    <li>
-      <%= link_to p.user.username, user_experiences_path(p.user)%>
-      <%= link_to p.intro, user_profile_path(p.user) %>
-    </li>
+  <% if action_name != 'goals' %>
+    <div class='search_exp_items'>
+      <h3>經驗 <%= link_to "#{@experiences.total_entries}個結果- 秀全部", search_exps_path(:search => params[:search]) %></h3>
+      <ul>
+        <% @experiences.each do |experience|%>
+          <li class='exp_anchor'>
+            <%= link_to truncate_u(Sanitize.clean(experience.content), 55), experience %>
+          </li>
+        <% end %>
+      </ul>
+      <%= will_paginate @experiences if action_name == 'experiences' %>
+      <p class='share_function'>
+        <%= link_to '分享你的經驗', new_user_experience_path(current_user) %>
+      </p>
+    </div>
   <% end %>
-</ul>
-<p>
-  <%= link_to "Write You Profile", edit_profile_path%>
-</p>
-<h3>有類似的經驗</h3>
-<ul>
-  <% @experiences.each do |experience|%>
-    <li><%= link_to truncate_u(Sanitize.clean(experience.content), 15), experience %></li>
-  <% end %>
-</ul>
-<p>
-  <%= link_to 'Share Your Experience', new_user_experience_path(current_user) %>
-</p>
+</div>

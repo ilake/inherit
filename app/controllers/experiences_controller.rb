@@ -56,7 +56,7 @@ class ExperiencesController < ApplicationController
     @questions = @experience.answer_questions.limit(5)
 
     @comment = @experience.comments.new
-    @vote = @experience.votes.new
+    #@vote = @experience.votes.new
 
     respond_to do |format|
       format.html # show.html.erb

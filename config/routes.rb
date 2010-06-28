@@ -16,6 +16,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :profile, :except => [:new, :create]
 
   map.search "search/:search", :controller =>'search', :action => 'index', :search => nil
+  map.search_exps "search_exps/:search", :controller =>'search', :action => 'experiences', :search => nil
+  map.search_goals "search_goals/:search", :controller =>'search', :action => 'goals', :search => nil
 
   map.user_exps "users/:user_id/:goal_id/experiences", :controller => 'experiences', :action => 'index'
 

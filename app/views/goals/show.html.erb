@@ -2,6 +2,13 @@
 <p>
   <strong>Author:</strong>
   <%= link_to "#{@goal.user.username}",  user_experiences_path(@goal.user) %>
+  <% if can? :update, @goal %>
+    <%= link_to "Edit", edit_goal_path(@goal) %> |
+  <% end %>
+
+  <% if can? :destroy, @goal %>
+    <%= link_to "Destroy", @goal, :confirm => 'Are you sure?', :method => :delete %>
+  <% end %>
 </p>
 <p>
   <strong>Start At:</strong>
@@ -19,15 +26,8 @@
   <strong>State:</strong>
   <%=h @goal.state %>
 </p>
-
 <p>
-  <% if can? :update, @goal %>
-    <%= link_to "Edit", edit_goal_path(@goal) %> |
-  <% end %>
-
-  <% if can? :destroy, @goal %>
-    <%= link_to "Destroy", @goal, :confirm => 'Are you sure?', :method => :delete %> |
-  <% end %>
+  <% h tag_link @goal %>
 </p>
 
 <h3>類似目標</h3>

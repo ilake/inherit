@@ -1,18 +1,21 @@
 <% title "Questions" %>
-<p><%= link_to "New Question", new_question_path %></p>
+<div class='top-function-menu'>
+  <%= link_to "發問", new_question_path %>
+</div>
 
-<table>
+<table id='questionlist'>
   <tr>
-    <th>Title</th>
-    <th>Content</th>
+    <th>標題</th>
+    <th>內容</th>
   </tr>
   <% for question in @questions %>
     <tr>
-      <td><%=h question.title %></td>
-      <td><%= truncate_u(Sanitize.clean(question.content), 12) %></td>
-      <td><%= link_to "Show", question %></td>
-      <td><%= link_to "Edit", edit_question_path(question) %></td>
-      <td><%= link_to "Destroy", question, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td class='question_title'>
+        <%= link_to h(question.title), question %>
+      </td>
+      <td>
+        <%= truncate_u(Sanitize.clean(question.content), 32) %>
+      </td>
     </tr>
   <% end %>
 </table>

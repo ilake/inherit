@@ -1,27 +1,35 @@
-<% title "Chats" %>
+<% title "意見" %>
 
 <%= render :partial => 'form' %>
-<table>
-  <tr>
-    <th></th>
-    <th>Suggestion</th>
-  </tr>
+<div class='chatlist'>
   <% for chat in @chats %>
-    <tr>
-      <% if can? :destroy, chat %>
-        <td><%= link_to "Destroy origin", chat, :confirm => 'Are you sure?', :method => :delete %></td>
-      <% end %>
-      <td><%=h chat.content %></td>
-      <% chat.children.each do |c|%>
-        <td><%= c.content %></td>
-        <% if can? :destroy, c %>
-          <td><%= link_to "Destroy reply", c, :confirm => 'Are you sure?', :method => :delete %></td>
+    <div class='chat'>
+      <h3>
+        <span class='exp_author'>
+          <%= link_to chat.user.username, user_experiences_path(chat.user) %>
+        </span> 說...
+        <% if can? :destroy, chat %>
+          <%= link_to "刪除", chat, :confirm => '你確定嗎?', :method => :delete %>
         <% end %>
-      <% end %>
-      <td>
-        <%= link_to "reply", reply_new_chat_path(:chat_id => chat) if current_user.try(:admin?) %>
-      </td>
-    </tr>
+      </h3>
+      <div><%= Sanitize.clean(chat.content) %></div>
+      <div class='chat_reply'>
+        <% chat.children.each do |c|%>
+          <h3>
+            <span class='exp_author'>
+              <%= link_to c.user.username, user_experiences_path(c.user) %>
+            </span> 說...
+            <% if can? :destroy, c %>
+              <%= link_to "刪除", c, :confirm => '你確定嗎?', :method => :delete %>
+            <% end %>
+          </h3>
+          <div><%= Sanitize.clean(chat.content) %></div>
+        <% end %>
+      </div>
+
+      <%= link_to "回應", reply_new_chat_path(:chat_id => chat) if current_user.try(:admin?) %>
+
+    </div>
   <% end %>
-</table>
+</div>
 <%= will_paginate @chats %>

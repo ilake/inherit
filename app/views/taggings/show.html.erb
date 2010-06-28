@@ -1,18 +1,10 @@
-<h1><%= params[:taggable_type] %> about <%= params[:id] %></h1>
+<h3>有關 <%= params[:id] %></h3>
 
 <table>
-  <tr>
-    <th>Content</th>
-    <th>Start At</th>
-    <th>End At</th>
-  </tr>
-
-<% @taggable_objs.each do |obj| %>
-  <tr>
-    <td><%= link_to obj.content, obj%></td>
-    <td><%= obj.start_at.to_s(:date) if obj.start_at %></td>
-    <td><%= obj.end_at.to_s(:date) if obj.end_at %></td>
-  </tr>
-<% end %>
+  <% @taggable_objs.each do |obj| %>
+    <tr>
+      <td class='exp_cell'><%= link_to truncate_u(Sanitize.clean(obj.content), 35), obj%></td>
+    </tr>
+  <% end %>
 </table>
 <%= will_paginate @taggable_objs %>

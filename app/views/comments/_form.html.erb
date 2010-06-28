@@ -3,8 +3,8 @@
   <%= f.hidden_field :commentable_type %>
   <%= f.hidden_field :commentable_id %>
   <p>
-    <%= f.label :comment %><br />
+    <strong>回應</strong><br />
     <%= f.text_area :comment, :size => '30x5' %>
   </p>
-  <p><%= f.submit "Submit" %></p>
+  <p><%= f.submit "送出" %></p>
 <% end %>
