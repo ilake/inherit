@@ -31,7 +31,7 @@
   </div>
   <% if @current_goal %>
     <div id='goal_detail'>
-      <%= link_to truncate_u(Sanitize.clean(@current_goal.content), 22), @current_goal %>
+      <%= link_to truncate_u(Sanitize.clean(@current_goal.content), 18), @current_goal %>
       <%h tag_link @current_goal %>
       <%=h @current_goal.start_at.to_s(:date) if @current_goal.start_at %>
       <%=h @current_goal.state %>

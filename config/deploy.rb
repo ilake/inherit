@@ -105,9 +105,7 @@ namespace :inherit do
   task :disable_web, :roles => :web do
     on_rollback { delete "#{shared_path}/system/maintenance.html" }
 
-    #maintenance = render("./app/views/layouts/maintenance.html.erb" )
     require 'erb'
-    #deadline, reason = ENV['UNTIL'], ENV['REASON']
     maintenance = ERB.new(File.read("./app/views/layouts/maintenance.html.erb")).result(binding)
 
     put maintenance, "#{shared_path}/system/maintenance.html", :mode => 0644
