@@ -57,7 +57,7 @@ class ExperiencesController < ApplicationController
     @questions = @experience.answer_questions.limit(5)
 
     @comment = @experience.comments.new
-    #@vote = @experience.votes.new
+    @vote = @experience.votes.new
 
     respond_to do |format|
       format.html # show.html.erb
@@ -68,7 +68,7 @@ class ExperiencesController < ApplicationController
   # GET /experiences/new
   # GET /experiences/new.xml
   def new
-    @experience = Experience.new(:goal_id => params[:goal_id], :end_at => Time.now)
+    @experience = Experience.new(:goal_id => params[:goal_id])
     if params[:question_id]
       @question = Question.find(params[:question_id])
     end

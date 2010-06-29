@@ -4,6 +4,11 @@
 <p>
   <%= @goals.join(', ')%>
 </p>
+<% if @fans_count > 0 %>
+<p>
+  You have <%= @fans_count %> fans waitting for you
+</p>
+<% end %>
 <p>
   Record what you do for your goal
   <%= link_to "Create Your Experience", new_experience_url %>

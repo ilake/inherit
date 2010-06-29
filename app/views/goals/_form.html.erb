@@ -4,32 +4,29 @@
 <% form_for @goal do |f| %>
   <%= f.error_messages %>
   <p>
-    <%= f.label :title, "Goal Name"%><br />
+    <%= f.label :title, "名稱"%><br />
+    <div class='desc'>它可以是你的目標, 計畫或者是經驗的分類</div>
     <%= f.text_field :title %>
   </p>
   <p>
-    <%= f.label :tag %><br />
+    <%= f.label :content, "描述" %><br />
+    <%= f.text_area :content, :size => '40x10', :class => "mceEditor"  %>
+  </p>
+  <p>
+    <%= f.label :start_at, '開始時間' %><br />
+    <%= f.date_select :start_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950  %>
+  </p>
+  <p>
+    <%= f.label :tag, '標籤(請用空白隔開)'  %><br />
     <%= f.text_field :tag_list %>
   </p>
   <p>
-    <%= f.label :state %><br />
+    <%= f.label :state, '狀態' %><br />
     <%= f.select :state, GOAL_STATES.to_select_options %>
-  </p>
-  <p>
-    <%= f.label :start_at %><br />
-    <%= f.date_select :start_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950  %>
-  </p>
-  <p>
-    <%= f.label :start_at %><br />
-    <%= f.date_select :start_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950  %>
   </p>
   <p>
     <%= f.label :public, '公開' %><br />
     <%= f.check_box :public %>
-  </p>
-  <p>
-    <%= f.label :content, "Detail" %><br />
-    <%= f.text_area :content, :size => '60x20', :class => "mceEditor"  %>
   </p>
   <p><%= f.submit "Submit" %></p>
 <% end %>

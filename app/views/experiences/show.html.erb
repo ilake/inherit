@@ -42,37 +42,25 @@
       <span class='exp_tags'>
         <% tag_link @experience %>
       </span>
+      <div class='cheer_function'>
+        <% if @experience.votes_for > 0%>
+          <strong> <%= @experience.votes_for %> 人說讚</strong>
+        <% end %>
+
+        <% form_for @vote do |f| %>
+          <%= hidden_field_tag :voteable_type, @vote.voteable_type %>
+          <%= hidden_field_tag :exp_id, @experience.id%>
+          <%= hidden_field_tag :vote, 1 %>
+          <%= f.submit "讚" %>
+        <% end %>
+      </div>
+      <div class='clear'></div>
+
     </p>
     <%#= EXP_TYPE[@experience.exp_type] if @experience.exp_type %>
     <%#= @experience.location_list %>
-    <div>
-      <span class='exp_author'>
-        By <%= link_to "#{@experience.user.username}",  user_experiences_path(@experience.user) %>
-      </span>
-
-      <% if can? :update, @experience %>
-        <span class='exp_function'>
-          <%= link_to '編輯', edit_experience_path(@experience) %>
-        </span>
-      <% end %>
-      <span class='exp_function'>
-        <% if can? :destroy, @experience %>
-          <%= link_to '刪除', @experience, :confirm => '你確定嗎?', :method => :delete %>
-        </span>
-      <% end %>
-
-    </div>
 
   </div>
-  <%#= @experience.votes_for %>
-
-  <%# form_for @vote do |f| %>
-    <%#= hidden_field_tag :voteable_type, @vote.voteable_type %>
-    <%#= hidden_field_tag :exp_id, @experience.id%>
-    <%#= hidden_field_tag :vote, 1 %>
-    <%#= f.submit "cheer" %>
-  <%# end %>
-
   <% if !@questions.blank? %>
     <h3>處理的問題</h3>
     <ul>

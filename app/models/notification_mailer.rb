@@ -40,11 +40,11 @@ class NotificationMailer < ActionMailer::Base
     body          :user => user
   end
 
-  def exp_empty(user, goals)
+  def exp_empty(user, goals, fans_count)
     recipients     user.email
     from          "notifications@inherit.com"
     subject       "Empty exp Notification"
     sent_on       Time.now
-    body          :user => user, :goals => goals
+    body          :user => user, :goals => goals, :fans_count => fans_count
   end
 end

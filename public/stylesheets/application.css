@@ -147,11 +147,12 @@ label {
 
 /* common site */
 #container {
-  margin-bottom:0;
+  height: auto !important;
   margin-left:auto;
   margin-right:auto;
   margin-top:0;
   width:960px !important;
+  min-height:100%;
 }
 
 #footer {
@@ -162,7 +163,7 @@ label {
   margin-top: 120px;
   width: 100%;
   z-index: 9999;
-  border-top: 2px solid #a66;
+  border-top: 1px solid #a66;
   line-height: 4em;
   color: #fff;
 }
@@ -433,7 +434,7 @@ label {
   font-weight:bold;
 }
 
-.exp_function a, .question_function a {
+.exp_function a, .question_function a, .function a {
   color: #990000;
   text-decoration: none;
   padding: 0px 3px 0px 3px;
@@ -515,4 +516,17 @@ td.question_title{ width: 400px}
   color: #fff;
   float:right;
   text-decoration: none;
+}
+
+/* cheer */
+.cheer_function form {
+  padding-right:10px;
+  float:left;
+}
+.cheer_function strong{
+  float:left;
+}
+
+.desc {
+  color:#33CC66;
 }
