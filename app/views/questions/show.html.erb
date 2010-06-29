@@ -1,7 +1,6 @@
 <% title "Question" %>
 <p>
-  <strong>Title:</strong>
-  <%=h @question.title %>
+  <strong><%=h @question.title %></strong>
   <span class='exp_author'> 
     By <%= link_to @question.user.username, user_experiences_path(@question.user) %>
   </span>

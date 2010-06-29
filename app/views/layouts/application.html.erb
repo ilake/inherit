@@ -32,7 +32,7 @@
 
       <div id='header'>
         <div id='logo'>
-          <h2 id='logo'>傳承.</h2>
+          <h2 id='logo'><%= link_to "傳承.", root_url %></h2>
         </div>
 
         <div id="location">
@@ -45,7 +45,7 @@
               <li><%= link_to "首頁", home_url %></li>
               <li><%= link_to "我的傳承", user_experiences_path(current_user)%></li>
             <% else %>
-              <li><%= link_to "首頁", root_url %></li>
+              <li><%= link_to "首頁", home_url %></li>
             <% end %>
             <li><%= link_to "解惑", questions_path %></li>
             <li><%= link_to "意見", chats_path %></li>

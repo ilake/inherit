@@ -7,6 +7,7 @@ class ExperiencesController < ApplicationController
 
   # GET /experiences
   # GET /experiences.xml
+  # cache : params.values.sort.to_s
   def index
     @experiences = user_selected.experiences.show_policy(@user.is_owner?(current_user)).goal_categroy(params[:goal_id]).descend_by_start_at.find(:all, :include => [:goal])
     @current_goal = Goal.find_by_id(params[:goal_id])

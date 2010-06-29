@@ -9,32 +9,34 @@
   </div>
 
   <div id='home_content'>
-  <h4>大家的經驗</h4>
-  <div>
-  <% @experiences.each do |experience| %>
-    <div class='exp_cell'>
-    <%= link_to truncate_u(Sanitize.clean(experience.content), 40), experience %>
+    <h4>經驗類型</h4>
+    <div class='exp_tags'>
+      <% tag_cloud(@exp_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
+        <%= link_to tag.name, tagging_url(tag.name, :taggable_type => 'Experience'), :class => css_class %>
+      <% end %>
     </div>
-  <% end %>
-  </div>
-  <h4>經驗類型</h4>
-  <div class='exp_tags'>
-  <% tag_cloud(@exp_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
-    <%= link_to tag.name, tagging_url(tag.name, :taggable_type => 'Experience'), :class => css_class %>
-  <% end %>
-  </div>
+
+    <h4>大家的經驗</h4>
+    <div>
+      <% @experiences.each do |experience| %>
+        <div class='exp_cell'>
+          <%= link_to truncate_u(Sanitize.clean(experience.content), 40), experience %>
+        </div>
+      <% end %>
+    </div>
   </div>
   <div id='home_sidebar'>
-  <h4>大家的目標</h4>
-  <div>
-  <% @goals.each do |goal| %>
-    <div class='goal_cell'> <%= link_to truncate_u(goal.title, 40), goal %></div>
-  <% end %>
-  </div>
-  <h4>目標類型</h4>
-  <div class='goal_tags'>
-  <% tag_cloud(@goal_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
-    <%= link_to tag.name, tagging_url(tag.name, :taggable_type => 'Experience'), :class => css_class %>
-  <% end %>
-  </div>
+    <h4>目標類型</h4>
+    <div class='goal_tags'>
+      <% tag_cloud(@goal_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
+        <%= link_to tag.name, tagging_url(tag.name, :taggable_type => 'Experience'), :class => css_class %>
+      <% end %>
+    </div>
+
+    <h4>大家的目標</h4>
+    <div>
+      <% @goals.each do |goal| %>
+        <div class='goal_cell'> <%= link_to truncate_u(goal.title, 40), goal %></div>
+      <% end %>
+    </div>
   </div>

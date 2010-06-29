@@ -182,13 +182,14 @@ label {
   float: right;
 }
 
-#logo {
+#logo a{
   float: left;
   width: 130px;
   height: auto;
   background: none;
   font-weight:bold;
   color:#003366;
+  text-decoration: none;
 }
 
 #header {
