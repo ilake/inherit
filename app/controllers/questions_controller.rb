@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
   load_and_authorize_resource :nested => :user
 
   def index
-    @questions = Question.location_with(current_user_location).descend_by_created_at.paginate :per_page => 15, :page => params[:page]
+    @questions = Question.location_with(current_user_location).descend_by_last_comment_time.paginate :per_page => 15, :page => params[:page]
   end
   
   def show

@@ -9,7 +9,7 @@ div.color_picker {
 }
 
 div#color_selector {
-  width: 110px;
+  width: 240px;
   position: absolute;
   border: 1px solid #598FEF;
   background-color: #EFEFEF;

@@ -7,6 +7,8 @@
   <tr>
     <th>標題</th>
     <th>內容</th>
+    <th>回應數</th>
+    <th>最後回應</th>
   </tr>
   <% for question in @questions %>
     <tr>
@@ -14,7 +16,13 @@
         <%= link_to h(question.title), question %>
       </td>
       <td>
-        <%= truncate_u(Sanitize.clean(question.content), 32) %>
+        <%= truncate_u(Sanitize.clean(question.content), 18) %>
+      </td>
+      <td>
+        <%= question.comments_count %>
+      </td>
+      <td>
+        <%= question.last_comment_time.to_s(:fulltime) %>
       </td>
     </tr>
   <% end %>

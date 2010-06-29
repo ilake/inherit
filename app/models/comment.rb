@@ -27,6 +27,7 @@ class Comment < ActiveRecord::Base
   belongs_to :user
 
   after_create :deliver_comment_notification
+  after_create :add_question_comment_count
 
   def mail_receiver
     #下過comment的
@@ -44,4 +45,13 @@ class Comment < ActiveRecord::Base
   def deliver_comment_notification
     Delayed::Job.enqueue(CommentMailingJob.new(self.id))
   end
+
+  def add_question_comment_count
+    if self.commentable_type == 'Question'
+      self.commentable.comments_count+=1
+      self.commentable.last_comment_time = Time.now
+      self.commentable.save!
+    end
+  end
+
 end
