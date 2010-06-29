@@ -23,7 +23,7 @@
               <%= link_to "刪除", c, :confirm => '你確定嗎?', :method => :delete %>
             <% end %>
           </h3>
-          <div><%= Sanitize.clean(chat.content) %></div>
+          <div><%= Sanitize.clean(c.content) %></div>
         <% end %>
       </div>
 
