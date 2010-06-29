@@ -39,6 +39,7 @@ class ApplicationController < ActionController::Base
 
   def user_hometown
     session[:hometown] ||= current_user.try(:location_list).try(:to_s)
+    session[:hometown] ||= ip_location
   end
 
   def ip_location
