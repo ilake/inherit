@@ -16,6 +16,7 @@
     <div>
       <span id='exp_show_time'>
         <%= @experience.start_at.to_s(:date)%> ~ <%= @experience.try(:end_at).try(:to_s, :date) %> 
+        <%= '(私密)' if !@experience.public %>
       </span>
       <span class='exp_author'>
         By <%= link_to "#{@experience.user.username}",  user_experiences_path(@experience.user) %>

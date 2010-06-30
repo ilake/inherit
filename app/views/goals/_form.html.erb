@@ -25,8 +25,11 @@
     <%= f.select :state, GOAL_STATES.to_select_options %>
   </p>
   <p>
+    <%= f.radio_button :public, true %>
     <%= f.label :public, '公開' %><br />
-    <%= f.check_box :public %>
+
+    <%= f.radio_button :public, false %>
+    <%= f.label :public, '私密(自己才看的到)' %>
   </p>
   <p><%= f.submit "Submit" %></p>
 <% end %>

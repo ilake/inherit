@@ -19,6 +19,10 @@
   <%=h @goal.title %>
 </p>
 <p>
+  <strong>public:</strong>
+  <%= '(私密)' if !@goal.public %>
+</p>
+<p>
   <strong>Content:</strong>
   <%= @goal.content %>
 </p>

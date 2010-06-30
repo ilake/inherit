@@ -29,8 +29,11 @@
       <%= f.text_area :content, :size => '60x20', :class => "mceEditor" %>
     </p>
     <p>
+      <%= f.radio_button :public, true %>
       <%= f.label :public, '公開' %><br />
-      <%= f.check_box :public %>
+
+      <%= f.radio_button :public, false %>
+      <%= f.label :public, '私密(自己才看的到)' %>
     </p>
   </div>
 
