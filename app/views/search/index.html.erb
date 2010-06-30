@@ -14,7 +14,24 @@
   <%#= submit_tag 'Search', :name => nil %>
 <%# end %>
 <div class='search_item_list'>
-  <% if action_name != 'experiences' %>
+  <% if ['questions', 'index'].include?(action_name) %>
+    <div class='search_exp_items'>
+      <h3>問題 <%= link_to "#{@questions.total_entries}個結果- 秀全部", search_questions_path(:search => params[:search]) %></h3>
+      <ul>
+        <% @questions.each do |question|%>
+          <li class='question_anchor'>
+            <%= link_to question.title, question %>
+          </li>
+        <% end %>
+      </ul>
+      <%= will_paginate @questions if action_name == 'questions' %>
+      <p class='share_function'>
+        <%= link_to '說出你的煩惱', new_question_path %>
+      </p>
+    </div>
+  <% end %>
+
+  <% if ['goals', 'index'].include?(action_name) %>
     <div class='search_goal_items'>
       <h3>目標<%= link_to "#{@goals.total_entries}個結果- 秀全部", search_goals_path(:search => params[:search]) %></h3>
       <ul>
@@ -29,7 +46,7 @@
     </div>
   <% end %>
 
-  <% if action_name != 'goals' %>
+  <% if ['experiences', 'index'].include?(action_name) %>
     <div class='search_exp_items'>
       <h3>經驗 <%= link_to "#{@experiences.total_entries}個結果- 秀全部", search_exps_path(:search => params[:search]) %></h3>
       <ul>

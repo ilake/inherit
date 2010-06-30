@@ -27,6 +27,11 @@ class Question < ActiveRecord::Base
   before_create :set_last_comment_time
   before_create :default_set_user_location
 
+  define_index do
+    indexes content
+    indexes title
+  end
+
   def to_param
     "#{id}-#{title}"
   end

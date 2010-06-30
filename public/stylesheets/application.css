@@ -424,7 +424,7 @@ label {
   text-decoration: none;
 }
 
-.exp_cell a, #new_exp a, .exp_author a, .question_title a, .top-function-menu a, .exp_anchor a, .goal_anchor a{
+.exp_cell a, #new_exp a, .exp_author a, .question_title a, .top-function-menu a, .exp_anchor a, .goal_anchor a, .question_anchor a{
   color: #0AA7F8;
   text-decoration: none;
 }
