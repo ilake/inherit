@@ -1,4 +1,4 @@
-<% title "#{@user.username} experiences" %>
+<% title "#{@user.username} 的傳承" %>
 
 <div id='exp_chart'>
 </div>
@@ -89,99 +89,17 @@
 </table>
 </div>
 
-<% content_for :head do %>
-
+<% content_for :bottom_js do %>
   <script>
     Timeline_ajax_url= '<%= javascript_path "timeline/timeline_ajax/simile-ajax-api.js" %>';
     Timeline_urlPrefix='<%= "#{ActionController::Base.asset_host}/javascripts/timeline/timeline_js/" %>';
     Timeline_parameters="bundle=true";
+    user_event= <%= @events %>;
+    timeline_start_at = new Date(<%= timeline_start_time(@user) %>);
+    timeline_default_at = new Date(<%= @experiences.first.try(:start_at).try(:to_s, :js_date) %>);
   </script>
   <%= javascript_include_tag 'timeline/timeline_js/timeline-api.js' %>
-
-<% end %>
-<% content_for :bottom_js do %>
-  <script>
-    var timeline_data = {  // save as a global variable
-      'dateTimeFormat': 'iso8601',
-      'events' : <%= @events %>
-    }
-  </script>
-
-  <script type='text/javascript'>
-    var tl;
-    function onLoad() {
-        var tl_el = document.getElementById("exp_chart");
-        var eventSource1 = new Timeline.DefaultEventSource();
-        
-        var theme1 = Timeline.ClassicTheme.create();
-        theme1.event.bubble.width = 350;   // modify it
-        theme1.event.bubble.height = 300;
-        theme1.event.track.height = 15;
-        theme1.event.tape.height = 10;
-
-        theme1.timeline_start = new Date(<%= timeline_start_time(@user) %>);
-        var t = new Date();
-        var year = t.getFullYear();
-        theme1.timeline_stop  = new Date(year+5, 12, 31);
-        
-  // 置中
-        var d = Timeline.DateTime.parseGregorianDateTime(new Date(<%= @experiences.first.try(:start_at).try(:to_s, :js_date) %>));
-        var bandInfos = [
-            Timeline.createBandInfo({
-                width:          "80%", // set to a minimum, autoWidth will then adjust
-                intervalUnit:   Timeline.DateTime.MONTH, 
-                intervalPixels: 150,
-                eventSource:    eventSource1,
-                date:           d,
-                theme:          theme1,
-                timeZone:       8,
-                layout:         'original'  // original, overview, detailed
-            }),
-            Timeline.createBandInfo({
-                width:          "20%", // set to a minimum, autoWidth will then adjust
-                intervalUnit:   Timeline.DateTime.YEAR, 
-                intervalPixels: 100,
-                eventSource:    eventSource1,
-                date:           d,
-                theme:          theme1,
-                timeZone:       8,
-                layout:         'overview'  // original, overview, detailed
-            })
-        ];
-  
-  bandInfos[1].syncWith = 0;
-  bandInfos[1].highlight = true;
-                                                        
-        // create the Timeline
-        tl = Timeline.create(tl_el, bandInfos, Timeline.HORIZONTAL);
-        
-        var url = '.'; // The base url for image, icon and background image
-                       // references in the data
-        eventSource1.loadJSON(timeline_data, url); // The data was stored into the 
-                                                   // timeline_data variable.
-        tl.layout(); // display the Timeline
-    }
-
-    var resizeTimerID = null;
-    function onResize() {
-      if (resizeTimerID == null) {
-        resizeTimerID = window.setTimeout(function() {
-            resizeTimerID = null;
-            tl.layout();
-            }, 500);
-      }
-    }
-
-    $(document).ready(function(){
-      onLoad();
-    });
-
-    $(document).resize(function() {
-      onResize();
-    });
-
-        
-   </script>
+  <%= javascript_include_tag 'experience_timeline.js' %>
 <% end %>
 
 

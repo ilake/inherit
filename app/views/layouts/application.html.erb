@@ -7,7 +7,6 @@
   <title><%= h(yield(:title) || 'Experience') %></title>
 
   <%= stylesheet_link_tag 'scaffold', 'colorPicker', 'application' %>
-  <%= javascript_include_tag 'jquery' %>
   <%= yield(:head) %>
 </head>
 <body>
@@ -68,6 +67,7 @@
   </div>
   <div id='footer'>
   </div>
+  <%= javascript_include_tag 'jquery' %>
   <%= yield :bottom_js %>
   <%= javascript_include_tag 'application', 'colorPicker' %>
 </body>
