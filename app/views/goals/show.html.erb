@@ -1,54 +1,67 @@
 <% title "#{@goal.user.username} goal #{@goal.title}" %>
-<p>
-  <strong>Author:</strong>
-  <%= link_to "#{@goal.user.username}",  user_experiences_path(@goal.user) %>
-  <% if can? :update, @goal %>
-    <%= link_to "Edit", edit_goal_path(@goal) %> |
-  <% end %>
-
-  <% if can? :destroy, @goal %>
-    <%= link_to "Destroy", @goal, :confirm => 'Are you sure?', :method => :delete %>
-  <% end %>
-</p>
-<p>
-  <strong>Start At:</strong>
-  <%=h @goal.start_at %>
-</p>
-<p>
-  <strong>Title:</strong>
-  <%=h @goal.title %>
-</p>
-<p>
-  <strong>public:</strong>
-  <%= '(私密)' if !@goal.public %>
-</p>
-<p>
-  <strong>Content:</strong>
-  <%= @goal.content %>
-</p>
-<p>
-  <strong>State:</strong>
-  <%=h @goal.state %>
-</p>
-<p>
-  <% h tag_link @goal %>
-</p>
-
-<h3>類似目標</h3>
-  <ul>
-    <% @goal.find_related_tags.each do |g| %>
-      <li><%= link_to truncate_u(g.title), g%></li>
-    <% end %>
-  </ul>
-  <hr >
-
-<h3><%= @goal.title %> experiences</h3>
-<ul>
-  <% @goal.experiences.each do |e| %>
-    <li><%= link_to truncate_u(e.content), e%> <%= e.start_at.to_s(:date) %></li>
-  <% end %>
-</ul>
-
-<% if can? :create, Experience %>
-  <%= link_to 'New experience', new_goal_experience_path(@goal) %>
+<% content_for :sider do %>
+  <div id='group_show_side'>
+    <h3>類似目標</h3>
+    <ul>
+      <% @goal.find_related_tags.each do |g| %>
+        <li><%= link_to truncate_u(g.title), g%></li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>
+<div id='goal_show_main'>
+  <div id='goal_show_content'>
+    <div>
+      <span id='goal_show_time'>
+        <%=h @goal.title %>
+        <%=h @goal.start_at.to_s(:date) %>
+        <%= '(私密)' if !@goal.public %>
+      </span>
+      <span class='goal_author'>
+        By <%= link_to "#{@goal.user.username}",  user_experiences_path(@goal.user) %>
+      </span>
+
+      <% if can? :update, @goal %>
+        <span class='goal_function'>
+          <%= link_to '編輯', edit_goal_path(@goal) %>
+        </span>
+      <% end %>
+      <span class='goal_function'>
+        <% if can? :destroy, @goal %>
+          <%= link_to '刪除', @goal, :confirm => '你確定嗎?', :method => :delete %>
+        </span>
+      <% end %>
+
+    </div>
+    <p>
+      <%= @goal.content %>
+    </p>
+    <p>
+      <strong>狀態:</strong>
+      <%=h @goal.state %>
+    </p>
+    <p>
+      <strong>關鍵字: </strong>
+      <span class='goal_tags'>
+        <% tag_link @goal%>
+      </span>
+      <div class='clear'></div>
+
+    </p>
+  </div>
+
+  <hr >
+  <%= render :partial => 'comments/form' %>
+
+  <h3>回覆</h3>
+  <div class='commentlist'>
+    <% @comments.each do |c| %>
+      <div class='comment'>
+        <h3><span class='goal_author'><%= link_to c.user.username, user_experiences_path(c.user) %></span> 說...</h3>
+        <div><%= Sanitize.clean(c.comment) %></div>
+      </div>
+    <% end %>
+  </div>
+
+
+</div>

@@ -8,6 +8,8 @@ class GoalsController < ApplicationController
   
   def show
     @goal = Goal.find(params[:id], :include => [:experiences])
+    @comments = @goal.comments.recent.find(:all, :include => :user)
+    @comment = @goal.comments.new
   end
   
   def new

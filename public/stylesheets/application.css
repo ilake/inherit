@@ -360,25 +360,25 @@ label {
 /* User experience index page END */
 
 /* User experience show page */
-#exp_show_main {
+#exp_show_main, #goal_show_main {
   float:right;
   width:700px;
   padding:5px;
 }
 
-#exp_show_side {
+#exp_show_side, #goal_show_side {
   float:left;
   width:200px;
   padding:5px;
 }
 
-#exp_show_time {
+#exp_show_time, #goal_show_time {
   margin-right:10px;
   font-weight: bolder;
   font-size:20px;
 }
 
-#exp_show_content {
+#exp_show_content, #goal_show_content {
   margin-bottom:40px;
 }
 /* User experience show page END */
@@ -424,7 +424,7 @@ label {
   text-decoration: none;
 }
 
-.exp_cell a, #new_exp a, .exp_author a, .question_title a, .top-function-menu a, .exp_anchor a, .goal_anchor a, .question_anchor a{
+.exp_cell a, #new_exp a, .exp_author a, .goal_author a, .question_title a, .top-function-menu a, .exp_anchor a, .goal_anchor a, .question_anchor a{
   color: #0AA7F8;
   text-decoration: none;
 }
@@ -434,7 +434,7 @@ label {
   font-weight:bold;
 }
 
-.exp_function a, .question_function a, .function a {
+.exp_function a, .question_function a, .function a, .goal_function a{
   color: #990000;
   text-decoration: none;
   padding: 0px 3px 0px 3px;
