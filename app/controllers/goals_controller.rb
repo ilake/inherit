@@ -20,7 +20,7 @@ class GoalsController < ApplicationController
     @goal = current_user.goals.new(params[:goal])
     if @goal.save
       flash[:notice] = "Successfully created goal."
-      redirect_to user_experiences_path(current_user) 
+      redirect_to user_home_path(current_user) 
     else
       render :action => 'new'
     end
@@ -44,6 +44,6 @@ class GoalsController < ApplicationController
     @goal = current_user.goals.find(params[:id])
     @goal.destroy
     flash[:notice] = "Successfully destroyed goal."
-    redirect_to user_experiences_path(current_user) 
+    redirect_to user_home_path(current_user) 
   end
 end

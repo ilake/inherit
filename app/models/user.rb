@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
   after_create :init
 
   def to_param
-    "#{id}-#{username}"
+    username
   end
 
   def is_not_guest?

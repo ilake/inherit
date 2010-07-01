@@ -18,7 +18,7 @@
         <%= '(私密)' if !@goal.public %>
       </span>
       <span class='goal_author'>
-        By <%= link_to "#{@goal.user.username}",  user_experiences_path(@goal.user) %>
+        By <%= link_to "#{@goal.user.username}",  user_home_path(@goal.user) %>
       </span>
 
       <% if can? :update, @goal %>
@@ -57,7 +57,7 @@
   <div class='commentlist'>
     <% @comments.each do |c| %>
       <div class='comment'>
-        <h3><span class='goal_author'><%= link_to c.user.username, user_experiences_path(c.user) %></span> 說...</h3>
+        <h3><span class='goal_author'><%= link_to c.user.username, user_home_path(c.user) %></span> 說...</h3>
         <div><%= Sanitize.clean(c.comment) %></div>
       </div>
     <% end %>

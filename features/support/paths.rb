@@ -12,7 +12,7 @@ module NavigationHelpers
       '/'
 
     when /the list of "(.+)" experiences/
-      user_experiences_path(User.find_by_username($1))
+      user_home_path(User.find_by_username($1))
 
     when /the "(.+)" show page for (.+)/
       polymorphic_path(model($2), :user_id => model($1))

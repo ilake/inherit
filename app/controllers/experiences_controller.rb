@@ -97,7 +97,7 @@ class ExperiencesController < ApplicationController
           if @question
             redirect_to @question
           else
-            #redirect_to user_experiences_path(current_user) 
+            #redirect_to user_home_path(current_user) 
             redirect_to @experience
           end
         }
@@ -121,7 +121,7 @@ class ExperiencesController < ApplicationController
         flash[:notice] = 'Experience was successfully updated.'
         format.html { 
           redirect_to @experience
-          #redirect_to user_experiences_path(current_user) 
+          #redirect_to user_home_path(current_user) 
         }
         format.xml  { head :ok }
       else

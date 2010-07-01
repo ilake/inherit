@@ -2,7 +2,7 @@
 <p>
   <strong><%=h @question.title %></strong>
   <span class='exp_author'> 
-    By <%= link_to @question.user.username, user_experiences_path(@question.user) %>
+    By <%= link_to @question.user.username, user_home_path(@question.user) %>
   </span>
 
   <% if can? :update, @question %>
@@ -43,7 +43,7 @@
   <div class='commentlist'>
     <% @comments.each do |c| %>
       <div class='comment'>
-        <h3><span class='exp_author'><%= link_to c.user.username, user_experiences_path(c.user) %></span> 說...</h3>
+        <h3><span class='exp_author'><%= link_to c.user.username, user_home_path(c.user) %></span> 說...</h3>
         <div><%= Sanitize.clean(c.comment) %></div>
       </div>
     <% end %>
