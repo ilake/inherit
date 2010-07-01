@@ -89,16 +89,21 @@
 </table>
 </div>
 
-<% content_for :bottom_js do %>
+<% content_for :head do %>
   <script>
     Timeline_ajax_url= '<%= javascript_path "timeline/timeline_ajax/simile-ajax-api.js" %>';
     Timeline_urlPrefix='<%= "#{ActionController::Base.asset_host}/javascripts/timeline/timeline_js/" %>';
     Timeline_parameters="bundle=true";
+  </script>
+  <%= javascript_include_tag 'timeline/timeline_js/timeline-api.js' %>
+<% end %>
+
+<% content_for :bottom_js do %>
+  <script>
     user_event= <%= @events %>;
     timeline_start_at = new Date(<%= timeline_start_time(@user) %>);
     timeline_default_at = new Date(<%= @experiences.first.try(:start_at).try(:to_s, :js_date) %>);
   </script>
-  <%= javascript_include_tag 'timeline/timeline_js/timeline-api.js' %>
   <%= javascript_include_tag 'experience_timeline.js' %>
 <% end %>
 
