@@ -11,7 +11,7 @@
 <table>
   <% @taggable_objs.each do |obj| %>
     <tr>
-      <td class='exp_cell'><%= link_to truncate_u(Sanitize.clean(obj.content), 35), obj%></td>
+      <td class='exp_cell'><%= link_to truncate_u(Sanitize.clean(obj.try(:content) || ""), 35), obj%></td>
     </tr>
   <% end %>
 </table>
