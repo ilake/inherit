@@ -1,4 +1,12 @@
-<% title  h(@question.title) %>
+<% content_for :meta_tag do%>
+  <%= Handcache.get_and_set("#{params.values.sort.to_s}-#{@question.updated_at.to_s(:fulltime)}") do
+    title @question.title 
+    description "#{truncate_u(Sanitize.clean(@question.content), 100)}" 
+    keywords @question.tag_list 
+    display_meta_tags :site => '傳承' 
+  end %>  
+<% end %>
+
 <p>
   <strong><%=h @question.title %></strong>
   <span class='exp_author'> 

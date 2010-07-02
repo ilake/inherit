@@ -23,6 +23,7 @@ class ApplicationController < ActionController::Base
   
   def user_selected
     @user ||= User.find_by_username(params[:user_id]) if params[:user_id]
+    @user ||= User.find(params[:user_id]) if params[:user_id]
     @user ||= current_user
     unless @user
       flash[:error] = 'Please login first'

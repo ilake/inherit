@@ -48,6 +48,7 @@ var timeline_data = {  // save as a global variable
   bandInfos[1].highlight = true;
                                                         
         // create the Timeline
+        //tl = Timeline.create(tl_el, bandInfos, Timeline.VERTICAL);
         tl = Timeline.create(tl_el, bandInfos, Timeline.HORIZONTAL);
         
         var url = '.'; // The base url for image, icon and background image

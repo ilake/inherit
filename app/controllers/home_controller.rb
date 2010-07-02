@@ -10,6 +10,7 @@ class HomeController < ApplicationController
   end
 
   def user
+    Experience
     @experiences = Handcache.compressed_get_and_set("explore_experiences", :expires_in => 60) do  
       Experience.location_with(current_user_location).descend_by_updated_at.limit(10).all
     end  

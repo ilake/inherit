@@ -381,6 +381,7 @@ label {
 #exp_show_content, #goal_show_content {
   margin-bottom:40px;
 }
+
 /* User experience show page END */
 
 /* comments */
@@ -440,7 +441,7 @@ label {
   padding: 0px 3px 0px 3px;
 }
 
-.exp_tags a, .goal_tags a{
+.exp_tags a, .goal_tags a, .exp_category a{
   color: #FFCC00;
 }
 

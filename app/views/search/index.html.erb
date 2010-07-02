@@ -1,18 +1,7 @@
-<%# form_tag search_url, :method => :get do %>
-  <!--p>
-    Search: <%#= text_field_tag :search %>
-  </p>
-  <p>
-    <%#= check_box_tag :user_date_check %>
-    <span id='user_start_at_date'>
-      user born range: <%#= text_field_tag :age_start_at, current_user.try(:birthday).try(:to_s, :date) || Time.now.ago(30.years)%>
-    </span>
-    <span id='user_start_at_date'>
-      ~ <%#= text_field_tag :age_end_at, current_user.try(:birthday).try(:since, 5.years).try(:to_s, :date) || Time.now.ago(25.years) %>
-    </span>
-  </p-->
-  <%#= submit_tag 'Search', :name => nil %>
-<%# end %>
+<% title params[:search] %>
+<% description search_page_meta_tag(@questions, @goals, @experiences)%>
+<% keywords params[:search] %>  
+
 <div class='search_item_list'>
   <% if ['questions', 'index'].include?(action_name) %>
     <div class='search_exp_items'>
@@ -41,7 +30,7 @@
       </ul>
       <%= will_paginate @goals if action_name == 'goals' %>
       <p class='share_function'>
-        <%= link_to '分享你的目標', new_user_goal_path(current_user) %>
+        <%= link_to '分享你的目標', new_goal_path %>
       </p>
     </div>
   <% end %>
@@ -58,7 +47,7 @@
       </ul>
       <%= will_paginate @experiences if action_name == 'experiences' %>
       <p class='share_function'>
-        <%= link_to '分享你的經驗', new_user_experience_path(current_user) %>
+        <%= link_to '分享你的經驗', new_experience_path %>
       </p>
     </div>
   <% end %>

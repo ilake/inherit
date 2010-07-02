@@ -20,7 +20,7 @@ ActionController::Routing::Routes.draw do |map|
   map.search_goals "search_goals/:search", :controller =>'search', :action => 'goals', :search => nil
   map.search_questions "search_questions/:search", :controller =>'search', :action => 'questions', :search => nil
 
-  map.user_home "users/:username", :controller => 'experiences', :action => 'index'
+  map.user_home "users/:user_id", :controller => 'experiences', :action => 'index'
   map.user_exps "users/:user_id/:goal_id/experiences", :controller => 'experiences', :action => 'index'
 
   map.resources :users do |user|

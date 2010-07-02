@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100629101636
+# Schema version: 20100702045054
 #
 # Table name: questions
 #
@@ -11,11 +11,13 @@
 #  updated_at        :datetime
 #  comments_count    :integer(4)      default(0)
 #  last_comment_time :datetime
+#  tags_list         :string(255)
 #
 
 class Question < ActiveRecord::Base
   attr_accessible :title, :content, :location_list
   acts_as_commentable
+  acts_as_taggable_on :tags
   acts_as_taggable_on :locations
 
   belongs_to :user
@@ -26,6 +28,7 @@ class Question < ActiveRecord::Base
 
   before_create :set_last_comment_time
   before_create :default_set_user_location
+  before_save :set_tags_list
 
   define_index do
     indexes content
@@ -33,7 +36,7 @@ class Question < ActiveRecord::Base
   end
 
   def to_param
-    "#{id}-#{title}"
+    "#{id}-#{title.downcase.gsub(/\s/i, '-')}"
   end
 
   def self.location_with(location)
@@ -45,6 +48,10 @@ class Question < ActiveRecord::Base
   end
 
   private
+  def set_tags_list
+    self.tags_list = tag_list.join(" ")
+  end
+
   def default_set_user_location
     self.location_list = self.user.location_list
   end

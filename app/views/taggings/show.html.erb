@@ -1,3 +1,11 @@
+<% content_for :meta_tag do%>
+  <%= Handcache.get_and_set("#{params.values.sort.to_s}", :expires_in => 60) do
+    title params[:id]
+    description "#{truncate_u(Sanitize.clean(@taggable_objs.first.content), 100)}" 
+    keywords params[:id]
+    display_meta_tags :site => '傳承' 
+  end %>  
+<% end %>
 <h3>有關 <%= params[:id] %></h3>
 
 <table>
@@ -7,4 +15,4 @@
     </tr>
   <% end %>
 </table>
-<%= will_paginate @taggable_objs %>
+<%= will_paginate @taggable_objs if @taggable_objs.respond_to?(:total_pages)%>

@@ -1,7 +1,7 @@
-<h2>fans</h2>
+<h2>粉絲</h2>
 <ul>
   <% @users.each do |u| %>
-    <li>
+    <li class='exp_author'>
       <%= link_to "#{u.username}",  user_home_path(u) %>
     </li>
 <% end %>

@@ -1,8 +1,15 @@
-<% title "#{@user.username} 的傳承" %>
+<% content_for :meta_tag do%>
+  <%= Handcache.get_and_set("#{params.values.sort.to_s}-#{@user.profile.updated_at.to_s(:fulltime)}") do
+    title "#{@user.username} 的傳承"
+    description "#{truncate_u(Sanitize.clean(@user.profile.intro), 100)}" 
+    keywords @user.profile.tag_list 
+    display_meta_tags :site => '傳承' 
+  end %>  
+<% end %>
 
 <div id='exp_chart'>
 </div>
-
+<div class='clear'></div>
 <div class='grid-top'>
   <div id='profile_area'>
     <%= link_to "#{@user.username} 簡介", user_profile_path(@user), :popup => true %>
@@ -88,6 +95,7 @@
   <% end %>
 </table>
 </div>
+<div class='clear'></div>
 
 <% content_for :head do %>
   <script>

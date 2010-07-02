@@ -1,14 +1,17 @@
-<% title "#{@experience.user.username} experiences" %>
+<% content_for :meta_tag do%>
+  <%= Handcache.get_and_set("#{params.values.sort.to_s}-#{@experience.updated_at.to_s(:fulltime)}") do
+    title "#{truncate_u(Sanitize.clean(@experience.content), 10)}" 
+    description "#{truncate_u(Sanitize.clean(@experience.content), 100)}" 
+    keywords @experience.tag_list 
+    display_meta_tags :site => '傳承' 
+  end %>  
+<% end %>
+
 
 <% content_for :sider do %>
-  <div id='exp_show_side'>
-    <h3>類似經驗</h3>
-    <ul>
-      <% @experience.find_related_tags.each do |e| %>
-        <li><%= link_to truncate_u(Sanitize.clean(e.content), 40), e%></li>
-      <% end %>
-    </ul>
-  </div>
+  <%= Handcache.get_and_set("#{params.values.sort.to_s}-sider", :expires_in => 60 ) do
+    render :partial => 'show_sider', :locals => {:experience => @experience}
+  end %>  
 <% end %>
 
 <div id='exp_show_main'>
@@ -32,9 +35,14 @@
           <%= link_to '刪除', @experience, :confirm => '你確定嗎?', :method => :delete %>
         </span>
       <% end %>
-
     </div>
-    <p><%= link_to @experience.goal.title, @experience.goal if @experience.goal %></p>
+
+    <% if @experience.goal %>
+      <p class='exp_category'>
+        <strong>分類:</strong>
+        <%= link_to @experience.goal.title, @experience.goal%>
+      </p>
+    <% end %>
     <p>
       <%= @experience.content %>
     </p>

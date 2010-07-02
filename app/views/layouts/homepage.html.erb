@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title><%= h(yield(:title) || 'Experience') %></title>
+  <%= yield(:meta_tag) || display_meta_tags(:site => '傳承') %>
   <%= stylesheet_link_tag 'scaffold', 'application' %>
   <%= javascript_include_tag 'jquery' %>
   <%= yield(:head) %>

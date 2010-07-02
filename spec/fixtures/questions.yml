@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100629101636
+# Schema version: 20100702045054
 #
 # Table name: questions
 #
@@ -11,6 +11,7 @@
 #  updated_at        :datetime
 #  comments_count    :integer(4)      default(0)
 #  last_comment_time :datetime
+#  tags_list         :string(255)
 #
 
 one:
