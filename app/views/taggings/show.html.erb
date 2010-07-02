@@ -1,7 +1,7 @@
 <% content_for :meta_tag do%>
   <%= Handcache.get_and_set("#{params.values.sort.to_s}", :expires_in => 60) do
     title params[:id]
-    description "#{truncate_u(Sanitize.clean(@taggable_objs.first.content), 100)}" 
+    description "#{truncate_u(Sanitize.clean(@taggable_objs.first.try(:content) || ""), 100)}" 
     keywords params[:id]
     display_meta_tags :site => '傳承' 
   end %>  
