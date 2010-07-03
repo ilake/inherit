@@ -43,8 +43,16 @@
         <%= link_to @experience.goal.title, @experience.goal%>
       </p>
     <% end %>
+    <p class='function'>
+      <%= link_to '上一個經驗',  experience_path(@experience, :page => 'pervious')%>
+      <%= link_to '下一個經驗',  experience_path(@experience, :page => 'next')%>
+    </p>
     <p>
       <%= @experience.content %>
+    </p>
+    <p class='function'>
+      <%= link_to '上一個經驗',  experience_path(@experience, :page => 'pervious')%>
+      <%= link_to '下一個經驗',  experience_path(@experience, :page => 'next')%>
     </p>
     <p>
       <strong>關鍵字: </strong>

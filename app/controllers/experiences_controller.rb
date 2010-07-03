@@ -52,7 +52,25 @@ class ExperiencesController < ApplicationController
   # GET /experiences/1
   # GET /experiences/1.xml
   def show
-    @experience = Experience.find(params[:id])
+    current_exp = Experience.find(params[:id])
+    if params[:page] == 'next'
+      next_exp = current_exp.user.experiences.find(:first,
+                                                   :conditions => ["start_at > ?", @experience.start_at])
+      @experience = next_exp
+    elsif params[:page] == 'pervious'
+      prev_exp = current_exp.user.experiences.find(:first,
+                                                   :conditions => ["start_at < ?", @experience.start_at])
+      @experience = prev_exp
+    else
+      @experience = current_exp
+    end
+
+    #沒有上一筆或下一筆
+    if !@experience 
+      flash[:error] = '沒有了'
+      @experience = current_exp
+    end
+
     @comments = @experience.comments.recent.find(:all, :include => :user)
     @questions = @experience.answer_questions.limit(5)
 
