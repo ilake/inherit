@@ -17,6 +17,8 @@
 #
 
 class Goal < ActiveRecord::Base
+  include TagListFunc
+
   acts_as_taggable
   acts_as_taggable_on :tags
   acts_as_taggable_on :locations
@@ -27,9 +29,6 @@ class Goal < ActiveRecord::Base
   has_many :experiences
 
   validates_presence_of :content, :title, :start_at
-  before_save :set_tags_list
-  before_create :default_set_user_location
-
 
   define_index do
     indexes content
@@ -41,23 +40,6 @@ class Goal < ActiveRecord::Base
 
   def to_param
     "#{id}-#{title}"
-  end
-
-  def self.location_with(location)
-    if location == 'World' || location.blank?
-      scope = Goal.scoped#({:include => :user})
-    else
-      tagged_with(location, :on => :locations)
-    end
-  end
-
-  private
-  def set_tags_list
-    self.tags_list = tag_list.join(" ")
-  end
-
-  def default_set_user_location
-    self.location_list = self.user.location_list
   end
 
 end

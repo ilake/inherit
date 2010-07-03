@@ -19,6 +19,8 @@
 #
 
 class Experience < ActiveRecord::Base
+  include TagListFunc
+
   attr_accessible :start_at, :end_at, :content, :goal_id, :tag_list, :exp_type, :location_list, :until_now, :end_at_exist, :public, :color
 
   acts_as_taggable
@@ -36,8 +38,6 @@ class Experience < ActiveRecord::Base
 
   validates_presence_of :user_id, :content
 
-  before_create :default_set_user_location
-  before_save :set_tags_list
   before_save :format_content
   after_create :deliver_experience_notification
 
@@ -57,14 +57,6 @@ class Experience < ActiveRecord::Base
     indexes tags_list
     where "public = '1'"
     group_by "user_id"
-  end
-
-  def self.location_with(location)
-    if location == 'World' || location.blank?
-      scope = Experience.scoped#({:include => :user})
-    else
-      tagged_with(location, :on => :locations)
-    end
   end
 
   def end_at_exist=(value)
@@ -100,16 +92,7 @@ class Experience < ActiveRecord::Base
   end
 
   private
-  def set_tags_list
-    self.tags_list = tag_list.join(" ")
-  end
-
   def deliver_experience_notification
     Delayed::Job.enqueue(ExperienceMailingJob.new(self.id, self.user_id)) if self.public
   end
-
-  def default_set_user_location
-    self.location_list = self.user.location_list
-  end
-
 end

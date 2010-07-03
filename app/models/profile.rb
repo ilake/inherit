@@ -14,6 +14,8 @@
 #
 
 class Profile < ActiveRecord::Base
+  include TagListFunc
+
   attr_accessible :birthday, :gender, :location_list, :intro, :tag_list
 
   acts_as_taggable_on :tags
@@ -21,8 +23,6 @@ class Profile < ActiveRecord::Base
 
   belongs_to :user
   validates_presence_of :intro, :tag_list, :on => :update
-
-  before_save :set_tags_list
 
   named_scope :age_range, Proc.new{|age_start_at, age_end_at|
     if age_start_at.blank? || age_end_at.blank?
@@ -39,8 +39,4 @@ class Profile < ActiveRecord::Base
     where "intro is not NULL"
   end
 
-  private
-  def set_tags_list
-    self.tags_list = tag_list.join(" ")
-  end
 end
