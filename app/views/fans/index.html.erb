@@ -2,7 +2,7 @@
 <ul>
   <% @users.each do |u| %>
     <li class='exp_author'>
-      <%= link_to "#{u.username}",  user_home_path(u) %>
+      <%= link_to "#{u.username}",  user_home_path(u.username) %>
     </li>
 <% end %>
 </ul>

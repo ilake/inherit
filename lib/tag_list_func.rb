@@ -1,7 +1,7 @@
 module TagListFunc
   def self.included(base)
       base.before_save :set_tags_list
-      base.before_create :default_set_user_location
+      base.before_create :default_set_user_location if base != Profile
       base.send(:extend, ClassMethods)
       base.send(:include, InstanceMethods)
   end

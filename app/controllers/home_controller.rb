@@ -33,6 +33,6 @@ class HomeController < ApplicationController
 
   private
   def user_auth
-    redirect_to user_home_path(current_user) if user_signed_in? 
+    redirect_to user_home_path(current_user.username) if user_signed_in? 
   end
 end

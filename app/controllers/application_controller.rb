@@ -22,7 +22,10 @@ class ApplicationController < ActionController::Base
   end
   
   def user_selected
-    @user ||= User.find_by_username(params[:user_id]) if params[:user_id]
+    #一直有一個timeline action 沒找到, 先用這樣擋掉
+    render :nothing => true and return if params.has_key?("0")
+
+    @user ||= User.find_by_username(params[:username]) if params[:username]
     @user ||= User.find(params[:user_id]) if params[:user_id]
     @user ||= current_user
     unless @user
@@ -33,9 +36,8 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user_location
-    session[:current_location] = params[:location] if params[:location]
+    session[:current_location] = params[:location] if !params[:location].blank?
     session[:current_location] ||= user_hometown
-    session[:current_location] ||= ip_location
   end
 
   def user_hometown

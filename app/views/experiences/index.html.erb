@@ -55,8 +55,8 @@
   <div id='goal_list'>
     <h2>目標/計畫</h2>
       <div>
-        <%= link_to "All", user_home_path(@user),
-            ( current_page?(user_home_path(@user)) ? {:class => 'goal_here'} : nil) %>
+        <%= link_to "All", user_home_path(@user.username),
+            ( current_page?(user_home_path(@user.username)) ? {:class => 'goal_here'} : nil) %>
       </div>
       <% for goal in @goals %>
         <div>

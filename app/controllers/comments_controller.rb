@@ -18,7 +18,8 @@ class CommentsController < ApplicationController
       flash[:notice] = "Successfully created comments."
       redirect_to :back
     else
-      render :action => 'new'
+      flash[:error] = "Fail created comments."
+      redirect_to :back
     end
   end
   

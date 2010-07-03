@@ -26,6 +26,7 @@ class Comment < ActiveRecord::Base
   # NOTE: Comments belong to a user
   belongs_to :user
 
+  validates_presence_of :comment
   after_create :deliver_comment_notification
   after_create :add_question_comment_count
 

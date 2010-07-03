@@ -22,7 +22,7 @@
         <%= '(私密)' if !@experience.public %>
       </span>
       <span class='exp_author'>
-        By <%= link_to "#{@experience.user.username}",  user_home_path(@experience.user) %>
+        By <%= link_to "#{@experience.user.username}",  user_home_path(@experience.user.username) %>
       </span>
 
       <% if can? :update, @experience %>
@@ -48,7 +48,7 @@
     </p>
     <p>
       <strong>關鍵字: </strong>
-      <span class='exp_tags'>
+      <span class='tags_func'>
         <% tag_link @experience %>
       </span>
       <div class='cheer_function'>
@@ -62,6 +62,7 @@
           <%= hidden_field_tag :vote, 1 %>
           <%= f.submit "讚" %>
         <% end %>
+
       </div>
       <div class='clear'></div>
 
@@ -88,7 +89,7 @@
   <div class='commentlist'>
     <% @comments.each do |c| %>
       <div class='comment'>
-        <h3><span class='exp_author'><%= link_to c.user.username, user_home_path(c.user) %></span> 說...</h3>
+        <h3><span class='exp_author'><%= link_to c.user.username, user_home_path(c.user.username) %></span> 說...</h3>
         <div><%= Sanitize.clean(c.comment) %></div>
       </div>
     <% end %>

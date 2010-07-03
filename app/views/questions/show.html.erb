@@ -10,7 +10,7 @@
 <p>
   <strong><%=h @question.title %></strong>
   <span class='exp_author'> 
-    By <%= link_to @question.user.username, user_home_path(@question.user) %>
+    By <%= link_to @question.user.username, user_home_path(@question.user.username) %>
   </span>
 
   <% if can? :update, @question %>
@@ -27,6 +27,10 @@
 <p>
   <%= @question.content %>
 </p>
+<strong>關鍵字: </strong>
+<span class='tags_func'>
+  <% tag_link @question %>
+</span>
 
 <p>
   <span class='question_function'><%= link_to "回到列表", questions_path %></span>
@@ -51,7 +55,7 @@
   <div class='commentlist'>
     <% @comments.each do |c| %>
       <div class='comment'>
-        <h3><span class='exp_author'><%= link_to c.user.username, user_home_path(c.user) %></span> 說...</h3>
+        <h3><span class='exp_author'><%= link_to c.user.username, user_home_path(c.user.username) %></span> 說...</h3>
         <div><%= Sanitize.clean(c.comment) %></div>
       </div>
     <% end %>

@@ -12,7 +12,7 @@
     <h4>經驗類型</h4>
     <div class='exp_tags'>
       <% tag_cloud(@exp_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
-        <%= link_to tag.name, tagging_url(tag.name, :taggable_type => 'Experience'), :class => css_class %>
+        <%= link_to tag.name, tag_url(:id => tag.name, :taggable_type => 'Experience'), :class => css_class %>
       <% end %>
     </div>
 
@@ -29,7 +29,7 @@
     <h4>目標類型</h4>
     <div class='goal_tags'>
       <% tag_cloud(@goal_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
-        <%= link_to tag.name, tagging_url(tag.name, :taggable_type => 'Experience'), :class => css_class %>
+        <%= link_to tag.name, tag_url(:id => tag.name, :taggable_type => 'Goal'), :class => css_class %>
       <% end %>
     </div>
 

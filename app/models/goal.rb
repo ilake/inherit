@@ -39,7 +39,7 @@ class Goal < ActiveRecord::Base
   end
 
   def to_param
-    "#{id}-#{title}"
+    "#{id}-#{title.downcase.gsub(/\s/i, '-')}"
   end
 
 end

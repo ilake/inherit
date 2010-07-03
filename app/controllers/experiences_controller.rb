@@ -9,7 +9,7 @@ class ExperiencesController < ApplicationController
   # GET /experiences.xml
   # cache : params.values.sort.to_s
   def index
-    @experiences = user_selected.experiences.show_policy(@user.is_owner?(current_user)).goal_categroy(params[:goal_id]).descend_by_start_at.find(:all, :include => [:goal])
+    @experiences = user_selected.experiences.show_policy(@user.is_owner?(current_user)).goal_categroy(params[:goal_id]).descend_by_start_at.find(:all)
     @current_goal = Goal.find_by_id(params[:goal_id])
     @experience_groups = @experiences.group_by{|e| e.start_at.at_beginning_of_month}
     @goals = user_selected.goals.show_policy(@user.is_owner?(current_user)).all
