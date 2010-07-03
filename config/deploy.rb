@@ -27,6 +27,7 @@ set :shared_children, %w(system log pids mugshots tiny_mce_photos)
 set :online_configs, %w(database app_config cucumber tiny_mce sphinx)
 
 after 'deploy:symlink',  'inherit:extra_setting'
+after "deploy:update_code", "deploy:copy_old_sitemap"
 
 namespace :inherit do 
   task :setup do
@@ -96,10 +97,14 @@ namespace :inherit do
     run "cd #{current_path} && rake asset_fingerprint:symlinks:generate RAILS_ENV=#{env}"
   end
 
-  task :flush_page_cache, :roles => :app do
+  task :flush_action_cache, :roles => :app do
     run <<-CMD
-      rm -rf #{shared_path}/system/cache/*
+      rm -rf #{shared_path}/system/action_cache/*
     CMD
+  end
+
+  task :copy_old_sitemap do
+    run "if [ -e #{previous_release}/public/sitemap_index.xml.gz ]; then cp #{previous_release}/public/sitemap* #{current_release}/public/; fi"
   end
 
   task :disable_web, :roles => :web do
