@@ -430,6 +430,11 @@ label {
   text-decoration: none;
 }
 
+.new_obj_area {
+  border: 1px solid #A0A0A0;
+  padding: 10px;
+}
+
 .exp_author a{
   padding: 0px 3px 0px 3px;
   font-weight:bold;
@@ -530,4 +535,13 @@ td.question_title{ width: 400px}
 
 .desc {
   color:#33CC66;
+}
+
+.share_this_exp {
+  float:left;
+  width:100px;
+}
+
+.select_exp_entry {
+  padding: 10px;
 }

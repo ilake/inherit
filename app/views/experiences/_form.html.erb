@@ -1,12 +1,18 @@
 <% content_for :head do %>
   <%= include_tiny_mce_if_needed %>
 <% end %>
+<h3>問題</h3>
 <p>
-  <%= @question.try(:content)%>
+  <%= truncate_u(@question.try(:content), 100)%>
   <%= hidden_field_tag :question_id, @question.try(:id) %>
-  <%= link_to 'Share the experience exist', select_user_home_path(:user_id => current_user, :question_id => @question.id) if @question %>
 </p>
 
+<span class='function'>
+  <%= link_to '分享我發表過的經驗', select_user_experiences_path(:user_id => current_user, :question_id => @question.to_param) if @question %>
+</span>
+
+<div class='new_obj_area'>
+  <h3>分享新的經驗</h3>
   <%= f.error_messages %>
   <div>
     <p>
@@ -54,3 +60,4 @@
   <p>
     <%= f.submit '送出' %>
   </p>
+</div>

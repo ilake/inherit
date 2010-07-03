@@ -16,6 +16,7 @@ class Ability
         can :destroy, [Experience, Goal, Question, Chat] do |obj|
           obj.try(:user) == user
         end
+        can :select, [Experience]
       end
 
     end

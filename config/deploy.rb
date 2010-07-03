@@ -27,7 +27,7 @@ set :shared_children, %w(system log pids mugshots tiny_mce_photos)
 set :online_configs, %w(database app_config cucumber tiny_mce sphinx)
 
 after 'deploy:symlink',  'inherit:extra_setting'
-after "deploy:update_code", "deploy:copy_old_sitemap"
+after "deploy:update_code", "inherit:copy_old_sitemap"
 
 namespace :inherit do 
   task :setup do

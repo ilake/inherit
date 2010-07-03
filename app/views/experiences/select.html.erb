@@ -1,9 +1,13 @@
 <h2><%= link_to @question.title, @question %></h2>
 <ul>
   <% @experiences.each do |e|%>
-    <li>
-      <%= link_to truncate_u(Sanitize.clean(e.content), 15), e %>
-      <%= button_to 'submit', question_experience_relations_path(:question_id => @question.id, :experience_id => e)%>
+    <li class='select_exp_entry'>
+      <span class='exp_anchor'>
+        <%= link_to truncate_u(Sanitize.clean(e.content), 15), e, :popup => true %>
+      </span>
+      <span class='share_this_exp'>
+        <%= button_to '分享這個', question_experience_relations_path(:question_id => @question.id, :experience_id => e)%>
+      </span>
     </li>
   <% end %>
 </ul>
