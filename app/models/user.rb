@@ -41,6 +41,9 @@ class User < ActiveRecord::Base
 
   validates_presence_of :username, :email
   validates_uniqueness_of :username, :email
+  validates_length_of :username, :maximum => 10
+  #限定只能用英文
+  validates_format_of :username, :with => /\A[a-z0-9]+\Z/i, :on => :create, :message => '必須是英文或數字'
 
   has_one :profile, :dependent => :destroy
 
