@@ -166,14 +166,14 @@ module ActiveRecord
                                  )
         end
 
-        def higher_item(current_user)
+        def perv_item(current_user)
           if self.user == current_user
             acts_as_list_class.find(:first, :conditions =>
             "#{scope_condition} AND #{position_column} = #{(send(position_column).to_i - 1).to_s}"
                                    )
           else
             acts_as_list_class.find(:first, :conditions =>
-            "#{scope_condition} AND public = true AND #{position_column} < #{(send(position_column).to_i).to_s}"
+            "#{scope_condition} AND public = true AND #{position_column} < #{(send(position_column).to_i).to_s}", :order => "start_at DESC, created_at DESC"
                                    )
           end
         end
@@ -186,7 +186,7 @@ module ActiveRecord
                                  )
         end
 
-        def lower_item(current_user)
+        def next_item(current_user)
           return nil unless in_list?
           if self.user == current_user
             acts_as_list_class.find(:first, :conditions =>
@@ -194,7 +194,7 @@ module ActiveRecord
                                    )
           else
             acts_as_list_class.find(:first, :conditions =>
-            "#{scope_condition} AND public = true AND #{position_column} > #{(send(position_column).to_i).to_s}"
+            "#{scope_condition} AND public = true AND #{position_column} > #{(send(position_column).to_i).to_s}", :order => "start_at ASC, created_at ASC"
                                    )
           end
         end

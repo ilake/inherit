@@ -9,6 +9,6 @@ class AddPositionToExperiences < ActiveRecord::Migration
   end
 
   def self.down
-
+    remove_column :experiences, :position
   end
 end
