@@ -54,11 +54,14 @@ class Experience < ActiveRecord::Base
   named_scope :is_belong_one_goal, {:conditions => "goal_id is not NULL"}
 
 
-  define_index do
-    indexes content
-    indexes tags_list
-    where "public = '1'"
-    group_by "user_id"
+  if respond_to? :define_index
+    define_index do
+      indexes content
+      indexes tags_list
+      indexes comments.content, :as => :comment_content
+      where "public = '1'"
+      group_by "user_id"
+    end
   end
 
   def end_at_exist=(value)

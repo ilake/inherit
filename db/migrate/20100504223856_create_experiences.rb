@@ -8,6 +8,7 @@ class CreateExperiences < ActiveRecord::Migration
     end
 
     add_index :experiences, :user_id
+    add_index :experiences, :start_at
   end
 
   def self.down

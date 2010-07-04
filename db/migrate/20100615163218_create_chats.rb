@@ -6,6 +6,9 @@ class CreateChats < ActiveRecord::Migration
       t.integer :parent_id
       t.timestamps
     end
+
+    add_index :chats, :user_id
+    add_index :chats, :created_at
   end
   
   def self.down

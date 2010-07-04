@@ -6,6 +6,7 @@ class AddPositionToExperiences < ActiveRecord::Migration
         e.update_attribute(:position, i+1)
       }
     end
+    add_index :experiences, :position
   end
 
   def self.down

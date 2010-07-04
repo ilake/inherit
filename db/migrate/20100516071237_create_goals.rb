@@ -11,6 +11,7 @@ class CreateGoals < ActiveRecord::Migration
     end
 
     add_index :goals, :user_id
+    add_index :goals, :start_at
   end
   
   def self.down

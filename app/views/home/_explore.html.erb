@@ -24,6 +24,14 @@
         </div>
       <% end %>
     </div>
+    <h4>熱門追蹤</h4>
+    <div>
+      <% @popular_users.each do |user| %>
+        <div class='exp_author'>
+          <%= link_to user.username, user_home_path(user.username)%>
+        </div>
+      <% end %>
+    </div>
   </div>
   <div id='home_sidebar'>
     <h4>目標類型</h4>
@@ -37,6 +45,14 @@
     <div>
       <% @goals.each do |goal| %>
         <div class='goal_cell'> <%= link_to truncate_u(goal.title, 40), goal %></div>
+      <% end %>
+    </div>
+    <h4>最新加入</h4>
+    <div>
+      <% @latest_users.each do |user| %>
+        <div class='exp_author'>
+          <%= link_to user.username, user_home_path(user.username)%>
+        </div>
       <% end %>
     </div>
   </div>
