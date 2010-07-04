@@ -166,7 +166,7 @@ module ActiveRecord
                                  )
         end
 
-        def perv_item(current_user)
+        def prev_item(current_user)
           if self.user == current_user
             acts_as_list_class.find(:first, :conditions =>
             "#{scope_condition} AND #{position_column} = #{(send(position_column).to_i - 1).to_s}"

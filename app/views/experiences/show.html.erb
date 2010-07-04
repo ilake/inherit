@@ -45,12 +45,12 @@
     <% end %>
     <p class='function'>
       <% unless @experience.first? %>
-        <% if can? :show, @experience.higher_item(current_user) %>
+        <% if can? :show, @experience.prev_item(current_user) %>
           <%= link_to '上一個經驗',  @experience.prev_item(current_user) %>
         <% end %>
       <% end %>
       <% unless @experience.last? %>
-        <% if can? :show, @experience.lower_item(current_user) %>
+        <% if can? :show, @experience.next_item(current_user) %>
           <%= link_to '下一個經驗',  @experience.next_item(current_user) %>
         <% end %>
       <% end %>
@@ -60,12 +60,12 @@
     </p>
     <p class='function'>
       <% unless @experience.first? %>
-        <% if can? :show, @experience.higher_item(current_user) %>
+        <% if can? :show, @experience.prev_item(current_user) %>
           <%= link_to '上一個經驗',  @experience.prev_item(current_user) %>
         <% end %>
       <% end %>
       <% unless @experience.last? %>
-        <% if can? :show, @experience.lower_item(current_user) %>
+        <% if can? :show, @experience.next_item(current_user) %>
           <%= link_to '下一個經驗',  @experience.next_item(current_user) %>
         <% end %>
       <% end %>
