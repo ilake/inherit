@@ -8,6 +8,10 @@ class Ability
     else
 
       can :read, :all
+      can :show, [Experience] do |obj|
+        obj.public? || obj.try(:user) == user
+      end
+
       if user.is_not_guest?
         can :create, [Experience, Goal, Question, Chat]
         can :update, [Experience, Goal, Profile, Question] do |obj|

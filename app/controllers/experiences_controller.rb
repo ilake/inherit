@@ -9,7 +9,7 @@ class ExperiencesController < ApplicationController
   # GET /experiences.xml
   # cache : params.values.sort.to_s
   def index
-    @experiences = user_selected.experiences.show_policy(@user.is_owner?(current_user)).goal_categroy(params[:goal_id]).descend_by_start_at.find(:all)
+    @experiences = user_selected.experiences.show_policy(@user.is_owner?(current_user)).goal_categroy(params[:goal_id]).descend_by_position.find(:all)
     @current_goal = Goal.find_by_id(params[:goal_id])
     @experience_groups = @experiences.group_by{|e| e.start_at.at_beginning_of_month}
     @goals = user_selected.goals.show_policy(@user.is_owner?(current_user)).all
@@ -52,25 +52,7 @@ class ExperiencesController < ApplicationController
   # GET /experiences/1
   # GET /experiences/1.xml
   def show
-    current_exp = Experience.find(params[:id])
-    if params[:page] == 'next'
-      next_exp = current_exp.user.experiences.find(:first,
-                                                   :conditions => ["start_at > ?", @experience.start_at])
-      @experience = next_exp
-    elsif params[:page] == 'pervious'
-      prev_exp = current_exp.user.experiences.find(:first,
-                                                   :conditions => ["start_at < ?", @experience.start_at])
-      @experience = prev_exp
-    else
-      @experience = current_exp
-    end
-
-    #沒有上一筆或下一筆
-    if !@experience 
-      flash[:error] = '沒有了'
-      @experience = current_exp
-    end
-
+    @experience = Experience.find(params[:id])
     @comments = @experience.comments.recent.find(:all, :include => :user)
     @questions = @experience.answer_questions.limit(5)
 

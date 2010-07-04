@@ -33,6 +33,7 @@ Rails::Initializer.run do |config|
   config.gem 'daemons'
   config.gem 'geoip'
   config.gem 'sitemap_generator', :lib => false
+  #config.gem 'ryanb-acts-as-list', :lib => 'acts_as_list', :source => 'http://gems.github.com'
 
 
   # Only load the plugins named here, in the order given (default is alphabetical).

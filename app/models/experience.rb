@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100615130941
+# Schema version: 20100703192500
 #
 # Table name: experiences
 #
@@ -16,6 +16,7 @@
 #  public     :boolean(1)      default(TRUE)
 #  tags_list  :text
 #  color      :string(7)       default("#64E827")
+#  position   :integer(4)      default(0)
 #
 
 class Experience < ActiveRecord::Base
@@ -29,6 +30,7 @@ class Experience < ActiveRecord::Base
 
   acts_as_commentable
   acts_as_voteable
+  acts_as_list :scope => :user
 
   belongs_to :user
   belongs_to :goal

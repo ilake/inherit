@@ -44,15 +44,31 @@
       </p>
     <% end %>
     <p class='function'>
-      <%= link_to '上一個經驗',  experience_path(@experience, :page => 'pervious')%>
-      <%= link_to '下一個經驗',  experience_path(@experience, :page => 'next')%>
+      <% unless @experience.first? %>
+        <% if can? :show, @experience.higher_item(current_user) %>
+          <%= link_to '上一個經驗',  @experience.higher_item(current_user) %>
+        <% end %>
+      <% end %>
+      <% unless @experience.last? %>
+        <% if can? :show, @experience.lower_item(current_user) %>
+          <%= link_to '下一個經驗',  @experience.lower_item(current_user) %>
+        <% end %>
+      <% end %>
     </p>
     <p>
       <%= @experience.content %>
     </p>
     <p class='function'>
-      <%= link_to '上一個經驗',  experience_path(@experience, :page => 'pervious')%>
-      <%= link_to '下一個經驗',  experience_path(@experience, :page => 'next')%>
+      <% unless @experience.first? %>
+        <% if can? :show, @experience.higher_item(current_user) %>
+          <%= link_to '上一個經驗',  @experience.higher_item(current_user) %>
+        <% end %>
+      <% end %>
+      <% unless @experience.last? %>
+        <% if can? :show, @experience.lower_item(current_user) %>
+          <%= link_to '下一個經驗',  @experience.lower_item(current_user) %>
+        <% end %>
+      <% end %>
     </p>
     <p>
       <strong>關鍵字: </strong>

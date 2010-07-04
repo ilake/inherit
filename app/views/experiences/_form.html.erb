@@ -1,15 +1,17 @@
 <% content_for :head do %>
   <%= include_tiny_mce_if_needed %>
 <% end %>
-<h3>問題</h3>
-<p>
-  <%= truncate_u(@question.try(:content), 100)%>
-  <%= hidden_field_tag :question_id, @question.try(:id) %>
-</p>
+<% if @question %>
+  <h3>問題</h3>
+  <p>
+    <%= truncate_u(@question.try(:content), 100)%>
+    <%= hidden_field_tag :question_id, @question.try(:id) %>
+  </p>
 
-<span class='function'>
-  <%= link_to '分享我發表過的經驗', select_user_experiences_path(:user_id => current_user, :question_id => @question.to_param) if @question %>
-</span>
+  <span class='function'>
+    <%= link_to '分享我發表過的經驗', select_user_experiences_path(:user_id => current_user, :question_id => @question.to_param) %>
+  </span>
+<% end %>
 
 <div class='new_obj_area'>
   <h3>分享新的經驗</h3>
@@ -17,13 +19,13 @@
   <div>
     <p>
       <%= f.label :start_at, '開始時間' %><br />
-      <%= f.date_select :start_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950 %>
+      <%= f.date_select :start_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :end_year => Time.now.year %>
     </p>
     <p>
       <%= f.label :end_at, '結束時間' %><br />
       <%= f.check_box :end_at_exist %>
       <span id='end_at_date'>
-        <%= f.date_select :end_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950 %>
+        <%= f.date_select :end_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :end_year => Time.now.year  %>
       </span>
       <div id='end_at_untilnow'>
         <%= f.check_box :until_now %>
