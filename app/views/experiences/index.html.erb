@@ -26,7 +26,7 @@
     <% end %>
     <% if can?(:create, Goal) && @user.is_owner?(current_user)%>
       <li class='new_goal'>
-        <%= link_to "新增分類", new_goal_path %>
+        <%= link_to "新增TAB", new_goal_path %>
       </li>
     <% end %>
   </ul>
@@ -36,7 +36,7 @@
   <div id='fans_area'>
     <span id='exp_follower'>
       <strong>粉絲</strong>
-      <span class='anchor'>
+      <span class='fans_anchor'>
         <%= link_to @user.fans_count, user_fans_path(@user) %>
       </span>
     </span>
@@ -56,7 +56,7 @@
     <% end %>
     <span id='exp_ifollew'>
       <strong>訂閱</strong>
-      <span class='anchor'>
+      <span class='fans_anchor'>
         <%= link_to @user.user_ifollow_count, ifollow_user_fans_path(@user) %> 
       </span>
     </span>
@@ -80,22 +80,22 @@
       </span>
     <% end %>
   </h2>
-<table>
-  <% @experience_groups.keys.each do |time| %>
-    <tr><td><h3><%= time.to_s(:ym)%></h3></td></tr>
-    <% @experience_groups[time].each do |experience| %>
-      <tr>
-        <td class='time'>
-          <%= experience.start_at.to_s(:md) if experience.start_at %>
-          <%= experience.end_at_date %>
-        </td>
-        <td class='exp_content'>
-          <%= link_to truncate_u(Sanitize.clean(experience.content), 30), experience, :popup => true %>
-        </td>
-      </tr>
+  <ul>
+    <% @experience_groups.keys.each do |time| %>
+      <li><h3><%= time.to_s(:ym)%></h3></li>
+      <% @experience_groups[time].each do |experience| %>
+        <li class='exp_list_cell'>
+          <span class='time'>
+            <%= experience.start_at.to_s(:md) if experience.start_at %>
+            <%= experience.end_at_date %>
+          </span>
+          <span class='exp_content'>
+            <%= link_to truncate_u(Sanitize.clean(experience.content), 30), experience, :popup => true %>
+          </span>
+        </li>
+      <% end %>
     <% end %>
-  <% end %>
-</table>
+  </ul>
 </div>
 <div class='clear'></div>
 
