@@ -2,4 +2,6 @@
   <%= render :partial => 'form', :locals => {:f => f} %>
 <% end %>
 
-<%= link_to 'Back', user_home_path(current_user.username) %>
+<p class='function'>
+  <%= link_to '取消', user_home_path(current_user.username) %>
+</p>

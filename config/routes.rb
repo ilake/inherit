@@ -18,7 +18,10 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :fans, :except => [:new, :show, :edit, :update]
   map.resources :questions
-  map.resources :goals, :as => :categories, :except => [:index]
+  map.resources :goals, :as => :categories, :except => [:index] do |goal|
+    goal.resources :experiences, :only => [:new]
+  end
+
   map.resources :experiences, :except => [:index]
   #map.resource :profile, :only => [:show, :edit, :update]
 
@@ -40,6 +43,3 @@ ActionController::Routing::Routes.draw do |map|
 end
 
 #map.resources :taggings
-#  map.resources :goals do |goal|
-#    goal.resources :experiences
-#  end

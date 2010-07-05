@@ -290,28 +290,8 @@ label {
   border:1px solid #EFEFEF;
 }
 
-#goal_list {
-  float:left;
-  width:230px;
-  padding:5px;
-}
-
-#goal_list div{
-  height:30px;
-  width:230px;
-  line-height: 20px;
-}
-
-
-#goal_list #new_goal{
-  text-align:center;
-}
-
-#goal_list #new_goal span {
-  border: 1px solid #0AA7F8;
-  padding: 6px 15px 6px 15px;
-}
 #exp_list {
+  margin-left:150px;
   float:left;
   width:700px;
   padding:5px;
@@ -335,12 +315,6 @@ label {
   float:left;
 }
 
-#profile_area {
-  float:left;
-  width: 130px;
-  padding:5px;
-}
-
 #fans_area {
   float:left;
   width: 230px;
@@ -356,6 +330,7 @@ label {
   width: 570px;
   padding:5px;
 }
+
 
 /* User experience index page END */
 
@@ -420,12 +395,12 @@ label {
   margin-left:30px;
 }
 /* anchor */
-#goal_list a, #exp_list a{
+#exp_list a{
   color: #333333;
   text-decoration: none;
 }
 
-.exp_cell a, #new_exp a, .exp_author a, .goal_author a, .question_title a, .top-function-menu a, .exp_anchor a, .goal_anchor a, .question_anchor a{
+.exp_cell a, #new_exp a, .exp_author a, .goal_author a, .question_title a, .top-function-menu a, .exp_anchor a, .goal_anchor a, .question_anchor a, .anchor a{
   color: #0AA7F8;
   text-decoration: none;
 }
@@ -446,12 +421,8 @@ label {
   padding: 0px 3px 0px 3px;
 }
 
-.exp_tags a, .goal_tags a, .exp_category a, .tags_func a{
+.exp_tags a, .goal_tags a, .exp_category a, .tags_func a, .goal_desc a{
   color: #FFCC00;
-}
-
-#goal_list a{
-  font-size: 21px;
 }
 
 .share_function a{
@@ -461,20 +432,10 @@ label {
 }
 
 
-#goal_list a:hover, #exp_list a:hover {
+#exp_list a:hover {
   text-decoration: underline;
 }
 
-#goal_list #new_goal a{
-  color: #0AA7F8;
-  font-size: 18px;
-}
-
-a.goal_here {
-  border-bottom-color:#0AA7F8;
-  border-bottom-style:solid;
-  border-bottom-width:3px;
-}
 
 /* Question */
 #questionlist {
@@ -544,4 +505,57 @@ td.question_title{ width: 400px}
 
 .select_exp_entry {
   padding: 10px;
+}
+
+/* Menu style */
+#centeredmenu {
+   float:left;
+   width:100%;
+   background:#fff;
+   border-bottom:4px solid #3274D0;
+   overflow:hidden;
+   position:relative;
+}
+#centeredmenu ul {
+   clear:left;
+   float:left;
+   list-style:none;
+   margin:0;
+   padding:0;
+   position:relative;
+   left:50%;
+   text-align:center;
+}
+#centeredmenu ul li {
+   display:block;
+   float:left;
+   list-style:none;
+   margin:0;
+   padding:0;
+   position:relative;
+   right:50%;
+}
+#centeredmenu ul li a {
+   display:block;
+   margin:0 0 0 1px;
+   padding:3px 10px;
+   background:#ddd;
+   color:#000;
+   text-decoration:none;
+   line-height:1.3em;
+}
+#centeredmenu ul li a:hover {
+   background:#EFEFEF;
+   color:#7B7B7B;
+}
+#centeredmenu ul li a.active,
+#centeredmenu ul li a.active:hover {
+   color:#fff;
+   background:#3274D0;
+   font-weight:bold;
+}
+#centeredmenu ul li.new_goal a{
+  color:#F00;
+  background:#FFF;
+  font-weight:bold;
 }
