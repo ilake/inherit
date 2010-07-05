@@ -24,7 +24,7 @@ set :git_enable_submodules, 1
 set :use_sudo, false
 
 set :shared_children, %w(system log pids mugshots tiny_mce_photos)
-set :online_configs, %w(database app_config cucumber tiny_mce sphinx)
+set :online_configs, %w(database)
 
 after 'deploy:symlink',  'inherit:extra_setting'
 after "deploy:update_code", "inherit:copy_old_sitemap"
@@ -80,8 +80,8 @@ namespace :inherit do
     run "ln -nfs #{shared_path}/db/sphinx #{current_path}/db/sphinx"
   end
 
-  task :rebuild_asset do
-    run "cd #{latest_release} && rake asset:packager:build_all;"
+  task :rebuild_asset, :roles => [:app] do
+    run "cd #{latest_release} && rake asset:packager:build_all RAILS_ENV=#{env}"
   end
 
   task :check_path, :roles => :db do

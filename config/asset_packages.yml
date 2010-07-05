@@ -3,15 +3,11 @@ javascripts:
 - base: 
   - jquery
   - application
-  - controls
   - colorPicker
-  - effects
-  - pagination
+- secondary:
   - experience_timeline
-  - prototype
-  - dragdrop
 stylesheets: 
 - base: 
-  - application
-  - colorPicker
   - scaffold
+  - colorPicker
+  - application

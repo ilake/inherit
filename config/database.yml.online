@@ -32,7 +32,7 @@ development:
 
 test:
   adapter: mysql
-  database: eexp_test
+  database: exp_test
   username: root
   password:
   reconnect: true
