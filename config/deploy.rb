@@ -28,6 +28,7 @@ set :online_configs, %w(database app_config cucumber tiny_mce sphinx)
 
 after 'deploy:symlink',  'inherit:extra_setting'
 after "deploy:update_code", "inherit:copy_old_sitemap"
+after "deploy:update_code", "inherit:rebuild_asset"
 
 namespace :inherit do 
   task :setup do
@@ -79,14 +80,8 @@ namespace :inherit do
     run "ln -nfs #{shared_path}/db/sphinx #{current_path}/db/sphinx"
   end
 
-  task :start do 
-    deploy::migrate
-    chown if hosting == 'webbynode'
-    restart
-  end
-
-  task :restart do
-    run "touch #{current_path}/tmp/restart.txt"
+  task :rebuild_asset do
+    run "cd #{latest_release} && rake asset:packager:build_all;"
   end
 
   task :check_path, :roles => :db do
@@ -120,6 +115,17 @@ namespace :inherit do
   task :enable_web, :roles => :web do
     run "rm #{shared_path}/system/maintenance.html"
   end
+
+  task :start do 
+    deploy::migrate
+    chown if hosting == 'webbynode'
+    restart
+  end
+
+  task :restart do
+    run "touch #{current_path}/tmp/restart.txt"
+  end
+
 
   task :deploy_all do 
     delayed_job::stop

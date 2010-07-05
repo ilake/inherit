@@ -5,7 +5,7 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <%= yield(:meta_tag) || display_meta_tags(:site => '傳承') %>
-  <%= stylesheet_link_tag 'scaffold', 'colorPicker', 'application' %>
+  <%= stylesheet_link_merged :base %>
   <%= yield(:head) %>
 </head>
 <body>
@@ -66,8 +66,8 @@
   </div>
   <div id='footer'>
   </div>
-  <%= javascript_include_tag 'jquery' %>
+  <%= javascript_include_merged :base %>
   <%= yield :bottom_js %>
-  <%= javascript_include_tag 'application', 'colorPicker' %>
+  <%= javascript_include_merged :secondary %>
 </body>
 </html>

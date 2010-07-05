@@ -1,0 +1,17 @@
+--- 
+javascripts: 
+- base: 
+  - jquery
+  - application
+  - controls
+  - colorPicker
+  - effects
+  - pagination
+  - experience_timeline
+  - prototype
+  - dragdrop
+stylesheets: 
+- base: 
+  - application
+  - colorPicker
+  - scaffold
