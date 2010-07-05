@@ -1,0 +1,8 @@
+<div id='group_show_side'>
+  <h3>類似目標</h3>
+  <ul>
+    <% goal.find_related_tags.each do |g| %>
+      <li><%= link_to truncate_u(g.title), g%></li>
+    <% end %>
+  </ul>
+</div>

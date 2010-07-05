@@ -1,14 +1,13 @@
-<% title "#{@goal.user.username} goal #{@goal.title}" %>
+<% title @goal.title %>
+<% description "#{truncate_u(Sanitize.clean(@goal.content), 100)}" %>
+<% keywords @goal.tag_list %>
+
 <% content_for :sider do %>
-  <div id='group_show_side'>
-    <h3>類似目標</h3>
-    <ul>
-      <% @goal.find_related_tags.each do |g| %>
-        <li><%= link_to truncate_u(g.title), g%></li>
-      <% end %>
-    </ul>
-  </div>
+  <%= Handcache.get_and_set("#{params.values.sort.to_s}-sider", :expires_in => 60 ) do
+    render :partial => 'show_sider', :locals => {:goal => @goal}
+  end %>  
 <% end %>
+
 <div id='goal_show_main'>
   <div id='goal_show_content'>
     <div>

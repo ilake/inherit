@@ -2,12 +2,14 @@ class GoalsController < ApplicationController
   uses_tiny_mce(:options => AppConfig.simple_mce_options, :only => [:new, :edit]) if defined?(AppConfig)
   before_filter :authenticate_user!, :except => [:index , :show]
   before_filter :user_selected, :only => [:index]
+  load_and_authorize_resource :nested => :user
+
   def index
     @goals = user_selected.goals.all
   end
   
   def show
-    @goal = Goal.find(params[:id], :include => [:experiences])
+    @goal = Goal.find(params[:id])
     @comments = @goal.comments.recent.find(:all, :include => :user)
     @comment = @goal.comments.new
   end

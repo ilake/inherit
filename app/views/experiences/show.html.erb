@@ -7,7 +7,6 @@
   end %>  
 <% end %>
 
-
 <% content_for :sider do %>
   <%= Handcache.get_and_set("#{params.values.sort.to_s}-sider", :expires_in => 60 ) do
     render :partial => 'show_sider', :locals => {:experience => @experience}
