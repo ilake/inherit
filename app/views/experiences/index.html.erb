@@ -16,10 +16,16 @@
 <div id="centeredmenu">
   <ul>
     <li>
-      <%= link_to "#{@user.username} 簡介", user_profile_path(@user), (current_page?(user_profile_path(@user)) ? {:class => 'active'} : nil) %>
+      <strong><%= @user.username %></strong>
     </li>
     <li>
-      <%= link_to "All", user_home_path(@user.username), ( current_page?(user_home_path(@user.username)) ? {:class => 'active'} : nil) %>
+      <%= link_to "簡介", user_profile_path(@user), {:class => 'profile'} %>
+    </li>
+    <li>
+      <%= link_to "解惑", user_questions_path(@user), {:class => 'profile'} %>
+    </li>
+    <li>
+      <%= link_to "全部經驗", user_home_path(@user.username), ( current_page?(user_home_path(@user.username)) ? {:class => 'active'} : nil) %>
     </li>
     <% for goal in @goals %>
       <li>

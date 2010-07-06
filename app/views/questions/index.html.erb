@@ -2,9 +2,11 @@
 <% description "解惑" %>
 <% keywords "解惑" %>
 
-<div class='top-function-menu'>
-  <%= link_to "發問", new_question_path %>
-</div>
+<% unless params[:user_id] %>
+  <div class='top-function-menu'>
+    <%= link_to "發問", new_question_path %>
+  </div>
+<% end %>
 
 <table id='questionlist'>
   <tr>
@@ -31,3 +33,6 @@
   <% end %>
 </table>
 <%= will_paginate @questions %>
+<p class='function'>
+  <%= link_to "回到個人頁面", user_home_path(@user.username) if params[:user_id] %>
+</p>

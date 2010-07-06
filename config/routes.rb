@@ -30,6 +30,7 @@ ActionController::Routing::Routes.draw do |map|
     user.resources :experiences, :collection => { :select => :get }, :except => [:index]
     user.resources :goals, :as => :categories, :except => [:index]
     user.resources :fans, :collection => { :ifollow => :get }, :except => [:show, :edit, :update]
+    user.resources :questions, :only => [:index]
   end
   
   map.resources :chats, :new => {:reply => :get}, :except => [:show, :new]

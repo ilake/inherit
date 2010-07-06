@@ -4,7 +4,11 @@ class QuestionsController < ApplicationController
   load_and_authorize_resource :nested => :user
 
   def index
-    @questions = Question.location_with(current_user_location).descend_by_last_comment_time.paginate :per_page => 15, :page => params[:page]
+    @questions = if params[:user_id]
+                   user_selected.questions.descend_by_last_comment_time.paginate :per_page => 15, :page => params[:page]
+                 else
+                   Question.location_with(current_user_location).descend_by_last_comment_time.paginate :per_page => 15, :page => params[:page]
+                 end
   end
   
   def show
@@ -48,5 +52,8 @@ class QuestionsController < ApplicationController
     @question.destroy
     flash[:notice] = "Successfully destroyed question."
     redirect_to questions_url
+  end
+
+  def user
   end
 end
