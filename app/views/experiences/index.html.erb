@@ -9,6 +9,8 @@
 
 <div id='exp_chart'>
 </div>
+<strong>資料比數</strong>
+<%= select 'experience', 'data_number', DATA_NUMBER.sort{|a,b|a[0] <=> b[0]}, {:selected => current_data_number.to_i}%>
 <div class='clear'></div>
 
 <div id="centeredmenu">

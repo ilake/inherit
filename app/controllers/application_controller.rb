@@ -3,7 +3,7 @@
 
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
-  helper_method :current_user_location, :user_hometown
+  helper_method :current_user_location, :user_hometown, :current_data_number
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   before_filter :authenticate_inviter
   before_filter :ip_location
@@ -33,6 +33,11 @@ class ApplicationController < ActionController::Base
       redirect_to new_user_session_path
     end
     return @user
+  end
+
+  def current_data_number(data_number=nil)
+    cookies[:current_data_number] = data_number.to_i if data_number
+    cookies[:current_data_number] ||= 30
   end
 
   def current_user_location

@@ -78,4 +78,12 @@ $(document).ready(function(){
       detect_goal_state();
     });
 
+    $('#experience_data_number').change(function(){
+        var href = [];
+        href.push(location.pathname);
+        href.push('?data_number='+$('#experience_data_number').val());
+        var url = href.join('')
+        window.location = url;
+    });
+
 });
