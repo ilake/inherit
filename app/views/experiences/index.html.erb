@@ -1,6 +1,6 @@
 <% content_for :meta_tag do%>
   <%= Handcache.get_and_set("#{params.values.sort.to_s}-#{@user.profile.updated_at.to_s(:fulltime)}") do
-    title "#{@user.username} 的傳承"
+    title "#{@user.nickname} 的傳承"
     description "#{truncate_u(Sanitize.clean(@user.profile.intro || ''), 100)}" 
     keywords @user.profile.tag_list 
     display_meta_tags :site => '傳承' 
@@ -9,14 +9,14 @@
 
 <div id='exp_chart'>
 </div>
-<strong>資料比數</strong>
+<strong>資料筆數</strong>
 <%= select 'experience', 'data_number', DATA_NUMBER.sort{|a,b|a[0] <=> b[0]}, {:selected => current_data_number.to_i}%>
 <div class='clear'></div>
 
 <div id="centeredmenu">
   <ul>
     <li>
-      <strong><%= @user.username %></strong>
+      <strong><%= @user.nickname %></strong>
     </li>
     <li>
       <%= link_to "簡介", user_profile_path(@user), {:class => 'profile'} %>

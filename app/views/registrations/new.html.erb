@@ -5,8 +5,11 @@
   <p><%= f.label :email %></p>
   <p><%= f.text_field :email %></p>
 
-  <p><%= f.label :username %></p>
+  <p><%= f.label :username, 'Account (只限英文數字)' %></p>
   <p><%= f.text_field :username %></p>
+
+  <p><%= f.label :nickname %></p>
+  <p><%= f.text_field :nickname %></p>
 
   <p><%= f.label :password %></p>
   <p><%= f.password_field :password %></p>

@@ -18,7 +18,7 @@
         <%= '(私密)' if !@goal.public %>
       </span>
       <span class='goal_author'>
-        By <%= link_to "#{@goal.user.username}",  user_home_path(@goal.user.username) %>
+        By <%= link_to "#{@goal.user.nickname}",  user_home_path(@goal.user.username) %>
       </span>
 
       <% if can? :update, @goal %>

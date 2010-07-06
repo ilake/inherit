@@ -21,7 +21,7 @@
         <%= '(私密)' if !@experience.public %>
       </span>
       <span class='exp_author'>
-        By <%= link_to "#{@experience.user.username}",  user_home_path(@experience.user.username) %>
+        By <%= link_to "#{@experience.user.nickname}",  user_home_path(@experience.user.username) %>
       </span>
 
       <% if can? :update, @experience %>
@@ -112,7 +112,7 @@
   <div class='commentlist'>
     <% @comments.each do |c| %>
       <div class='comment'>
-        <h3><span class='exp_author'><%= link_to c.user.username, user_home_path(c.user.username) %></span> 說...</h3>
+        <h3><span class='exp_author'><%= link_to c.user.nickname, user_home_path(c.user.username) %></span> 說...</h3>
         <div><%= Sanitize.clean(c.comment) %></div>
       </div>
     <% end %>

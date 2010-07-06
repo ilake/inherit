@@ -7,7 +7,7 @@
     <div class='chat'>
       <h3>
         <span class='exp_author'>
-          <%= link_to chat.user.username, user_home_path(chat.user.username) %>
+          <%= link_to chat.user.nickname, user_home_path(chat.user.nickname) %>
         </span> 說...
         <% if can? :destroy, chat %>
           <%= link_to "刪除", chat, :confirm => '你確定嗎?', :method => :delete %>
@@ -18,7 +18,7 @@
         <% chat.children.each do |c|%>
           <h3>
             <span class='exp_author'>
-              <%= link_to c.user.username, user_home_path(c.user.username) %>
+              <%= link_to c.user.nickname, user_home_path(c.user.username) %>
             </span> 說...
             <% if can? :destroy, c %>
               <%= link_to "刪除", c, :confirm => '你確定嗎?', :method => :delete %>

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100702045054
+# Schema version: 20100706101940
 #
 # Table name: users
 #
@@ -24,6 +24,7 @@
 #  admin                :boolean(1)
 #  user_ifollow_count   :integer(4)      default(0)
 #  username             :string(255)
+#  nickname             :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -37,15 +38,16 @@ class User < ActiveRecord::Base
          :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :username, :password_confirmation
+  attr_accessible :email, :password, :username, :password_confirmation, :nickname
 
-  validates_presence_of :username, :email
-  validates_uniqueness_of :username, :email
+  validates_presence_of :username, :email, :nickname
+  validates_uniqueness_of :username, :email, :nickname
   validates_length_of :username, :maximum => 10
   #限定只能用英文
   validates_format_of :username, :with => /\A[a-z0-9]+\Z/i, :on => :create, :message => '必須是英文或數字'
 
   has_one :profile, :dependent => :destroy
+  accepts_nested_attributes_for :profile, :allow_destroy => true
 
   has_many :goals
   has_many :experiences
@@ -56,6 +58,10 @@ class User < ActiveRecord::Base
   delegate :location_list, :birthday, :to => :profile
 
   after_create :init
+  validate do |u|
+    u.errors.add(:nickname, '暱稱不能有空白') if  u.nickname.match(/\s/)
+  end
+
 
   def to_param
     "#{id}-#{username}"

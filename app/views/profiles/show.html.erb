@@ -1,5 +1,9 @@
-<% title "Profile" %>
+<% title "#{@user.nickname} Profile" %>
 
+<p>
+  <strong>暱稱:</strong>
+  <%=h @user.nickname %>
+</p>
 <p>
   <strong>生日:</strong>
   <%=h @profile.birthday %>

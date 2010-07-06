@@ -11,12 +11,10 @@ class ProfilesController < ApplicationController
   end
   
   def edit
-    @profile = current_user.profile
   end
   
   def update
-    @profile = current_user.profile
-    if @profile.update_attributes(params[:profile])
+    if current_user.update_attributes(params[:user])
       session[:hometown] = current_user.location_list.to_s
 
       flash[:notice] = "Successfully updated profile."

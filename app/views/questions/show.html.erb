@@ -10,7 +10,7 @@
 <p>
   <strong><%=h @question.title %></strong>
   <span class='exp_author'> 
-    By <%= link_to @question.user.username, user_home_path(@question.user.username) %>
+    By <%= link_to @question.user.nickname, user_home_path(@question.user.username) %>
   </span>
 
   <% if can? :update, @question %>

@@ -14,7 +14,7 @@
       <ul>
         <li id='dashboard_options'>
           <% if user_signed_in? %>
-            <%= current_user.username %>
+            <%= current_user.nickname %>
             <%= link_to "設定", user_profile_path(current_user)%>
             <%= link_to "登出", destroy_user_session_path %>
           <% else %>

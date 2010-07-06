@@ -16,7 +16,7 @@
 class Profile < ActiveRecord::Base
   include TagListFunc
 
-  attr_accessible :birthday, :gender, :location_list, :intro, :tag_list
+  attr_accessible :birthday, :gender, :location_list, :intro, :tag_list, :nickname, :location
 
   acts_as_taggable_on :tags
   acts_as_taggable_on :locations
@@ -39,4 +39,7 @@ class Profile < ActiveRecord::Base
     where "intro is not NULL"
   end
 
+  def location
+    location_list.to_s
+  end
 end
