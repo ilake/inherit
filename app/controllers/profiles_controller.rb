@@ -1,4 +1,5 @@
 class ProfilesController < ApplicationController
+  uses_tiny_mce(:options => AppConfig.simple_mce_options, :only => [:edit]) if defined?(AppConfig)
   before_filter :authenticate_user!, :except => [:index , :show]
   before_filter :user_selected, :only => [:show]
 
@@ -16,6 +17,7 @@ class ProfilesController < ApplicationController
   def update
     if current_user.update_attributes(params[:user])
       session[:hometown] = current_user.location_list.to_s
+      session[:current_location] = user_hometown
 
       flash[:notice] = "Successfully updated profile."
       redirect_to user_profile_path(current_user)

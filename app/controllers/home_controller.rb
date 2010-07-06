@@ -30,8 +30,8 @@ class HomeController < ApplicationController
     end  
 
     #最多人追蹤的
-    @popular_users = Profile.location_with(current_user_location).find(:all, :select => 'users.fans_count as user_fans_count, users.username as username', :joins => "left outer join users on profiles.user_id = users.id", :order => 'user_fans_count DESC', :limit => 5)
-    @latest_users = Profile.location_with(current_user_location).find(:all, :select => 'users.username as username, profiles.created_at as created_at', :joins => "left outer join users on profiles.user_id = users.id", :order => 'created_at DESC', :limit => 5)
+    @popular_users = Profile.location_with(current_user_location).find(:all, :select => 'users.fans_count as user_fans_count, users.username as username, users.nickname as nickname', :joins => "left outer join users on profiles.user_id = users.id", :order => 'user_fans_count DESC', :limit => 5, :conditions => "users.fans_count <> 0")
+    @latest_users = Profile.location_with(current_user_location).find(:all, :select => 'users.username as username, profiles.created_at as created_at, users.nickname as nickname', :joins => "left outer join users on profiles.user_id = users.id", :order => 'created_at DESC', :limit => 5)
   end
 
   private

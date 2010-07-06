@@ -1,3 +1,6 @@
+<% content_for :head do %>
+  <%= include_tiny_mce_if_needed %>
+<% end %>
 <% form_for current_user, :url => user_profile_path(current_user), :method => :put do |user_form| %>
   <%= user_form.error_messages %>
   <p>
@@ -19,12 +22,12 @@
     </p>
     <p>
       <%= profile_form.label :intro, '自我介紹' %><br />
-      <%= profile_form.text_area :intro, :size => '40x10' %>
+      <%= profile_form.text_area :intro, :size => '50x15', :class => "mceEditor" %>
     </p>
     <p>
       <%= profile_form.label :tag, '關鍵字' %><br />
       <p class='desc'>請用關鍵字描述自己的職業, 興趣, 技能, 目標, 夢想, 經驗等</p>
-      <p class='desc'>如工程師 足球 羽球 星海 魔獸 遊戲 網站開發（請用空白隔開）</p>
+      <p class='desc'>如工程師 足球 羽球 星海 魔獸 遊戲 網站開發<strong>（請用空白隔開）</strong></p>
       <%= profile_form.text_field :tag_list, :size => 100 %>
     </p>
   <% end %>

@@ -39,7 +39,14 @@ class ExperiencesController < ApplicationController
        events << {
           'start' => g.start_at.to_s(:date),
           'title' => g.title,
-          'description' => "#{app_helpers.link_to '編輯', edit_goal_path(g) if can? :update, g}#{app_helpers.link_to('刪除', destroy_goal_path(g)) if can? :destroy, g}<br />  #{g.content}",
+          'description' => "
+      <span class='function'>
+          #{app_helpers.link_to '編輯', edit_goal_path(g) if can? :update, g}
+          #{app_helpers.link_to('刪除', destroy_goal_path(g)) if can? :destroy, g}
+          #{app_helpers.link_to('<strong>詳細內容</strong>', goal_path(g), :popup => true)}
+      </span>
+          <br /> 
+          #{app_helpers.truncate_u(Sanitize.clean(g.content), 100)}",
           'color' => "##{rand(10)}#{rand(10)}#{rand(10)}",
           'icon' => "/images/timeline/#{['gray', 'green', 'red'].rand}-circle.png"
        }#.merge!(end_time_hash)

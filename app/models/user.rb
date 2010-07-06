@@ -38,10 +38,14 @@ class User < ActiveRecord::Base
          :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :username, :password_confirmation, :nickname
+  attr_accessible :email, :password, :username, :password_confirmation, :nickname, :profile_attributes
 
-  validates_presence_of :username, :email, :nickname
-  validates_uniqueness_of :username, :email, :nickname
+  validates_presence_of :username, :email
+  validates_uniqueness_of :username, :email
+
+  validates_uniqueness_of :nickname, :on => :update
+  validates_presence_of :nickname, :on => :update
+
   validates_length_of :username, :maximum => 10
   #限定只能用英文
   validates_format_of :username, :with => /\A[a-z0-9]+\Z/i, :on => :create, :message => '必須是英文或數字'
@@ -58,7 +62,7 @@ class User < ActiveRecord::Base
   delegate :location_list, :birthday, :to => :profile
 
   after_create :init
-  validate do |u|
+  validate_on_update do |u|
     u.errors.add(:nickname, '暱稱不能有空白') if  u.nickname.match(/\s/)
   end
 

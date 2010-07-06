@@ -274,9 +274,9 @@ label {
 
 #location {
   height:30px;
-  padding:15px;
+  padding: 0px 15px;
   float: left;
-  width: 130px;
+  width: 250px;
   height: auto;
   background: none;
 }
