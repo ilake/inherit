@@ -1,8 +1,12 @@
-development:
+common: &default_settings
   goal_states: 
+    prepare: 'Prepare'
     working: 'Working'
-    done: 'Done'
     pending: 'Pending'
+    finish: 'Finish'
+  goal_category:
+    category: 'Category'
+    goal: 'Goal'
   exp_type:
     normal: 'Normal'
     useful: 'Useful'
@@ -13,33 +17,15 @@ development:
     'false': 'Female'
   web_root_url: 'localhost:3000'
 
+development: 
+  <<: *default_settings  
+
 production:
-  goal_states: 
-    working: 'Working'
-    done: 'Done'
-    pending: 'Pending'
-  exp_type:
-    normal: 'Normal'
-    useful: 'Useful'
-    milestone: 'Milestone'
-  gender_type:
-    'true': 'Male'
-    'false': 'Female'
+  <<: *default_settings  
   web_root_url: 'inhertit.iwakela.com'
 
-test: &TEST
-  goal_states: 
-    working: 'Working'
-    done: 'Done'
-    pending: 'Pending'
-  exp_type:
-    normal: 'Normal'
-    useful: 'Useful'
-    milestone: 'Milestone'
-  gender_type:
-    'true': 'Male'
-    'false': 'Female'
-  web_root_url: 'localhost:3000'
+test: 
+  <<: *default_settings  
 
 cucumber: 
-  <<: *TEST
+  <<: *default_settings  

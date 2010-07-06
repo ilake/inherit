@@ -5,8 +5,8 @@ class CreateGoals < ActiveRecord::Migration
       t.text :content, :default => ""
       t.string :state, :limit => 10, :default => "working"
       t.references :user
-      t.time :start_at
-      t.time :end_at
+      t.datetime :start_at
+      t.datetime :end_at
       t.timestamps
     end
 

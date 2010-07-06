@@ -21,7 +21,7 @@
     </li>
     <% for goal in @goals %>
       <li>
-        <%=link_to h(goal.title), user_exps_path(@user, goal), ( goal.id == params[:goal_id].to_i ? {:class => 'active'} : nil) %>
+        <%=link_to h(goal.title), user_exps_path(@user, goal), ( goal.id == params[:goal_id].to_i ? {:class => 'active'} : goal.tab_style ) %>
       </li>
     <% end %>
     <% if can?(:create, Goal) && @user.is_owner?(current_user)%>
@@ -112,7 +112,7 @@
   <script>
     user_event= <%= @events %>;
     timeline_start_at = new Date(<%= timeline_start_time(@user) %>);
-    timeline_default_at = new Date(<%= @experiences.first.try(:start_at).try(:to_s, :js_date) %>);
+    timeline_default_at = new Date(<%= @current_goal.try(:start_at).try(:to_s, :js_date) || @experiences.first.try(:start_at).try(:to_s, :js_date) %>);
   </script>
 <% end %>
 

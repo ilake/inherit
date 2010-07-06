@@ -4,8 +4,24 @@
 <% form_for @goal do |f| %>
   <%= f.error_messages %>
   <p>
-    <%= f.label :title, "名稱"%><br />
     <div class='desc'>它可以是你的目標, 計畫或者是經驗的分類</div>
+    <%= f.label :category, '類型' %><br />
+    <%= f.select :category, GOAL_CATEGORY.to_select_options %>
+  </p>
+  <p class='goal_start_at'>
+    <%= f.label :start_at, '開始時間' %><br />
+    <%= f.date_select :start_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :end_year => Time.now.year  %>
+  </p>
+  <p class='goal_state'>
+    <%= f.label :state, '狀態' %><br />
+    <%= f.select :state, GOAL_STATES.to_select_options %>
+  </p>
+  <p class='goal_end_at'>
+    <%= f.label :end_at, '完成時間' %><br />
+    <%= f.date_select :end_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :end_year => Time.now.year %>
+  </p>
+  <p>
+    <%= f.label :title, "名稱"%><br />
     <%= f.text_field :title %>
   </p>
   <p>
@@ -13,16 +29,8 @@
     <%= f.text_area :content, :size => '40x10', :class => "mceEditor"  %>
   </p>
   <p>
-    <%= f.label :start_at, '開始時間' %><br />
-    <%= f.date_select :start_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950  %>
-  </p>
-  <p>
     <%= f.label :tag, '標籤(請用空白隔開)'  %><br />
     <%= f.text_field :tag_list %>
-  </p>
-  <p>
-    <%= f.label :state, '狀態' %><br />
-    <%= f.select :state, GOAL_STATES.to_select_options %>
   </p>
   <p>
     <%= f.radio_button :public, true %>
@@ -31,5 +39,5 @@
     <%= f.radio_button :public, false %>
     <%= f.label :public, '私密(自己才看的到)' %>
   </p>
-  <p><%= f.submit "Submit" %></p>
+  <p><%= f.submit "送出" %></p>
 <% end %>

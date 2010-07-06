@@ -549,8 +549,18 @@ td.question_title{ width: 400px}
    text-decoration:none;
    line-height:1.3em;
 }
+
+#centeredmenu ul li a.goal_tab {
+   background:#FFFF00;
+}
+
 #centeredmenu ul li a:hover {
    background:#EFEFEF;
+   color:#7B7B7B;
+}
+
+#centeredmenu ul li a.goal_tab:hover {
+   background:#FFFF99;
    color:#7B7B7B;
 }
 #centeredmenu ul li a.active,

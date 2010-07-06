@@ -9,10 +9,10 @@ class ExperiencesController < ApplicationController
   # GET /experiences.xml
   # cache : params.values.sort.to_s
   def index
-    @experiences = user_selected.experiences.show_policy(@user.is_owner?(current_user)).goal_categroy(params[:goal_id]).descend_by_position.find(:all)
+    @experiences = user_selected.experiences.show_policy(@user.is_owner?(current_user)).goal_categroy(params[:goal_id]).descend_by_position
     @current_goal = Goal.find_by_id(params[:goal_id])
     @experience_groups = @experiences.group_by{|e| e.start_at.at_beginning_of_month}
-    @goals = user_selected.goals.show_policy(@user.is_owner?(current_user)).all
+    @goals = user_selected.goals.show_policy(@user.is_owner?(current_user)).descend_by_start_at
     @fan = @user.fan(current_user)
 
     events = @experiences.map{ |e|
@@ -34,14 +34,15 @@ class ExperiencesController < ApplicationController
       }.merge!(end_time_hash)
     }
 
-     @goals.each { |g|
+     @goals.not_category.each { |g|
+      #end_time_hash = g.end_at_hash
        events << {
           'start' => g.start_at.to_s(:date),
           'title' => g.title,
-          'description' => "#{app_helpers.link_to '編輯', edit_goal_path(g) if can? :update, g}#{app_helpers.link_to('刪除', destroy_goal_path(g)) if can? :destroy, g}#{g.content}",
+          'description' => "#{app_helpers.link_to '編輯', edit_goal_path(g) if can? :update, g}#{app_helpers.link_to('刪除', destroy_goal_path(g)) if can? :destroy, g}<br />  #{g.content}",
           'color' => "##{rand(10)}#{rand(10)}#{rand(10)}",
           'icon' => "/images/timeline/#{['gray', 'green', 'red'].rand}-circle.png"
-       }
+       }#.merge!(end_time_hash)
     }
     @events = events.to_json
 

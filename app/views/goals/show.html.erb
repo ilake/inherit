@@ -13,7 +13,8 @@
     <div>
       <span id='goal_show_time'>
         <%=h @goal.title %>
-        <%=h @goal.start_at.to_s(:date) %>
+        <%=h @goal.start_at.to_s(:date) if @goal.start_at %>
+        <%=h "~ #{@goal.end.to_s(:date)}" if @goal.end_at %>
         <%= '(私密)' if !@goal.public %>
       </span>
       <span class='goal_author'>
@@ -33,11 +34,10 @@
 
     </div>
     <p>
-      <%= @goal.content %>
-    </p>
-    <p>
+      <strong>類型:</strong>
+      <%= GOAL_CATEGORY[@goal.category] %>
       <strong>狀態:</strong>
-      <%=h @goal.state %>
+      <%= GOAL_STATES[@goal.state] %>
     </p>
     <p>
       <strong>關鍵字: </strong>
@@ -45,7 +45,9 @@
         <% tag_link @goal%>
       </span>
       <div class='clear'></div>
-
+    </p>
+    <p>
+      <%= @goal.content %>
     </p>
   </div>
 

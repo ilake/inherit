@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100620155656
+# Schema version: 20100706023114
 #
 # Table name: goals
 #
@@ -14,6 +14,7 @@
 #  updated_at :datetime
 #  public     :boolean(1)      default(TRUE)
 #  tags_list  :text
+#  category   :string(255)     default("category")
 #
 
 class Goal < ActiveRecord::Base
@@ -23,12 +24,13 @@ class Goal < ActiveRecord::Base
   acts_as_taggable_on :tags
   acts_as_taggable_on :locations
   acts_as_commentable
-  attr_accessible :start_at, :title, :content, :state, :tag_list, :public, :location_list
+  attr_accessible :start_at, :title, :content, :state, :tag_list, :public, :location_list, :category, :end_at
 
   belongs_to :user
   has_many :experiences
 
-  validates_presence_of :content, :title, :start_at
+  validates_presence_of :content, :title
+  named_scope :not_category, :conditions => "start_at is not NULL"
 
   define_index do
     indexes content
@@ -41,5 +43,28 @@ class Goal < ActiveRecord::Base
   def to_param
     "#{id}-#{title.downcase.gsub(/\s/i, '-')}"
   end
+
+  def is_category?
+    !start_at
+  end
+
+  def tab_style
+    self.is_category? ? nil : {:class => 'goal_tab'}
+  end
+
+#  def end_at_exist
+#    !!end_at
+#  end
+#
+#  def end_at_hash
+#    if self.state == 'working'
+#      {'end' => Time.now.to_s(:date)}
+#    elsif !self.end_at_exist || self.start_at > self.end_at
+#      {}
+#    else
+#      {'end' => self.end_at.to_s(:date)}
+#    end
+#  end
+
 
 end
