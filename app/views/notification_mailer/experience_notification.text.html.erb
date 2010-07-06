@@ -1,7 +1,7 @@
 <p>
-  Your follow have new experience <%= @experience.content %>
+  Your follow have new experience <%= ApplicationController.helpers.truncate_u(Sanitize.clean(@experience.content), 50) %>
 </p>
 
 <p>
-<%= link_to 'you could see it here', "http://#{ActionMailer::Base.default_url_options[:host]}#{url_for(@experience)}" %>
+  <%= link_to 'you could see it here', "http://#{ActionMailer::Base.default_url_options[:host]}#{url_for(@experience)}" %>
 </p>

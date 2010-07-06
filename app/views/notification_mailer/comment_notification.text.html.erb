@@ -1,5 +1,5 @@
 <p>
-  have new comment <%= @comment.comment %>
+  have new comment <%= ApplicationController.helpers.truncate_u(Sanitize.clean(@comment.comment), 20) %>
 </p>
 
 <p>

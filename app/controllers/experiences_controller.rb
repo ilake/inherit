@@ -25,7 +25,7 @@ class ExperiencesController < ApplicationController
       <span class='function'>
       #{app_helpers.link_to '編輯', edit_experience_path(e) if can? :update, e}
       #{app_helpers.link_to('刪除', destroy_experience_path(e), :confirm => 'Are you sure') if can? :destroy, e}
-      #{app_helpers.link_to('詳細內容', experience_path(e), :popup => true)}
+      #{app_helpers.link_to('<strong>詳細內容</strong>', experience_path(e), :popup => true)}
       </span>
       <br /> 
       #{app_helpers.truncate_u(Sanitize.clean(e.content), 100)}",
