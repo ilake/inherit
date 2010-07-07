@@ -8,21 +8,6 @@ config.cache_classes = true
 config.action_controller.consider_all_requests_local = false
 config.action_controller.perform_caching             = true
 config.action_view.cache_template_loading            = true
-config.action_mailer.default_url_options = { :host => 'inherit.iwakela.com' }
-
-ActionMailer::Base.delivery_method = :smtp
-#ActionMailer::Base.smtp_settings = {
-#  :enable_starttls_auto => true,
-#  :address => "smtp.gmail.com",
-#  :port => "587",
-#  :domain => "localhost.localdomain",
-#  :authentication => :plain,
-#  :user_name => "lake.ilakela@gmail.com",
-#  :password => "-pl,0okm9ijn"
-#}
-
-  config.cache_store = :file_store, File.join(RAILS_ROOT, 'public', 'system', 'action_cache')
-  config.action_controller.page_cache_directory = File.join(RAILS_ROOT, 'public', 'system', 'cache')
 
 # See everything in the log (default is :info)
 # config.log_level = :debug
