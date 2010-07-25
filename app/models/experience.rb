@@ -40,8 +40,12 @@ class Experience < ActiveRecord::Base
 
   validates_presence_of :user_id, :content
 
-  before_save :format_content
-  after_create :deliver_experience_notification
+  #我想讓使用者寫文章時可以用顏色 所以先拿掉過濾
+  #before_save :format_content
+  after_create :deliver_experience_notification, :if => Proc.new{|exp| exp.public}
+  
+  #原本Private 變成public會在通知一次                                                    
+  after_update :deliver_experience_notification, :if => Proc.new{|exp| exp.public_changed? && exp.public}
 
   named_scope :goal_categroy, Proc.new{|goal_id| 
     if goal_id
@@ -98,6 +102,6 @@ class Experience < ActiveRecord::Base
 
   private
   def deliver_experience_notification
-    Delayed::Job.enqueue(ExperienceMailingJob.new(self.id, self.user_id)) if self.public
+    Delayed::Job.enqueue(ExperienceMailingJob.new(self.id, self.user_id))
   end
 end

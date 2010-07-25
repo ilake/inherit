@@ -31,6 +31,7 @@ class Goal < ActiveRecord::Base
 
   validates_presence_of :content, :title
   named_scope :not_category, :conditions => "start_at is not NULL"
+  named_scope :is_category, :conditions => "start_at is NULL"
 
   define_index do
     indexes content

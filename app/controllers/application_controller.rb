@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
     #一直有一個timeline action 沒找到, 先用這樣擋掉
     render :nothing => true and return if params.has_key?("0")
 
-    @user ||= User.find_by_username(params[:username]) if params[:username]
+    @user ||= User.find(:first, :conditions => {:username => params[:username]}) if params[:username]
     @user ||= User.find(params[:user_id]) if params[:user_id]
     @user ||= current_user
     unless @user

@@ -196,6 +196,7 @@ label {
 #header {
   overflow: hidden;
   height: 65px;
+  margin-bottom:30px;
 }
 
 #menus {
@@ -283,11 +284,31 @@ label {
 
 
 /* User experience index page */
-#exp_chart {
+#user_exp_profile {
+  overflow-x: hidden;
   height:250px;
+  width:200px;
+  float:left;
   margin-bottom:50px;
   margin-top:20px;
   border:1px solid #EFEFEF;
+  padding:6px 3px 3px 3px;
+}
+
+.exp_profile_cell {
+  margin:6px 0px 6px 0px;
+}
+
+#exp_chart {
+  height:250px;
+  width:750px;
+  float:left;
+  margin-top:20px;
+  border:1px solid #EFEFEF;
+}
+
+#exp_number {
+  float:right;
 }
 
 #exp_list {
@@ -326,10 +347,17 @@ label {
   padding-left:5px;
 }
 
-#goal_detail {
+#goal_desc_area {
   float:left;
-  width: 570px;
-  padding:5px;
+  width: 680px;
+  padding:5px 5px 5px 10px;
+  border-left: 3px solid #AFAFAF;
+  margin-right: 5px;
+}
+
+#goal_detail {
+  margin-top:10px;
+  float:left;
 }
 
 
@@ -405,6 +433,13 @@ label {
   color: #0AA7F8;
   text-decoration: none;
 }
+
+#exp_list a:hover, .exp_cell a:hover, #new_exp a:hover, .exp_author a:hover, .goal_author a:hover, .question_title a:hover, .top-function-menu a:hover, .exp_anchor a:hover, .goal_anchor a:hover, .question_anchor a:hover, .anchor a:hover
+{
+  text-decoration: underline;
+}
+
+
 .fans_anchor a{
   color: #0AA7F8;
   font-weight:bold;
@@ -434,11 +469,6 @@ label {
   color: #F06;
   font-weight:bold;
   font-size: 18px;
-}
-
-
-#exp_list a:hover {
-  text-decoration: underline;
 }
 
 

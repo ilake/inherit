@@ -14,7 +14,7 @@ AppConfig.simple_mce_options = {
                     :theme_advanced_statusbar_location => "bottom", 
                     :editor_deselector => "mceNoEditor",
                     :theme_advanced_resize_horizontal => false,  
-                    :theme_advanced_buttons1 => %w{underline link unlink image separator },
+                    :theme_advanced_buttons1 => %w{bold link unlink image separator forecolor backcolor},
                     :theme_advanced_buttons2 => [],
                     :theme_advanced_buttons3 => []
                 }

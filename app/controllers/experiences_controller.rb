@@ -12,7 +12,8 @@ class ExperiencesController < ApplicationController
     @experiences = user_selected.experiences.show_policy(@user.is_owner?(current_user)).goal_categroy(params[:goal_id]).descend_by_position.limit(current_data_number(params[:data_number]))
     @current_goal = Goal.find_by_id(params[:goal_id])
     @experience_groups = @experiences.group_by{|e| e.start_at.at_beginning_of_month}
-    @goals = user_selected.goals.show_policy(@user.is_owner?(current_user)).descend_by_start_at
+    @goals = user_selected.goals.show_policy(@user.is_owner?(current_user)).not_category.descend_by_start_at
+    @categories = user_selected.goals.show_policy(@user.is_owner?(current_user)).is_category.descend_by_created_at
     @fan = @user.fan(current_user)
 
     events = @experiences.map{ |e|
@@ -68,6 +69,7 @@ class ExperiencesController < ApplicationController
 
     @comment = @experience.comments.new
     @vote = @experience.votes.new
+    @current_goal = Goal.find(params[:goal_id]) if params[:goal_id]
 
     respond_to do |format|
       format.html # show.html.erb

@@ -26,8 +26,8 @@
           <%= link_to '編輯', edit_goal_path(@goal) %>
         </span>
       <% end %>
-      <span class='goal_function'>
-        <% if can? :destroy, @goal %>
+      <% if can? :destroy, @goal %>
+        <span class='goal_function'>
           <%= link_to '刪除', @goal, :confirm => '你確定嗎?', :method => :delete %>
         </span>
       <% end %>

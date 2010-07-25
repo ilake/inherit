@@ -166,14 +166,24 @@ module ActiveRecord
                                  )
         end
 
-        def prev_item(current_user)
-          if self.user == current_user
+        def prev_item(current_user, goal_id=nil)
+          if self.user != current_user && goal_id.blank?
+            acts_as_list_class.find(:first, :conditions =>
+            "#{scope_condition} AND public = true AND #{position_column} < #{(send(position_column).to_i).to_s}", :order => "start_at DESC, created_at DESC"
+                                   )
+          elsif self.user == current_user && goal_id.blank?
             acts_as_list_class.find(:first, :conditions =>
             "#{scope_condition} AND #{position_column} = #{(send(position_column).to_i - 1).to_s}"
                                    )
+          elsif goal_id
+            acts_as_list_class.find(:first, :conditions =>
+            "#{scope_condition} AND public = true AND #{position_column} < #{(send(position_column).to_i).to_s} AND goal_id = #{goal_id}", :order => "start_at DESC, created_at DESC"
+                                   )
+          #else self.user == current_user && goal_id
+          #自己的而且從分類來的
           else
             acts_as_list_class.find(:first, :conditions =>
-            "#{scope_condition} AND public = true AND #{position_column} < #{(send(position_column).to_i).to_s}", :order => "start_at DESC, created_at DESC"
+            "#{scope_condition} AND #{position_column} = #{(send(position_column).to_i - 1).to_s} AND goal_id = #{goal_id}"
                                    )
           end
         end
@@ -186,15 +196,24 @@ module ActiveRecord
                                  )
         end
 
-        def next_item(current_user)
+        def next_item(current_user, goal_id=nil)
           return nil unless in_list?
-          if self.user == current_user
+
+          if self.user != current_user && goal_id.blank?
+            acts_as_list_class.find(:first, :conditions =>
+            "#{scope_condition} AND public = true AND #{position_column} > #{(send(position_column).to_i).to_s}", :order => "start_at ASC, created_at ASC"
+                                   )
+          elsif self.user == current_user && goal_id.blank?
             acts_as_list_class.find(:first, :conditions =>
             "#{scope_condition} AND #{position_column} = #{(send(position_column).to_i + 1).to_s}"
                                    )
+          elsif goal_id
+            acts_as_list_class.find(:first, :conditions =>
+            "#{scope_condition} AND public = true AND #{position_column} > #{(send(position_column).to_i).to_s} AND goal_id = #{goal_id}", :order => "start_at ASC, created_at ASC"
+                                   )
           else
             acts_as_list_class.find(:first, :conditions =>
-            "#{scope_condition} AND public = true AND #{position_column} > #{(send(position_column).to_i).to_s}", :order => "start_at ASC, created_at ASC"
+            "#{scope_condition} AND #{position_column} = #{(send(position_column).to_i + 1).to_s} AND goal_id = #{goal_id}"
                                    )
           end
         end

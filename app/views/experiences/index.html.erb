@@ -7,38 +7,55 @@
   end %>  
 <% end %>
 
+<div id='user_exp_profile'>
+  <div class='exp_profile_cell anchor'>
+    <strong>暱稱:</strong>
+    <%= link_to "#{h @user.nickname}", user_home_path(@user.username)%>
+  </div>
+  <div class='exp_profile_cell anchor'>
+    <strong>個人檔案:</strong>
+    <%= link_to "簡介", user_profile_path(@user), {:class => 'profile'} %>
+  </div>
+  <div class='exp_profile_cell anchor'>
+    <strong>解惑:</strong>
+    <%= link_to "解惑", user_questions_path(@user), {:class => 'profile'} %>
+  </div>
+  <dl>
+    <dt>
+    <strong>目標:</strong>
+    <% if can?(:create, Goal) && @user.is_owner?(current_user)%>
+      <%= link_to "新增目標", new_goal_path(:goal => {'category' => 'goal'}) %>
+    <% end %>
+    </dt>
+
+    <% for goal in @goals %>
+      <dd class='anchor'>
+      <%=link_to h(goal.title), user_exps_path(@user, goal) %>
+      </dd>
+    <% end %>
+  </dl>
+  <dl>
+    <dt>
+    <strong>分類:</strong>
+    <% if can?(:create, Goal) && @user.is_owner?(current_user)%>
+      <%= link_to "新增分類", new_goal_path %>
+    <% end %>
+    </dt>
+
+    <% for category in @categories %>
+      <dd class='anchor'>
+      <%=link_to h(category.title), user_exps_path(@user, category), ( category.id == params[:goal_id].to_i ? {:class => 'active'} : category.tab_style ) %>
+      </dd>
+    <% end %>
+  </dl>
+</div>
 <div id='exp_chart'>
 </div>
+<div id='exp_number'>
 <strong>資料筆數</strong>
 <%= select 'experience', 'data_number', DATA_NUMBER.sort{|a,b|a[0] <=> b[0]}, {:selected => current_data_number.to_i}%>
-<div class='clear'></div>
-
-<div id="centeredmenu">
-  <ul>
-    <li>
-      <strong><%= @user.nickname %></strong>
-    </li>
-    <li>
-      <%= link_to "簡介", user_profile_path(@user), {:class => 'profile'} %>
-    </li>
-    <li>
-      <%= link_to "解惑", user_questions_path(@user), {:class => 'profile'} %>
-    </li>
-    <li>
-      <%= link_to "全部經驗", user_home_path(@user.username), ( current_page?(user_home_path(@user.username)) ? {:class => 'active'} : nil) %>
-    </li>
-    <% for goal in @goals %>
-      <li>
-        <%=link_to h(goal.title), user_exps_path(@user, goal), ( goal.id == params[:goal_id].to_i ? {:class => 'active'} : goal.tab_style ) %>
-      </li>
-    <% end %>
-    <% if can?(:create, Goal) && @user.is_owner?(current_user)%>
-      <li class='new_goal'>
-        <%= link_to "新增TAB", new_goal_path %>
-      </li>
-    <% end %>
-  </ul>
 </div>
+<div class='clear'></div>
 
 <div class='grid-top'>
   <div id='fans_area'>
@@ -70,8 +87,26 @@
     </span>
   </div>
   <% if @current_goal %>
-    <div id='goal_detail' class='goal_desc'>
-      <%= link_to truncate_u(Sanitize.clean(@current_goal.content), 100), @current_goal %>
+    <div id='goal_desc_area'>
+        <div>
+          <span class='anchor'><%= link_to "回到全部經驗", user_home_path(@user.username) %></span>
+        </div>
+        <div>
+          <strong><%= GOAL_CATEGORY[@current_goal.category] %>名稱:</strong>
+          <span class='anchor'><%= link_to  @current_goal.title, @current_goal %></span>
+          <% unless @current_goal.is_category? %>
+            <strong>起始:</strong>
+            <%= @current_goal.start_at.to_s(:date)%>
+            <strong>狀態:</strong>
+            <%= GOAL_STATES[@current_goal.state] %>
+          <% end %>
+        </div>
+        <div id='goal_detail'>
+          <span class='goal_desc'>
+            <%= link_to "#{truncate_u(Sanitize.clean(@current_goal.content), 100)}", @current_goal %>
+          </span>
+          <span class='anchor'><%= link_to ">>more", @current_goal %></span>
+        </div>
     </div>
   <% end %>
 </div>
@@ -89,6 +124,7 @@
     <% end %>
   </h2>
   <ul>
+    <% params_hash = @current_goal ? {:goal_id => @current_goal.id} : {}%>
     <% @experience_groups.keys.each do |time| %>
       <li><h3><%= time.to_s(:ym)%></h3></li>
       <% @experience_groups[time].each do |experience| %>
@@ -98,7 +134,7 @@
             <%= experience.end_at_date %>
           </span>
           <span class='exp_content'>
-            <%= link_to truncate_u(Sanitize.clean(experience.content), 30), experience, :popup => true %>
+            <%= link_to truncate_u(Sanitize.clean(experience.content), 30), experience_path(experience, params_hash) %>
           </span>
         </li>
       <% end %>
