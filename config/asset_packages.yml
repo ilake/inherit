@@ -4,6 +4,7 @@ javascripts:
   - jquery
   - application
   - colorPicker
+  - facebox
 - secondary:
   - experience_timeline
 stylesheets: 
@@ -11,3 +12,4 @@ stylesheets:
   - scaffold
   - colorPicker
   - application
+  - facebox

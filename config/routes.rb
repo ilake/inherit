@@ -33,6 +33,8 @@ ActionController::Routing::Routes.draw do |map|
     user.resources :questions, :only => [:index]
   end
   
+  map.user_location "user_location", :controller => 'home', :action => 'user_location'
+  map.change_location "change_user_location", :controller => 'home', :action => 'change_user_location'
   map.resources :chats, :new => {:reply => :get}, :except => [:show, :new]
   map.resources :question_experience_relations, :only => [:create]
 

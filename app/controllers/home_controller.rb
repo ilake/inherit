@@ -34,6 +34,15 @@ class HomeController < ApplicationController
     @latest_users = Profile.location_with(current_user_location).find(:all, :select => 'users.username as username, profiles.created_at as created_at, users.nickname as nickname', :joins => "left outer join users on profiles.user_id = users.id", :order => 'created_at DESC', :limit => 5)
   end
 
+  def user_location
+    render :layout => false
+  end
+
+  def change_user_location
+    session[:current_location] = params[:user_location]
+    render :nothing => true
+  end
+
   private
   def user_auth
     redirect_to user_home_path(current_user.username) if user_signed_in? 

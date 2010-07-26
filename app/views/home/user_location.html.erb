@@ -1,0 +1,17 @@
+<h2>選擇內容位置</h2>
+<p class='anchor'>
+  <%= link_to('World(All)', '#', :class => 'change_location', :value => 'World') %>
+  <%= link_to(user_hometown, '#', :class => 'change_location', :value => user_hometown) %>
+</p>
+<hr>
+<p id='current_user_location'>
+  <%= localized_country_select('user', 'location_list', [], {:selected => current_user_location}, :value => current_user_location) %>
+</p>
+
+<%= javascript_include_tag 'location' %>
+<script type='text/javascript'>
+  $(function() {
+      $('#user_location_list').attr('value', '<%= current_user_location %>');
+});
+</script>
+

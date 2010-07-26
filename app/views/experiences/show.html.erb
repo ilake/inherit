@@ -14,9 +14,9 @@
 <% end %>
 
 <div id='exp_show_main'>
-  <div class='exp_author'>
+  <p class='exp_author'>
     <%= link_to "回到 #{@experience.user.nickname} 的經驗",  @current_goal ?  user_exps_path(:user_id => @experience.user, :goal_id => @current_goal) : user_home_path(@experience.user.username) %>
-  </div>
+  </p>
   <div id='exp_show_content'>
     <div>
       <span id='exp_show_time'>

@@ -12,15 +12,18 @@
   <div id='container'>
     <div id="dashboard">
       <ul>
-        <li id='dashboard_options'>
+        <li id='dashboard_options' class='anchor'>
           <% if user_signed_in? %>
-            <%= current_user.nickname %>
-            <%= link_to "設定", user_profile_path(current_user)%>
-            <%= link_to "登出", destroy_user_session_path %>
+            <span class='space'> <%= link_to current_user.nickname, user_home_path(current_user.username) %></span>
+            <span class='space'> <%= link_to "設定", user_profile_path(current_user)%></span>
+            <span class='space'> <%= link_to "登出", destroy_user_session_path %></span>
           <% else %>
-            <%= link_to "現在就加入", new_user_registration_path %>
-            <%= link_to "登入", new_user_session_path %>
+            <span class='space'> <%= link_to "現在就加入", new_user_registration_path %></span>
+            <span class='space'> <%= link_to "登入", new_user_session_path %></span>
           <% end %>
+          <span class='anchor'>
+            地點：<%= link_to(current_user_location, user_location_url, :rel => "facebox", :id => 'user_location') %>
+          </span>
         </li>
       </div>
 
@@ -31,10 +34,6 @@
       <div id='header'>
         <div id='logo'>
           <h2 id='logo'><%= link_to "傳承.", root_url %></h2>
-        </div>
-
-        <div id="location">
-          <%= user_current_view_location(params[:location]) %>
         </div>
 
         <div id='menus'>

@@ -429,7 +429,7 @@ label {
   text-decoration: none;
 }
 
-.exp_cell a, #new_exp a, .exp_author a, .goal_author a, .question_title a, .top-function-menu a, .exp_anchor a, .goal_anchor a, .question_anchor a, .anchor a{
+.exp_cell a, #new_exp a, .exp_author a, .goal_author a, .question_title a,  .exp_anchor a, .goal_anchor a, .question_anchor a, .anchor a{
   color: #0AA7F8;
   text-decoration: none;
 }
@@ -439,6 +439,9 @@ label {
   text-decoration: underline;
 }
 
+.top-function-menu a{
+  color: #0033CC;
+}
 
 .fans_anchor a{
   color: #0AA7F8;
@@ -610,3 +613,5 @@ td.question_title{ width: 400px}
   background:#FFF;
   font-weight:bold;
 }
+
+/* user_location */

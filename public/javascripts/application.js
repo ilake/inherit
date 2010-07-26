@@ -50,6 +50,8 @@ function detect_goal_state(){
 }
 
 $(document).ready(function(){
+    $('a[rel*=facebox]').facebox();
+
     detect_user_date();
 
     detect_end_at();
@@ -85,5 +87,4 @@ $(document).ready(function(){
         var url = href.join('')
         window.location = url;
     });
-
 });

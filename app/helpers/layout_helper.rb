@@ -22,15 +22,16 @@ module LayoutHelper
   end
 
   def user_current_view_location(location)
-    s = []
-    if current_user_location == "World"
-      s << 'World'
-      s << link_to(user_hometown, :location => user_hometown) if user_hometown
-    else
-      s << link_to('World', :location => 'World')
-      s << user_hometown if user_hometown
-    end
-    s.join(' > ')
+#    s = []
+#    if current_user_location == "World"
+#      s << 'World'
+#      s << link_to(user_hometown, {:location => user_hometown}, :rel => "facebox") if user_hometown
+#    else
+#      s << link_to('World', :location => 'World')
+#      s << user_hometown if user_hometown
+#    end
+#    s.join(' > ')
+     link_to(current_user_location, user_location_url, :rel => "facebox")
   end
 
 end
