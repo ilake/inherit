@@ -1,11 +1,12 @@
 <% content_for :head do %>
   <%= include_tiny_mce_if_needed %>
 <% end %>
+
 <% form_for @goal do |f| %>
   <%= f.error_messages %>
   <p>
-    <div class='desc'>它可以是你的目標, 計畫或者是經驗的分類</div>
-    <%= f.label :category, '類型' %><br />
+    <p class='desc'>它可以是你的目標, 計畫或者是經驗的分類</p>
+    <p><%= f.label :category, '類型' %></p>
     <%= f.select :category, GOAL_CATEGORY.to_select_options %>
   </p>
   <p class='goal_start_at'>
@@ -40,4 +41,31 @@
     <%= f.label :public, '私密(自己才看的到)' %>
   </p>
   <p><%= f.submit "送出" %></p>
+<% end %>
+<%= javascript_include_tag 'goal' %>
+
+<%# '表示從facebox 出來' %>
+<% if params[:rel] %>
+<script type='text/javascript'>
+  $(function() {
+      $("#new_goal").submit(function(){  
+        $(document).trigger('close.facebox');
+        $('#action_comeplete_status').hide();
+        $('#action_working_status').show();
+
+        $.ajax({
+          url: $(this).attr("action")+'.js',
+          type: 'POST',
+          data: $(this).serialize(),
+          success: function(categories){
+            $('#exp_categories').html(categories);
+            $('#experience_goal_id').attr('value', $('#experience_goal_id option:last').attr('value'));
+            $('#action_working_status').hide();
+            $('#action_comeplete_status').show();
+          }
+        });
+        return false;  
+      });  
+  });
+</script>
 <% end %>

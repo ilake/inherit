@@ -16,15 +16,24 @@ class GoalsController < ApplicationController
   
   def new
     @goal = Goal.new(params[:goal])
+    render :layout => false if params[:rel]
   end
   
   def create
     @goal = current_user.goals.new(params[:goal])
     if @goal.save
       flash[:notice] = "Successfully created goal."
-      redirect_to user_home_path(current_user.username) 
+      respond_to do |format|
+        format.html {redirect_to user_home_path(current_user.username)}
+        format.js { 
+          render :inline => "<%= select :experience, :goal_id, current_user.goals.map{|g|[g.title, g.id]}, {:include_blank => true}%>"
+        }
+      end
     else
-      render :action => 'new'
+      respond_to do |format|
+        format.html { render :action => 'new' }
+        format.js { render :nothing => true } 
+      end
     end
   end
   

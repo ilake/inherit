@@ -30,6 +30,7 @@ class Goal < ActiveRecord::Base
   has_many :experiences
 
   validates_presence_of :content, :title
+  validates_uniqueness_of :title, :scope => :user_id
   named_scope :not_category, :conditions => "start_at is not NULL"
   named_scope :is_category, :conditions => "start_at is NULL"
 

@@ -38,6 +38,14 @@ label {
   clear: both;
 }
 
+.complete {
+  color: #64E827;
+}
+
+.loading {
+  color: #FF0000;
+}
+
 .css1 { font-size: 1.0em; }
 .css2 { font-size: 1.2em; }
 .css3 { font-size: 1.4em; }
@@ -287,10 +295,9 @@ label {
 #user_exp_profile {
   overflow-x: hidden;
   height:250px;
-  width:200px;
+  width:180px;
   float:left;
-  margin-bottom:50px;
-  margin-top:20px;
+  margin: 20px 6px 50px 0px;
   border:1px solid #EFEFEF;
   padding:6px 3px 3px 3px;
 }
