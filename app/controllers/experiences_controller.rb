@@ -25,8 +25,8 @@ class ExperiencesController < ApplicationController
       'description' => "
       <span class='function'>
       #{app_helpers.link_to '編輯', edit_experience_path(e) if can? :update, e}
-      #{app_helpers.link_to('刪除', destroy_experience_path(e), :confirm => 'Are you sure') if can? :destroy, e}
-      #{app_helpers.link_to('<strong>詳細內容</strong>', experience_path(e), :popup => true)}
+      #{app_helpers.link_to '刪除', destroy_experience_path(e) if can? :destroy, e}
+      #{app_helpers.link_to '<strong>詳細內容</strong>', experience_path(e)}
       </span>
       <br /> 
       #{app_helpers.truncate_u(Sanitize.clean(e.content), 100)}",
@@ -43,8 +43,8 @@ class ExperiencesController < ApplicationController
           'description' => "
       <span class='function'>
           #{app_helpers.link_to '編輯', edit_goal_path(g) if can? :update, g}
-          #{app_helpers.link_to('刪除', destroy_goal_path(g)) if can? :destroy, g}
-          #{app_helpers.link_to('<strong>詳細內容</strong>', goal_path(g), :popup => true)}
+          #{app_helpers.link_to '刪除', destroy_goal_path(g) if can? :destroy, g}
+          #{app_helpers.link_to '<strong>詳細內容</strong>', goal_path(g)}
       </span>
           <br /> 
           #{app_helpers.truncate_u(Sanitize.clean(g.content), 100)}",

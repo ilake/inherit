@@ -627,4 +627,9 @@ td.question_title{ width: 400px}
 .sign_out {
   display: inline;
 }
+
+#facebook_like {
+  height:20px;
+}
 /* facebook end */
+

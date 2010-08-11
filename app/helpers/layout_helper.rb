@@ -38,4 +38,19 @@ module LayoutHelper
     content_tag :iframe, nil, :src => "http://www.facebook.com/plugins/like.php?href=#{CGI::escape(request.url)}&layout=standard&show_faces=true&width=450&action=like&font=arial&colorscheme=light&height=80", :scrolling => 'no', :frameborder => '0', :allowtransparency => true, :id => :facebook_like
   end
 
+  def facebook_share
+    '<a name="fb_share" type="button_count" href="http://www.facebook.com/sharer.php">Share</a><script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>'
+  end
+
+  def share_button
+    '<!-- AddToAny BEGIN -->
+    <a class="a2a_dd" href="http://www.addtoany.com/share_save"><img src="http://static.addtoany.com/buttons/share_save_171_16.png" width="171" height="16" border="0" alt="Share/Bookmark"/></a>
+    <script type="text/javascript">
+    var a2a_config = a2a_config || {};
+    a2a_config.num_services = 10;
+    </script>
+    <script type="text/javascript" src="http://static.addtoany.com/menu/page.js"></script>
+    <!-- AddToAny END -->'
+  end
+
 end
