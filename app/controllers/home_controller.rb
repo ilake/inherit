@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
-  before_filter :user_auth, :only => [:index]
   before_filter :force_set_profile
+  before_filter :user_auth, :only => [:index]
 
   caches_action :index
 

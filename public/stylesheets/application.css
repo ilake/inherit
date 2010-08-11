@@ -622,3 +622,9 @@ td.question_title{ width: 400px}
 }
 
 /* user_location */
+
+/* facebook */
+.sign_out {
+  display: inline;
+}
+/* facebook end */

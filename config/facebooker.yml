@@ -1,0 +1,33 @@
+defaults: &defaults
+    # Required.
+    api_key: aac8312a313dbb644f78a4538f2d7b5d
+    secret_key: eddca3844a00ef2d778caadc95ceeda1
+
+    # Optional for Facebook Connect.
+    canvas_page_name: inherit
+    # Optional for Facebook Connect. Depends on your Facebook App settings.
+    callback_url: http://localhost:3000
+
+    # Optional options.
+    # pretty_errors: true
+    # set_asset_host_to_callback_url: false
+    # tunnel:
+    #   public_host_username:
+    #   public_host:
+    #   public_port: 4007
+    #   local_port: 3000
+
+development:
+  <<: *defaults
+
+test: &test
+  <<: *defaults
+
+production: &production
+  <<: *defaults
+
+# staging:
+#   <<: *production
+#
+# cucumber:
+#   <<: *test

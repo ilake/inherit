@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password
 
   rescue_from CanCan::AccessDenied do |exception|
-    flash[:error] = "Access denied."
+    flash[:error] = "Access denied. #{exception.message}"
     redirect_to root_url
   end
 
@@ -56,7 +56,7 @@ class ApplicationController < ActionController::Base
   end
 
   def force_set_profile
-    redirect_to edit_user_profile_path(current_user) if current_user && current_user.try(:birthday).blank?
+    redirect_to edit_user_profile_path(current_user) if current_user && current_user.profile.invalid?
   end
 
   def authenticate_inviter

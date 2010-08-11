@@ -35,13 +35,18 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :http_authenticatable, :token_authenticatable, :lockable, :timeoutable and :activatable
   devise :registerable, :database_authenticatable, :recoverable, :confirmable,
-         :rememberable, :trackable, :validatable
+    :rememberable, :trackable, :validatable, :facebook_connectable
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :username, :password_confirmation, :nickname, :profile_attributes
 
-  validates_presence_of :username, :email
-  validates_uniqueness_of :username, :email
+  validates_presence_of :username
+  validates_uniqueness_of :username
+
+  validates_presence_of :email, :if => Proc.new{|u| u.facebook_uid.nil?  }, :on => :create
+  validates_presence_of :email, :on => :update
+  validates_uniqueness_of :email, :allow_nil => true, :on => :create
+  validates_uniqueness_of :email, :on => :update
 
   validates_uniqueness_of :nickname, :on => :update
   validates_presence_of :nickname, :on => :update
@@ -62,9 +67,9 @@ class User < ActiveRecord::Base
   delegate :location_list, :birthday, :to => :profile
 
   after_create :init
-  validate_on_update do |u|
-    u.errors.add(:nickname, '暱稱不能有空白') if  u.nickname.match(/\s/)
-  end
+#  validate_on_update do |u|
+#    u.errors.add(:nickname, '暱稱不能有空白') if  u.nickname.match(/\s/)
+#  end
 
 
   def to_param
@@ -93,6 +98,31 @@ class User < ActiveRecord::Base
     User.find(:all, :conditions => {:id => user_ids })
   end
 
+  def before_facebook_connect(fb_session)
+    fb_session.user.populate(:username, :name)
+
+    fb_username = fb_session.user.username
+    fb_nickname = fb_session.user.name
+    self.username = (fb_username || fb_nickname)
+    self.nickname = (fb_nickname || fb_username)
+  end
+
+  def after_facebook_connect(fb_session)
+    #...
+  end
+
+  #Facebook connect user maybe wrong
+  def init_user_email_username
+    self.invalid? && (self.errors.on(:email) || self.errors.on(:username))
+  end
+
+  def is_facebook_user?
+    !!self.facebook_uid
+  end
+
+  def showname
+    @showname ||= (nickname || username)
+  end
   private
   def init
     self.create_profile

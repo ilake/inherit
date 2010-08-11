@@ -3,6 +3,19 @@
 <% end %>
 <% form_for current_user, :url => user_profile_path(current_user), :method => :put do |user_form| %>
   <%= user_form.error_messages %>
+
+  <% if current_user.init_user_email_username%>
+    <!-- 只有facebook的user需要有重新修改username, email的機會 -->
+    <p>
+    <%= user_form.label :email, 'Email' %><br />
+    <%= user_form.text_field :email%>
+    </p>
+    <p>
+    <%= user_form.label :username, 'Account' %><br />
+    <%= user_form.text_field :username %>
+    </p>
+  <% end %>
+
   <p>
     <%= user_form.label :nickname, 'Nickname' %><br />
     <%= user_form.text_field :nickname %>

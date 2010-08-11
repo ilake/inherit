@@ -1,6 +1,10 @@
 # Use this hook to configure devise mailer, warden hooks and so forth. The first
 # four configuration values can also be set straight in your models.
 Devise.setup do |config|
+  config.facebook_uid_field = :facebook_uid
+  config.facebook_session_key_field = :facebook_session_key
+  #config.facebook_auto_create_account = false
+
   # Configure the e-mail address which will be shown in DeviseMailer.
   config.mailer_sender = "no-reply@experience.net"
   

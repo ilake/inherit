@@ -1,7 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!-- REQUIRED: Include Facebook XMLNS (XML namespace). -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"  xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <%= yield(:meta_tag) || display_meta_tags(:site => '傳承') %>
@@ -14,13 +15,21 @@
       <ul>
         <li id='dashboard_options' class='anchor'>
           <% if user_signed_in? %>
-            <span class='space'> <%= link_to current_user.nickname, user_home_path(current_user.username) %></span>
+            <span class='space'> <%= link_to current_user.showname, user_home_path(current_user.username) %></span>
             <span class='space'> <%= link_to "設定", user_profile_path(current_user)%></span>
-            <span class='space'> <%= link_to "登出", destroy_user_session_path %></span>
+            <span class='space'> 
+              <% if current_user.is_facebook_user? %>
+                <%= facebook_sign_out_link :user %>
+              <% else %>
+                <%= link_to "登出", destroy_user_session_path %></span>
+            <% end %>
+            </span>
           <% else %>
             <span class='space'> <%= link_to "現在就加入", new_user_registration_path %></span>
             <span class='space'> <%= link_to "登入", new_user_session_path %></span>
           <% end %>
+
+
           <span class='anchor'>
             地點：<%= link_to(current_user_location, user_location_url, :rel => "facebox", :id => 'user_location') %>
           </span>
@@ -57,16 +66,23 @@
 
       </div>
 
-    <div id='layout'>
-      <%= yield %>
-      <%= yield :sider %>
-    </div>
+      <div id='layout'>
+        <%= yield %>
+        <%= yield :sider %>
+      </div>
     <div class='clear'></div>
   </div>
   <div id='footer'>
   </div>
   <%= javascript_include_merged :base %>
+
+  <!-- REQUIRED: Include Facebook Javascript (with current locale). See Facebooker documentation. -->
+  <%= fb_connect_javascript_tag(:lang => ::I18n.locale) %>
+  <!-- REQUIRED: Include devise_facebook_connectable Javascripts. -->
+  <%= javascript_include_tag 'devise.facebook_connectable' %>
+  <!-- REQUIRED: Init Facebook Javascript (using jQuery). See Facebooker documentation. -->
+  <%= init_fb_connect :XFBML, :js => :jquery %>
+
   <%= yield :bottom_js %>
-  <%= javascript_include_merged :secondary %>
 </body>
 </html>
