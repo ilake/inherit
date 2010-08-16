@@ -1,6 +1,10 @@
 <% title '意見' %>
 <% description @chats.last.try(:content) %>
-
+<% if params[:user_id] %>
+  <%= @user.showname %>留言板
+<% else %>
+  站方意見留言板
+<% end %>
 <%= render :partial => 'form' %>
 <div class='chatlist'>
   <% for chat in @chats %>
@@ -27,9 +31,7 @@
           <div><%= Sanitize.clean(c.content) %></div>
         <% end %>
       </div>
-
-      <%= link_to "回應", reply_new_chat_path(:chat_id => chat) if current_user.try(:admin?) %>
-
+      <%= link_to "回應", reply_new_chat_path(:chat_id => chat) if current_user.reply_permission(chat, params[:user_id]) %>
     </div>
   <% end %>
 </div>

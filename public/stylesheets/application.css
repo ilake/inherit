@@ -205,6 +205,8 @@ label {
   overflow: hidden;
   height: 65px;
   margin-bottom:30px;
+  background-color:#EFEFEF;
+  padding: 0px 0px 6px 6px;
 }
 
 #menus {

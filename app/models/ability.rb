@@ -17,8 +17,11 @@ class Ability
         can :update, [Experience, Goal, Profile, Question] do |obj|
           obj.try(:user) == user
         end
-        can :destroy, [Experience, Goal, Question, Chat] do |obj|
-          obj.try(:user) == user
+        can :destroy, [Experience, Goal, Question] do |obj|
+          obj.try(:user) == user 
+        end
+        can :destroy, [Chat] do |obj|
+          obj.try(:user) == user || obj.try(:owner) == user
         end
         can :select, [Experience]
       end

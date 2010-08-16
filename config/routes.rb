@@ -31,6 +31,7 @@ ActionController::Routing::Routes.draw do |map|
     user.resources :goals, :as => :categories, :except => [:index]
     user.resources :fans, :collection => { :ifollow => :get }, :except => [:show, :edit, :update]
     user.resources :questions, :only => [:index]
+    user.resources :chats, :only => [:index, :create, :show]
   end
   
   map.user_location "user_location", :controller => 'home', :action => 'user_location'

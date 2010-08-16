@@ -1,4 +1,5 @@
 class NotificationMailer < ActionMailer::Base
+
   def load_settings
     @@smtp_settings = {
       :enable_starttls_auto => true,
@@ -11,14 +12,18 @@ class NotificationMailer < ActionMailer::Base
     }
   end
 
+  def host
+    @host_url ||= "http://#{ActionMailer::Base.default_url_options[:host]}"
+  end
+
   def chat_notification(user, chat, reply)
     load_settings
 
     bcc           user.email
     from          "notifications@inherit.com"
-    subject       "Chat Comment Notification"
+    subject       "#{chat.owner.showname} Chat Comment Notification"
     sent_on       Time.now
-    body          :chat => chat, :reply => reply
+    body          :chat => chat, :reply => reply, :host => host, :url => user_chat_path(chat.owner, chat)
   end
 
   def comment_notification(users, comment)
@@ -28,27 +33,27 @@ class NotificationMailer < ActionMailer::Base
     from          "notifications@inherit.com"
     subject       "Inherit Comment Notification"
     sent_on       Time.now
-    body          :comment => comment
+    body          :comment => comment, :host => host, :url => url_for(comment.commentable)
   end
 
-  def question_notification(users, experience, question)
-    load_settings
-
-    bcc           users.map{|u| u.email}
-    from          "notifications@inherit.com"
-    subject       "Inherit Question Notification"
-    sent_on       Time.now
-    body          :experience => experience, :question => question
-  end
+#  def question_notification(users, experience, question)
+#    load_settings
+#
+#    bcc           users.map{|u| u.email}
+#    from          "notifications@inherit.com"
+#    subject       "Inherit Question Notification"
+#    sent_on       Time.now
+#    body          :experience => experience, :question => question
+#  end
 
   def experience_notification(users, experience)
     load_settings
 
     bcc           users.map{|u| u.email}
     from          "notifications@inherit.com"
-    subject       "Inherit Experience Notification"
+    subject       "#{experience.user.showname} Inherit Experience Notification"
     sent_on       Time.now
-    body          :experience => experience
+    body          :experience => experience, :host => host, :url => experience_path(experience)
   end
 
   def goal_empty(user)
@@ -56,7 +61,7 @@ class NotificationMailer < ActionMailer::Base
 
     recipients     user.email
     from          "notifications@inherit.com"
-    subject       "Empty goal Notification"
+    subject       "#{user.showname} Empty goal Notification"
     sent_on       Time.now
     body          :user => user
   end
@@ -66,7 +71,7 @@ class NotificationMailer < ActionMailer::Base
 
     recipients     user.email
     from          "notifications@inherit.com"
-    subject       "Empty exp Notification"
+    subject       "#{user.showname} Empty exp Notification"
     sent_on       Time.now
     body          :user => user, :goals => goals, :fans_count => fans_count
   end

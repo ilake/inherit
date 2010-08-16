@@ -1,12 +1,27 @@
 <% title "Chat" %>
 
-<p>
-  <strong>Content:</strong>
-  <%=h @chat.content %>
-</p>
-
-<p>
-  <%= link_to "Edit", edit_chat_path(@chat) %> |
-  <%= link_to "Destroy", @chat, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", chats_path %>
-</p>
+<div class='chat'>
+  <h3>
+    <span class='exp_author'>
+      <%= link_to @chat.user.nickname, user_home_path(@chat.user.username) %>
+    </span> 說...
+    <% if can? :destroy, @chat %>
+      <%= link_to "刪除", @chat, :confirm => '你確定嗎?', :method => :delete %>
+    <% end %>
+  </h3>
+  <div><%= Sanitize.clean(@chat.content) %></div>
+  <div class='chat_reply'>
+    <% @chat.children.each do |c|%>
+      <h3>
+        <span class='exp_author'>
+          <%= link_to c.user.nickname, user_home_path(c.user.username) %>
+        </span> 說...
+        <% if can? :destroy, c %>
+          <%= link_to "刪除", c, :confirm => '你確定嗎?', :method => :delete %>
+        <% end %>
+      </h3>
+      <div><%= Sanitize.clean(c.content) %></div>
+    <% end %>
+  </div>
+  <%= link_to "回應", reply_new_chat_path(:chat_id => @chat) if current_user.reply_permission(@chat, params[:user_id]) %>
+</div>

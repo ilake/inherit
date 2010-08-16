@@ -2,4 +2,10 @@
 
 <%= render :partial => 'form' %>
 
-<p><%= link_to "Back to List", chats_path %></p>
+<p>
+<% if @user %>
+<%= link_to "Back to List", user_chats_path(@user) %>
+<% else %>
+<%= link_to "Back to List", chats_path %>
+<% end %>
+</p>

@@ -3,5 +3,5 @@
 </p>
 
 <p>
-  <%= link_to 'you could see it here', "http://#{ActionMailer::Base.default_url_options[:host]}#{url_for(@comment.commentable)}" %>
+  <a href="<%= @host %><%= @url %>">you could see it here</a>
 </p>

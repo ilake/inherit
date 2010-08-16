@@ -8,10 +8,12 @@
   </div>
 <% end %>
 
-<p class='function'>
-  <%= link_to "回到#{@user.nickname}頁面", user_home_path(@user.username) if params[:user_id] %>
-</p>
-<h3><%= @user.nickname %>問過的問題</h3>
+<% if @user %>
+  <p class='function'>
+  <%= link_to "回到#{@user.nickname}頁面", user_home_path(@user.username) %>
+  </p>
+  <h3><%= @user.nickname %>問過的問題</h3>
+<% end %>
 <table id='questionlist'>
   <tr>
     <th>標題</th>

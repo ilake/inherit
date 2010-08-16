@@ -62,7 +62,9 @@ class User < ActiveRecord::Base
   has_many :experiences
   has_many :comments
   has_many :questions
-  has_many :chats
+
+  has_many :leave_chats, :class_name => 'Chat', :foreign_key => :user_id
+  has_many :own_chats, :class_name => 'Chat', :foreign_key => :master_id
 
   delegate :location_list, :birthday, :to => :profile
 
@@ -123,6 +125,15 @@ class User < ActiveRecord::Base
   def showname
     @showname ||= (nickname || username)
   end
+
+  def reply_permission(chat, user_id)
+    if user_id
+      self.id == user_id.to_i
+    else
+      self.try(:admin)
+    end
+  end
+
   private
   def init
     self.create_profile

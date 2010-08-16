@@ -24,6 +24,12 @@
     <%= link_to "解惑", user_questions_path(@user), {:class => 'profile'} %>
   </div>
   <dl>
+    <dt class='anchor'>
+    <strong>留言:</strong>
+    <%= link_to "留言", user_chats_path(@user), {:class => 'profile'} %>
+    </dt>
+  </dl>
+  <dl>
     <dt>
     <strong>目標:</strong>
     <% if can?(:create, Goal) && @user.is_owner?(current_user)%>
