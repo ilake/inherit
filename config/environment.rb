@@ -35,6 +35,7 @@ Rails::Initializer.run do |config|
   config.gem 'sitemap_generator', :lib => false
   config.gem 'devise_facebook_connectable'
   config.gem 'facebooker'
+  config.gem 'contacts'
   #config.gem 'ryanb-acts-as-list', :lib => 'acts_as_list', :source => 'http://gems.github.com'
 
 

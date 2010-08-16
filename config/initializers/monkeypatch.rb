@@ -22,8 +22,7 @@ module Devise
     # valid. Also tests presence of password, confirmation and length
     module Validatable
       # All validations used by this module.
-      VALIDATIONS = [ :validates_presence_of, :validates_uniqueness_of, :validates_format_of,
-                      :validates_confirmation_of, :validates_length_of ].freeze
+      #VALIDATIONS = [ :validates_presence_of, :validates_uniqueness_of, :validates_format_of, :validates_confirmation_of, :validates_length_of ].freeze
 
       def self.included(base)
         assert_validations_api!(base)
