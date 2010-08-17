@@ -4,11 +4,7 @@
 
 <% form_for @goal do |f| %>
   <%= f.error_messages %>
-  <p>
-    <p class='desc'>它可以是你的目標, 計畫或者是經驗的分類</p>
-    <p><%= f.label :category, '類型' %></p>
-    <%= f.select :category, GOAL_CATEGORY.to_select_options %>
-  </p>
+  <%= f.hidden_field :category, :value => 'category' %>
   <p class='goal_start_at'>
     <%= f.label :start_at, '開始時間' %><br />
     <%= f.date_select :start_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :end_year => Time.now.year  %>

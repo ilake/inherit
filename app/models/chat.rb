@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100615163218
+# Schema version: 20100816003850
 #
 # Table name: chats
 #
@@ -9,6 +9,7 @@
 #  parent_id  :integer(4)
 #  created_at :datetime
 #  updated_at :datetime
+#  master_id  :integer(4)
 #
 
 # master_id 是 nil 表示是寄給 admin
@@ -58,3 +59,4 @@ class Chat < ActiveRecord::Base
     self.location_list = self.user.location_list
   end
 end
+

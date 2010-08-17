@@ -13,7 +13,7 @@ class ExperiencesController < ApplicationController
     @current_goal = Goal.find_by_id(params[:goal_id])
     @experience_groups = @experiences.group_by{|e| e.start_at.at_beginning_of_month}
     @goals = user_selected.goals.show_policy(@user.is_owner?(current_user)).not_category.descend_by_created_at
-    @categories = user_selected.goals.show_policy(@user.is_owner?(current_user)).is_category.descend_by_created_at
+    #@categories = user_selected.goals.show_policy(@user.is_owner?(current_user)).is_category.descend_by_created_at
     @fan = @user.fan(current_user)
 
     events = @experiences.map{ |e|
@@ -39,7 +39,7 @@ class ExperiencesController < ApplicationController
       #end_time_hash = g.end_at_hash
        events << {
           'start' => g.start_at.to_s(:date),
-          'title' => g.title,
+          'title' => "[目標]#{g.title}",
           'description' => "
       <span class='function'>
           #{app_helpers.link_to '編輯', edit_goal_path(g) if can? :update, g}

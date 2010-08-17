@@ -1,3 +1,18 @@
+# == Schema Information
+# Schema version: 20100816003850
+#
+# Table name: profiles
+#
+#  id         :integer(4)      not null, primary key
+#  birthday   :date
+#  gender     :boolean(1)
+#  user_id    :integer(4)
+#  created_at :datetime
+#  updated_at :datetime
+#  intro      :text
+#  tags_list  :text
+#
+
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Profile do
@@ -5,3 +20,4 @@ describe Profile do
     Profile.new.should be_valid
   end
 end
+

@@ -19,13 +19,13 @@
   <div>
     <p>
       <%= f.label :start_at, '開始時間' %><br />
-      <%= f.date_select :start_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :end_year => Time.now.year %>
+      <%= f.datetime_select :start_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :end_year => Time.now.year %>
     </p>
     <p>
       <%= f.label :end_at, '結束時間' %><br />
       <%= f.check_box :end_at_exist %>
       <span id='end_at_date'>
-        <%= f.date_select :end_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :end_year => Time.now.year  %>
+        <%= f.datetime_select :end_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :end_year => Time.now.year  %>
       </span>
       <div id='end_at_untilnow'>
         <%= f.check_box :until_now %>

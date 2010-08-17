@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100706101940
+# Schema version: 20100816003850
 #
 # Table name: users
 #
@@ -18,12 +18,14 @@
 #  last_sign_in_at      :datetime
 #  current_sign_in_ip   :string(255)
 #  last_sign_in_ip      :string(255)
+#  facebook_uid         :integer(8)
+#  facebook_session_key :string(149)
 #  created_at           :datetime
 #  updated_at           :datetime
+#  username             :string(255)
 #  fans_count           :integer(4)      default(0)
 #  admin                :boolean(1)
 #  user_ifollow_count   :integer(4)      default(0)
-#  username             :string(255)
 #  nickname             :string(255)
 #
 
@@ -140,3 +142,4 @@ class User < ActiveRecord::Base
   end
 
 end
+

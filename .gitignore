@@ -19,3 +19,4 @@ public/h.rb
 tags
 *.swp
 rerun.txt
+vendor/plugins/annotate_models/

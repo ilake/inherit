@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100703192500
+# Schema version: 20100816003850
 #
 # Table name: experiences
 #
@@ -105,3 +105,4 @@ class Experience < ActiveRecord::Base
     Delayed::Job.enqueue(ExperienceMailingJob.new(self.id, self.user_id))
   end
 end
+

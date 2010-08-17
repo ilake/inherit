@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100706023114
+# Schema version: 20100816003850
 #
 # Table name: goals
 #
@@ -8,8 +8,8 @@
 #  content    :text
 #  state      :string(10)      default("working")
 #  user_id    :integer(4)
-#  start_at   :time
-#  end_at     :time
+#  start_at   :datetime
+#  end_at     :datetime
 #  created_at :datetime
 #  updated_at :datetime
 #  public     :boolean(1)      default(TRUE)
@@ -70,3 +70,4 @@ class Goal < ActiveRecord::Base
 
 
 end
+

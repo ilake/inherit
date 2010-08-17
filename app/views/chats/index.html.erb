@@ -1,7 +1,9 @@
 <% title '意見' %>
 <% description @chats.last.try(:content) %>
 <% if params[:user_id] %>
-  <%= @user.showname %>留言板
+  <span class='anchor'>
+    <%= link_to "#{h @user.showname}", user_home_path(@user.username) %> > <%= @user.showname %>留言板
+  </span>
 <% else %>
   站方意見留言板
 <% end %>

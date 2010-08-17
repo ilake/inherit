@@ -4,8 +4,8 @@ common: &default_settings
     working: 'Working'
     pending: 'Pending'
     finish: 'Finish'
+    help: 'Need Help'
   goal_category:
-    category: 'Category'
     goal: 'Goal'
   exp_type:
     normal: 'Normal'

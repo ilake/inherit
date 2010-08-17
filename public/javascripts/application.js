@@ -57,4 +57,15 @@ $(document).ready(function(){
         var url = href.join('')
         window.location = url;
     });
+
+    $('#profile_hide_show').toggle(
+    function(){
+      $('#profile_hide_show').removeClass('profile_show').addClass('profile_hide')
+      $('#user_content').show();
+    },
+    function(){
+      $('#profile_hide_show').removeClass('profile_hide').addClass('profile_show')
+      $('#user_content').hide();
+    }
+    );
 });

@@ -11,52 +11,127 @@
 <%= share_button %>
 
 <div id='user_exp_profile'>
-  <div class='exp_profile_cell anchor'>
-    <strong>暱稱:</strong>
-    <%= link_to "#{h @user.nickname}", user_home_path(@user.username)%>
-  </div>
-  <div class='exp_profile_cell anchor'>
-    <strong>個人檔案:</strong>
-    <%= link_to "簡介", user_profile_path(@user), {:class => 'profile'} %>
-  </div>
-  <div class='exp_profile_cell anchor'>
-    <strong>解惑:</strong>
-    <%= link_to "解惑", user_questions_path(@user), {:class => 'profile'} %>
-  </div>
-  <dl>
-    <dt class='anchor'>
-    <strong>留言:</strong>
-    <%= link_to "留言", user_chats_path(@user), {:class => 'profile'} %>
-    </dt>
-  </dl>
-  <dl>
-    <dt>
-    <strong>目標:</strong>
+  <div class='user_header'>
+  <% if @current_goal %>
+    <h3 class='avatared anchor'><%= link_to "#{h @user.showname}", user_home_path(@user.username) %> > <%= @current_goal.title %></h3>
+  <% else %>
+    <h1 class='avatared'><%= "#{h @user.showname}" %></h1>
+  <% end %>
+  <div id='fans_area'>
     <% if can?(:create, Goal) && @user.is_owner?(current_user)%>
-      <%= link_to "新增目標", new_goal_path(:goal => {'category' => 'goal'}) %>
+      <span class='btn btn-active'>
+        <%= link_to "新增目標", new_goal_path(:goal => {'category' => 'goal'}) %>
+      </span>
     <% end %>
-    </dt>
+    <% if !@user.is_owner?(current_user)%>
+      <% if @fan.new_record? %>
+        <% form_for @fan, :html => {:id => 'trigger_follow'} do |f| %>
+          <%= f.hidden_field :fannable_id %>
+          <%= f.hidden_field :fannable_type %>
+          <%= f.hidden_field :user_id %>
+          <%= f.submit "訂閱", :name => nil, :class => 'btn'%>
+        <% end %>
+      <% else %>
+        <span class='btn'>
+          <%= link_to '取消訂閱', @fan, :confirm => 'Are you sure?', :method => :delete %>
+        </span>
+      <% end %>
+    <% end %>
+    <span class='btn btn-active'>
+      <%= link_to "留言版", user_chats_path(@user), {:class => 'profile'} %>
+    </span>
+    <span id='exp_follower'>
+      <strong>粉絲</strong>
+      <span class='fans_anchor'>
+        <%= link_to @user.fans_count, user_fans_path(@user) %>
+      </span>
+    </span>
+    <span id='exp_ifollew'>
+      <strong>訂閱</strong>
+      <span class='fans_anchor'>
+        <%= link_to @user.user_ifollow_count, ifollow_user_fans_path(@user) %> 
+      </span>
+    </span>
+    <span id='profile_hide_show' class='profile_show'> &nbsp; &nbsp; &nbsp; </span>
+  </div>
+</div>
+  <div class='clear'></div>
+  <div id='user_content'>
+    <div class='exp_profile_content anchor'>
+      <p>
+      <strong>生日:</strong>
+      <%=h @user.profile.birthday %>
+      </p>
+      <p>
+      <strong>性別:</strong>
+      <%= GENDER_TYPE[@user.profile.gender.to_s] %>
+      </p>
+      <p>
+      <strong>國家:</strong>
+      <%= @user.profile.location_list %>
+      </p>
+      <p>
+      <strong>自我介紹:</strong>
+      <%= @user.profile.intro %>
+      </p>
+      <p>
+      <strong>標籤:</strong>
+      <%= @user.profile.tag_list %>
+      </p>
 
-    <% for goal in @goals %>
-      <dd class='anchor'>
-      <%=link_to h(goal.title), user_exps_path(@user, goal) %>
-      </dd>
-    <% end %>
-  </dl>
-  <dl>
-    <dt>
-    <strong>分類:</strong>
-    <% if can?(:create, Goal) && @user.is_owner?(current_user)%>
-      <%= link_to "新增分類", new_goal_path %>
-    <% end %>
-    </dt>
+      <% if can? :update, @user.profile %>
+        <p class='function'>
+        <%= link_to "編輯", edit_user_profile_path(current_user)%>
+        </p>
+      <% end %>
+    </div>
+    <div class='exp_goal_content anchor'>
+      <dl>
+        <dt>
+        <strong>目標:</strong>
+        <% if can?(:create, Goal) && @user.is_owner?(current_user)%>
+          <span class='btn btn-active'>
+            <%= link_to "新增目標", new_goal_path(:goal => {'category' => 'goal'}) %>
+          </span>
+        <% end %>
+        </dt>
 
-    <% for category in @categories %>
-      <dd class='anchor'>
-      <%=link_to h(category.title), user_exps_path(@user, category), ( category.id == params[:goal_id].to_i ? {:class => 'active'} : category.tab_style ) %>
-      </dd>
+        <% if @goals.size.zero? %>
+          <em>Don't have goal yet</em>
+        <% else %>
+          <% for goal in @goals %>
+            <dd class='anchor'>
+            <%=link_to h(goal.title), user_exps_path(@user, goal) %>(<%= GOAL_STATES[goal.state] %>)
+            </dd>
+          <% end %>
+        <% end %>
+      </dl>
+    </div>
+    <% if @current_goal %>
+      <div id='goal_desc_area'>
+        <div>
+          <strong><%= GOAL_CATEGORY[@current_goal.category] %>名稱:</strong>
+          <span class='anchor'><%= link_to  @current_goal.title, @current_goal %></span>
+          <% unless @current_goal.is_category? %>
+            <div>
+              <strong>起始:</strong>
+              <%= @current_goal.start_at.to_s(:date)%>
+            </div>
+            <div>
+              <strong>狀態:</strong>
+              <%= GOAL_STATES[@current_goal.state] %>
+            </div>
+          <% end %>
+        </div>
+        <div id='goal_detail'>
+          <span>
+            <%= link_to Sanitize.clean(@current_goal.content), @current_goal %>
+          </span>
+          <span class='anchor'><%= link_to '>>more', @current_goal %></span>
+        </div>
+      </div>
     <% end %>
-  </dl>
+  </div>
 </div>
 <div id='exp_chart'>
 </div>
@@ -66,64 +141,19 @@
 </div>
 <div class='clear'></div>
 
-<div class='grid-top'>
-  <div id='fans_area'>
-    <span id='exp_follower'>
-      <strong>粉絲</strong>
-      <span class='fans_anchor'>
-        <%= link_to @user.fans_count, user_fans_path(@user) %>
-      </span>
-    </span>
-    <% if !@user.is_owner?(current_user)%>
-      <span>
-        <% if @fan.new_record? %>
-          <% form_for @fan, :html => {:id => 'trigger_follow'} do |f| %>
-            <%= f.hidden_field :fannable_id %>
-            <%= f.hidden_field :fannable_type %>
-            <%= f.hidden_field :user_id %>
-            <%= f.submit "訂閱", :name => nil%>
-          <% end %>
-        <% else %>
-          <%= link_to '取消訂閱', @fan, :confirm => 'Are you sure?', :method => :delete, :id => 'trigger_follow' %>
-        <% end %>
-      </span>
-    <% end %>
-    <span id='exp_ifollew'>
-      <strong>訂閱</strong>
-      <span class='fans_anchor'>
-        <%= link_to @user.user_ifollow_count, ifollow_user_fans_path(@user) %> 
-      </span>
-    </span>
-  </div>
-  <% if @current_goal %>
-    <div id='goal_desc_area'>
-        <div>
-          <span class='anchor'><%= link_to "回到全部經驗", user_home_path(@user.username) %></span>
-        </div>
-        <div>
-          <strong><%= GOAL_CATEGORY[@current_goal.category] %>名稱:</strong>
-          <span class='anchor'><%= link_to  @current_goal.title, @current_goal %></span>
-          <% unless @current_goal.is_category? %>
-            <strong>起始:</strong>
-            <%= @current_goal.start_at.to_s(:date)%>
-            <strong>狀態:</strong>
-            <%= GOAL_STATES[@current_goal.state] %>
-          <% end %>
-        </div>
-        <div id='goal_detail'>
-          <span class='goal_desc'>
-            <%= link_to "#{truncate_u(Sanitize.clean(@current_goal.content), 100)}", @current_goal %>
-          </span>
-          <span class='anchor'><%= link_to ">>more", @current_goal %></span>
-        </div>
-    </div>
+<% if @current_goal %>
+  <% content_for :sider do %>
+    <%= Handcache.get_and_set("#{params.values.sort.to_s}-sider", :expires_in => 60 ) do
+      render :partial => 'goals/show_sider', :locals => {:goal => @current_goal}
+    end %>  
   <% end %>
-</div>
-<div class='clear'></div>
+<% end %>
+
+
 <div id='exp_list'>
   <h2>經驗
     <% if can?(:create, Experience) && @user.is_owner?(current_user) %>
-      <span id='new_exp'>
+      <span id='new_exp' class='btn btn-active'>
         <% if @current_goal %>
           <%= link_to ' ( 新增 ) ', new_goal_experience_path(@current_goal) %>
         <% else %>

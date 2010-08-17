@@ -2,20 +2,23 @@
 <% description "#{truncate_u(Sanitize.clean(@goal.content), 100)}" %>
 <% keywords @goal.tag_list %>
 
+<%= facebook_like %>
+<div class='clear'></div>
+<h3 class='avatared anchor'><%= link_to "#{h @goal.user.showname}", user_home_path(@goal.user.username) %> > <%= @goal.title %></h3>
+<div class='clear'></div>
 <% content_for :sider do %>
   <%= Handcache.get_and_set("#{params.values.sort.to_s}-sider", :expires_in => 60 ) do
     render :partial => 'show_sider', :locals => {:goal => @goal}
   end %>  
 <% end %>
 
-<%= facebook_like %>
 <div id='goal_show_main'>
   <div id='goal_show_content'>
     <div>
       <span id='goal_show_time'>
-        <%=h @goal.title %>
+        <div><%=h @goal.title %></div>
         <%=h @goal.start_at.to_s(:date) if @goal.start_at %>
-        <%=h "~ #{@goal.end.to_s(:date)}" if @goal.end_at %>
+        <%=h "~ #{@goal.end_at.to_s(:date)}" if @goal.end_at %>
         <%= '(私密)' if !@goal.public %>
       </span>
       <span class='goal_author'>
