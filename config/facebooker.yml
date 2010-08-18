@@ -10,7 +10,7 @@ defaults: &defaults
 
     # Optional options.
     # pretty_errors: true
-    # set_asset_host_to_callback_url: false
+    set_asset_host_to_callback_url: false
     # tunnel:
     #   public_host_username:
     #   public_host:
@@ -25,6 +25,9 @@ test: &test
 
 production: &production
   <<: *defaults
+  api_key: 94fda12883236d10527ac6e8961f7518
+  secret_key: 255f79cf1dbc2cac7120b1e4c275f68f
+  callback_url: http://inherit.iwakela.com
 
 # staging:
 #   <<: *production
