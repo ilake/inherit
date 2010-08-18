@@ -16,7 +16,6 @@ Rails::Initializer.run do |config|
 
   # Specify gems that this application depends on and have them installed with rake gems:install
   # config.gem "bj"
-  # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
   config.gem "mislav-will_paginate", :lib => "will_paginate", :source => "http://gems.github.com"
@@ -36,6 +35,7 @@ Rails::Initializer.run do |config|
   config.gem 'devise_facebook_connectable'
   config.gem 'facebooker'
   config.gem 'contacts'
+  config.gem "hpricot", :source => 'http://rubygems.org'
   #config.gem 'ryanb-acts-as-list', :lib => 'acts_as_list', :source => 'http://gems.github.com'
 
 
