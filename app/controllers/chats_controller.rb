@@ -5,7 +5,7 @@ class ChatsController < ApplicationController
   def index
     if params[:user_id]
       @chats = user_selected.own_chats.location_with(current_user_location).origin.descend_by_created_at.paginate :per_page => 15, :page => params[:page], :include => [:user, :children]
-      @chat = current_user.leave_chats.new(:master_id => user_selected.id)
+      @chat = Chat.new(:master_id => user_selected.id, :user_id => current_user.try(:id))
     else
       @chats = Chat.location_with(current_user_location).for_admin.origin.descend_by_created_at.paginate :per_page => 15, :page => params[:page], :include => [:user, :children]
       @chat = Chat.new
@@ -29,7 +29,11 @@ class ChatsController < ApplicationController
     @chat = current_user.leave_chats.new(params[:chat])
     if @chat.save
       flash[:notice] = "Successfully created chat."
-      redirect_to user_chats_path(@chat.owner)
+      if @chat.owner
+        redirect_to user_chats_path(@chat.owner)
+      else
+        redirect_to chats_path
+      end
     else
       render :action => 'new'
     end

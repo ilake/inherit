@@ -53,8 +53,8 @@
             <% else %>
               <li><%= link_to "首頁", home_url %></li>
             <% end %>
-            <li><%= link_to "解惑", questions_path %></li>
             <li><%= link_to "意見", chats_path %></li>
+            <li><%= link_to "吼！", search_rands_path %></li>
             <li>
               <% form_tag search_url, :method => :get do %>
                 搜尋: <%= text_field_tag :search, nil, :size => 10 %>

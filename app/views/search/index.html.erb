@@ -1,26 +1,20 @@
 <% title params[:search] %>
 <% description search_page_meta_tag(@questions, @goals, @experiences)%>
 <% keywords params[:search] %>  
-
-<div class='search_item_list'>
-  <% if ['questions', 'index'].include?(action_name) %>
-    <div class='search_exp_items'>
-      <h3>問題 <%= link_to "#{@questions.total_entries}個結果- 秀全部", search_questions_path(:search => params[:search]) %></h3>
-      <ul>
-        <% @questions.each do |question|%>
-          <li class='question_anchor'>
-            <%= link_to question.title, question %>
-          </li>
-        <% end %>
-      </ul>
-      <%= will_paginate @questions if action_name == 'questions' %>
-      <p class='share_function'>
-        <%= link_to '說出你的煩惱', new_question_path %>
-      </p>
-    </div>
+  <div id="home_search">
+  <h4><!--不這樣都會偏掉我不會處理 orz -->　　</h4>
+  <h2>搜尋你有興趣的</h2>
+  <% form_tag search_url, :method => :get do %>
+    <%= text_field_tag :search, nil, :size => 24 %>
+    <%= submit_tag '搜尋', :name => nil %>
   <% end %>
-
-  <% if ['goals', 'index'].include?(action_name) %>
+  </div>
+  <strong>使用的關鍵字是 <%= params[:search] || @tag.name %></strong>
+  <span class='btn btn-active'>
+    <%= link_to "吼！", search_rands_path %>
+  </span>
+<div class='search_item_list'>
+  <% if ['goals', 'index', 'random'].include?(action_name) %>
     <div class='search_goal_items'>
       <h3>目標<%= link_to "#{@goals.total_entries}個結果- 秀全部", search_goals_path(:search => params[:search]) %></h3>
       <ul>
@@ -35,7 +29,7 @@
     </div>
   <% end %>
 
-  <% if ['experiences', 'index'].include?(action_name) %>
+  <% if ['experiences', 'index', 'random'].include?(action_name) %>
     <div class='search_exp_items'>
       <h3>經驗 <%= link_to "#{@experiences.total_entries}個結果- 秀全部", search_exps_path(:search => params[:search]) %></h3>
       <ul>

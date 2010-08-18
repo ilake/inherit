@@ -12,7 +12,12 @@ class ExperiencesController < ApplicationController
     @experiences = user_selected.experiences.show_policy(@user.is_owner?(current_user)).goal_categroy(params[:goal_id]).descend_by_position.limit(current_data_number(params[:data_number]))
     @current_goal = Goal.find_by_id(params[:goal_id])
     @experience_groups = @experiences.group_by{|e| e.start_at.at_beginning_of_month}
-    @goals = user_selected.goals.show_policy(@user.is_owner?(current_user)).not_category.descend_by_created_at
+    if @current_goal
+      @goals = []
+      @goals << @current_goal
+    else
+      @goals = user_selected.goals.show_policy(@user.is_owner?(current_user)).not_category.descend_by_created_at
+    end
     #@categories = user_selected.goals.show_policy(@user.is_owner?(current_user)).is_category.descend_by_created_at
     @fan = @user.fan(current_user)
 
@@ -30,12 +35,11 @@ class ExperiencesController < ApplicationController
       </span>
       <br /> 
       #{app_helpers.truncate_u(Sanitize.clean(e.content), 100)}",
-      'color' => e.color,
-      'icon' => "/images/timeline/dark-red-circle.png"
+      'color' => e.color
       }.merge!(end_time_hash)
     }
 
-     @goals.not_category.each { |g|
+     @goals.each { |g|
       #end_time_hash = g.end_at_hash
        events << {
           'start' => g.start_at.to_s(:date),
@@ -48,8 +52,7 @@ class ExperiencesController < ApplicationController
       </span>
           <br /> 
           #{app_helpers.truncate_u(Sanitize.clean(g.content), 100)}",
-          'color' => "##{rand(10)}#{rand(10)}#{rand(10)}",
-          'icon' => "/images/timeline/#{['gray', 'green', 'red'].rand}-circle.png"
+          'color' => "##{rand(10)}#{rand(10)}#{rand(10)}"
        }#.merge!(end_time_hash)
     }
     @events = events.to_json

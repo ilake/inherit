@@ -62,7 +62,7 @@ class Experience < ActiveRecord::Base
     define_index do
       indexes content
       indexes tags_list
-      indexes comments.content, :as => :comment_content
+      #indexes comments.content, :as => 'comment_content'
       where "public = '1'"
       group_by "user_id"
     end

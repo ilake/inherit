@@ -14,18 +14,18 @@
 <% end %>
 
 <div class='new_obj_area'>
-  <h3>分享新的經驗</h3>
+  <h3>新增entry</h3>
   <%= f.error_messages %>
   <div>
     <p>
       <%= f.label :start_at, '開始時間' %><br />
-      <%= f.datetime_select :start_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :end_year => Time.now.year %>
+      <%= f.date_select :start_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :end_year => Time.now.year %>
     </p>
     <p>
       <%= f.label :end_at, '結束時間' %><br />
       <%= f.check_box :end_at_exist %>
       <span id='end_at_date'>
-        <%= f.datetime_select :end_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :end_year => Time.now.year  %>
+        <%= f.date_select :end_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :end_year => Time.now.year  %>
       </span>
       <div id='end_at_untilnow'>
         <%= f.check_box :until_now %>
@@ -48,9 +48,9 @@
   <%#= f.label :exp_type, '影響' %><br />
   <%#= f.select :exp_type, EXP_TYPE.to_select_options%>
   <p>
-    <%= f.label :goal_id, '選擇所屬分類' %>
+    <%= f.label :goal_id, '選擇所屬目標' %>
     <span class='anchor'>
-      <%= link_to "新增分類", new_goal_path(:rel => 'facebox'), :rel => "facebox"  %>
+      <%= link_to "新增目標", new_goal_path(:rel => 'facebox', :state => 'goal'), :rel => "facebox"  %>
     </span>
     <span id='action_working_status' class='loading' style='display:none'>Increasing...</span>
     <span id='action_comeplete_status' class='complete' style='display:none'>Increased</span>

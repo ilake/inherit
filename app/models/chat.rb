@@ -30,7 +30,7 @@ class Chat < ActiveRecord::Base
   after_create :deliver_chat_notification, :if => Proc.new{|c| c.parent_id }
   
   #如果是給一般使用者的留言就寄信, admin不用
-  after_create :deliver_master_chat_notification, :if => Proc.new{|c| c.parent_id.nil? && !to_admin? }
+  after_create :deliver_master_chat_notification, :if => Proc.new{|c| c.parent_id.nil? && !c.to_admin? }
 
   def self.location_with(location)
     if location == 'World' || location.blank?
@@ -42,6 +42,14 @@ class Chat < ActiveRecord::Base
 
   def to_admin?
     !master_id
+  end
+
+  def reply_permission(current_user)
+    if self.owner
+      self.owner == current_user
+    else
+      current_user.try(:admin)
+    end
   end
 
   private

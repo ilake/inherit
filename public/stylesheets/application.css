@@ -251,7 +251,7 @@ input.btn, .btn a, .btn-active button, .btn-active input, .btn-active a {
 
 /* user home */
 #home_search {
-  margin-bottom:0;
+  margin-bottom:10px;
   margin-top:10px;
   padding-bottom:10px;
   background-color: #fff9aa;
@@ -419,9 +419,8 @@ input.btn, .btn a, .btn-active button, .btn-active input, .btn-active a {
 }
 
 #exp_list {
-  margin-left:100px;
-  float:left;
-  width:820px;
+  float:right;
+  width:720px;
   padding:5px;
 }
 
@@ -453,6 +452,7 @@ input.btn, .btn a, .btn-active button, .btn-active input, .btn-active a {
   float:left;
   width:200px;
   padding:5px;
+  border-right: 1px solid #DDDDDD;
 }
 
 #exp_show_time, #goal_show_time {

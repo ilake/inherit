@@ -128,14 +128,6 @@ class User < ActiveRecord::Base
     @showname ||= (nickname || username)
   end
 
-  def reply_permission(chat, user_id)
-    if user_id
-      self.id == user_id.to_i
-    else
-      self.try(:admin)
-    end
-  end
-
   private
   def init
     self.create_profile

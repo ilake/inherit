@@ -5,7 +5,8 @@ class TaggingsController < ApplicationController
   
   def show
     #@taggable_objs = params[:taggable_type].try(:constantize).try(:tagged_with, params[:id])
-    @taggable_objs = params[:taggable_type].try(:constantize).try(:paginate, :per_page => 15, :page => params[:page], :joins => :tags, :conditions => {:tags => {:name => params[:id]}}, :order => 'updated_at DESC')
+    @taggable_objs = params[:taggable_type].try(:constantize).search params[:id], :page => params[:page], :per_page => 15
+    #@taggable_objs = Experience.search params[:id], :page => params[:page], :per_page => 15
     @taggable_objs ||= []
   end
   

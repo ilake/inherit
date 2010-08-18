@@ -4,7 +4,7 @@
 
 <% form_for @goal do |f| %>
   <%= f.error_messages %>
-  <%= f.hidden_field :category, :value => 'category' %>
+  <%= f.hidden_field :category, :value => 'goal' %>
   <p class='goal_start_at'>
     <%= f.label :start_at, '開始時間' %><br />
     <%= f.date_select :start_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :end_year => Time.now.year  %>
