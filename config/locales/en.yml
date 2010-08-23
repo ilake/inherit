@@ -50,13 +50,22 @@ en:
     country: 'Country'
     intro: 'Introduce'
     tags: 'Tags'
+    nickname: 'Nickname'
+    locale: 'Locale'
+    backhome: 'Back to user home'
+    profile1: 'Please use tag describe your career, interest, skill, goal, dream, experence etc..'
+    profile2: 'Like engineer football starcraft warcraft reading'
+    tag_space: '( Space separated )'
+    male: 'Male'
+    female: 'Femal'
+
   exp:
     label: 'Record'
     tags: 'Experience tags'
     guys: 'Others experiecnes'
     someone: "'s got"
     number: 'Data Limit'
-    label: 'Trace'
+    label: 'Record'
     back_to_user: "Back to {{name}}'s records"
     belong_goal: "Goal"
     private: "Private"
@@ -66,6 +75,15 @@ en:
     relate: 'Related Records'
     new: 'Add your Record'
     detail: 'Detail'
+    start_at: 'Start At'
+    end_at: 'End At'
+    until_now: 'Until Now'
+    content: 'Content'
+    tag_space: 'tags （space separated）'
+    public: 'Public'
+    self_privacy: 'Private(Just for you)'
+    select_goal: 'select goal that record belongs to'
+    select_color: 'select the record color'
   goal:
     label: 'Goal'
     tags: 'Goal tags'
@@ -83,6 +101,17 @@ en:
     exps: "Goal's records"
     noexps: "Don't have any record in this goal yet"
     new: 'Create your Goal'
+    prepare: 'Prepare'
+    working: 'Working'
+    pending: 'Pending'
+    finish: 'Finish'
+    needhelp: 'Need Help'
+    start_at: 'Start At'
+    end_at: 'Finish At'
+    content: 'Description'
+    tag_space: 'tags （space separated）'
+    public: 'Public'
+    self_privacy: 'Private(Just for you)'
   comment:
     label: 'Comment'
     say: 'Say'
@@ -94,12 +123,15 @@ en:
     confirm: 'Are you Sure?'
     submit: 'Submit'
     like: 'Like'
+    cancel: 'Cancel'
     update_successfully: 'Update Successfully'
     update_fail: 'Update Fail'
     create_successfully: 'Create Successfully'
     create_fail: 'Create Fail'
     destroy_successfully: 'Destroy Successfully'
     destroy_fail: 'Destroy Fail'
+    increasing: 'Increasing'
+    increased: 'Increased'
   message:
     label: 'Suggestion'
     board: 'Message Board'
@@ -119,6 +151,23 @@ en:
     destroy: 'Cancel Successfully'
   can:
     not: 'No Permission'
+  mail:
+    see_here: 'You could see it here'
+    exp_notify: 'Your following have new record'
+    message: 'Your Message'
+    reply: 'Reply for you'
+    message_notify_subject: 'Message Notification'
+    goal_empty_notify_subject: 'Empty goal Notification'
+    exp_empty_notify_subject: 'Empty record Notification'
+    nogoal_desc1: "you don't have goal yet"
+    nogoal_desc2: 'Do you want to try to create a new one'
+    nogoal_desc3: 'or find what others doing for their goal'
+    new_goal_now: 'Create Your Goal'
+    others_goal: "Others' goal"
+    noexp_desc1: "you have {{num}} goals"
+    noexp_desc2: "You have {{num}} followers waitting for you"
+    noexp_desc3: "Record what you do for your goal"
+    new_exp_now: 'Record it now'
 
   date:
     formats:

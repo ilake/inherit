@@ -21,9 +21,9 @@ class NotificationMailer < ActionMailer::Base
 
     bcc           user.email
     from          "notifications@inherit.com"
-    subject       "#{chat.owner.showname} Chat Comment Notification"
+    subject       "#{chat.owner.showname} #{I18n.t('mail.message_notify_subject', :locale => user.locale)}"
     sent_on       Time.now
-    body          :chat => chat, :reply => reply, :host => host, :url => user_chat_path(chat.owner, chat)
+    body          :chat => chat, :reply => reply, :user => user, :host => host, :url => user_chat_path(chat.owner, chat)
   end
 
   def comment_notification(users, comment)
@@ -61,7 +61,7 @@ class NotificationMailer < ActionMailer::Base
 
     recipients     user.email
     from          "notifications@inherit.com"
-    subject       "#{user.showname} Empty goal Notification"
+    subject       "#{user.showname} #{I18n.t('mail.goal_empty_notify_subject', :locale => user.locale)}"
     sent_on       Time.now
     body          :user => user
   end
@@ -71,7 +71,7 @@ class NotificationMailer < ActionMailer::Base
 
     recipients     user.email
     from          "notifications@inherit.com"
-    subject       "#{user.showname} Empty exp Notification"
+    subject       "#{user.showname}  #{I18n.t('mail.exp_empty_notify_subject', :locale => user.locale)}"
     sent_on       Time.now
     body          :user => user, :goals => goals, :fans_count => fans_count
   end

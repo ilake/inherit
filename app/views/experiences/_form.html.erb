@@ -14,60 +14,60 @@
 <% end %>
 
 <div class='new_obj_area'>
-  <h3>新增entry</h3>
+  <h3><%= t'exp.new'%></h3>
   <%= f.error_messages %>
   <div>
     <p>
-      <%= f.label :start_at, '開始時間' %><br />
+      <%= f.label :start_at, t('exp.start_at') %><br />
       <%= f.date_select :start_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :end_year => Time.now.year %>
     </p>
     <p>
-      <%= f.label :end_at, '結束時間' %><br />
+    <%= f.label :end_at, t('exp.end_at') %><br />
       <%= f.check_box :end_at_exist %>
       <span id='end_at_date'>
         <%= f.date_select :end_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :end_year => Time.now.year  %>
       </span>
       <div id='end_at_untilnow'>
         <%= f.check_box :until_now %>
-        <strong>現在持續進行</strong>
+        <strong><%= t'exp.until_now'%></strong>
       </div>
     </p>
     <p>
-      <%= f.label :content, '內容' %><br />
+      <%= f.label :content, t('exp.content') %><br />
       <%= f.text_area :content, :size => '60x20', :class => "mceEditor" %>
     </p>
     <p>
       <%= f.radio_button :public, true %>
-      <%= f.label :public, '公開' %><br />
+      <%= f.label :public, t('exp.public') %><br />
 
       <%= f.radio_button :public, false %>
-      <%= f.label :public, '私密(自己才看的到)' %>
+      <%= f.label :public, t('exp.self_privacy') %>
     </p>
   </div>
 
   <%#= f.label :exp_type, '影響' %><br />
   <%#= f.select :exp_type, EXP_TYPE.to_select_options%>
   <p>
-    <%= f.label :goal_id, '選擇所屬目標' %>
+    <%= f.label :goal_id, t('exp.select_goal') %>
     <span class='anchor'>
-      <%= link_to "新增目標", new_goal_path(:rel => 'facebox', :state => 'goal'), :rel => "facebox"  %>
+      <%= link_to t("goal.new"), new_goal_path(:rel => 'facebox', :state => 'goal'), :rel => "facebox"  %>
     </span>
-    <span id='action_working_status' class='loading' style='display:none'>Increasing...</span>
-    <span id='action_comeplete_status' class='complete' style='display:none'>Increased</span>
+    <span id='action_working_status' class='loading' style='display:none'><%= t'action.increasing'%>...</span>
+    <span id='action_comeplete_status' class='complete' style='display:none'><%= t'action.increased'%></span>
     <br />
     <span id='exp_categories'>
       <%= f.select :goal_id, current_user.goals.map{|g|[g.title, g.id]}, {:include_blank => true}%>
     </span>
   </p>
   <p>
-    <%= f.label :tag, '標籤(請用空白隔開)' %><br />
+    <%= f.label :tag, t('exp.tag_space') %><br />
     <%= f.text_field :tag_list %>
   </p>
   <p>
-    <%= f.label :content, '請選擇你喜歡的顏色' %><br />
+    <%= f.label :content, t('exp.select_color') %><br />
     <%= f.text_field "color", :id => 'colorPicker' %>
   </p>
   <p>
-    <%= f.submit '送出' %>
+    <%= f.submit t('action.submit') %>
   </p>
 </div>

@@ -3,6 +3,10 @@ class Hash
     map{|k,v| [v, k] }
   end
 
+  def localize_to_select_options
+    map{|k,v| [I18n.t(v), k] }
+  end
+
   #vendor/plugins/localized_country_select/lib/localized_country_select.rb
   #為了不想我自己每次轉, to_sym
   def stringize_keys

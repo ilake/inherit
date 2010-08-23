@@ -1,20 +1,20 @@
 common: &default_settings
   goal_states: 
-    prepare: 'Prepare'
-    working: 'Working'
-    pending: 'Pending'
-    finish: 'Finish'
-    help: 'Need Help'
+    prepare: 'goal.prepare'
+    working: 'goal.working'
+    pending: 'goal.pending'
+    finish: 'goal.finish'
+    help: 'goal.needhelp'
   goal_category:
-    goal: 'Goal'
+    goal: 'goal'
   exp_type:
     normal: 'Normal'
     useful: 'Useful'
     milestone: 'Milestone'
     impression: 'Impression'
   gender_type:
-    'true': 'Male'
-    'false': 'Female'
+    'true': 'user.male'
+    'false': 'user.female'
   data_number:
     30: 30
     50: 50

@@ -1,13 +1,13 @@
 <p>
-Your message 
+<%= t'mail.message', :locale => @user.locale %>
 <a href='<%= @host %><%= @url %>'><%= @chat.content %></a>
 </p>
 <% if @reply %>
   <p>
-  You have reply <%= ApplicationController.helpers.truncate_u(Sanitize.clean(@reply.content),20) %>
+  <%= t'mail.reply', :locale => @user.locale %> <%= ApplicationController.helpers.truncate_u(Sanitize.clean(@reply.content),20) %>
   </p>
 <% end %>
 
 <p>
-<a href='<%= @host %><%= @url %>'>you could see it here</a>
+<a href='<%= @host %><%= @url %>'><%= t'mail.see_here', :locale => @user.locale %></a>
 </p>

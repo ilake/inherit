@@ -1,7 +1,7 @@
-<% title "編輯資料" %>
+<% title t("action.edit") %>
 
 <%= render :partial => 'form' %>
 
 <p class='function'>
-  <%= link_to "取消", user_profile_path(current_user)%>
+  <%= link_to t("action.cancel"), user_profile_path(current_user)%>
 </p>

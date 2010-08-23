@@ -16,7 +16,7 @@
 class Profile < ActiveRecord::Base
   include TagListFunc
 
-  attr_accessible :birthday, :gender, :location_list, :intro, :tag_list, :nickname, :location
+  attr_accessible :birthday, :gender, :location_list, :intro, :tag_list, :nickname, :location, :locale
 
   acts_as_taggable_on :tags
   acts_as_taggable_on :locations

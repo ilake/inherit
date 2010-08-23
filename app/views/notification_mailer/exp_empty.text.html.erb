@@ -1,15 +1,15 @@
 <p>
-  <%= @user.nickname %> you have <%= @goals.size %> goals
+<%= @user.nickname %> <%= t('mail.noexp_desc1', :num => @goals.size, :locale => @user.locale)%>
 </p>
 <p>
   <%= @goals.join(', ')%>
 </p>
 <% if @fans_count > 0 %>
 <p>
-  You have <%= @fans_count %> fans waitting for you
+ <%= t('mail.noexp_desc2', :num => @fans_count, :locale => @user.locale)%>
 </p>
 <% end %>
 <p>
-  Record what you do for your goal
-  <%= link_to "Create Your Experience", new_experience_url %>
+ <%= t('mail.noexp_desc3', :locale => @user.locale)%>
+  <%= link_to t("mail.new_exp_now", :locale => @user.locale), new_experience_url %>
 </p>

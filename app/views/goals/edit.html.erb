@@ -1,8 +1,5 @@
-<% title "Edit Goal" %>
+<% title t"goal.new" %>
 
 <%= render :partial => 'form' %>
 
-<p>
-  <%= link_to "Show", @goal %> |
-  <%= link_to "View All", goals_path %>
-</p>
+<p class='function'><%= link_to t("action.cancel"), user_home_path(current_user.username)%></p>

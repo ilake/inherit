@@ -29,7 +29,6 @@
             <span class='space'> <%= link_to t("sessions.sign_in"), new_user_session_path %></span>
           <% end %>
 
-
           <% if user_signed_in? %>
             <span class='anchor'>
               <%= t'user.location'%>：<%= link_to(current_user_location, user_location_url, :rel => "facebox", :id => 'user_location') %>
@@ -45,6 +44,7 @@
         <%= content_tag :div, msg, :id => "flash_#{name}" %>
       <% end %>
 
+      <div class='clear'></div>
       <div id='header'>
         <div id='logo'>
           <h2 id='logo'><%= link_to t("site.name"), root_url %></h2>

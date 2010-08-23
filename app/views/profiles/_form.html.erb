@@ -7,45 +7,48 @@
   <% if current_user.init_user_email_username%>
     <!-- 只有facebook的user需要有重新修改username, email的機會 -->
     <p>
-    <%= user_form.label :email, 'Email' %><br />
+    <%= user_form.label :email, t('user.email') %><br />
     <%= user_form.text_field :email%>
     </p>
     <p>
-    <%= user_form.label :username, 'Account' %><br />
+    <%= user_form.label :username, t('registrations.account') %><br />
     <%= user_form.text_field :username %>
     </p>
   <% end %>
 
   <p>
-    <%= user_form.label :nickname, 'Nickname' %><br />
+    <%= user_form.label :nickname, t('user.nickname') %><br />
     <%= user_form.text_field :nickname %>
   </p>
   <% user_form.fields_for :profile do |profile_form| %>
     <p>
-      <%= profile_form.label :birthday, '生日' %><br />
+      <%= profile_form.label :birthday, t('user.birthday') %><br />
       <%= profile_form.date_select :birthday, :start_year => 1920, :use_month_numbers => true, :default => {:month => 1, :day => 1} %>
     </p>
     <p>
-      <%= profile_form.label :gender, '性別' %><br />
-      <%= profile_form.select :gender, GENDER_TYPE.to_select_options %>
+      <%= profile_form.label :gender, t('user.gender') %><br />
+      <%= profile_form.select :gender, GENDER_TYPE.localize_to_select_options%>
     </p>
     <p>
-      <%#=profile_formcountry_select("profile", "location_list") %>
+      <%= profile_form.label :locale, t('user.locale') %><br />
+      <%= profile_form.select :locale, LOCALES_AVAILABLE.map{|locale|[ t(locale), locale]} %>
+    </p>
+    <p>
       <%= localized_country_select('user[profile_attributes]', 'location_list', [], {:selected => user_hometown}, :value => user_hometown) %>
     </p>
     <p>
-      <%= profile_form.label :intro, '自我介紹' %><br />
+      <%= profile_form.label :intro, t('user.intro') %><br />
       <%= profile_form.text_area :intro, :size => '50x15', :class => "mceEditor" %>
     </p>
     <p>
-      <%= profile_form.label :tag, '關鍵字' %><br />
-      <p class='desc'>請用關鍵字描述自己的職業, 興趣, 技能, 目標, 夢想, 經驗等</p>
-      <p class='desc'>如工程師 足球 羽球 星海 魔獸 遊戲 網站開發<strong>（請用空白隔開）</strong></p>
+      <%= profile_form.label :tag, t('user.tags') %><br />
+      <p class='desc'><%= t'user.profile1'%></p>
+      <p class='desc'><%= t'user.profile2'%><strong><%= t'user.tag_space'%></strong></p>
       <%= profile_form.text_field :tag_list, :size => 100 %>
     </p>
   <% end %>
 
-  <p><%= submit_tag "送出" %></p>
+  <p><%= submit_tag t("action.submit") %></p>
 <% end %>
 
 <% content_for :bottom_js do %>

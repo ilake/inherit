@@ -23,6 +23,15 @@
         <%= link_to t("goal.new"), new_goal_path(:goal => {'category' => 'goal'}) %>
       </span>
     <% end %>
+    <% if can?(:create, Experience) && @user.is_owner?(current_user) %>
+      <span id='new_exp' class='btn btn-active'>
+        <% if @current_goal %>
+          <%= link_to "#{t('exp.new')}", new_goal_experience_path(@current_goal) %>
+        <% else %>
+          <%= link_to "#{t('exp.new')}", new_user_experience_path(current_user) %>
+        <% end %>
+      </span>
+    <% end %>
     <% if !@user.is_owner?(current_user)%>
       <% if @fan.new_record? %>
         <% form_for @fan, :html => {:id => 'trigger_follow'} do |f| %>
@@ -64,7 +73,7 @@
       </p>
       <p>
       <strong><%= t'user.gender'%>:</strong>
-      <%= GENDER_TYPE[@user.profile.gender.to_s] %>
+      <%= t(GENDER_TYPE[@user.profile.gender.to_s]) %>
       </p>
       <p>
       <strong><%= t'user.country'%>:</strong>
@@ -101,7 +110,7 @@
         <% else %>
           <% for goal in @goals %>
             <dd class='anchor'>
-            <%=link_to h(goal.title), user_exps_path(@user, goal) %>(<%= GOAL_STATES[goal.state] %>)
+            <%=link_to h(goal.title), user_exps_path(@user, goal) %>(<%= t(GOAL_STATES[goal.state]) %>)
             </dd>
           <% end %>
         <% end %>
@@ -119,7 +128,7 @@
             </div>
             <div>
               <strong><%= t'goal.state'%>:</strong>
-              <%= GOAL_STATES[@current_goal.state] %>
+              <%= t(GOAL_STATES[@current_goal.state]) %>
             </div>
             <div>
               <strong><%= t'goal.percentage'%>:</strong>

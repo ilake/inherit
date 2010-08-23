@@ -1,5 +1,5 @@
-<% title "新增分類" %>
+<% title t("goal.new") %>
 
 <%= render :partial => 'form' %>
 
-<p class='function'><%= link_to "取消", user_home_path(current_user.username)%></p>
+<p class='function'><%= link_to t("action.cancel"), user_home_path(current_user.username)%></p>

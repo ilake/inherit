@@ -48,6 +48,14 @@ cn:
     country: '国家'
     intro: '简介'
     tags: '标签'
+    nickname: '昵称'
+    locale: '语言'
+    backhome: '回到个人页面'
+    profile1: '请用关键字描述自己的职业, 兴趣, 技能, 目标, 梦想, 经验等'
+    profile2: '如工程师 足球 羽球 星海 魔兽 游戏 网站开发'
+    tag_space: '（请用空白隔开）'
+    male: '男'
+    female: '女'
   exp:
     label: '记录'
     tags: '记录标签'
@@ -64,6 +72,15 @@ cn:
     relate: '相关记录'
     new: '分享你的记录'
     detail: '详细内容'
+    start_at: '开始时间'
+    end_at: '结束时间'
+    until_now: '现在持续进行'
+    content: '内容'
+    tag_space: '标签（请用空白隔开）'
+    public: '公开'
+    self_privacy: '私密(自己才看的到)'
+    select_goal: '选择所属目标'
+    select_color: '选择你喜欢的颜色'
   goal:
     label: '目标'
     tags: '目标标签'
@@ -81,6 +98,17 @@ cn:
     exps: '所属记录'
     noexps: '还没有该目标相关的记录'
     new: '建立你的目标'
+    prepare: '准备中'
+    working: '进行中'
+    pending: '暂停中'
+    finish: '完成'
+    needhelp: '需要帮忙'
+    start_at: '开始时间'
+    end_at: '完成时间'
+    content: '描述'
+    tag_space: '标签（请用空白隔开）'
+    public: '公开'
+    self_privacy: '私密(自己才看的到)'
   comment:
     label: '回覆'
     say: '说'
@@ -92,12 +120,15 @@ cn:
     confirm: '你确定吗?'
     submit: '送出'
     like: '赞'
+    cancel: '取消'
     update_successfully: '更新成功'
     update_fail: '更新失败'
     create_successfully: '新增成功'
     create_fail: '新增失败'
     destroy_successfully: '删除成功'
     destroy_fail: '删除失败'
+    increasing: '新增中'
+    increased: '已新增'
   message:
     label: '建议'
     board: '留言板'
@@ -117,6 +148,23 @@ cn:
     destroy: '取消成功'
   can:
     not: '权限不符'
+  mail:
+    see_here: '您可以从这前往观看'
+    exp_notify: '您的订阅者有新的纪录分享了'
+    message: '你的留言'
+    reply: '有给你的回应'
+    message_notify_subject: '留言通知'
+    goal_empty_notify_subject: '目标提醒'
+    exp_empty_notify_subject: '记录提醒'
+    nogoal_desc1: '您还没有建立目标'
+    nogoal_desc2: '尝试建立你的目标吧'
+    nogoal_desc3: '或者是参考人家的目标'
+    new_goal_now: '现在就建立'
+    others_goal: '别人的目标'
+    noexp_desc1: "你有{{num}}个目标"
+    noexp_desc2: "你有{{num}}个粉丝在等着你"
+    noexp_desc3: "记录你为你的目标做了什么"
+    new_exp_now: '现在就记录'
 
 
   date:
@@ -257,4 +305,3 @@ cn:
         less_than_or_equal_to: "必须小于或等于 {{count}}"
         odd: "必须是奇数"
         even: "必须是偶数"
-

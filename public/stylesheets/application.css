@@ -14,12 +14,13 @@ label {
   margin-top: 10px;
 }
 
-#flash_error {
-  font-size: 11px;
+#flash_error, #flash_failure {
+  font-size: 13px;
   background-color: #FCC;
   border: solid 1px #C66;
   padding: 5px 8px;
   margin-top: 10px;
+  font-weight:bold;
 }
 
 #flash_alert {
@@ -49,6 +50,10 @@ label {
 
 .hide {
   display: none;
+}
+
+.fl-r{
+  float:right;
 }
 
 .btn {
@@ -334,7 +339,7 @@ input.btn, .btn a, .btn-active button, .btn-active input, .btn-active a {
   margin-bottom:0;
   color:#495961;
   float:left;
-  width:520px;
+  width:420px;
 }
 
 #fans_area {

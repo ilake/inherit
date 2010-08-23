@@ -47,6 +47,14 @@ tw:
     country: '國家'
     intro: '簡介'
     tags: '標籤'
+    nickname: '暱稱'
+    locale: '語言'
+    backhome: '回到個人頁面'
+    profile1: '請用關鍵字描述自己的職業, 興趣, 技能, 目標, 夢想, 經驗等'
+    profile2: '如工程師 足球 羽球 星海 魔獸 遊戲 網站開發'
+    tag_space: '（請用空白隔開）'
+    male: '男'
+    female: '女'
   exp:
     label: '記錄'
     tags: '記錄標籤'
@@ -61,8 +69,17 @@ tw:
     next: '下一個記錄'
     guys_like: '人說讚'
     relate: '相關記錄'
-    new: '分享你的記錄'
+    new: '新增你的記錄'
     detail: '詳細內容'
+    start_at: '開始時間'
+    end_at: '結束時間'
+    until_now: '現在持續進行'
+    content: '內容'
+    tag_space: '標籤（請用空白隔開）'
+    public: '公開'
+    self_privacy: '私密(自己才看的到)'
+    select_goal: '選擇所屬目標'
+    select_color: '選擇你喜歡的顏色'
   goal:
     label: '目標'
     tags: '目標標籤'
@@ -80,6 +97,17 @@ tw:
     exps: '所屬記錄'
     noexps: '還沒有該目標相關的記錄'
     new: '建立你的目標'
+    prepare: '準備中'
+    working: '進行中'
+    pending: '暫停中'
+    finish: '完成'
+    needhelp: '需要幫忙'
+    start_at: '開始時間'
+    end_at: '完成時間'
+    content: '描述'
+    tag_space: '標籤（請用空白隔開）'
+    public: '公開'
+    self_privacy: '私密(自己才看的到)'
   comment:
     label: '回覆'
     say: '說'
@@ -91,12 +119,15 @@ tw:
     confirm: '你確定嗎?'
     submit: '送出'
     like: '讚'
+    cancel: '取消'
     update_successfully: '更新成功'
     update_fail: '更新失敗'
     create_successfully: '新增成功'
     create_fail: '新增失敗'
     destroy_successfully: '刪除成功'
     destroy_fail: '刪除失敗'
+    increasing: '新增中'
+    increased: '已新增'
   message:
     label: '建議'
     board: '留言板'
@@ -116,6 +147,25 @@ tw:
     destroy: '取消成功'
   can:
     not: '權限不符'
+  mail:
+    see_here: '您可以從這前往觀看'
+    exp_notify: '您的訂閱者有新的紀錄分享了' 
+    message: '你的留言'
+    reply: '有給你的回應'
+    message_notify_subject: '留言通知'
+    goal_empty_notify_subject: '目標提醒'
+    exp_empty_notify_subject: '記錄提醒'
+    nogoal_desc1: '您還沒有建立目標'
+    nogoal_desc2: '嘗試建立你的目標吧'
+    nogoal_desc3: '或者是參考人家的目標'
+    new_goal_now: '現在就建立'
+    others_goal: '別人的目標'
+    noexp_desc1: "你有{{num}}個目標"
+    noexp_desc2: "你有{{num}}個粉絲在等著你"
+    noexp_desc3: "記錄你為你的目標做了什麼"
+    new_exp_now: '現在就記錄'
+
+
     
 
   date:

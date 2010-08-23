@@ -1,7 +1,7 @@
 <p>
-  Your follow have new experience <%= ApplicationController.helpers.truncate_u(Sanitize.clean(@experience.content), 50) %>
+<%= I18n.t('mail.exp_notify')%> <%= ApplicationController.helpers.truncate_u(Sanitize.clean(@experience.content), 50) %>
 </p>
 
 <p>
-<a href='<%= @host %><%= @url %>'>you could see it here</a>
+<a href='<%= @host %><%= @url %>'><%= t'mail.see_here'%></a>
 </p>

@@ -68,7 +68,7 @@ class User < ActiveRecord::Base
   has_many :leave_chats, :class_name => 'Chat', :foreign_key => :user_id
   has_many :own_chats, :class_name => 'Chat', :foreign_key => :master_id
 
-  delegate :location_list, :birthday, :intro, :to => :profile
+  delegate :location_list, :birthday, :intro, :locale, :to => :profile
 
   after_create :init
 #  validate_on_update do |u|

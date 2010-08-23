@@ -1,36 +1,40 @@
 <% title "#{@user.nickname} Profile" %>
 
 <p>
-  <strong>暱稱:</strong>
+  <strong><%= t'user.nickname'%>:</strong>
   <%=h @user.nickname %>
 </p>
 <p>
-  <strong>生日:</strong>
-  <%=h @profile.birthday %>
+<strong><%= t'user.birthday' %>:</strong>
+<%=h @profile.birthday %>
 </p>
 <p>
-  <strong>性別:</strong>
-  <%= GENDER_TYPE[@profile.gender.to_s] %>
+<strong><%= t'user.gender'  %>:</strong>
+<%= GENDER_TYPE[@profile.gender.to_s] %>
 </p>
 <p>
-  <strong>國家:</strong>
+<strong><%= t'user.locale'%>:</strong>
+  <%= t(@profile.locale) %>
+</p>
+<p>
+<strong><%= t'user.country'%>:</strong>
   <%= @profile.location_list %>
 </p>
 <p>
-  <strong>自我介紹:</strong>
+<strong><%= t'user.intro'%>:</strong>
   <%= @profile.intro %>
 </p>
 <p>
-  <strong>標籤:</strong>
+<strong><%= t'user.tags'%>:</strong>
   <%= @profile.tag_list %>
 </p>
 
 <% if can? :update, @profile %>
   <p class='function'>
-    <%= link_to "編輯", edit_user_profile_path(current_user)%>
+    <%= link_to t("action.edit"), edit_user_profile_path(current_user)%>
   </p>
 <% end %>
 
 <p>
-  <%= link_to "回到個人頁面", user_home_path(@user.username) %>
+  <%= link_to t("user.backhome"), user_home_path(@user.username) %>
 </p>

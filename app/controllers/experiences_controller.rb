@@ -50,9 +50,9 @@ class ExperiencesController < ApplicationController
   # GET /experiences/new.xml
   def new
     @experience = Experience.new(:goal_id => params[:goal_id])
-    if params[:question_id]
-      @question = Question.find(params[:question_id])
-    end
+#    if params[:question_id]
+#      @question = Question.find(params[:question_id])
+#    end
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @experience }
@@ -156,7 +156,7 @@ class ExperiencesController < ApplicationController
      goals.each { |g|
        events << {
           'start' => g.start_at.to_s(:date),
-          'title' => "[#{I18n.t('goal.lable')}]#{g.title}",
+          'title' => "[#{I18n.t('goal.label')}]#{g.title}",
           'description' => "
       <span class='function'>
           #{app_helpers.link_to t('action.edit'), edit_goal_path(g) if can? :update, g}

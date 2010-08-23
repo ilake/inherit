@@ -1,9 +1,9 @@
-<h2>編輯</h2>
+<h2><%= t'action.edit'%></h2>
 
 <% form_for(@experience) do |f| %>
   <%= render :partial => 'form', :locals => {:f => f} %>
 <% end %>
 
 <p class='function'>
-  <%= link_to '取消', user_home_path(current_user.username) %>
+  <%= link_to t('action.cancel'), user_home_path(current_user.username) %>
 </p>
