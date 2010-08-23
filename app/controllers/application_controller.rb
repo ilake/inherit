@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
   def ip_location
     #預設是台灣的ip
     client_ip = (RAILS_ENV == 'development') ? '60.251.181.109' : request.remote_ip
-    session[:ip_location] ||= LocalizedCountrySelect::localized_countries_hash.fetch(IP_COUNTRY.country(client_ip)[3])
+    session[:ip_location] ||= LocalizedCountrySelect::localized_countries_hash.fetch(IP_COUNTRY.country(client_ip)[3].upcase)
   end
 
   def force_set_profile
