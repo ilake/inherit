@@ -10,8 +10,10 @@ class GoalsController < ApplicationController
   
   def show
     @goal = Goal.find(params[:id])
+    @experiences = @goal.user.experiences.show_policy(@goal.user.is_owner?(current_user)).goal_categroy(@goal.id).descend_by_position.limit(3)
     @comments = @goal.comments.recent.find(:all, :include => :user)
     @comment = @goal.comments.new
+    @related_goals = @goal.find_related_goals(current_user_location)
   end
   
   def new
@@ -22,7 +24,7 @@ class GoalsController < ApplicationController
   def create
     @goal = current_user.goals.new(params[:goal])
     if @goal.save
-      flash[:notice] = "Successfully created goal."
+      flash[:notice] = I18n.t("action.create_successfully")
       respond_to do |format|
         format.html {redirect_to user_home_path(current_user.username)}
         format.js { 
@@ -44,9 +46,10 @@ class GoalsController < ApplicationController
   def update
     @goal = current_user.goals.find(params[:id])
     if @goal.update_attributes(params[:goal])
-      flash[:notice] = "Successfully updated goal."
+      flash[:notice] = I18n.t("action.update_successfully")
       redirect_to @goal
     else
+      flash[:error] = I18n.t("action.update_fail")
       render :action => 'edit'
     end
   end
@@ -54,7 +57,7 @@ class GoalsController < ApplicationController
   def destroy
     @goal = current_user.goals.find(params[:id])
     @goal.destroy
-    flash[:notice] = "Successfully destroyed goal."
+    flash[:notice] = I18n.t("action.destroy_successfully")
     redirect_to user_home_path(current_user.username) 
   end
 end

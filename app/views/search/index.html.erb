@@ -3,20 +3,31 @@
 <% keywords params[:search] %>  
   <div id="home_search">
   <h4><!--不這樣都會偏掉我不會處理 orz -->　　</h4>
-  <h2>搜尋你有興趣的</h2>
+  <h2><%= t'site.search_desc'%></h2>
   <% form_tag search_url, :method => :get do %>
     <%= text_field_tag :search, nil, :size => 24 %>
-    <%= submit_tag '搜尋', :name => nil %>
+    <%= submit_tag t('site.search'), :name => nil %>
   <% end %>
   </div>
-  <strong>使用的關鍵字是 <%= params[:search] || @tag.name %></strong>
+  <strong><%= t'search.keyword'%> <%= params[:search] || @tag.try(:name) %></strong>
   <span class='btn btn-active'>
-    <%= link_to "吼！", search_rands_path %>
+    <%= link_to t("site.excite"), search_rands_path %>
   </span>
 <div class='search_item_list'>
+  <% if ['users', 'index', 'random'].include?(action_name) %>
+    <div class='search_users_items'>
+      <h3><%= t'user.label' %><%= link_to t("search.result_show_all", :num => @profiles.total_entries), search_users_path(:search => params[:search]) %></h3>
+      <ul>
+        <% @profiles.each do |profile|%>
+          <li class='profile_anchor'><%= link_to "#{profile.user.showname} ( #{truncate_u(Sanitize.clean(profile.intro), 15)} )", user_home_path(profile.user.username)%></li>
+        <% end %>
+      </ul>
+      <%= will_paginate @profiles if action_name == 'users' %>
+    </div>
+  <% end %>
   <% if ['goals', 'index', 'random'].include?(action_name) %>
     <div class='search_goal_items'>
-      <h3>目標<%= link_to "#{@goals.total_entries}個結果- 秀全部", search_goals_path(:search => params[:search]) %></h3>
+      <h3><%= t'goal.label'%><%= link_to t("search.result_show_all", :num => @goals.total_entries), search_goals_path(:search => params[:search]) %></h3>
       <ul>
         <% @goals.each do |goal|%>
           <li class='goal_anchor'><%= link_to truncate_u(Sanitize.clean(goal.title), 15), goal %></li>
@@ -24,14 +35,14 @@
       </ul>
       <%= will_paginate @goals if action_name == 'goals' %>
       <p class='share_function'>
-        <%= link_to '分享你的目標', new_goal_path %>
+        <%= link_to t('goal.new'), new_goal_path %>
       </p>
     </div>
   <% end %>
 
   <% if ['experiences', 'index', 'random'].include?(action_name) %>
     <div class='search_exp_items'>
-      <h3>經驗 <%= link_to "#{@experiences.total_entries}個結果- 秀全部", search_exps_path(:search => params[:search]) %></h3>
+      <h3><%=t'exp.label'%> <%= link_to t("search.result_show_all", :num => @experiences.total_entries), search_exps_path(:search => params[:search]) %></h3>
       <ul>
         <% @experiences.each do |experience|%>
           <li class='exp_anchor'>
@@ -41,7 +52,7 @@
       </ul>
       <%= will_paginate @experiences if action_name == 'experiences' %>
       <p class='share_function'>
-        <%= link_to '分享你的經驗', new_experience_path %>
+        <%= link_to t('exp.new'), new_experience_path %>
       </p>
     </div>
   <% end %>

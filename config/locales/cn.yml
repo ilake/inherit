@@ -1,0 +1,260 @@
+cn:
+  en: 'English'
+  tw: '繁体中文'
+  cn: '简体中文'
+  
+  site:
+    name: '传承'
+    index: '首页'
+    home: '我的传承'
+    suggestion: '给我们建议'
+    excite: '吼！'
+    search: '搜寻'
+    desc: '写下你的目标, 记录你为你的目标做了什么'
+    keywords: '传承'
+    slogan1: '写下你的目标, 记录你为你的目标做了什么' 
+    slogan2: '逐梦踏实, 找到你人生的价值' 
+    demo: '这就是我们的目标'
+    hottest_guy: '热门追踪'
+    latest_guy: '最新加入'
+    search_desc: '搜寻你有兴趣的目标记录'
+  flow:
+    get_in: '进来看看'
+  sessions: 
+    sign_in: '登入'
+    sign_out: '登出'
+    remember_me: '记住我'
+  registrations:
+    link: '现在就加入'
+    account: '帐号 (只限英文数字)'
+    sign_up: '注册'
+    resend_confirm: '重新发送认证信'
+    resend_confirm: '重新发送认证信, 请输入您的电邮'
+  user:
+    label: '人'
+    setting: '设定'
+    location: '地点'
+    locale: '语言'
+    email: '电邮'
+    pwd: '密码'
+    confirm_pwd: '请再输入一次'
+    sub: '订阅'
+    unsub: '取消订阅'
+    message: '留言'
+    fans: '粉丝'
+    subscriber: '订阅者'
+    birthday: '生日'
+    gender: '性别'
+    country: '国家'
+    intro: '简介'
+    tags: '标签'
+  exp:
+    label: '记录'
+    tags: '记录标签'
+    guys: '大家的记录'
+    someone: '的传承'
+    number: '资料笔数'
+    label: '记录'
+    back_to_user: "回到 {{name}} 的记录"
+    belong_goal: "所属目标"
+    private: "私密"
+    prev: '上一个记录'
+    next: '下一个记录'
+    guys_like: '人说赞'
+    relate: '相关记录'
+    new: '分享你的记录'
+    detail: '详细内容'
+  goal:
+    label: '目标'
+    tags: '目标标签'
+    guys: '大家的目标'
+    new: '新增目标'
+    non: '现在还没有目标'
+    start: '起始'
+    name: '名称'
+    state: '状态'
+    percentage: '进度'
+    more: '(继续阅读)'
+    detail: '详细内容'
+    relate: '相关目标'
+    private: '私密'
+    exps: '所属记录'
+    noexps: '还没有该目标相关的记录'
+    new: '建立你的目标'
+  comment:
+    label: '回覆'
+    say: '说'
+    reply: '回应'
+  action:
+    edit: '编辑'
+    new: '新增'
+    destroy: '删除'
+    confirm: '你确定吗?'
+    submit: '送出'
+    like: '赞'
+    update_successfully: '更新成功'
+    update_fail: '更新失败'
+    create_successfully: '新增成功'
+    create_fail: '新增失败'
+    destroy_successfully: '删除成功'
+    destroy_fail: '删除失败'
+  message:
+    label: '建议'
+    board: '留言板'
+    for_site: '站方意见留言板'
+  search:
+    keyword: '使用的关键字是'
+    result_show_all: "{{num}}个结果- 秀全部"
+  tagging:
+    about: '关于'
+  fans:
+    follow_successfully: '订阅成功'
+    follow_fail: '订阅失败'
+    unfollow_successfully: '订阅成功'
+    unfollow_fail: '订阅失败'
+  vote:
+    result: '感谢你的鼓励'
+    destroy: '取消成功'
+  can:
+    not: '权限不符'
+
+
+  date:
+    formats:
+      default: "%Y-%m-%d"
+      short: "%b%d日"
+      long: "%Y年%b%d日"
+    day_names: [星期日, 星期一, 星期二, 星期三, 星期四, 星期五, 星期六]
+    abbr_day_names: [日, 一, 二, 三, 四, 五, 六]
+    month_names: [~, 一月, 二月, 三月, 四月, 五月, 六月, 七月, 八月, 九月, 十月, 十一月, 十二月]
+    abbr_month_names: [~, 1月, 2月, 3月, 4月, 5月, 6月, 7月, 8月, 9月, 10月, 11月, 12月]
+    order: [ :year, :month, :day ]
+  
+  time:
+    formats:
+      default: "%Y年%b%d日 %A %H:%M:%S %Z"
+      short: "%b%d日 %H:%M"
+      long: "%Y年%b%d日 %H:%M"
+    am: "上午"
+    pm: "下午"
+  
+  datetime:
+    distance_in_words:
+      half_a_minute: "半分钟"
+      less_than_x_seconds:
+        one: "不到一秒"
+        other: "不到 %{count} 秒"
+      x_seconds:
+        one: "一秒"
+        other: "%{count} 秒"
+      less_than_x_minutes:
+        one: "不到一分钟"
+        other: "不到 %{count} 分钟"
+      x_minutes:
+        one: "一分钟"
+        other: "%{count} 分钟"
+      about_x_hours:
+        one: "大约一小时"
+        other: "大约 %{count} 小时"
+      x_days:
+        one: "一天"
+        other: "%{count} 天"
+      about_x_months:
+        one: "大约一个月"
+        other: "大约 %{count} 个月"
+      x_months:
+        one: "一个月"
+        other: "%{count} 个月"
+      about_x_years:
+        one: "大约一年"
+        other: "大约 %{count} 年"
+      over_x_years:
+        one: "一年多"
+        other: "%{count} 年多"
+      almost_x_years:
+        one:   "接近一年"
+        other: "接近 %{count} 年"
+    prompts:
+      year:   "年"
+      month:  "月"
+      day:    "日"
+      hour:   "时"
+      minute: "分"
+      second: "秒"
+  
+  number:
+    format:
+      separator: "."
+      delimiter: ","
+      precision: 3
+    currency:
+      format:
+        format: "%u %n"
+        unit: "NT$"
+        separator: "."
+        delimiter: ","
+        precision: 2
+    percentage:
+      format:
+        delimiter: ""
+    precision:
+      format:
+        delimiter: ""
+    human:
+      format:
+        delimiter: ""
+        precision: 1
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: "Byte"
+            other: "Bytes"
+          kb: "KB"
+          mb: "MB"
+          gb: "GB"
+          tb: "TB"
+  
+  support:
+    array:
+      words_connector: ", "
+      two_words_connector: " 和 "
+      last_word_connector: ", 和 "
+    select:
+      prompt: "请选择"
+  
+  activerecord:
+    models:
+      user: "使用者"
+    attributes:
+      user:
+        username: "帐号"
+        email: '电邮'
+        password: '密码'
+    errors:
+      template:
+        header:
+          one: "有错误发生,无法储存。"
+          other: "有错误发生, 无法储存。"
+        body: "以下栏位发生问题："
+      messages:
+        inclusion: "没有包含在列表中"
+        exclusion: "是被保留的"
+        invalid: "是无效的"
+        confirmation: "不符"
+        accepted: "必须是可被接受的"
+        empty: "不能留空"
+        blank: "不能是空白字元"
+        too_long: "过长（最长是 {{count}} 个字）"
+        too_short: "过短（最短是 {{count}} 个字）"
+        wrong_length: "字数错误（必须是 {{count}} 个字）"
+        taken: "已经被使用"
+        not_a_number: "不是数字"
+        greater_than: "必须大于 {{count}}"
+        greater_than_or_equal_to: "必须大于或等于 {{count}}"
+        equal_to: "必须等于 {{count}}"
+        less_than: "必须小于 {{count}}"
+        less_than_or_equal_to: "必须小于或等于 {{count}}"
+        odd: "必须是奇数"
+        even: "必须是偶数"
+

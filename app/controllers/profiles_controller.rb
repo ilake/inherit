@@ -19,9 +19,10 @@ class ProfilesController < ApplicationController
       session[:hometown] = current_user.location_list.to_s
       session[:current_location] = user_hometown
 
-      flash[:notice] = "Successfully updated profile."
+      flash[:notice] = I18n.t("action.update_successfully")
       redirect_to user_profile_path(current_user)
     else
+      flash[:error] = I18n.t("action.update_fail")
       render :action => 'edit'
     end
   end

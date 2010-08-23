@@ -14,9 +14,9 @@ class VotesController < ApplicationController
   
   def create
     if current_user.vote(params[:voteable_type].constantize.find(params[:exp_id]), params[:vote].to_i)
-      flash[:notice] = "Thank for your advice."
+      flash[:notice] = I18n.t("vote.result")
     else
-      flash[:error] = "Thank for your advice."
+      flash[:error] =  I18n.t("vote.result")
     end
     redirect_to :back
   end
@@ -38,7 +38,7 @@ class VotesController < ApplicationController
   def destroy
     @vote = Vote.find(params[:id])
     @vote.destroy
-    flash[:notice] = "Successfully destroyed vote."
+    flash[:notice] = I18n.t("vote.destroy")
     redirect_to votes_url
   end
 end

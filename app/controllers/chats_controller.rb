@@ -1,6 +1,6 @@
 class ChatsController < ApplicationController
   before_filter :authenticate_user!, :except => [:index , :show]
-  before_filter :user_selected, :only => [:index, :reply ]
+  before_filter :user_selected, :only => [:reply ]
 
   def index
     if params[:user_id]
@@ -28,13 +28,14 @@ class ChatsController < ApplicationController
   def create
     @chat = current_user.leave_chats.new(params[:chat])
     if @chat.save
-      flash[:notice] = "Successfully created chat."
+      flash[:notice] = I18n.t("action.create_successfully")
       if @chat.owner
         redirect_to user_chats_path(@chat.owner)
       else
         redirect_to chats_path
       end
     else
+      flash[:error] = I18n.t("action.create_fail")
       render :action => 'new'
     end
   end
@@ -46,7 +47,7 @@ class ChatsController < ApplicationController
   def update
     @chat = Chat.find(params[:id])
     if @chat.update_attributes(params[:chat])
-      flash[:notice] = "Successfully updated chat."
+      flash[:notice] = I18n.t("action.update_successfully")
       redirect_to @chat
     else
       render :action => 'edit'
@@ -56,7 +57,7 @@ class ChatsController < ApplicationController
   def destroy
     @chat = Chat.find(params[:id])
     @chat.destroy
-    flash[:notice] = "Successfully destroyed chat."
+    flash[:notice] = I18n.t("action.destroy_successfully")
     redirect_to :back
   end
 end

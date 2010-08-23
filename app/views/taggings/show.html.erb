@@ -3,10 +3,10 @@
     title params[:id]
     description "#{truncate_u(Sanitize.clean(@taggable_objs.first.try(:content) || ""), 100)}" 
     keywords params[:id]
-    display_meta_tags :site => '傳承' 
+    display_meta_tags :site => t('site.name') 
   end %>  
 <% end %>
-<h3>有關 <%= params[:id] %></h3>
+<h3><%= t'tagging.about'%> <%= params[:id] %></h3>
 
 <table>
   <% @taggable_objs.each do |obj| %>

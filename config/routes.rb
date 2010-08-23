@@ -5,13 +5,14 @@ ActionController::Routing::Routes.draw do |map|
   map.search "search/:search", :controller =>'search', :action => 'index', :search => nil
   map.search_exps "search_exps/:search", :controller =>'search', :action => 'experiences', :search => nil
   map.search_goals "search_goals/:search", :controller =>'search', :action => 'goals', :search => nil
-  map.search_questions "search_questions/:search", :controller =>'search', :action => 'questions', :search => nil
+  map.search_users "search_users/:search", :controller =>'search', :action => 'users', :search => nil
   map.search_rands "excite", :controller =>'search', :action => 'random'
   map.user_home "users/:username", :controller => 'experiences', :action => 'index'
   map.user_exps "users/:user_id/:goal_id/experiences", :controller => 'experiences', :action => 'index'
   map.tag  "taggings/:taggable_type/:id", :controller => 'taggings', :action => 'show'
   map.que_loc ":location/questions", :controller => 'questions', :action => 'index'
   map.chat_loc ":location/chats", :controller => 'chats', :action => 'index'
+  map.change_lang "/lang/:locale", :controller => 'languages', :action => 'edit'
 
   #因為我解不掉在controller 用link_to 做刪除動作的bug, 所以只好work around 
   map.destroy_experience "experiences/:id/destroy", :controller => 'experiences', :action => 'destroy'

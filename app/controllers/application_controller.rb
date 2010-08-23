@@ -7,12 +7,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   before_filter :authenticate_inviter
   before_filter :ip_location
+  before_filter :set_locale
 
   # Scrub sensitive parameters from your log
   filter_parameter_logging :password
 
   rescue_from CanCan::AccessDenied do |exception|
-    flash[:error] = "Access denied. #{exception.message}"
+    flash[:error] = I18n.t("can.not")
     redirect_to root_url
   end
 
@@ -51,6 +52,7 @@ class ApplicationController < ActionController::Base
   end
 
   def ip_location
+    #預設是台灣的ip
     client_ip = (RAILS_ENV == 'development') ? '60.251.181.109' : request.remote_ip
     session[:ip_location] ||= LocalizedCountrySelect::localized_countries_hash.fetch(IP_COUNTRY.country(client_ip)[3])
   end
@@ -64,5 +66,22 @@ class ApplicationController < ActionController::Base
       name == 'i' && password == 'lovetaiwan'
     end
     warden.custom_failure! if performed? 
+  end
+
+  def set_locale
+    if !cookies[:locale]
+      accept_lang = request.env['HTTP_ACCEPT_LANGUAGE']
+      request_language = if accept_lang.match(/(tw)/i)
+                           'tw'
+                         elsif accept_lang.match(/(cn)/i)
+                           'cn'
+                         else
+                           'en'
+                         end                  
+    end
+    
+    cookies[:locale] ||= LOCALES_AVAILABLE.include?(request_language) ? request_language : I18n.default_locale
+    # if this is nil then I18n.default_locale will be used
+    I18n.locale = cookies[:locale]
   end
 end

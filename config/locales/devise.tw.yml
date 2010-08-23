@@ -1,0 +1,43 @@
+tw:
+  devise:
+    sessions:
+      link: '登入'
+      signed_in: '登入成功'
+      signed_out: '登出成功'
+      unauthenticated: '您需要先登入, 在繼續下面的動作之前'
+      unconfirmed: '您需要先認證您的E-Mail, 在繼續下面的動作之前'
+      locked: '您的帳號已被鎖定.'
+      invalid: 'E-mail或者是密碼有錯.'
+      invalid_token: 'Invalid authentication token.'
+      timeout: '已登出, 請重新登入.'
+      inactive: '您的帳號還未被啟用.'
+      facebook_invalid: "無法登入, 帳號有錯."
+      facebook_timeout: "請重新登入."
+      facebook_authenticity_token: "因為安全性的原因, 請重新登入."
+      facebook_actions:
+        sign_in: "Facebook connect"
+        sign_out: "登出"
+    passwords:
+      link: '忘記密碼'
+      send_instructions: '重設密碼的信件已送出, 您將會在幾分鐘內收到它'
+      resend_submit: '重設密碼'
+      updated: '您的密碼已變更, 您現在可以登入了'
+      forget_desc: '忘記密碼了嗎, 請輸入您的E-Mail'
+    confirmations:
+      link: "沒有收到認證信?"
+      send_instructions: '重新認證的信件已送出, 您將會在幾分鐘內收到它'
+      confirmed: '您的帳號已認證, 您現在可以登入了.'
+    registrations:
+      link: '註冊'
+      signed_up: '您的帳號已註冊. 認證信將在幾分鐘內寄到您的信箱.'
+      updated: '您已成功更新您的帳號.'
+      destroyed: 'Bye! Your account was successfully cancelled. We hope to see you again soon.'
+    unlocks:
+      link: "Didn't receive unlock instructions?"
+      send_instructions: 'You will receive an email with instructions about how to unlock your account in a few minutes.'
+      unlocked: 'Your account was successfully unlocked. You are now signed in.'
+    mailer:
+      confirmation_instructions: '認證帳號'
+      reset_password_instructions: '重設密碼'
+      unlock_instructions: 'Unlock Instructions'
+

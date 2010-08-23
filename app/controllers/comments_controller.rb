@@ -15,10 +15,10 @@ class CommentsController < ApplicationController
   def create
     comment = current_user.comments.new(params[:comment])
     if comment.save
-      flash[:notice] = "Successfully created comments."
+      flash[:notice] = I18n.t("action.create_successfully")
       redirect_to :back
     else
-      flash[:error] = "Fail created comments."
+      flash[:error] = I18n.t("action.create_fail")
       redirect_to :back
     end
   end
@@ -30,7 +30,7 @@ class CommentsController < ApplicationController
   def update
     @comment = Comment.find(params[:id])
     if @comment.update_attributes(params[:comment])
-      flash[:notice] = "Successfully updated comment."
+      flash[:notice] = I18n.t("action.update_successfully")
       redirect_to @comments
     else
       render :action => 'edit'
@@ -40,7 +40,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
-    flash[:notice] = "Successfully destroyed comments."
+    flash[:notice] = I18n.t("action.destroy_successfully")
     redirect_to comments_url
   end
 end

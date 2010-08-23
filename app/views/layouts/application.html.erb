@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"  xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <%= yield(:meta_tag) || display_meta_tags(:site => '傳承') %>
+  <%= yield(:meta_tag) || display_meta_tags(:site => t('site.name')) %>
   <%= stylesheet_link_merged :base %>
   <%= yield(:head) %>
 </head>
@@ -16,22 +16,27 @@
         <li id='dashboard_options' class='anchor'>
           <% if user_signed_in? %>
             <span class='space'> <%= link_to current_user.showname, user_home_path(current_user.username) %></span>
-            <span class='space'> <%= link_to "設定", user_profile_path(current_user)%></span>
+            <span class='space'> <%= link_to t("user.setting"), user_profile_path(current_user)%></span>
             <span class='space'> 
               <% if current_user.is_facebook_user? %>
                 <%= facebook_sign_out_link :user %>
               <% else %>
-                <%= link_to "登出", destroy_user_session_path %></span>
+                <%= link_to t"sessions.sign_out", destroy_user_session_path %></span>
             <% end %>
             </span>
           <% else %>
-            <span class='space'> <%= link_to "現在就加入", new_user_registration_path %></span>
-            <span class='space'> <%= link_to "登入", new_user_session_path %></span>
+            <span class='space'> <%= link_to t("registrations.link"), new_user_registration_path %></span>
+            <span class='space'> <%= link_to t("sessions.sign_in"), new_user_session_path %></span>
           <% end %>
 
 
+          <% if user_signed_in? %>
+            <span class='anchor'>
+              <%= t'user.location'%>：<%= link_to(current_user_location, user_location_url, :rel => "facebox", :id => 'user_location') %>
+            </span>
+          <% end %>
           <span class='anchor'>
-            地點：<%= link_to(current_user_location, user_location_url, :rel => "facebox", :id => 'user_location') %>
+            <%= t'user.locale'%>：<%= language_selection %>
           </span>
         </li>
       </div>
@@ -42,23 +47,23 @@
 
       <div id='header'>
         <div id='logo'>
-          <h2 id='logo'><%= link_to "傳承.", root_url %></h2>
+          <h2 id='logo'><%= link_to t("site.name"), root_url %></h2>
         </div>
 
         <div id='menus'>
           <ul id='main_menu'>
             <% if user_signed_in? %>
-              <li><%= link_to "首頁", home_url %></li>
-              <li><%= link_to "我的傳承", user_home_path(current_user.username)%></li>
+              <li><%= link_to t("site.index"), home_url %></li>
+              <li><%= link_to t("site.home"), user_home_path(current_user.username)%></li>
             <% else %>
-              <li><%= link_to "首頁", home_url %></li>
+              <li><%= link_to t("site.index"), home_url %></li>
             <% end %>
-            <li><%= link_to "意見", chats_path %></li>
-            <li><%= link_to "吼！", search_rands_path %></li>
+            <li><%= link_to t("site.suggestion"), chats_path %></li>
+            <li><%= link_to t("site.excite"), search_rands_path %></li>
             <li>
               <% form_tag search_url, :method => :get do %>
-                搜尋: <%= text_field_tag :search, nil, :size => 10 %>
-                <%= submit_tag '搜尋', :name => nil %>
+                <%= t('site.search')%>: <%= text_field_tag :search, nil, :size => 10 %>
+                <%= submit_tag t('site.search'), :name => nil %>
               <% end %>
             </li>
           </ul>

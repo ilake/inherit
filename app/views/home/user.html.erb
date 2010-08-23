@@ -3,10 +3,10 @@
     title "#{truncate_u(Sanitize.clean(@experiences.first.try(:content) || ''), 10)}" 
     description "#{truncate_u(Sanitize.clean(@experiences.first.try(:content) || ''), 100)}" 
     keywords @exp_tags.map{|e| e.name} << @goal_tags.map{|g| g.name} 
-    display_meta_tags :site => '傳承' 
+    display_meta_tags :site => t('site.name') 
   end %>  
 <% end %>
 
-<%= Handcache.get_and_set( "home_explore_#{params[:location]}", :expires_in => 60 ) do
+<%= Handcache.get_and_set( "home_explore_#{params[:location]}_#{I18n.locale}", :expires_in => 60 ) do
   render :partial => 'explore'
 end %>  

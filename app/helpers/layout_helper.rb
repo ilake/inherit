@@ -53,4 +53,11 @@ module LayoutHelper
     <!-- AddToAny END -->'
   end
 
+  def language_selection
+    r = []
+    LOCALES_AVAILABLE.each do |language|
+      r << link_to_unless(I18n.locale == language, t(language), change_lang_path(:locale => language)) + "&nbsp;" 
+    end
+    r
+  end
 end

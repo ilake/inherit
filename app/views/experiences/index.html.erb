@@ -1,9 +1,9 @@
 <% content_for :meta_tag do%>
   <%= Handcache.get_and_set("#{params.values.sort.to_s}-#{@user.profile.updated_at.to_s(:fulltime)}") do
-    title "#{@user.nickname} 的傳承"
+    title "#{@user.nickname} #{t'exp.someone'}"
     description "#{truncate_u(Sanitize.clean(@user.profile.intro || ''), 100)}" 
     keywords @user.profile.tag_list 
-    display_meta_tags :site => '傳承' 
+    display_meta_tags :site => t('site.name') 
   end %>  
 <% end %>
 
@@ -13,14 +13,14 @@
 <div id='user_exp_profile'>
   <div class='user_header'>
   <% if @current_goal %>
-    <h3 class='avatared anchor'><%= link_to "#{h @user.showname}", user_home_path(@user.username) %> > <%= @current_goal.title %></h3>
+    <h3 class='avatared anchor'><%= link_to_user_home(@user)  %> > <%= @current_goal.title %></h3>
   <% else %>
     <h1 class='avatared'><%= "#{h @user.showname}" %></h1>
   <% end %>
   <div id='fans_area'>
     <% if can?(:create, Goal) && @user.is_owner?(current_user)%>
       <span class='btn btn-active'>
-        <%= link_to "新增目標", new_goal_path(:goal => {'category' => 'goal'}) %>
+        <%= link_to t("goal.new"), new_goal_path(:goal => {'category' => 'goal'}) %>
       </span>
     <% end %>
     <% if !@user.is_owner?(current_user)%>
@@ -29,75 +29,75 @@
           <%= f.hidden_field :fannable_id %>
           <%= f.hidden_field :fannable_type %>
           <%= f.hidden_field :user_id %>
-          <%= f.submit "訂閱", :name => nil, :class => 'btn'%>
+          <%= f.submit t("user.sub"), :name => nil, :class => 'btn'%>
         <% end %>
       <% else %>
         <span class='btn'>
-          <%= link_to '取消訂閱', @fan, :confirm => 'Are you sure?', :method => :delete %>
+          <%= link_to t('user.unsub'), @fan, :confirm => 'Are you sure?', :method => :delete %>
         </span>
       <% end %>
     <% end %>
     <span class='btn btn-active'>
-      <%= link_to "留言版", user_chats_path(@user), {:class => 'profile'} %>
+      <%= link_to t("user.message"), user_chats_path(@user), {:class => 'profile'} %>
     </span>
     <span id='exp_follower'>
-      <strong>粉絲</strong>
+      <strong><%= t('user.fans')%></strong>
       <span class='fans_anchor'>
         <%= link_to @user.fans_count, user_fans_path(@user) %>
       </span>
     </span>
     <span id='exp_ifollew'>
-      <strong>訂閱</strong>
+      <strong><%= t'user.subscriber' %></strong>
       <span class='fans_anchor'>
         <%= link_to @user.user_ifollow_count, ifollow_user_fans_path(@user) %> 
       </span>
     </span>
-    <span id='profile_hide_show' class='profile_show'> &nbsp; &nbsp; &nbsp; </span>
+    <span id='profile_hide_show' class='profile_<%= user_content_display_state(@current_goal) %>'> &nbsp; &nbsp; &nbsp; </span>
   </div>
 </div>
   <div class='clear'></div>
-  <div id='user_content'>
+  <div id='user_content' class=<%= user_content_display_state(@current_goal)%>>
     <div class='exp_profile_content anchor'>
       <p>
-      <strong>生日:</strong>
+      <strong><%= t'user.birthday'%>:</strong>
       <%=h @user.profile.birthday %>
       </p>
       <p>
-      <strong>性別:</strong>
+      <strong><%= t'user.gender'%>:</strong>
       <%= GENDER_TYPE[@user.profile.gender.to_s] %>
       </p>
       <p>
-      <strong>國家:</strong>
+      <strong><%= t'user.country'%>:</strong>
       <%= @user.profile.location_list %>
       </p>
       <p>
-      <strong>自我介紹:</strong>
+      <strong><%= t'user.intro'%>:</strong>
       <%= @user.profile.intro %>
       </p>
       <p>
-      <strong>標籤:</strong>
-      <%= @user.profile.tag_list %>
+      <strong><%= t'user.tags'%>:</strong>
+      <% exp_tag_list(@user.profile.tag_list) %>
       </p>
 
       <% if can? :update, @user.profile %>
         <p class='function'>
-        <%= link_to "編輯", edit_user_profile_path(current_user)%>
+        <%= link_to t("action.edit"), edit_user_profile_path(current_user)%>
         </p>
       <% end %>
     </div>
     <div class='exp_goal_content anchor'>
       <dl>
         <dt>
-        <strong>目標:</strong>
+        <strong><%= t'goal.label'%>:</strong>
         <% if can?(:create, Goal) && @user.is_owner?(current_user)%>
           <span class='btn btn-active'>
-            <%= link_to "新增目標", new_goal_path(:goal => {'category' => 'goal'}) %>
+            <%= link_to t("goal.new"), new_goal_path(:goal => {'category' => 'goal'}) %>
           </span>
         <% end %>
         </dt>
 
         <% if @goals.size.zero? %>
-          <em>Don't have goal yet</em>
+          <em><%= t'goal.non'%></em>
         <% else %>
           <% for goal in @goals %>
             <dd class='anchor'>
@@ -110,16 +110,20 @@
     <% if @current_goal %>
       <div id='goal_desc_area'>
         <div>
-          <strong><%= GOAL_CATEGORY[@current_goal.category] %>名稱:</strong>
+          <strong><%= GOAL_CATEGORY[@current_goal.category] %><%= t'goal.name'%>:</strong>
           <span class='anchor'><%= link_to  @current_goal.title, @current_goal %></span>
           <% unless @current_goal.is_category? %>
             <div>
-              <strong>起始:</strong>
+              <strong><%= t'goal.start'%>:</strong>
               <%= @current_goal.start_at.to_s(:date)%>
             </div>
             <div>
-              <strong>狀態:</strong>
+              <strong><%= t'goal.state'%>:</strong>
               <%= GOAL_STATES[@current_goal.state] %>
+            </div>
+            <div>
+              <strong><%= t'goal.percentage'%>:</strong>
+              <%= ntp(@current_goal.percentage) %>
             </div>
           <% end %>
         </div>
@@ -127,7 +131,7 @@
           <span>
             <%= link_to Sanitize.clean(@current_goal.content), @current_goal %>
           </span>
-          <span class='anchor'><%= link_to '>>more', @current_goal %></span>
+          <span class='anchor'><%= link_to t('goal.more'), @current_goal %></span>
         </div>
       </div>
     <% end %>
@@ -136,34 +140,34 @@
 <div id='exp_chart'>
 </div>
 <div id='exp_number'>
-<strong>資料筆數</strong>
+  <strong><%= t'exp.number'%></strong>
 <%= select 'experience', 'data_number', DATA_NUMBER.sort{|a,b|a[0] <=> b[0]}, {:selected => current_data_number.to_i}%>
 </div>
 <div class='clear'></div>
 
 <% if @current_goal %>
   <% content_for :sider do %>
-    <%= Handcache.get_and_set("#{params.values.sort.to_s}-sider", :expires_in => 60 ) do
-      render :partial => 'goals/show_sider', :locals => {:goal => @current_goal}
+    <%= Handcache.get_and_set("#{params.values.sort.to_s}-#{I18n.locale}-sider", :expires_in => 60 ) do
+      render :partial => 'goals/show_sider', :locals => {:goals => @related_goals}
     end %>  
   <% end %>
 <% end %>
 
 
 <div id='exp_list'>
-  <h2><%= @current_goal.title if @current_goal %> 痕跡
+  <h2><%= @current_goal.title if @current_goal %> <%= t'exp.label'%>
     <% if can?(:create, Experience) && @user.is_owner?(current_user) %>
       <span id='new_exp' class='btn btn-active'>
         <% if @current_goal %>
-          <%= link_to ' ( 新增 ) ', new_goal_experience_path(@current_goal) %>
+          <%= link_to "( #{t('action.new')} )", new_goal_experience_path(@current_goal) %>
         <% else %>
-          <%= link_to ' ( 新增 ) ', new_user_experience_path(current_user) %>
+          <%= link_to "( #{t('action.new')} )", new_user_experience_path(current_user) %>
         <% end %>
       </span>
     <% end %>
     <% if @current_goal %>
       <span id='new_exp' class='btn btn-active'>
-        <%= link_to '<strong>詳細內容</strong>', goal_path(@current_goal)%>
+        <%= link_to "<strong>#{t'goal.detail'}</strong>", goal_path(@current_goal)%>
       </span>
     <% end %>
   </h2>

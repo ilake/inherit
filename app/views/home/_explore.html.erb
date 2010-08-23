@@ -1,22 +1,22 @@
 
   <div id="home_search">
   <h4><!--不這樣都會偏掉我不會處理 orz -->　　</h4>
-  <h2>搜尋你有興趣的資料</h2>
+  <h2><%= t'site.search_desc' %></h2>
   <% form_tag search_url, :method => :get do %>
     <%= text_field_tag :search, nil, :size => 24 %>
-    <%= submit_tag '搜尋', :name => nil %>
+    <%= submit_tag t('site.search'), :name => nil %>
   <% end %>
   </div>
 
   <div id='home_content'>
-    <h4>經驗類型</h4>
+    <h4><%= t'exp.tags' %></h4>
     <div class='exp_tags'>
       <% tag_cloud(@exp_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
         <%= link_to tag.name, tag_url(:id => tag.name, :taggable_type => 'Experience'), :class => css_class %>
       <% end %>
     </div>
 
-    <h4>大家的經驗</h4>
+    <h4><%= t'exp.guys'%></h4>
     <div>
       <% @experiences.each do |experience| %>
         <div class='exp_cell'>
@@ -24,7 +24,7 @@
         </div>
       <% end %>
     </div>
-    <h4>熱門追蹤</h4>
+    <h4><%= t'site.hottest_guy'%></h4>
     <div>
       <% @popular_users.each do |user| %>
         <div class='exp_author'>
@@ -34,20 +34,20 @@
     </div>
   </div>
   <div id='home_sidebar'>
-    <h4>目標類型</h4>
+    <h4><%= t'goal.tags'%></h4>
     <div class='goal_tags'>
       <% tag_cloud(@goal_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
         <%= link_to tag.name, tag_url(:id => tag.name, :taggable_type => 'Goal'), :class => css_class %>
       <% end %>
     </div>
 
-    <h4>大家的目標</h4>
+    <h4><%= t'goal.guys' %></h4>
     <div>
       <% @goals.each do |goal| %>
         <div class='goal_cell'> <%= link_to truncate_u(goal.title, 40), goal %></div>
       <% end %>
     </div>
-    <h4>最新加入</h4>
+    <h4><%= t'site.latest_guy'%></h4>
     <div>
       <% @latest_users.each do |user| %>
         <div class='exp_author'>

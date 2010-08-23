@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100816003850
+# Schema version: 20100818063426
 #
 # Table name: goals
 #
@@ -15,6 +15,7 @@
 #  public     :boolean(1)      default(TRUE)
 #  tags_list  :text
 #  category   :string(255)     default("category")
+#  percentage :integer(4)      default(0)
 #
 
 class Goal < ActiveRecord::Base
@@ -29,7 +30,7 @@ class Goal < ActiveRecord::Base
   belongs_to :user
   has_many :experiences
 
-  validates_presence_of :content, :title
+  validates_presence_of :content, :title, :tag_list
   validates_uniqueness_of :title, :scope => :user_id
   named_scope :not_category, :conditions => "start_at is not NULL"
   named_scope :is_category, :conditions => "start_at is NULL"
@@ -53,6 +54,11 @@ class Goal < ActiveRecord::Base
   def tab_style
     self.is_category? ? nil : {:class => 'goal_tab'}
   end
+
+  def find_related_goals(current_user_location)
+     Goal.search self.tag_list.rand, :limit => 6 || Goal.location_with(current_user_location).descend_by_updated_at.limit(6).all
+  end
+
 
 #  def end_at_exist
 #    !!end_at

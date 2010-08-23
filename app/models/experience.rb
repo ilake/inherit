@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100816003850
+# Schema version: 20100818063426
 #
 # Table name: experiences
 #
@@ -38,7 +38,7 @@ class Experience < ActiveRecord::Base
   has_many :question_experience_relations, :dependent => :destroy
   has_many :answer_questions, :through => :question_experience_relations, :source => :question
 
-  validates_presence_of :user_id, :content
+  validates_presence_of :user_id, :content, :tag_list
 
   #我想讓使用者寫文章時可以用顏色 所以先拿掉過濾
   #before_save :format_content
@@ -62,9 +62,9 @@ class Experience < ActiveRecord::Base
     define_index do
       indexes content
       indexes tags_list
-      #indexes comments.content, :as => 'comment_content'
+      indexes comments.comment, :as => :comment_content
       where "public = '1'"
-      group_by "user_id"
+      group_by "experiences.user_id"
     end
   end
 
@@ -98,6 +98,10 @@ class Experience < ActiveRecord::Base
 
   def format_content
     write_attribute(:content, Sanitize.clean(CGI::unescapeHTML(content), Sanitize::Config::CUSTOM))
+  end
+
+  def find_related_exps(current_user_location)
+     Experience.search self.tag_list.rand, :limit => 6 || Experience.location_with(current_user_location).descend_by_updated_at.limit(6).all
   end
 
   private

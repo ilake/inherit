@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100816003850
+# Schema version: 20100818063426
 #
 # Table name: users
 #
@@ -68,13 +68,12 @@ class User < ActiveRecord::Base
   has_many :leave_chats, :class_name => 'Chat', :foreign_key => :user_id
   has_many :own_chats, :class_name => 'Chat', :foreign_key => :master_id
 
-  delegate :location_list, :birthday, :to => :profile
+  delegate :location_list, :birthday, :intro, :to => :profile
 
   after_create :init
 #  validate_on_update do |u|
 #    u.errors.add(:nickname, '暱稱不能有空白') if  u.nickname.match(/\s/)
 #  end
-
 
   def to_param
     "#{id}-#{username}"
@@ -94,7 +93,7 @@ class User < ActiveRecord::Base
 
   def user_fans
     user_ids = self.fans.map{|f| f.user_id }
-    User.find(:all, :conditions => {:id => user_ids })
+    User.find(:all, :conditions => {:id => user_ids }, :include => 'profile')
   end
 
   def ifollow

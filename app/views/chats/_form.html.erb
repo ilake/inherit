@@ -3,8 +3,8 @@
   <%= f.hidden_field :master_id %>
   <%= f.hidden_field :parent_id %>
   <p>
-  <%= f.label :content, '意見' %><br />
+  <%= f.label :content, t('message.label') %><br />
   <%= f.text_area :content, :size => '60x4' %>
   </p>
-  <p><%= f.submit "送出" %></p>
+  <p><%= f.submit t("action.submit") %></p>
 <% end %>

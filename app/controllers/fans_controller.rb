@@ -1,5 +1,5 @@
 class FansController < ApplicationController
-  before_filter :authenticate_user!, :except => [:index , :show]
+  before_filter :authenticate_user!, :except => [:index , :show, :ifollow]
   def index
     @users = User.find(params[:user_id]).user_fans
   end
@@ -12,9 +12,9 @@ class FansController < ApplicationController
   def create
     fan = Fan.new(params[:fan])
     if fan.save
-      flash[:notice] = "Follow Successfully."
+      flash[:notice] = I18n.t("fans.follow_successfully")
     else
-      flash[:error] = "Follow Fail."
+      flash[:error] = I18n.t("fans.follow_fail")
     end
     redirect_to :back
   end
@@ -23,9 +23,9 @@ class FansController < ApplicationController
     fan = Fan.find(params[:id])
     
     if fan.destroy
-      flash[:notice] = "Unfollow Successfully."
+      flash[:notice] = I18n.t("fans.unfollow_successfully")
     else
-      flash[:error] = "Unfollow Fail."
+      flash[:error] = I18n.t("fans.unfollow_fail")
     end
     redirect_to :back
   end

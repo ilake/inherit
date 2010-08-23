@@ -35,7 +35,8 @@ Rails::Initializer.run do |config|
   config.gem 'devise_facebook_connectable'
   config.gem 'facebooker'
   config.gem 'contacts'
-  config.gem "hpricot", :source => 'http://rubygems.org'
+  config.gem 'hpricot', :source => 'http://rubygems.org'
+  #config.gem 'http_accept_language'
   #config.gem 'ryanb-acts-as-list', :lib => 'acts_as_list', :source => 'http://gems.github.com'
 
 
@@ -56,7 +57,7 @@ Rails::Initializer.run do |config|
 
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
-  # config.i18n.default_locale = :de
+  config.i18n.default_locale = :en
   config.action_controller.page_cache_directory = RAILS_ROOT + '/public/cache/'
   config.cache_store = :file_store, File.join(RAILS_ROOT, 'public', 'action_cache')
 end

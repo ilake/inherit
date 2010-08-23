@@ -3,43 +3,44 @@
     title "#{truncate_u(Sanitize.clean(@experience.content), 10)}" 
     description "#{truncate_u(Sanitize.clean(@experience.content), 100)}" 
     keywords @experience.tag_list 
-    display_meta_tags :site => '傳承' 
+    display_meta_tags :site => t('site.name') 
   end %>  
 <% end %>
 
 <% content_for :sider do %>
-  <%= Handcache.get_and_set("#{params.values.sort.to_s}-sider", :expires_in => 60 ) do
-    render :partial => 'show_sider', :locals => {:experience => @experience}
+  <%= Handcache.get_and_set("#{params.values.sort.to_s}-#{I18n.locale}-sider", :expires_in => 60 ) do
+    render :partial => 'show_sider', :locals => {:experiences => @related_exps}
   end %>  
 <% end %>
 
-<%= facebook_like %>
+<%#= facebook_like %>
 <div id='exp_show_main'>
   <p class='exp_author'>
-    <%= link_to "回到 #{@experience.user.nickname} 的經驗",  @current_goal ?  user_exps_path(:user_id => @experience.user, :goal_id => @current_goal) : user_home_path(@experience.user.username) %>
+  <%= link_to t("exp.back_to_user", :name => @experience.user.nickname),  @current_goal ?  user_exps_path(:user_id => @experience.user, :goal_id => @current_goal) : user_home_path(@experience.user.username) %>
   </p>
   <div id='exp_show_content'>
     <div>
       <span id='exp_show_time'>
-        <%= @experience.start_at.to_s(:date)%> ~ <%= @experience.try(:end_at).try(:to_s, :date) %> 
-        <%= '(私密)' if !@experience.public %>
+        <%= @experience.start_at.to_s(:date)%>
+        <%=h "~ #{@experience.end_at.to_s(:date)}" if @experience.end_at %>
+        <%= "(#{t'exp.private'})" if !@experience.public %>
       </span>
 
       <% if can? :update, @experience %>
         <span class='exp_function'>
-          <%= link_to '編輯', edit_experience_path(@experience) %>
+          <%= link_to t('action.edit'), edit_experience_path(@experience) %>
         </span>
       <% end %>
       <span class='exp_function'>
         <% if can? :destroy, @experience %>
-          <%= link_to '刪除', @experience, :confirm => '你確定嗎?', :method => :delete %>
+          <%= link_to t('action.destroy'), @experience, :confirm => t('action.confirm'), :method => :delete %>
         </span>
       <% end %>
     </div>
 
     <% if @experience.goal %>
       <p class='exp_category'>
-        <strong>所屬目標:</strong>
+      <strong><%= t'exp.belong_goal'%>:</strong>
         <%= link_to @experience.goal.title, @experience.goal%>
       </p>
     <% end %>
@@ -48,12 +49,12 @@
     <p class='function'>
       <% unless @experience.first? %>
         <% if can? :show, @experience.prev_item(current_user, @current_goal.try(:id)) %>
-          <%= link_to '上一個經驗',  experience_path(@experience.prev_item(current_user, @current_goal.try(:id)), params_hash) if @experience.prev_item(current_user, @current_goal.try(:id))%>
+          <%= link_to t('exp.prev'),  experience_path(@experience.prev_item(current_user, @current_goal.try(:id)), params_hash) if @experience.prev_item(current_user, @current_goal.try(:id))%>
         <% end %>
       <% end %>
       <% unless @experience.last? %>
         <% if can? :show, @experience.next_item(current_user, @current_goal.try(:id)) %>
-          <%= link_to '下一個經驗',  experience_path(@experience.next_item(current_user, @current_goal.try(:id)), params_hash) if @experience.next_item(current_user, @current_goal.try(:id))%>
+          <%= link_to t('exp.next'),  experience_path(@experience.next_item(current_user, @current_goal.try(:id)), params_hash) if @experience.next_item(current_user, @current_goal.try(:id))%>
         <% end %>
       <% end %>
     </p>
@@ -63,30 +64,30 @@
     <p class='function'>
       <% unless @experience.first? %>
         <% if can? :show, @experience.prev_item(current_user, @current_goal.try(:id)) %>
-          <%= link_to '上一個經驗',  experience_path(@experience.prev_item(current_user, @current_goal.try(:id)), params_hash) if @experience.prev_item(current_user, @current_goal.try(:id))%>
+          <%= link_to t('exp.prev'),  experience_path(@experience.prev_item(current_user, @current_goal.try(:id)), params_hash) if @experience.prev_item(current_user, @current_goal.try(:id))%>
         <% end %>
       <% end %>
       <% unless @experience.last? %>
         <% if can? :show, @experience.next_item(current_user, @current_goal.try(:id)) %>
-          <%= link_to '下一個經驗',  experience_path(@experience.next_item(current_user, @current_goal.try(:id)), params_hash) if @experience.next_item(current_user, @current_goal.try(:id))%>
+          <%= link_to t('exp.next'),  experience_path(@experience.next_item(current_user, @current_goal.try(:id)), params_hash) if @experience.next_item(current_user, @current_goal.try(:id))%>
         <% end %>
       <% end %>
     </p>
     <p>
-      <strong>關鍵字: </strong>
+    <strong><%= t'exp.tags' %>: </strong>
       <span class='tags_func'>
         <% tag_link @experience %>
       </span>
       <div class='cheer_function'>
         <% if @experience.votes_for > 0%>
-          <strong> <%= @experience.votes_for %> 人說讚</strong>
+          <strong> <%= @experience.votes_for %> <%= t'exp.guys_like'%></strong>
         <% end %>
 
         <% form_for @vote do |f| %>
           <%= hidden_field_tag :voteable_type, @vote.voteable_type %>
           <%= hidden_field_tag :exp_id, @experience.id%>
           <%= hidden_field_tag :vote, 1 %>
-          <%= f.submit "讚" %>
+          <%= f.submit t('action.like') %>
         <% end %>
 
       </div>
@@ -97,25 +98,14 @@
     <%#= @experience.location_list %>
 
   </div>
-  <% if !@questions.blank? %>
-    <h3>處理的問題</h3>
-    <ul>
-      <% @questions.each do |question| %>
-        <li>
-          <span class='question_title'><%= link_to truncate_u(Sanitize.clean(question.content), 15), question %></span>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
-
   <hr >
   <%= render :partial => 'comments/form' %>
 
-  <h3>回覆</h3>
+  <h3><%= t'comment.label' %></h3>
   <div class='commentlist'>
     <% @comments.each do |c| %>
       <div class='comment'>
-        <h3><span class='exp_author'><%= link_to c.user.nickname, user_home_path(c.user.username) %></span> 說...</h3>
+        <h3><span class='exp_author'><%= link_to c.user.nickname, user_home_path(c.user.username) %></span> <%= t'comment.say'%>...</h3>
         <div><%= Sanitize.clean(c.comment) %></div>
       </div>
     <% end %>

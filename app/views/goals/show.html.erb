@@ -7,8 +7,8 @@
 <h3 class='avatared anchor'><%= link_to "#{h @goal.user.showname}", user_home_path(@goal.user.username) %> > <%= @goal.title %></h3>
 <div class='clear'></div>
 <% content_for :sider do %>
-  <%= Handcache.get_and_set("#{params.values.sort.to_s}-sider", :expires_in => 60 ) do
-    render :partial => 'show_sider', :locals => {:goal => @goal}
+  <%= Handcache.get_and_set("#{params.values.sort.to_s}-#{I18n.locale}-sider", :expires_in => 60 ) do
+    render :partial => 'show_sider', :locals => {:goals => @related_goals}
   end %>  
 <% end %>
 
@@ -19,7 +19,7 @@
         <div><%=h @goal.title %></div>
         <%=h @goal.start_at.to_s(:date) if @goal.start_at %>
         <%=h "~ #{@goal.end_at.to_s(:date)}" if @goal.end_at %>
-        <%= '(私密)' if !@goal.public %>
+        <%= "(#{t'goal.private'})" if !@goal.public %>
       </span>
       <span class='goal_author'>
         By <%= link_to "#{@goal.user.nickname}",  user_home_path(@goal.user.username) %>
@@ -27,23 +27,27 @@
 
       <% if can? :update, @goal %>
         <span class='goal_function'>
-          <%= link_to '編輯', edit_goal_path(@goal) %>
+          <%= link_to t('action.edit'), edit_goal_path(@goal) %>
         </span>
       <% end %>
       <% if can? :destroy, @goal %>
         <span class='goal_function'>
-          <%= link_to '刪除', @goal, :confirm => '你確定嗎?', :method => :delete %>
+          <%= link_to t('action.destroy'), @goal, :confirm => t('action.confirm'), :method => :delete %>
         </span>
       <% end %>
 
     </div>
     <p>
       <%#= GOAL_CATEGORY[@goal.category] %>
-      <strong>狀態:</strong>
+      <strong><%= t'goal.state'%>:</strong>
       <%= GOAL_STATES[@goal.state] %>
     </p>
     <p>
-      <strong>關鍵字: </strong>
+    <strong><%= t'goal.percentage'%>:</strong>
+    <%= ntp(@goal.percentage) %>
+    </p>
+    <p>
+    <strong><%= t'goal.tags'%>: </strong>
       <span class='goal_tags'>
         <% tag_link @goal%>
       </span>
@@ -55,13 +59,32 @@
   </div>
 
   <hr >
+  <h3><%= t'goal.exps' %></h3>
+  <% if @experiences.blank? %>
+    <em><%= t'goal.noexps' %></em>
+  <% else %>
+    <ul>
+      <% @experiences.each do |experience| %>
+        <li class='exp_list_cell'>
+        <span class='time'>
+          <%= experience.start_at.to_s(:md) if experience.start_at %>
+          <%= experience.end_at_date %>
+        </span>
+        <span class='exp_content'>
+          <%= link_to truncate_u(Sanitize.clean(experience.content), 10), experience_path(experience, {:goal_id => @goal.id}) %>
+        </span>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+  <hr >
   <%= render :partial => 'comments/form' %>
 
-  <h3>回覆</h3>
+  <h3><%= t'comment.label'%></h3>
   <div class='commentlist'>
     <% @comments.each do |c| %>
       <div class='comment'>
-        <h3><span class='goal_author'><%= link_to c.user.username, user_home_path(c.user.username) %></span> 說...</h3>
+        <h3><span class='goal_author'><%= link_to c.user.username, user_home_path(c.user.username) %></span> <%= t'comment.say'%>...</h3>
         <div><%= Sanitize.clean(c.comment) %></div>
       </div>
     <% end %>

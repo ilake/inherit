@@ -1,51 +1,42 @@
-<% title "傳承" %>
-<% description "記錄你的人生，分享你的經驗;你今日的經驗可能就是他人的明燈" %>
-<% keywords "解惑,傳承" %>
+<% title t"site.name" %>
+<% description t"site.desc" %>
+<% keywords t"site.keywords" %>
 
 <div id="homepage_header">
-  <h1 id='homepage_logo'>傳 承</h1>
+  <h1 id='homepage_logo'><%= t'site.name' %></h1>
   <div id='login'>
-    <%= link_to "現在就加入", new_user_registration_path %> 
+    <%= link_to t("registrations.link"), new_user_registration_path %> 
     |
-    <%= link_to "登入", new_user_session_path %>
+    <%= link_to t("sessions.sign_in"), new_user_session_path %>
   </div>
 </div>
 
   <div id="overview">
     <h4><!--不這樣都會偏掉我不會處理 orz -->　　</h4>
-    <h2>記錄你的人生，分享你的經驗 </h2>
-    <h2>你今日的經驗可能就是他人的明燈</h2>
-  </div>
-  <div id='introduce'>
-    <div id="leftitem">
-      <p class='intro'>如果你已有一些目標計畫</p>
-      <p>我們將會定期提醒您的目標，也希望你可以分享著努力的經驗，同時你也可以認識到其他一同朝著相同目標努力的人, 可以參考彼此的經驗。</p>
-    </div>
-
-    <div id="rightitem">
-      <p class='intro'>如果你還不知道做什麼</p>
-      <p>你可以找到和自己相同自己背景的人們，看到其他人都在做些什麼，來幫助您找到自己的目標。</p>
-    </div>
+    <h2><%= t'site.slogan1' %></h2>
+    <h2><%= t'site.slogan2' %></h2>
   </div>
   <div class='clear'></div>
   <div id='come_in'>
-    <h2><%= link_to '進來看看', home_url %></h2>
+    <h2><%= link_to t('flow.get_in'), home_url %></h2>
   </div>
   <div class='clear'></div>
   <div id='demo'>
-    <h2>Some Demo<h2>
-    <div class='demo-item'>
-      <%= image_tag('demo1.png')%>
-    </div>
-    <div class='demo-item'>
-      <%= image_tag('demo1.png')%>
-    </div>
-    <div class='demo-item'>
-      <%= image_tag('demo1.png')%>
-    </div>
-    <div class='demo-item'>
-      <%= image_tag('demo1.png')%>
+    <h2><%= t'site.demo' %></h2>
+    <div id='exp_chart' style='width:800px'>
     </div>
   </div>
 
+<% content_for :head do %>
+  <script>
+    Timeline_ajax_url= '<%= javascript_path "timeline/timeline_ajax/simile-ajax-api.js" %>';
+    Timeline_urlPrefix='<%= "#{ActionController::Base.asset_host}/javascripts/timeline/timeline_js/" %>';
+    Timeline_parameters="bundle=true";
+  </script>
+  <%= javascript_include_tag 'timeline/timeline_js/timeline-api.js' %>
+<% end %>
 
+<% content_for :bottom_js do %>
+  <%= javascript_include_tag "timeline/timeline_events_#{I18n.locale}.js" %>
+  <%= javascript_include_merged :secondary %>
+<% end %>
