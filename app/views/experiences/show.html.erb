@@ -69,7 +69,7 @@
       </span>
       <div class='cheer_function'>
         <% if @experience.votes_for > 0%>
-          <strong class='anchor'> <%= link_to @experience.votes_for, experience_votes_url(@experience) %> <%= t'exp.guys_like'%></strong>
+          <strong class='anchor'> <%= link_to @experience.likes_count, experience_votes_url(@experience) %> <%= t'exp.guys_like'%></strong>
         <% end %>
 
         <% form_for @vote do |f| %>

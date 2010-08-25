@@ -7,11 +7,13 @@ label {
   font-weight:bold;
 }
 #flash_notice {
-  font-size: 11px;
+  font-size: 13px;
   background-color: #CFC;
   border: solid 1px #6C6;
   padding: 5px 8px;
   margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight:bold;
 }
 
 #flash_error, #flash_failure {
@@ -20,6 +22,7 @@ label {
   border: solid 1px #C66;
   padding: 5px 8px;
   margin-top: 10px;
+  margin-bottom: 10px;
   font-weight:bold;
 }
 
@@ -29,6 +32,7 @@ label {
   border: solid 1px #C66;
   padding: 5px 8px;
   margin-top: 10px;
+  margin-bottom: 10px;
   font-weight: bold;
 }
 
@@ -71,6 +75,13 @@ label {
   cursor:pointer;
   margin-left:0;
 }
+.btn-expression{
+  background:none repeat scroll 0 0 #FAD78A;
+  border-color:#E8AC47;
+  cursor:pointer;
+  margin-left:0;
+}
+
 input.btn, .btn a, .btn-active button, .btn-active input, .btn-active a {
   color:#444444;
   text-decoration: none;
@@ -86,7 +97,9 @@ input.btn, .btn a, .btn-active button, .btn-active input, .btn-active a {
   margin-bottom:5px;
   border-bottom: 1px solid #E8E8E8;
 }
-
+.even {
+    background-color :#D1E1FA;
+} 
 
 /* homepage */
 #homepage_container {
@@ -339,7 +352,7 @@ input.btn, .btn a, .btn-active button, .btn-active input, .btn-active a {
   margin-bottom:0;
   color:#495961;
   float:left;
-  width:420px;
+  width:820px;
 }
 
 #fans_area {
@@ -387,6 +400,11 @@ input.btn, .btn a, .btn-active button, .btn-active input, .btn-active a {
   float:left;
 }
 
+.exp-info {
+  display:none;
+  color:#000000;
+} 
+
 .user_header {
   padding-bottom:3px;
   border-bottom: 1px solid #DDDDDD;
@@ -432,6 +450,10 @@ input.btn, .btn a, .btn-active button, .btn-active input, .btn-active a {
   padding:5px;
 }
 
+.js_time {
+  display:none;
+}
+
 #exp_list li{
   list-style:none;
   border-bottom: 1px solid #E9E9E9;
@@ -466,7 +488,7 @@ input.btn, .btn a, .btn-active button, .btn-active input, .btn-active a {
 #exp_show_time, #goal_show_time {
   margin-right:10px;
   font-weight: bolder;
-  font-size:20px;
+  font-size:16px;
 }
 
 #exp_show_content, #goal_show_content {

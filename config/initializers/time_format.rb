@@ -1,9 +1,9 @@
 ActiveSupport::CoreExtensions::Time::Conversions::DATE_FORMATS.merge!( 
   :fulltime => "%Y-%m-%d %H:%M:%S",
-  :time => "%m/%d  %H:%M",
+  :time => "%my%d  %H:%M",
   :hm => "%H:%M",
   :date => "%Y-%m-%d",
-  :ym => '%Y - %m',
+  :ym => '%Y/%m',
   :js_date => '%Y, %m, %d',
   :md => "%m-%d"
 )     

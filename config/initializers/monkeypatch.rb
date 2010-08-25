@@ -55,3 +55,18 @@ module Devise
     end
   end
 end
+
+class Vote < ActiveRecord::Base
+  after_create :add_likes_count
+
+
+  private
+  def add_likes_count
+    if self.voteable_type == 'Experience'
+      self.voteable.likes_count += 1
+      self.voteable.save!
+      self.voteable.user.likes_count += 1
+      self.voteable.user.save!
+    end
+  end
+end

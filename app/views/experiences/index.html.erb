@@ -13,18 +13,18 @@
 <div id='user_exp_profile'>
   <div class='user_header'>
   <% if @current_goal %>
-    <h3 class='avatared anchor'><%= link_to_user_home(@user)  %> > <%= @current_goal.title %></h3>
+    <h1 class='avatared anchor'><%= link_to_user_home(@user)  %> > <%= @current_goal.title %></h1>
   <% else %>
     <h1 class='avatared'><%= "#{h @user.showname}" %></h1>
   <% end %>
   <div id='fans_area'>
     <% if can?(:create, Goal) && @user.is_owner?(current_user)%>
-      <span class='btn btn-active anchor'>
+      <span class='btn btn-expression anchor'>
         <%= link_to t("goal.new"), new_goal_path(:goal => {'category' => 'goal'}) %>
       </span>
     <% end %>
     <% if can?(:create, Experience) && @user.is_owner?(current_user) %>
-      <span id='new_exp' class='btn btn-active'>
+      <span id='new_exp' class='btn btn-expression'>
         <% if @current_goal %>
           <%= link_to "#{t('exp.new')}", new_goal_experience_path(@current_goal) %>
         <% else %>
@@ -49,6 +49,8 @@
     <span class='btn btn-active'>
       <%= link_to t("user.message"), user_chats_path(@user), {:class => 'profile'} %>
     </span>
+
+    <strong><%= @user.likes_count %></strong><%= t'exp.guys_like'%>
     <span id='exp_follower'>
       <strong><%= t('user.fans')%></strong>
       <span class='fans_anchor'>
@@ -67,32 +69,31 @@
   <div class='clear'></div>
   <div id='user_content' class=<%= user_content_display_state(@current_goal)%>>
     <div class='exp_profile_content anchor'>
-      <p>
+      <% if can? :update, @user.profile %>
+        <span class='function'>
+        <%= link_to t("action.edit"), edit_user_profile_path(current_user)%>
+        </span>
+      <% end %>
+      <div>
       <strong><%= t'user.birthday'%>:</strong>
       <%=h @user.profile.birthday %>
-      </p>
-      <p>
+      </div>
+      <div>
       <strong><%= t'user.gender'%>:</strong>
       <%= t(GENDER_TYPE[@user.profile.gender.to_s]) %>
-      </p>
-      <p>
+      </div>
+      <div>
       <strong><%= t'user.country'%>:</strong>
       <%= @user.profile.location_list %>
-      </p>
-      <p>
+      </div>
+      <div>
       <strong><%= t'user.intro'%>:</strong>
       <%= @user.profile.intro %>
-      </p>
-      <p>
+      </div>
+      <div>
       <strong><%= t'user.tags'%>:</strong>
       <% exp_tag_list(@user.profile.tag_list) %>
-      </p>
-
-      <% if can? :update, @user.profile %>
-        <p class='function'>
-        <%= link_to t("action.edit"), edit_user_profile_path(current_user)%>
-        </p>
-      <% end %>
+      </div>
     </div>
     <div class='exp_goal_content anchor'>
       <dl>
@@ -143,7 +144,9 @@
 </div>
 <div id='exp_chart'>
 </div>
-<div id='exp_number'>
+<div id='exp_number' class='anchor'>
+  <a href='#' class='time_line_point' value="<%= @experiences[-1].start_at.to_s(:js_date) unless @experiences.blank?%>"><%= t'exp.first'%></a>
+  <a href='#' class='time_line_point' value='<%= @experiences[0].start_at.to_s(:js_date) unless @experiences.blank? %>'><%= t'exp.last'%></a>
   <strong><%= t'exp.number'%></strong>
 <%= select 'experience', 'data_number', DATA_NUMBER.sort{|a,b|a[0] <=> b[0]}, {:selected => current_data_number.to_i}%>
 </div>
@@ -180,15 +183,24 @@
     <% @experience_groups.keys.each do |time| %>
       <li><h3><%= time.to_s(:ym)%></h3></li>
       <% @experience_groups[time].each do |experience| %>
-        <li class='exp_list_cell'>
-          <span class='time'>
-            <%= experience.start_at.to_s(:md) if experience.start_at %>
-            <%= experience.end_at_date %>
+        <a href=<%= experience_path(experience, params_hash) %>>
+          <span>
+            <li class='exp_list_cell'>
+            <span class='js_time'><%= experience.start_at.to_s(:js_date) if experience.start_at %></span>
+            <span class='time'>
+              <%= experience.start_at.to_s(:md) if experience.start_at %>
+              <%= experience.end_at_date %>
+            </span>
+            <span class='exp_content'>
+              <%=  truncate_u(Sanitize.clean(experience.content), 30)%>
+            </span>
+            <span class='exp-info'>
+              <span><strong><%= experience.likes_count %></strong><%= t'exp.guys_like'%></span>
+              <span><strong><%= experience.comments_count %></strong><%= t'comment.reply' %></span>
+            </span>
+            </li>
           </span>
-          <span class='exp_content'>
-            <%= link_to truncate_u(Sanitize.clean(experience.content), 30), experience_path(experience, params_hash) %>
-          </span>
-        </li>
+        </a>
       <% end %>
     <% end %>
   </ul>

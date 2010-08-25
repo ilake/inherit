@@ -85,6 +85,8 @@ tw:
     tag_desc: '請填上您記錄相關的標籤, 可以幫你找到更多與你相關的紀錄'
     guy_encourage_you: '人鼓勵你'
     comeback: '回到記錄'
+    first: '第一筆記錄'
+    last: '最後一筆記錄'
   goal:
     label: '目標'
     tags: '目標標籤'

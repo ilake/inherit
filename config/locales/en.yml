@@ -89,6 +89,8 @@ en:
     tag_desc: "Please enter some tag about your record, that would help you find many other recrod about it"
     guy_encourage_you: 'people encourage you'
     comeback: '回到记录'
+    first: 'First Record'
+    last: 'Last Record'
   goal:
     label: 'Goal'
     tags: 'Goal tags'

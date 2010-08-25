@@ -86,6 +86,8 @@ cn:
     tag_desc: '请填上您记录目标的标签, 可以帮你找到更多与你相关的目标'
     guy_encourage_you: '人鼓励你'
     comeback: '回到记录'
+    first: '第一笔记录'
+    last: '最后一笔记录'
   goal:
     label: '目标'
     tags: '目标标签'

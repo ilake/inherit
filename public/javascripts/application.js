@@ -68,4 +68,20 @@ $(document).ready(function(){
           $('#user_content').removeClass('hide').addClass('show')
         }
     });
+
+    $('.exp_list_cell').hover(
+      function(){
+        $(this).find('.exp-info').show();
+        $(this).addClass('even');
+        tl.getBand(0).setCenterVisibleDate(new Date($(this).find('.js_time').html()));
+      },
+      function(){
+        $(this).find('.exp-info').hide();
+        $(this).removeClass('even');
+      }
+    );
+
+    $('.time_line_point').click(function(){
+        tl.getBand(0).setCenterVisibleDate(new Date($(this).attr('value')));
+    });
 });

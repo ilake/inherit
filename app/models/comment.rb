@@ -28,7 +28,7 @@ class Comment < ActiveRecord::Base
 
   validates_presence_of :comment
   after_create :deliver_comment_notification
-  after_create :add_question_comment_count
+  after_create :add_comment_count
 
   def mail_receiver
     #下過comment的
@@ -47,10 +47,13 @@ class Comment < ActiveRecord::Base
     Delayed::Job.enqueue(CommentMailingJob.new(self.id))
   end
 
-  def add_question_comment_count
-    if self.commentable_type == 'Question'
+  def add_comment_count
+    if self.commentable_type == 'Question' 
       self.commentable.comments_count+=1
       self.commentable.last_comment_time = Time.now
+      self.commentable.save!
+    elsif self.commentable_type == 'Experience'
+      self.commentable.comments_count+=1
       self.commentable.save!
     end
   end

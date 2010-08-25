@@ -161,7 +161,7 @@ class ExperiencesController < ApplicationController
       <span class='function'>
           #{app_helpers.link_to t('action.edit'), edit_goal_path(g) if can? :update, g}
           #{app_helpers.link_to t('action.destroy'), destroy_goal_path(g) if can? :destroy, g}
-          #{app_helpers.link_to "<strong>#{t('goal.detail')}</strong>", goal_path(g)}
+          #{app_helpers.link_to "<strong>#{t('goal.detail')}</strong>", user_exps_path(@user, g)}
       </span>
           <br /> 
           #{app_helpers.truncate_u(Sanitize.clean(g.content), 100)}",
