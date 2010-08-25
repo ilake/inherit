@@ -24,7 +24,9 @@ ActionController::Routing::Routes.draw do |map|
     goal.resources :experiences, :only => [:new]
   end
 
-  map.resources :experiences, :except => [:index]
+  map.resources :experiences, :except => [:index] do |exp|
+    exp.resources :votes, :only => [:index]
+  end
   #map.resource :profile, :only => [:show, :edit, :update]
 
   map.resources :users do |user|

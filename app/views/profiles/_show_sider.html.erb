@@ -1,0 +1,11 @@
+<div id='profile_show_side'>
+  <h3><%= t'user.relate'%></h3>
+  <ul>
+    <% profiles.each do |p| %>
+      <li>
+      <%= link_to truncate_u(p.user.showname), p.user%>
+      <%= truncate_u(Sanitize.clean(p.intro || ''), 20)%>
+      </li>
+    <% end %>
+  </ul>
+</div>

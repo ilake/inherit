@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100818063426
+# Schema version: 20100823122919
 #
 # Table name: profiles
 #
@@ -11,6 +11,7 @@
 #  updated_at :datetime
 #  intro      :text
 #  tags_list  :text
+#  locale     :string(255)     default("en")
 #
 
 require File.dirname(__FILE__) + '/../spec_helper'

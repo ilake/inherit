@@ -1,17 +1,13 @@
-<% title "Votes" %>
-
-<table>
-  <tr>
-    <th>Name</th>
-  </tr>
-  <% for vote in @votes %>
-    <tr>
-      <td><%=h vote.name %></td>
-      <td><%= link_to "Show", vote %></td>
-      <td><%= link_to "Edit", edit_vote_path(vote) %></td>
-      <td><%= link_to "Destroy", vote, :confirm => 'Are you sure?', :method => :delete %></td>
-    </tr>
-  <% end %>
-</table>
-
-<p><%= link_to "New Vote", new_vote_path %></p>
+<% title t"action.like" %>
+<span class='anchor'>
+  <%= link_to t("exp.comeback"), @experience %>
+</span>
+<h2><%= @users.count %><%= t'exp.guy_encourage_you' %></h2>
+<ul>
+  <% @users.each do |u| %>
+    <li class='exp_author'>
+      <%= link_to "#{u.nickname}",  user_home_path(u.username) %>
+      <%= truncate_u(Sanitize.clean(u.profile.intro), 30) %>
+    </li>
+<% end %>
+</ul>

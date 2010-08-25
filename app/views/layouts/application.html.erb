@@ -21,7 +21,7 @@
               <% if current_user.is_facebook_user? %>
                 <%= facebook_sign_out_link :user %>
               <% else %>
-                <%= link_to t"sessions.sign_out", destroy_user_session_path %></span>
+                <%= link_to t("sessions.sign_out"), destroy_user_session_path %></span>
             <% end %>
             </span>
           <% else %>

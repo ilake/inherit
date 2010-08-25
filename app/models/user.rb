@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100818063426
+# Schema version: 20100823122919
 #
 # Table name: users
 #
@@ -125,6 +125,29 @@ class User < ActiveRecord::Base
 
   def showname
     @showname ||= (nickname || username)
+  end
+
+  #想幫他產生預設的生日, 到今天的日子, 遇到我們的日子
+  def init_exp_data
+    self.experiences.create([
+        {
+      :content => "#{self.showname} #{I18n.t("init.birthday", :locale => self.locale)}",
+      :start_at => self.birthday,
+      :tag_list => I18n.t('init.birthday_tags', :locale => self.locale)
+    },
+      {
+      :content => "#{self.showname} #{I18n.t("init.life_until_now", :locale => self.locale)}",
+      :start_at => self.birthday,
+      :end_at => Time.now,
+      :tag_list => I18n.t("init.life_until_now_tags", :locale => self.locale),
+      :until_now => true
+    },
+      {
+      :content =>  "#{self.showname} #{I18n.t("init.meet_us", :locale => self.locale)}",
+      :start_at => Time.now,
+      :tag_list => I18n.t("init.meet_us_tags", :locale => self.locale)
+    }
+    ])
   end
 
   private

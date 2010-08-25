@@ -13,7 +13,8 @@
   end %>  
 <% end %>
 
-<%#= facebook_like %>
+<%= facebook_like %>
+<%= share_button %>
 <div id='exp_show_main'>
   <p class='exp_author'>
   <%= link_to t("exp.back_to_user", :name => @experience.user.nickname),  @current_goal ?  user_exps_path(:user_id => @experience.user, :goal_id => @current_goal) : user_home_path(@experience.user.username) %>
@@ -46,19 +47,7 @@
     <% end %>
 
     <% params_hash = @current_goal ? {:goal_id => @current_goal.to_param} : {}%>
-    <p class='function'>
-      <% unless @experience.first? %>
-        <% if can? :show, @experience.prev_item(current_user, @current_goal.try(:id)) %>
-          <%= link_to t('exp.prev'),  experience_path(@experience.prev_item(current_user, @current_goal.try(:id)), params_hash) if @experience.prev_item(current_user, @current_goal.try(:id))%>
-        <% end %>
-      <% end %>
-      <% unless @experience.last? %>
-        <% if can? :show, @experience.next_item(current_user, @current_goal.try(:id)) %>
-          <%= link_to t('exp.next'),  experience_path(@experience.next_item(current_user, @current_goal.try(:id)), params_hash) if @experience.next_item(current_user, @current_goal.try(:id))%>
-        <% end %>
-      <% end %>
-    </p>
-    <p>
+    <p class='exp-content'>
       <%= @experience.content %>
     </p>
     <p class='function'>
@@ -80,7 +69,7 @@
       </span>
       <div class='cheer_function'>
         <% if @experience.votes_for > 0%>
-          <strong> <%= @experience.votes_for %> <%= t'exp.guys_like'%></strong>
+          <strong class='anchor'> <%= link_to @experience.votes_for, experience_votes_url(@experience) %> <%= t'exp.guys_like'%></strong>
         <% end %>
 
         <% form_for @vote do |f| %>

@@ -53,11 +53,13 @@ en:
     nickname: 'Nickname'
     locale: 'Locale'
     backhome: 'Back to user home'
-    profile1: 'Please use tag describe your career, interest, skill, goal, dream, experence etc..'
+    profile1: 'Please use tag describe your career, interest, skill, goal, dream, experence etc.. If there are anything about it, we would inform you'
     profile2: 'Like engineer football starcraft warcraft reading'
     tag_space: '( Space separated )'
     male: 'Male'
     female: 'Femal'
+    profile: 'Profile'
+    relate: 'Related Profile'
 
   exp:
     label: 'Record'
@@ -71,7 +73,7 @@ en:
     private: "Private"
     prev: 'Previous'
     next: 'Next'
-    guys_like: 'people like it'
+    guys_like: 'people encourage it'
     relate: 'Related Records'
     new: 'Add your Record'
     detail: 'Detail'
@@ -84,6 +86,9 @@ en:
     self_privacy: 'Private(Just for you)'
     select_goal: 'select goal that record belongs to'
     select_color: 'select the record color'
+    tag_desc: "Please enter some tag about your record, that would help you find many other recrod about it"
+    guy_encourage_you: 'people encourage you'
+    comeback: '回到记录'
   goal:
     label: 'Goal'
     tags: 'Goal tags'
@@ -112,6 +117,7 @@ en:
     tag_space: 'tags （space separated）'
     public: 'Public'
     self_privacy: 'Private(Just for you)'
+    tag_desc: "Please enter some tag about your goal, that would help you find many other goal about it"
   comment:
     label: 'Comment'
     say: 'Say'
@@ -122,7 +128,7 @@ en:
     destroy: 'Delete'
     confirm: 'Are you Sure?'
     submit: 'Submit'
-    like: 'Like'
+    like: 'Encourage'
     cancel: 'Cancel'
     update_successfully: 'Update Successfully'
     update_fail: 'Update Fail'
@@ -168,6 +174,13 @@ en:
     noexp_desc2: "You have {{num}} followers waitting for you"
     noexp_desc3: "Record what you do for your goal"
     new_exp_now: 'Record it now'
+  init:
+    birthday: "The Day you born, your birthday"
+    birthday_tags: "born"
+    life_until_now: "These day you born unitl now"
+    life_until_now_tags: 'life'
+    meet_us: "The day we meet"
+    meet_us_tags: "meet"
 
   date:
     formats:

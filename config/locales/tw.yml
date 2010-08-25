@@ -50,11 +50,13 @@ tw:
     nickname: '暱稱'
     locale: '語言'
     backhome: '回到個人頁面'
-    profile1: '請用關鍵字描述自己的職業, 興趣, 技能, 目標, 夢想, 經驗等'
+    profile1: '請用標籤描述你的職業, 興趣, 技能, 目標, 夢想, 經驗等, 如果有相關的記錄, 我們將會通知您'
     profile2: '如工程師 足球 羽球 星海 魔獸 遊戲 網站開發'
     tag_space: '（請用空白隔開）'
     male: '男'
     female: '女'
+    profile: '個人檔案'
+    relate: '有類似背景的人'
   exp:
     label: '記錄'
     tags: '記錄標籤'
@@ -67,7 +69,7 @@ tw:
     private: "私密"
     prev: '上一個記錄'
     next: '下一個記錄'
-    guys_like: '人說讚'
+    guys_like: '人鼓勵'
     relate: '相關記錄'
     new: '新增你的記錄'
     detail: '詳細內容'
@@ -80,6 +82,9 @@ tw:
     self_privacy: '私密(自己才看的到)'
     select_goal: '選擇所屬目標'
     select_color: '選擇你喜歡的顏色'
+    tag_desc: '請填上您記錄相關的標籤, 可以幫你找到更多與你相關的紀錄'
+    guy_encourage_you: '人鼓勵你'
+    comeback: '回到記錄'
   goal:
     label: '目標'
     tags: '目標標籤'
@@ -108,6 +113,7 @@ tw:
     tag_space: '標籤（請用空白隔開）'
     public: '公開'
     self_privacy: '私密(自己才看的到)'
+    tag_desc: '請填上您目標相關的標籤, 可以幫你找到更多與你相關的目標'
   comment:
     label: '回覆'
     say: '說'
@@ -118,7 +124,7 @@ tw:
     destroy: '刪除'
     confirm: '你確定嗎?'
     submit: '送出'
-    like: '讚'
+    like: '鼓勵'
     cancel: '取消'
     update_successfully: '更新成功'
     update_fail: '更新失敗'
@@ -164,7 +170,13 @@ tw:
     noexp_desc2: "你有{{num}}個粉絲在等著你"
     noexp_desc3: "記錄你為你的目標做了什麼"
     new_exp_now: '現在就記錄'
-
+  init:
+    birthday: "您誕生的日子, 您的生日"
+    birthday_tags: "誕生"
+    life_until_now: "您出生到現在的日子"
+    life_until_now_tags: '人生'
+    meet_us: "與我們相遇的日子"
+    meet_us_tags: "相遇"
 
     
 

@@ -34,6 +34,7 @@
       <%= profile_form.select :locale, LOCALES_AVAILABLE.map{|locale|[ t(locale), locale]} %>
     </p>
     <p>
+      <label><%= t('user.country') %></label><br />
       <%= localized_country_select('user[profile_attributes]', 'location_list', [], {:selected => user_hometown}, :value => user_hometown) %>
     </p>
     <p>

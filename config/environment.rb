@@ -62,6 +62,8 @@ Rails::Initializer.run do |config|
   config.cache_store = :file_store, File.join(RAILS_ROOT, 'public', 'action_cache')
 end
 
+ENV['TZ'] = 'UTC'
+
 begin
   #CacheStore = Moneta::Memcache.new(:server => "127.0.0.1")
   CacheStore = Moneta::BasicFile.new(:path => "tmp/cache")

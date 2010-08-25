@@ -1,7 +1,8 @@
 class VotesController < ApplicationController
   before_filter :authenticate_user!, :except => [:index , :show]
   def index
-    @votes = Vote.all
+    @experience = Experience.find(params[:experience_id])
+    @users = @experience.voters_who_voted
   end
   
   def show

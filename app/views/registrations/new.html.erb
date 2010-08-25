@@ -1,4 +1,4 @@
-<h2>Sign up</h2>
+<h2><%= t("registrations.sign_up")%></h2>
 <% form_for resource_name, resource, :url => registration_path(resource_name) do |f| -%>
   <%= f.error_messages %>
   <p><%= f.label :email, t('user.email') %></p>

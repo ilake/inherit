@@ -51,11 +51,13 @@ cn:
     nickname: '昵称'
     locale: '语言'
     backhome: '回到个人页面'
-    profile1: '请用关键字描述自己的职业, 兴趣, 技能, 目标, 梦想, 经验等'
+    profile1: '请用标签描述你的职业, 兴趣, 技能, 目标, 梦想, 经验等, 如果有相关的记录, 我们将会通知您'
     profile2: '如工程师 足球 羽球 星海 魔兽 游戏 网站开发'
     tag_space: '（请用空白隔开）'
     male: '男'
     female: '女'
+    profile: '个人档案'
+    relate: '有类似背景的人'
   exp:
     label: '记录'
     tags: '记录标签'
@@ -68,7 +70,7 @@ cn:
     private: "私密"
     prev: '上一个记录'
     next: '下一个记录'
-    guys_like: '人说赞'
+    guys_like: '人鼓励'
     relate: '相关记录'
     new: '分享你的记录'
     detail: '详细内容'
@@ -81,6 +83,9 @@ cn:
     self_privacy: '私密(自己才看的到)'
     select_goal: '选择所属目标'
     select_color: '选择你喜欢的颜色'
+    tag_desc: '请填上您记录目标的标签, 可以帮你找到更多与你相关的目标'
+    guy_encourage_you: '人鼓励你'
+    comeback: '回到记录'
   goal:
     label: '目标'
     tags: '目标标签'
@@ -109,6 +114,7 @@ cn:
     tag_space: '标签（请用空白隔开）'
     public: '公开'
     self_privacy: '私密(自己才看的到)'
+    tag_desc: '请填上您目标相关的标签，可以帮你找到更多与你相关的目标'
   comment:
     label: '回覆'
     say: '说'
@@ -119,7 +125,7 @@ cn:
     destroy: '删除'
     confirm: '你确定吗?'
     submit: '送出'
-    like: '赞'
+    like: '鼓励'
     cancel: '取消'
     update_successfully: '更新成功'
     update_fail: '更新失败'
@@ -165,6 +171,13 @@ cn:
     noexp_desc2: "你有{{num}}个粉丝在等着你"
     noexp_desc3: "记录你为你的目标做了什么"
     new_exp_now: '现在就记录'
+  init:
+    birthday: "您诞生的日子, 您的生日"
+    birthday_tags: "诞生"
+    life_until_now: "您出生到现在的日子"
+    life_until_now_tags: '人生'
+    meet_us: "与我们相遇的日子"
+    meet_us_tags: "相遇"
 
 
   date:

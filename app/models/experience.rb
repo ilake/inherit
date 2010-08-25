@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100818063426
+# Schema version: 20100823122919
 #
 # Table name: experiences
 #
@@ -101,7 +101,8 @@ class Experience < ActiveRecord::Base
   end
 
   def find_related_exps(current_user_location)
-     Experience.search self.tag_list.rand, :limit => 6 || Experience.location_with(current_user_location).descend_by_updated_at.limit(6).all
+     result = Experience.search self.tag_list.rand, :limit => 6 
+     result = (result.blank? || result == [nil]) ? Experience.location_with(current_user_location).descend_by_updated_at.limit(6).all : result
   end
 
   private

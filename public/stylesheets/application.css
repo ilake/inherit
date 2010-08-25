@@ -450,13 +450,13 @@ input.btn, .btn a, .btn-active button, .btn-active input, .btn-active a {
 /* User experience index page END */
 
 /* User experience show page */
-#exp_show_main, #goal_show_main {
+#exp_show_main, #goal_show_main, #profile_show_main {
   float:right;
   width:700px;
   padding:5px;
 }
 
-#exp_show_side, #goal_show_side {
+#exp_show_side, #goal_show_side, #profile_show_side {
   float:left;
   width:200px;
   padding:5px;
@@ -471,6 +471,11 @@ input.btn, .btn a, .btn-active button, .btn-active input, .btn-active a {
 
 #exp_show_content, #goal_show_content {
   margin-bottom:40px;
+}
+
+.exp-content, .goal-content {
+  padding:15px;
+  margin:15px;
 }
 
 /* User experience show page END */

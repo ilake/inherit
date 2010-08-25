@@ -3,6 +3,7 @@
 <% keywords @goal.tag_list %>
 
 <%= facebook_like %>
+<%= share_button %>
 <div class='clear'></div>
 <h3 class='avatared anchor'><%= link_to "#{h @goal.user.showname}", user_home_path(@goal.user.username) %> > <%= @goal.title %></h3>
 <div class='clear'></div>
@@ -40,7 +41,7 @@
     <p>
       <%#= GOAL_CATEGORY[@goal.category] %>
       <strong><%= t'goal.state'%>:</strong>
-      <%= GOAL_STATES[@goal.state] %>
+      <%= t(GOAL_STATES[@goal.state]) %>
     </p>
     <p>
     <strong><%= t'goal.percentage'%>:</strong>
@@ -53,7 +54,7 @@
       </span>
       <div class='clear'></div>
     </p>
-    <p>
+    <p class='goal-content'>
       <%= @goal.content %>
     </p>
   </div>
