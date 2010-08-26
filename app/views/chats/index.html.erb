@@ -5,7 +5,7 @@
     <%= link_to "#{h @user.showname}", user_home_path(@user.username) %> > <%= @user.showname %><%= t'message.board'%>
   </span>
 <% else %>
-  <%= t'message.for_site'%>
+  <h3><%= t'message.for_site'%></h3>
 <% end %>
 <%= render :partial => 'form' %>
 <div class='chatlist'>

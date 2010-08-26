@@ -58,8 +58,9 @@
             <% else %>
               <li><%= link_to t("site.index"), home_url %></li>
             <% end %>
-            <li><%= link_to t("site.suggestion"), chats_path %></li>
             <li><%= link_to t("site.excite"), search_rands_path %></li>
+            <li><%= link_to t("site.forum"), questions_path %></li>
+            <li><%= link_to t("site.suggestion"), chats_path %></li>
             <li>
               <% form_tag search_url, :method => :get do %>
                 <%= t('site.search')%>: <%= text_field_tag :search, nil, :size => 10 %>

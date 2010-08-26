@@ -1,25 +1,19 @@
-<% title "解惑" %>
-<% description "解惑" %>
-<% keywords "解惑" %>
+<% title t("site.forum") %>
+<% description t("site.forum") %>
+<% keywords t("site.forum") %>
 
 <% unless params[:user_id] %>
   <div class='top-function-menu'>
-    <%= link_to "發問", new_question_path %>
+    <span class='btn btn-active'><%= link_to t("forum.ask"), new_question_path %></span>
   </div>
 <% end %>
 
-<% if @user %>
-  <p class='function'>
-  <%= link_to "回到#{@user.nickname}頁面", user_home_path(@user.username) %>
-  </p>
-  <h3><%= @user.nickname %>問過的問題</h3>
-<% end %>
 <table id='questionlist'>
   <tr>
-    <th>標題</th>
-    <th>內容</th>
-    <th>回應數</th>
-    <th>最後回應</th>
+    <th><%= t'forum.title' %></th>
+    <th><%= t'forum.content' %></th>
+    <th><%= t'forum.comments_count' %></th>
+    <th><%= t'forum.last_comment' %></th>
   </tr>
   <% for question in @questions %>
     <tr>

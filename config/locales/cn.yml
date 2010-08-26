@@ -18,6 +18,7 @@ cn:
     hottest_guy: '热门追踪'
     latest_guy: '最新加入'
     search_desc: '搜寻你有兴趣的目标记录'
+    forum: '讨论区'
   flow:
     get_in: '进来看看'
   sessions: 
@@ -180,7 +181,15 @@ cn:
     life_until_now_tags: '人生'
     meet_us: "与我们相遇的日子"
     meet_us_tags: "相遇"
-
+  forum:
+    ask: '发问'
+    title: '标题'
+    content: '内容'
+    comments_count: '回应数'
+    last_comment: '最后回应'
+    tag_space: '（请用空白隔开）'
+    tags: '标签'
+    back: '回到讨论区'
 
   date:
     formats:

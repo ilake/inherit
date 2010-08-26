@@ -3,60 +3,47 @@
     title @question.title 
     description "#{truncate_u(Sanitize.clean(@question.content), 100)}" 
     keywords @question.tag_list 
-    display_meta_tags :site => '傳承' 
+    display_meta_tags :site => t('site.name') 
   end %>  
 <% end %>
 
 <p>
-  <strong><%=h @question.title %></strong>
+  <h2><%=h @question.title %></h2>
   <span class='exp_author'> 
     By <%= link_to @question.user.nickname, user_home_path(@question.user.username) %>
   </span>
 
   <% if can? :update, @question %>
     <span class='question_function'>
-      <%= link_to '編輯', edit_question_path(@question) %>
+      <%= link_to t('action.edit'), edit_question_path(@question) %>
     </span>
   <% end %>
   <span class='question_function'>
     <% if can? :destroy, @question %>
-      <%= link_to '刪除', @question, :confirm => '你確定嗎?', :method => :delete %>
+      <%= link_to t('action.destroy'), @question, :confirm => t('action.confirm'), :method => :delete %>
     </span>
   <% end %>
 </p>
-<p>
+<p class='question-content'>
   <%= @question.content %>
 </p>
-<strong>關鍵字: </strong>
+<strong><%= t'forum.tags' %>: </strong>
 <span class='tags_func'>
   <% tag_link @question %>
 </span>
 
 <p>
-  <span class='question_function'><%= link_to "回到列表", questions_path %></span>
+  <span class='question_function'><%= link_to t("forum.back"), questions_path %></span>
 </p>
 <hr >
-<h3>相關經驗</h3>
-  <ul>
-    <% @experiences.each do |experience| %>
-      <li>
-        <span class='exp_cell'>
-          <%= link_to truncate_u(Sanitize.clean(experience.content), 15), experience %>
-        </span>
-      </li>
-    <% end %>
-  </ul>
-  <span class='share_function'>
-    <%= link_to '分享你的經驗給他', new_experience_path(:question_id => @question) %>
-  </span>
-  <%= render :partial => 'comments/form' %>
+<%= render :partial => 'comments/form' %>
 
-  <h3>回覆</h3>
-  <div class='commentlist'>
-    <% @comments.each do |c| %>
-      <div class='comment'>
-        <h3><span class='exp_author'><%= link_to c.user.username, user_home_path(c.user.username) %></span> 說...</h3>
-        <div><%= Sanitize.clean(c.comment) %></div>
-      </div>
-    <% end %>
-  </div>
+<h3><%= t'comment.label' %></h3>
+<div class='commentlist'>
+  <% @comments.each do |c| %>
+    <div class='comment'>
+      <h3><span class='exp_author'><%= link_to c.user.username, user_home_path(c.user.username) %></span> <%= t'comment.reply' %>...</h3>
+      <div><%= Sanitize.clean(c.comment) %></div>
+    </div>
+  <% end %>
+</div>

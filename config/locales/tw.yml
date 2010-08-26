@@ -18,6 +18,7 @@ tw:
     hottest_guy: '熱門追蹤'
     latest_guy: '最新加入'
     search_desc: '搜尋你有興趣的目標記錄'
+    forum: '討論區'
   flow:
     get_in: '進來看看'
   sessions: 
@@ -179,9 +180,16 @@ tw:
     life_until_now_tags: '人生'
     meet_us: "與我們相遇的日子"
     meet_us_tags: "相遇"
-
+  forum:
+    ask: '發問'
+    title: '標題'
+    content: '內容'
+    comments_count: '回應數'
+    last_comment: '最後回應'
+    tag_space: '（請用空白隔開）'
+    tags: '標籤'
+    back: '回到討論區'
     
-
   date:
     formats:
       default: "%Y-%m-%d"

@@ -21,6 +21,7 @@ en:
     hottest_guy: 'Hottest Guys'
     latest_guy: 'Latest Guys'
     search_desc: 'Search goals / records you interest'
+    forum: 'Forum'
   flow:
     get_in: 'Take a around'
   sessions: 
@@ -73,7 +74,7 @@ en:
     private: "Private"
     prev: 'Previous'
     next: 'Next'
-    guys_like: 'people encourage it'
+    guys_like: 'people encourage'
     relate: 'Related Records'
     new: 'Add your Record'
     detail: 'Detail'
@@ -183,6 +184,15 @@ en:
     life_until_now_tags: 'life'
     meet_us: "The day we meet"
     meet_us_tags: "meet"
+  forum:
+    ask: 'Ask'
+    title: 'Title'
+    content: 'Content'
+    comments_count: 'Reply Num'
+    last_comment: 'Last Comment'
+    tag_space: '( Space separated )'
+    tags: 'Tags'
+    back: 'Back to forum'
 
   date:
     formats:

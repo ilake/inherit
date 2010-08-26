@@ -495,7 +495,7 @@ input.btn, .btn a, .btn-active button, .btn-active input, .btn-active a {
   margin-bottom:40px;
 }
 
-.exp-content, .goal-content {
+.exp-content, .goal-content, .question-content {
   padding:15px;
   margin:15px;
 }

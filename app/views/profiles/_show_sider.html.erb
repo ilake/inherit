@@ -2,8 +2,8 @@
   <h3><%= t'user.relate'%></h3>
   <ul>
     <% profiles.each do |p| %>
-      <li>
-      <%= link_to truncate_u(p.user.showname), p.user%>
+      <li class='anchor'>
+      <%= link_to truncate_u(p.user.showname), user_home_path(p.user.username)%>
       <%= truncate_u(Sanitize.clean(p.intro || ''), 20)%>
       </li>
     <% end %>
