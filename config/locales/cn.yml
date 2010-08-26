@@ -19,6 +19,7 @@ cn:
     latest_guy: '最新加入'
     search_desc: '搜寻你有兴趣的目标记录'
     forum: '讨论区'
+    contact_us: '如果你愿意的话, 可以直接写信给我们(inherit@gmail.com)'
   flow:
     get_in: '进来看看'
   sessions: 
@@ -118,6 +119,7 @@ cn:
     public: '公开'
     self_privacy: '私密(自己才看的到)'
     tag_desc: '请填上您目标相关的标签，可以帮你找到更多与你相关的目标'
+    remind: '我们会用此email, 提醒你为你的目标努力'
   comment:
     label: '回覆'
     say: '说'
@@ -129,6 +131,7 @@ cn:
     confirm: '你确定吗?'
     submit: '送出'
     like: '鼓励'
+    like_desc: '您的鼓励可以替别人带来力量'
     cancel: '取消'
     update_successfully: '更新成功'
     update_fail: '更新失败'

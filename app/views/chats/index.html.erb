@@ -5,7 +5,12 @@
     <%= link_to "#{h @user.showname}", user_home_path(@user.username) %> > <%= @user.showname %><%= t'message.board'%>
   </span>
 <% else %>
-  <h3><%= t'message.for_site'%></h3>
+  <h3>
+    <%= t'message.for_site'%>
+    <span class='anchor'>
+      <%= mail_to "inherit@gmail.com", t("site.contact_us") %>
+    </span>
+  </h3>
 <% end %>
 <%= render :partial => 'form' %>
 <div class='chatlist'>

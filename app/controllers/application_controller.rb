@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   helper_method :current_user_location, :user_hometown, :current_data_number
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
-  before_filter :authenticate_inviter
+  #before_filter :authenticate_inviter
   before_filter :ip_location
   before_filter :set_locale
 
@@ -61,12 +61,12 @@ class ApplicationController < ActionController::Base
     redirect_to edit_user_profile_path(current_user) if current_user && current_user.profile.invalid?
   end
 
-  def authenticate_inviter
-    authenticate_or_request_with_http_basic do |name, password|
-      name == 'i' && password == 'lovetaiwan'
-    end
-    warden.custom_failure! if performed? 
-  end
+#  def authenticate_inviter
+#    authenticate_or_request_with_http_basic do |name, password|
+#      name == 'i' && password == 'lovetaiwan'
+#    end
+#    warden.custom_failure! if performed? 
+#  end
 
   def set_locale
     if !cookies[:locale]

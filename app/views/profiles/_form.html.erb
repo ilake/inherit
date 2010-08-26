@@ -7,7 +7,7 @@
   <% if current_user.init_user_email_username%>
     <!-- 只有facebook的user需要有重新修改username, email的機會 -->
     <p>
-    <%= user_form.label :email, t('user.email') %><br />
+    <%= user_form.label :email, t('user.email') %><%= t'goal.remind' %><br />
     <%= user_form.text_field :email%>
     </p>
     <p>

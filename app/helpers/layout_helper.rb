@@ -43,7 +43,13 @@ module LayoutHelper
   end
 
   def share_button
-    '<!-- AddToAny BEGIN -->
+    if current_user_location == 'China'
+      '<!-- JiaThis Button BEGIN -->
+    <a href="http://www.jiathis.com/share/" class="jiathis" target="_blank"><img src="http://www.jiathis.com/code/images/jiathis2.gif" width="125" height="21" border="0" id="jiathis_a"/></a>
+    <script type="text/javascript" src="http://www.jiathis.com/code/jia.js" charset="utf-8"></script>
+    <!-- JiaThis Button END -->'
+    else
+      '<!-- AddToAny BEGIN -->
     <a class="a2a_dd" href="http://www.addtoany.com/share_save"><img src="http://static.addtoany.com/buttons/share_save_171_16.png" width="171" height="16" border="0" alt="Share/Bookmark"/></a>
     <script type="text/javascript">
     var a2a_config = a2a_config || {};
@@ -51,6 +57,7 @@ module LayoutHelper
     </script>
     <script type="text/javascript" src="http://static.addtoany.com/menu/page.js"></script>
     <!-- AddToAny END -->'
+    end
   end
 
   def language_selection

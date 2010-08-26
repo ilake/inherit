@@ -22,6 +22,7 @@ en:
     latest_guy: 'Latest Guys'
     search_desc: 'Search goals / records you interest'
     forum: 'Forum'
+    contact_us: 'If you want, just mail to us(inherit@gmail.com)'
   flow:
     get_in: 'Take a around'
   sessions: 
@@ -121,6 +122,7 @@ en:
     public: 'Public'
     self_privacy: 'Private(Just for you)'
     tag_desc: "Please enter some tag about your goal, that would help you find many other goal about it"
+    remind: 'We would use this email to remind for your goal'
   comment:
     label: 'Comment'
     say: 'Say'
@@ -132,6 +134,7 @@ en:
     confirm: 'Are you Sure?'
     submit: 'Submit'
     like: 'Encourage'
+    like_desc: 'Your encourage could bring power to others'
     cancel: 'Cancel'
     update_successfully: 'Update Successfully'
     update_fail: 'Update Fail'

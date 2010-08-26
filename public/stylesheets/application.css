@@ -646,6 +646,14 @@ td.question_title{ width: 400px}
   float:left;
 }
 
+.cheer {
+  color: #FFCC00;
+  font-weight: bold;
+}
+
+#vote_submit{
+  font-size:18px;
+}
 .desc {
   color:#33CC66;
 }
