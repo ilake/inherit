@@ -3,6 +3,7 @@
 <% end %>
 
 <% form_for @goal do |f| %>
+  <span class='mustbe'>＊<%= t'form.mustbe' %></span>
   <%= f.error_messages %>
   <%= f.hidden_field :category, :value => 'goal' %>
   <p class='goal_start_at'>
@@ -18,19 +19,23 @@
     <%= f.date_select :end_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :end_year => Time.now.year %>
   </p>
   <p>
+    <span class='mustbe'>＊</span>
     <%= f.label :title, t("goal.name")%><br />
     <%= f.text_field :title %>
   </p>
   <p>
+    <span class='mustbe'>＊</span>
     <%= f.label :content, t("goal.content") %><br />
-    <%= f.text_area :content, :size => '40x10', :class => "mceEditor"  %>
+    <%= f.text_area :content, :size => '60x20', :class => "mceEditor"  %>
   </p>
   <p>
+    <span class='mustbe'>＊</span>
     <%= f.label :percentage, t('goal.percentage')  %>(0 ~ 100)%<br />
     <%= f.text_field :percentage %>
   </p>
   <p>
-  <%= f.label :tag, t('goal.tag_space') %><%= t'goal.tag_desc'%><br />
+    <span class='mustbe'>＊</span>
+    <%= f.label :tag, t('goal.tag_space') %><%= t'goal.tag_desc'%><br />
     <%= f.text_field :tag_list %>
   </p>
   <p>
@@ -42,30 +47,12 @@
   </p>
   <p><%= f.submit t("action.submit") %></p>
 <% end %>
-<%= javascript_include_tag 'goal' %>
 
 <%# '表示從facebox 出來' %>
 <% if params[:rel] %>
-<script type='text/javascript'>
-  $(function() {
-      $("#new_goal").submit(function(){  
-        $(document).trigger('close.facebox');
-        $('#action_comeplete_status').hide();
-        $('#action_working_status').show();
-
-        $.ajax({
-          url: $(this).attr("action")+'.js',
-          type: 'POST',
-          data: $(this).serialize(),
-          success: function(categories){
-            $('#exp_categories').html(categories);
-            $('#experience_goal_id').attr('value', $('#experience_goal_id option:last').attr('value'));
-            $('#action_working_status').hide();
-            $('#action_comeplete_status').show();
-          }
-        });
-        return false;  
-      });  
-  });
-</script>
+  <%= javascript_include_tag 'goal' %>
+<% else %>
+  <% content_for :bottom_js do %>
+    <%= javascript_include_tag 'goal' %>
+  <% end %>
 <% end %>

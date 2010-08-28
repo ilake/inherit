@@ -1,5 +1,7 @@
 <% title t("goal.new") %>
 
+<h1><%= t'goal.new' %></h1>
+
 <%= render :partial => 'form' %>
 
 <p class='function'><%= link_to t("action.cancel"), user_home_path(current_user.username)%></p>

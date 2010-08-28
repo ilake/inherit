@@ -73,7 +73,8 @@ $(document).ready(function(){
       function(){
         $(this).find('.exp-info').show();
         $(this).addClass('even');
-        tl.getBand(0).setCenterVisibleDate(new Date($(this).find('.js_time').html()));
+        tl.getBand(0).scrollToCenter(new Date($(this).find('.js_time').html()));
+        
       },
       function(){
         $(this).find('.exp-info').hide();
@@ -82,6 +83,34 @@ $(document).ready(function(){
     );
 
     $('.time_line_point').click(function(){
-        tl.getBand(0).setCenterVisibleDate(new Date($(this).attr('value')));
+        tl.getBand(0).scrollToCenter(new Date($(this).attr('value')));
+    });
+
+    $('#prev_position').click(function(){
+        var current_position = $('#current_position').html();
+        $('#exp_position_'+current_position).hide();
+        if (current_position == '0' ) {
+          current_position = $('#last_position').html();
+        }
+        else {
+        current_position = current_position*1 - 1;
+        }
+        $('#exp_position_'+current_position).fadeIn();
+        $('#current_position').html(current_position);
+        tl.getBand(0).scrollToCenter(new Date($('#exp_position_'+current_position).find('.js_time').html()));
+    });
+
+    $('#next_position').click(function(){
+        var current_position = $('#current_position').html();
+        $('#exp_position_'+current_position).hide();
+        if (current_position == $('#last_position').html() ) {
+          current_position = '0';
+        }
+        else {
+          current_position = current_position*1 + 1;
+        }
+        $('#exp_position_'+current_position).fadeIn();
+        $('#current_position').html(current_position);
+        tl.getBand(0).scrollToCenter(new Date($('#exp_position_'+current_position).find('.js_time').html()));
     });
 });

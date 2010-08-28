@@ -77,7 +77,7 @@ en:
     next: 'Next'
     guys_like: 'people encourage'
     relate: 'Related Records'
-    new: 'Add your Record'
+    new: 'Create your Record'
     detail: 'Detail'
     start_at: 'Start At'
     end_at: 'End At'
@@ -144,6 +144,8 @@ en:
     destroy_fail: 'Destroy Fail'
     increasing: 'Increasing'
     increased: 'Increased'
+    prev: 'Previous'
+    next: 'Next'
   message:
     label: 'Suggestion'
     board: 'Message Board'
@@ -196,6 +198,8 @@ en:
     tag_space: '( Space separated )'
     tags: 'Tags'
     back: 'Back to forum'
+  form:
+    mustbe: 'is required'
 
   date:
     formats:

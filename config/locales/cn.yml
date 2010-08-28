@@ -74,7 +74,7 @@ cn:
     next: '下一个记录'
     guys_like: '人鼓励'
     relate: '相关记录'
-    new: '分享你的记录'
+    new: '新增你的记录'
     detail: '详细内容'
     start_at: '开始时间'
     end_at: '结束时间'
@@ -141,6 +141,8 @@ cn:
     destroy_fail: '删除失败'
     increasing: '新增中'
     increased: '已新增'
+    prev: '上一笔'
+    next: '下一笔'
   message:
     label: '建议'
     board: '留言板'
@@ -193,6 +195,8 @@ cn:
     tag_space: '（请用空白隔开）'
     tags: '标签'
     back: '回到讨论区'
+  form:
+    mustbe: '为必填'
 
   date:
     formats:

@@ -405,6 +405,15 @@ input.btn, .btn a, .btn-active button, .btn-active input, .btn-active a {
   color:#000000;
 } 
 
+#record-label{
+  float:left;
+}
+
+#exp-show-style {
+  float:left;
+  padding:18px;
+}
+
 .user_header {
   padding-bottom:3px;
   border-bottom: 1px solid #DDDDDD;
@@ -747,4 +756,23 @@ td.question_title{ width: 400px}
   height:20px;
 }
 /* facebook end */
+
+
+.exp_position, #last_position, #current_position {
+  display:none;
+}
+
+.position_action {
+  color: #1259C7;
+  cursor:pointer;
+}
+
+.mustbe {
+  color: #990000;
+  font-weight:bold;
+}
+#exp-show-style a{
+  text-decoration: none;
+  color:#CCC;
+}
 

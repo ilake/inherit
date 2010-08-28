@@ -1,5 +1,5 @@
 <% content_for :meta_tag do%>
-  <%= Handcache.get_and_set("#{params.values.sort.to_s}-#{@user.profile.updated_at.to_s(:fulltime)}") do
+  <%= Handcache.get_and_set("#{params.values.sort.to_s}-#{I18n.locale}-#{@user.profile.updated_at.to_s(:fulltime)}") do
     title "#{@user.nickname} #{t'exp.someone'}"
     description "#{truncate_u(Sanitize.clean(@user.profile.intro || ''), 100)}" 
     keywords @user.profile.tag_list 
@@ -145,8 +145,6 @@
 <div id='exp_chart'>
 </div>
 <div id='exp_number' class='anchor'>
-  <a href='#' class='time_line_point' value="<%= @experiences[-1].start_at.to_s(:js_date) unless @experiences.blank?%>"><%= t'exp.first'%></a>
-  <a href='#' class='time_line_point' value='<%= @experiences[0].start_at.to_s(:js_date) unless @experiences.blank? %>'><%= t'exp.last'%></a>
   <strong><%= t'exp.number'%></strong>
 <%= select 'experience', 'data_number', DATA_NUMBER.sort{|a,b|a[0] <=> b[0]}, {:selected => current_data_number.to_i}%>
 </div>
@@ -162,7 +160,7 @@
 
 
 <div id='exp_list'>
-  <h2><%= @current_goal.title if @current_goal %> <%= t'exp.label'%>
+  <h2 id='record-label'><%= @current_goal.title if @current_goal %> <%= t'exp.label'%>
     <% if can?(:create, Experience) && @user.is_owner?(current_user) %>
       <span id='new_exp' class='btn btn-active'>
         <% if @current_goal %>
@@ -178,6 +176,20 @@
       </span>
     <% end %>
   </h2>
+  <div id='exp-show-style'>
+    <% if params[:style] == 'list'%>
+      <a href="?style=one" id='expone'>
+        <%= image_tag("http://png-2.findicons.com/files/icons/941/web_design/32/window_app_list.png")%>
+      </a>
+    <% else %>
+      <a href="?style=list" id='explist'>
+        <%= image_tag("http://png-2.findicons.com/files/icons/1569/chalkwork_html/32/list_unordered.png")%>
+      </a>
+    <% end %>
+  </div>
+<div class='clear'></div>
+
+<% if params[:style] == 'list' %>
   <ul>
     <% params_hash = @current_goal ? {:goal_id => @current_goal.id} : {}%>
     <% @experience_groups.keys.each do |time| %>
@@ -204,6 +216,31 @@
       <% end %>
     <% end %>
   </ul>
+<% else %>
+  <span class='position_action' id='prev_position'><%= t'action.prev' %></span>
+  <span class='position_action' id='next_position'><%= t'action.next' %></span>
+  <span id='last_position'><%= @experiences.size-1 %></span>
+  <span id='current_position'>0</span>
+  <% params_hash = @current_goal ? {:goal_id => @current_goal.id} : {}%>
+  <% @experiences.each_with_index do |experience, i| %>
+    <a href=<%= experience_path(experience, params_hash) %>>
+      <div class='<%= i == 0 ? "" : "exp_position" %> exp_list_cell' id="exp_position_<%= i %>">
+        <span class='js_time'><%= experience.start_at.to_s(:js_date) if experience.start_at %></span>
+        <span class='time'>
+          <%= experience.start_at.to_s(:date) if experience.start_at %>
+          <%= experience.end_at_date %>
+        </span>
+        <span>
+          <span><strong><%= experience.likes_count %></strong><%= t'exp.guys_like'%></span>
+          <span><strong><%= experience.comments_count %></strong><%= t'comment.reply' %></span>
+        </span>
+        <div class='exp-content'>
+          <%= experience.content %>
+        </div>
+      </div>
+    </a>
+  <% end %>
+<% end %>
 </div>
 
 <% content_for :head do %>
