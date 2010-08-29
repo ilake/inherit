@@ -5,6 +5,7 @@ javascripts:
   - application
   - colorPicker
   - facebox
+  - menu
 - secondary:
   - experience_timeline
 stylesheets: 
@@ -13,3 +14,5 @@ stylesheets:
   - colorPicker
   - application
   - facebox
+  - menu
+  - pagination

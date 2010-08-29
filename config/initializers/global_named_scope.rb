@@ -6,4 +6,6 @@ class ActiveRecord::Base
       {:conditions => {:public => true}}
     end
   }
+
+  named_scope :public, :conditions => {:public => true}
 end

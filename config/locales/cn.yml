@@ -120,6 +120,7 @@ cn:
     self_privacy: '私密(自己才看的到)'
     tag_desc: '请填上您目标相关的标签，可以帮你找到更多与你相关的目标'
     remind: '我们会用此email, 提醒你为你的目标努力'
+    moreothers: '更多'
   comment:
     label: '回覆'
     say: '说'
@@ -197,6 +198,9 @@ cn:
     back: '回到讨论区'
   form:
     mustbe: '为必填'
+  paginate:
+    previous: '上一页'
+    next: '下一页'
 
   date:
     formats:

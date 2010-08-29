@@ -34,6 +34,7 @@ class Goal < ActiveRecord::Base
   validates_uniqueness_of :title, :scope => :user_id
   named_scope :not_category, :conditions => "start_at is not NULL"
   named_scope :is_category, :conditions => "start_at is NULL"
+  named_scope :state_is, lambda{|state|{:conditions => {:state => state}}}
 
   define_index do
     indexes content

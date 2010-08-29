@@ -42,11 +42,28 @@
     </div>
 
     <h4><%= t'goal.guys' %></h4>
-    <div>
-      <% @goals.each do |goal| %>
+    <ul class="menu">  
+      <li id="working" class="active"><%= t'goal.working'%></li>  
+      <li id="help"><%= t'goal.needhelp'%></li>  
+      <li id="finish"><%= t'goal.finish'%></li>  
+      <li id='goalmore'><%= link_to t('goal.moreothers'), goals_path(:state => 'working') %></li>  
+    </ul> 
+    <div class="clear"></div>
+    <div class="menu_content working">  
+      <% @working_goals.each do |goal| %>
         <div class='goal_cell'> <%= link_to truncate_u(goal.title, 40), goal %></div>
       <% end %>
-    </div>
+    </div>  
+    <div class="menu_content help">  
+      <% @help_goals.each do |goal| %>
+        <div class='goal_cell'> <%= link_to truncate_u(goal.title, 40), goal %></div>
+      <% end %>
+    </div>  
+    <div class="menu_content finish">  
+      <% @finish_goals.each do |goal| %>
+        <div class='goal_cell'> <%= link_to truncate_u(goal.title, 40), goal %></div>
+      <% end %>
+    </div>  
     <h4><%= t'site.latest_guy'%></h4>
     <div>
       <% @latest_users.each do |user| %>

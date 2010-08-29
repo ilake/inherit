@@ -1,0 +1,60 @@
+ul.menu li{  
+    float: left;  
+    margin-right: 5px;  
+    margin-bottom: -1px;  
+}  
+
+ul.menu li{  
+    font-weight: 700;  
+    display: block;  
+    padding: 5px 10px 5px 10px;  
+    background: #efefef;  
+    margin-bottom: -1px;  
+    border: 1px solid #d0ccc9;  
+    border-width: 1px 1px 1px 1px;  
+    position: relative;  
+    color: #898989;  
+    cursor: pointer;  
+}  
+
+ul.menu li.active{  
+    background: #fff;  
+    top: 1px;  
+    border-bottom: 0;  
+    color: #5f95ef;  
+}  
+ .menu a {
+   color: #898989;
+   text-decoration:none;
+ }
+ li.active a{
+   color: #5f95ef;  
+ }
+
+ /******* CONTENT *******/  
+ .menu_content{  
+     margin: 0pt auto;  
+     background: #efefef;  
+     background: #fff;  
+     border: 1px solid #d0ccc9;  
+     text-align: left;  
+     padding: 10px;  
+     padding-bottom: 20px;  
+ }  
+ .menu_content h1{  
+     line-height: 1em;  
+     vertical-align: middle;  
+     height: 48px;  
+     padding: 10px 10px 10px 52px;  
+     font-size: 32px;  
+ }  
+ /******* /CONTENT *******/
+
+/******* TUTORIALS *******/  
+.menu_content.help{  
+  display: none;  
+}  
+.menu_content.finish{  
+  display: none;  
+}  
+/******* /TUTORIALS *******/  

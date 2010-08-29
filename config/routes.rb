@@ -20,7 +20,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :fans, :except => [:new, :show, :edit, :update]
   map.resources :questions
-  map.resources :goals, :as => :categories, :except => [:index] do |goal|
+  map.resources :goals, :as => :categories do |goal|
     goal.resources :experiences, :only => [:new]
   end
 
@@ -47,6 +47,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :comments, :except => [:index, :show, :edit, :update]
   
 
+  map.about 'site/about', :controller => 'site', :action => 'about'
   map.root :controller => 'home'
 end
 

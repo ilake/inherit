@@ -119,6 +119,7 @@ tw:
     self_privacy: '私密(自己才看的到)'
     tag_desc: '請填上您目標相關的標籤, 可以幫你找到更多與你相關的目標'
     remind: '我們會用此email, 提醒你為你的目標努力'
+    moreothers: '更多'
   comment:
     label: '回覆'
     say: '說'
@@ -196,6 +197,9 @@ tw:
     back: '回到討論區'
   form:
     mustbe: '為必填'
+  paginate:
+    previous: '上一頁'
+    next: '下一頁'
     
   date:
     formats:

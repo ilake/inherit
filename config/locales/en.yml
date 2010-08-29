@@ -123,6 +123,7 @@ en:
     self_privacy: 'Private(Just for you)'
     tag_desc: "Please enter some tag about your goal, that would help you find many other goal about it"
     remind: 'We would use this email to remind for your goal'
+    moreothers: 'More'
   comment:
     label: 'Comment'
     say: 'Say'
@@ -200,6 +201,9 @@ en:
     back: 'Back to forum'
   form:
     mustbe: 'is required'
+  paginate:
+    previous: 'Pervious'
+    next: 'Next'
 
   date:
     formats:

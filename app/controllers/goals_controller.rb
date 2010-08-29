@@ -5,7 +5,8 @@ class GoalsController < ApplicationController
   load_and_authorize_resource :nested => :user
 
   def index
-    @goals = user_selected.goals.all
+    state = ['working', 'help', 'finish'].include?(params[:state]) ? params[:state] : 'working' 
+    @goals = Goal.location_with(current_user_location).public.state_is(state).descend_by_updated_at.paginate :page => params[:page], :per_page => 10
   end
   
   def show

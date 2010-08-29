@@ -1,34 +1,20 @@
 <% title "#{@user.nickname} goals" %>
 
-<h1><%= @user.nickname %> goals</h1>
-<table>
-  <tr>
-    <th>title</th>
-    <th>detail</th>
-    <th>experiences_count</th>
-    <th>Tags</th>
-    <th>Start At</th>
-    <th>State</th>
-  </tr>
-  <% for goal in @goals %>
-    <tr>
-      <td><%=h goal.title %></td>
-      <td><%=h truncate_u(goal.content) %></td>
-      <td><%=h goal.experiences_count %></td>
-      <td><%=h tag_link goal %></td>
-      <td><%=h goal.start_at %></td>
-      <td><%=h goal.state %></td>
-      <td><%= link_to "Show", goal %></td>
-    <% if can? :update, goal %>
-      <td><%= link_to "Edit", edit_goal_path(goal) %></td>
-    <% end %>
-    <% if can? :destroy, goal%>
-      <td><%= link_to "Destroy", goal, :confirm => 'Are you sure?', :method => :delete %></td>
-    <% end %>
-    </tr>
-  <% end %>
-</table>
-
-<% if can? :create, Goal%>
-  <p><%= link_to "New Goal", new_goal_path %></p>
-<% end %>
+    <ul class="menu">  
+      <li class="<%= current_tab(params[:state], 'working') %>">
+      <%= link_to t('goal.working'), goals_path(:state => 'working') %>
+      </li>  
+      <li class="<%= current_tab(params[:state], 'help') %>">
+      <%= link_to t('goal.needhelp'), goals_path(:state => 'help') %>
+      </li>  
+      <li class="<%= current_tab(params[:state], 'finish') %>">
+      <%= link_to t('goal.finish'), goals_path(:state => 'finish') %>
+      </li>  
+    </ul> 
+    <div class="clear"></div>
+    <div class="menu_content">  
+      <% @goals.each do |goal| %>
+        <div class='goal_cell'> <%= link_to truncate_u(goal.title, 40), goal %></div>
+      <% end %>
+    </div>  
+    <%= will_paginate @goals %>
