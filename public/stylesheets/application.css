@@ -48,7 +48,7 @@ label {
   color: #64E827;
 }
 
-.loading {
+.loading, .fail {
   color: #FF0000;
 }
 

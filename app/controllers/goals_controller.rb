@@ -29,13 +29,14 @@ class GoalsController < ApplicationController
       respond_to do |format|
         format.html {redirect_to user_home_path(current_user.username)}
         format.js { 
-          render :inline => "<%= select :experience, :goal_id, current_user.goals.map{|g|[g.title, g.id]}, {:include_blank => true}%>"
+          render :json => {'SUCCESS' => "#{ActionController::Base.helpers.select :experience, :goal_id, current_user.goals.map{|g|[g.title, g.id]}, {:include_blank => true}}", 'MESSAGE' => I18n.t('action.create_successfully')}.to_json
         }
       end
     else
+      
       respond_to do |format|
         format.html { render :action => 'new' }
-        format.js { render :nothing => true } 
+        format.js { render :json => {"FAIL" => I18n.t('action.create_fail')}.to_json} 
       end
     end
   end

@@ -51,6 +51,7 @@
 <%# '表示從facebox 出來' %>
 <% if params[:rel] %>
   <%= javascript_include_tag 'goal' %>
+  <%= javascript_include_tag 'goal_ajax_create' %>
 <% else %>
   <% content_for :bottom_js do %>
     <%= javascript_include_tag 'goal' %>

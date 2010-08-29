@@ -25,7 +25,7 @@ class Goal < ActiveRecord::Base
   acts_as_taggable_on :tags
   acts_as_taggable_on :locations
   acts_as_commentable
-  attr_accessible :start_at, :title, :content, :state, :tag_list, :public, :location_list, :category, :end_at
+  attr_accessible :start_at, :title, :content, :state, :tag_list, :public, :location_list, :category, :end_at, :percentage
 
   belongs_to :user
   has_many :experiences
