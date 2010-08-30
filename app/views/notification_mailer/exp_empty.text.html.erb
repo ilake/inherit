@@ -1,15 +1,15 @@
 <p>
-<%= @user.nickname %> <%= t('mail.noexp_desc1', :num => @goals.size, :locale => @user.locale)%>
+<%= @user.nickname %> <%= I18n.t('mail.noexp_desc1', :num => @goals.size, :locale => @user.locale)%>
 </p>
 <p>
   <%= @goals.join(', ')%>
 </p>
 <% if @fans_count > 0 %>
 <p>
- <%= t('mail.noexp_desc2', :num => @fans_count, :locale => @user.locale)%>
+ <%= I18n.t('mail.noexp_desc2', :num => @fans_count, :locale => @user.locale)%>
 </p>
 <% end %>
 <p>
- <%= t('mail.noexp_desc3', :locale => @user.locale)%>
-  <%= link_to t("mail.new_exp_now", :locale => @user.locale), new_experience_url %>
+<%= I18n.t('mail.noexp_desc3', :locale => @user.locale)%>
+<a href='<%= @host %><%= @new_exp_url %>'><%= I18n.t('mail.new_exp_now', :locale => @user.locale) %></a>
 </p>

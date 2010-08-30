@@ -63,7 +63,7 @@ class NotificationMailer < ActionMailer::Base
     from          "notifications@inherit.com"
     subject       "#{user.showname} #{I18n.t('mail.goal_empty_notify_subject', :locale => user.locale)}"
     sent_on       Time.now
-    body          :user => user
+    body          :user => user, :host => host, :host => host, :new_goal_url => new_goal_path, :home_url => home_path
   end
 
   def exp_empty(user, goals, fans_count)
@@ -73,6 +73,6 @@ class NotificationMailer < ActionMailer::Base
     from          "notifications@inherit.com"
     subject       "#{user.showname}  #{I18n.t('mail.exp_empty_notify_subject', :locale => user.locale)}"
     sent_on       Time.now
-    body          :user => user, :goals => goals, :fans_count => fans_count
+    body          :user => user, :goals => goals, :fans_count => fans_count, :host => host, :new_exp_url => new_experience_path
   end
 end

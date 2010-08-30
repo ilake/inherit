@@ -26,9 +26,9 @@
     </div>
     <h4><%= t'site.hottest_guy'%></h4>
     <div>
-      <% @popular_users.each do |user| %>
+      <% @popular_profiles.each do |profile| %>
         <div class='exp_author'>
-          <%= link_to_user_home(user) %>
+          <%= link_to_user_home(profile.user) %>
         </div>
       <% end %>
     </div>
@@ -66,9 +66,9 @@
     </div>  
     <h4><%= t'site.latest_guy'%></h4>
     <div>
-      <% @latest_users.each do |user| %>
+      <% @latest_profiles.each do |profile| %>
         <div class='exp_author'>
-          <%= link_to_user_home(user) %>
+          <%= link_to_user_home(profile.user) %>
         </div>
       <% end %>
     </div>

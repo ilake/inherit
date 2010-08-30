@@ -1,11 +1,11 @@
 <p>
-<%= @user.nickname %>  <%= t('mail.nogoal_desc1', :locale => @user.locale )%>
+<%= @user.nickname %>  <%= I18n.t('mail.nogoal_desc1', :locale => @user.locale )%>
 </p>
 <p>
-<%= t('mail.nogoal_desc2', :locale => @user.locale )%>
-<%= link_to t("mail.new_goal_now", :locale => @user.locale), new_goal_url %>
+<%= I18n.t('mail.nogoal_desc2', :locale => @user.locale )%>
+<a href='<%= @host %><%= @new_goal_url %>'><%= I18n.t('mail.new_goal_now', :locale => @user.locale) %></a>
 </p>
 <p>
-<%= t('mail.nogoal_desc3', :locale => @user.locale )%>
-<%= link_to t('mail.others_goal', :locale => @user.locale), home_url %>
+<%= I18n.t('mail.nogoal_desc3', :locale => @user.locale )%>
+<a href='<%= @host %><%= @home_url %>'><%= I18n.t('mail.others_goal', :locale => @user.locale) %></a>
 </p>
