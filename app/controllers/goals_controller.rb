@@ -1,7 +1,6 @@
 class GoalsController < ApplicationController
   uses_tiny_mce(:options => AppConfig.simple_mce_options, :only => [:new, :edit]) if defined?(AppConfig)
   before_filter :authenticate_user!, :except => [:index , :show]
-  before_filter :user_selected, :only => [:index]
   load_and_authorize_resource :nested => :user
 
   def index
