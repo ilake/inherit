@@ -150,6 +150,14 @@ class User < ActiveRecord::Base
     ])
   end
 
+  def deliver_goal_empty_notification
+    Delayed::Job.enqueue(GoalEmptyMailingJob.new(self.id))
+  end
+
+  def deliver_exp_empty_notification
+    Delayed::Job.enqueue(ExpEmptyMailingJob.new(self.id))
+  end
+
   private
   def init
     self.create_profile
