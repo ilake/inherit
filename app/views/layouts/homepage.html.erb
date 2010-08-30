@@ -4,14 +4,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <%= yield(:meta_tag) || display_meta_tags(:site => '傳承') %>
+  <%= yield(:meta_tag) || display_meta_tags(:site => t('site.name')) %>
   <%= stylesheet_link_merged :base %>
   <%= yield(:head) %>
 </head>
 <body>
   <div id='homepage_container'>
     <div id='homepage_content'>
-      <%= yield %>
+      <%= Handcache.get_and_set("#{params.values.sort.to_s}-#{I18n.locale}") do
+        yield
+      end %>  
     </div>
   </div>
   <%= javascript_include_merged :base %>

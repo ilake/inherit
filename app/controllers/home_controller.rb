@@ -2,9 +2,6 @@ class HomeController < ApplicationController
   before_filter :force_set_profile
   before_filter :user_auth, :only => [:index]
 
-  caches_action :index
-
-
   def index
     render :layout => 'homepage'
   end
