@@ -3,7 +3,7 @@
   <ul>
     <% profiles.each do |p| %>
       <li class='anchor'>
-      <%= link_to truncate_u(p.user.showname), user_home_path(p.user.username)%>
+      <%= link_to_user_home(p.user) %>
       <%= truncate_u(Sanitize.clean(p.intro || ''), 20)%>
       </li>
     <% end %>

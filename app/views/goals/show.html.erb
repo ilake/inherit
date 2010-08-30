@@ -5,7 +5,7 @@
 <%= facebook_like %>
 <%= share_button %>
 <div class='clear'></div>
-<h1 class='avatared anchor'><%= link_to "#{h @goal.user.showname}", user_home_path(@goal.user.username) %> > <%= @goal.title %></h1>
+<h1 class='avatared anchor'><%= link_to_user_home(@goal.user) %> > <%= @goal.title %></h1>
 <div class='clear'></div>
 <% content_for :sider do %>
   <%= Handcache.get_and_set("#{params.values.sort.to_s}-#{I18n.locale}-sider", :expires_in => 60 ) do
@@ -23,7 +23,7 @@
         <%= "(#{t'goal.private'})" if !@goal.public %>
       </span>
       <span class='goal_author'>
-        By <%= link_to "#{@goal.user.nickname}",  user_home_path(@goal.user.username) %>
+        By <%= link_to_user_home(@goal.user) %>
       </span>
 
       <% if can? :update, @goal %>
@@ -85,7 +85,7 @@
   <div class='commentlist'>
     <% @comments.each do |c| %>
       <div class='comment'>
-        <h3><span class='goal_author'><%= link_to c.user.username, user_home_path(c.user.username) %></span> <%= t'comment.say'%>...</h3>
+        <h3><span class='goal_author'><%= link_to_user_home(c.user) %></span> <%= t'comment.say'%>...</h3>
         <div><%= Sanitize.clean(c.comment) %></div>
       </div>
     <% end %>

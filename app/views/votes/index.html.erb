@@ -6,7 +6,7 @@
 <ul>
   <% @users.each do |u| %>
     <li class='exp_author'>
-      <%= link_to "#{u.nickname}",  user_home_path(u.username) %>
+      <%= link_to_user_home(u) %>
       <%= truncate_u(Sanitize.clean(u.profile.intro), 30) %>
     </li>
 <% end %>

@@ -1,9 +1,17 @@
-<% title "Chat" %>
+<span class='anchor'>
+  <% if @chat.owner %>
+    <% title "#{@chat.owner.showname} #{t('message.board')}" %>
+    <%= link_to "#{@chat.owner.showname} #{t'message.board'}", user_chats_path(@chat.owner) %>
+  <% else %>
+    <% title t('message.label') %>
+    <%= link_to t('message.label'), chats_path %>
+  <% end %>
+</span>
 
 <div class='chat'>
   <h3>
     <span class='exp_author'>
-      <%= link_to @chat.user.nickname, user_home_path(@chat.user.username) %>
+      <%= link_to_user_home(@chat.user) %>
     </span> <%= t'comment.say'%>...
     <% if can? :destroy, @chat %>
        <%= link_to t("action.destroy"), @chat, :confirm => t('action.confirm'), :method => :delete %>
@@ -14,7 +22,7 @@
     <% @chat.children.each do |c|%>
       <h3>
         <span class='exp_author'>
-          <%= link_to c.user.nickname, user_home_path(c.user.username) %>
+          <%= link_to_user_home(c.user) %>
         </span> <%= t'comment.say'%>...
         <% if can? :destroy, c %>
           <%= link_to t("action.destroy"), c, :confirm => t('action.confirm'), :method => :delete %>
@@ -23,5 +31,5 @@
       <div><%= Sanitize.clean(c.content) %></div>
     <% end %>
   </div>
-  <%= link_to t("action.reply"), reply_new_chat_path(:chat_id => @chat) if @chat.reply_permission(current_user) %>
+  <%= link_to t("comment.reply"), reply_new_chat_path(:chat_id => @chat) if @chat.reply_permission(current_user) %>
 </div>

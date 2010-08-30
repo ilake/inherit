@@ -14,7 +14,7 @@
 
 # master_id 是 nil 表示是寄給 admin
 class Chat < ActiveRecord::Base
-  attr_accessible :content, :parent_id, :location_list, :master_id
+  attr_accessible :content, :parent_id, :location_list, :master_id, :user_id
   validates_presence_of :user_id, :content
 
   default_scope :order => 'created_at DESC'

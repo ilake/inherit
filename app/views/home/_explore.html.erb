@@ -28,7 +28,7 @@
     <div>
       <% @popular_users.each do |user| %>
         <div class='exp_author'>
-          <%= link_to user.nickname, user_home_path(user.username)%>
+          <%= link_to_user_home(user) %>
         </div>
       <% end %>
     </div>
@@ -68,7 +68,7 @@
     <div>
       <% @latest_users.each do |user| %>
         <div class='exp_author'>
-          <%= link_to user.nickname, user_home_path(user.username)%>
+          <%= link_to_user_home(user) %>
         </div>
       <% end %>
     </div>

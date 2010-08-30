@@ -94,7 +94,8 @@
   <div class='commentlist'>
     <% @comments.each do |c| %>
       <div class='comment'>
-        <h3><span class='exp_author'><%= link_to c.user.nickname, user_home_path(c.user.username) %></span> <%= t'comment.say'%>...</h3>
+        <h3><span class='exp_author'><%= link_to_user_home(c.user) %></span> <%= t'comment.say'%>...</h3>
+      
         <div><%= Sanitize.clean(c.comment) %></div>
       </div>
     <% end %>

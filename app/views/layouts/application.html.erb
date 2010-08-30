@@ -15,7 +15,9 @@
       <ul>
         <li id='dashboard_options' class='anchor'>
           <% if user_signed_in? %>
-            <span class='space'> <%= link_to current_user.showname, user_home_path(current_user.username) %></span>
+            <span class='space'>
+              <%= link_to_user_home(current_user) %>
+            </span>
             <span class='space'> <%= link_to t("user.setting"), user_profile_path(current_user)%></span>
             <span class='space'> 
               <% if current_user.is_facebook_user? %>

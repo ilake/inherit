@@ -2,7 +2,7 @@
 <% description @chats.last.try(:content) %>
 <% if params[:user_id] %>
   <span class='anchor'>
-    <%= link_to "#{h @user.showname}", user_home_path(@user.username) %> > <%= @user.showname %><%= t'message.board'%>
+    <%= link_to_user_home(@user) %> > <%= @user.showname %>&nbsp;<%= t'message.board'%>
   </span>
 <% else %>
   <h3>
@@ -18,7 +18,8 @@
     <div class='chat'>
       <h3>
         <span class='exp_author'>
-          <%= link_to chat.user.nickname, user_home_path(chat.user.nickname) %>
+
+          <%= link_to_user_home(chat.user) %>
         </span> <%= t'comment.say'%>...
         <% if can? :destroy, chat %>
           <%= link_to t("action.destroy"), chat, :confirm => t('action.confirm'), :method => :delete %>
@@ -29,7 +30,7 @@
         <% chat.children.each do |c|%>
           <h3>
             <span class='exp_author'>
-              <%= link_to c.user.nickname, user_home_path(c.user.username) %>
+              <%= link_to_user_home(c.user) %>
             </span> <%= t'comment.say'%>...
             <% if can? :destroy, c %>
               <%= link_to t("action.destroy"), c, :confirm => t('action.confirm'), :method => :delete %>
