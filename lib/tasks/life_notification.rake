@@ -3,7 +3,7 @@ namespace :notify do
   task :goal_empty => :environment do
     User.find_in_batches do |users|
         users.each { |user|
-          NotificationMailer.send_later(:deliver_goal_empty, user)  if user.goals.not_category.count.zero?
+          NotificationMailer.send_later(:deliver_goal_empty, user)  if user.email && user.goals.not_category.count.zero?
         }
     end
   end
@@ -13,7 +13,7 @@ namespace :notify do
   task :exp_empty => :environment do
     User.find_in_batches do |users|
         users.each { |user|
-          NotificationMailer.send_later(:deliver_exp_empty, user, user.goals.map{|g| g.title}, user.fans_count)  if !user.goals.not_category.count.zero? && user.experiences.is_belong_one_goal.this_week.count.zero?
+          NotificationMailer.send_later(:deliver_exp_empty, user, user.goals.map{|g| g.title}, user.fans_count)  if  user.email && !user.goals.not_category.count.zero? && user.experiences.is_belong_one_goal.this_week.count.zero?
         }
     end
   end
