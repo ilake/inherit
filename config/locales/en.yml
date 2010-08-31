@@ -11,7 +11,7 @@ en:
     index: 'Home'
     home: 'Profile'
     suggestion: 'Suggestion'
-    excite: 'Exciting'
+    excite: 'Random'
     search: 'Search'
     desc: 'Track your life, track your goal, track what you do for that'
     keywords: '傳承'
@@ -93,6 +93,8 @@ en:
     comeback: '回到记录'
     first: 'First Record'
     last: 'Last Record'
+    showlist: 'Show record list'
+    showone: 'Show one record one time'
   goal:
     label: 'Goal'
     tags: 'Goal tags'

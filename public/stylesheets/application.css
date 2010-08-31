@@ -244,7 +244,7 @@ input.btn, .btn a, .btn-active button, .btn-active input, .btn-active a {
 #header {
   overflow: hidden;
   height: 65px;
-  margin-bottom:30px;
+  margin-bottom:10px;
   background-color:#EFEFEF;
   padding: 0px 0px 6px 6px;
 }
@@ -762,8 +762,9 @@ td.question_title{ width: 400px}
 }
 
 .position_action {
-  color: #1259C7;
+  color: #E8AC47;
   cursor:pointer;
+  font-weight:bold;
 }
 
 .mustbe {

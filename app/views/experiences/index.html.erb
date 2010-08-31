@@ -7,9 +7,6 @@
   end %>  
 <% end %>
 
-<%= facebook_like %>
-<%= share_button %>
-
 <div id='user_exp_profile'>
   <div class='user_header'>
   <% if @current_goal %>
@@ -158,6 +155,8 @@
   <% end %>
 <% end %>
 
+<%= facebook_like %>
+<%= share_button %>
 
 <div id='exp_list'>
   <h2 id='record-label'><%= @current_goal.title if @current_goal %> <%= t'exp.label'%>
@@ -179,12 +178,16 @@
   <div id='exp-show-style'>
     <% if params[:style] == 'list'%>
       <a href="?style=one" id='expone'>
-        <%= image_tag("http://png-2.findicons.com/files/icons/941/web_design/32/window_app_list.png")%>
+        <%= image_tag("http://png-2.findicons.com/files/icons/941/web_design/32/window_app_list.png", :title => t('exp.showone'), :alt => t('exp.showone'))%>
       </a>
     <% else %>
       <a href="?style=list" id='explist'>
-        <%= image_tag("http://png-2.findicons.com/files/icons/1569/chalkwork_html/32/list_unordered.png")%>
+        <%= image_tag("http://png-2.findicons.com/files/icons/1569/chalkwork_html/32/list_unordered.png", :title => t('exp.showlist'), :alt => t('exp.showlist'))%>
       </a>
+      <span class='position_action space' id='prev_position'><%= t'action.prev' %></span> / 
+      <span class='position_action space' id='next_position'><%= t'action.next' %></span>
+      <span id='last_position'><%= @experiences.size-1 %></span>
+      <span id='current_position'>0</span>
     <% end %>
   </div>
 <div class='clear'></div>
@@ -217,10 +220,6 @@
     <% end %>
   </ul>
 <% else %>
-  <span class='position_action' id='prev_position'><%= t'action.prev' %></span>
-  <span class='position_action' id='next_position'><%= t'action.next' %></span>
-  <span id='last_position'><%= @experiences.size-1 %></span>
-  <span id='current_position'>0</span>
   <% params_hash = @current_goal ? {:goal_id => @current_goal.id} : {}%>
   <% @experiences.each_with_index do |experience, i| %>
     <a href=<%= experience_path(experience, params_hash) %>>

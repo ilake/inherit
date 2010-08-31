@@ -8,7 +8,7 @@ cn:
     index: '首页'
     home: '我的传承'
     suggestion: '给我们建议'
-    excite: '吼！'
+    excite: '随机看看！'
     search: '搜寻'
     desc: '写下你的目标, 记录你为你的目标做了什么'
     keywords: '传承'
@@ -90,6 +90,8 @@ cn:
     comeback: '回到记录'
     first: '第一笔记录'
     last: '最后一笔记录'
+    showlist: '一次秀一列'
+    showone: '一次秀一笔'
   goal:
     label: '目标'
     tags: '目标标签'

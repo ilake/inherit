@@ -8,7 +8,7 @@ tw:
     index: '首頁'
     home: '我的傳承'
     suggestion: '給我們建議'
-    excite: '吼！'
+    excite: '隨機看看！'
     search: '搜尋'
     desc: '寫下你的目標, 記錄你為你的目標做了什麼'
     keywords: '傳承'
@@ -89,6 +89,8 @@ tw:
     comeback: '回到記錄'
     first: '第一筆記錄'
     last: '最後一筆記錄'
+    showlist: '一次秀一列'
+    showone: '一次秀一筆'
   goal:
     label: '目標'
     tags: '目標標籤'
