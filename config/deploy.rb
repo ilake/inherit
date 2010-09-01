@@ -6,9 +6,9 @@ set :user, 'root'
 set :hosting, 'webbynode'
 set :env, 'production'
 set :deploy_to, "/var/rails/inherit_deploy"
-role :web, 'inherit.iwakela.com'
-role :app, 'inherit.iwakela.com'
-role :db, 'inherit.iwakela.com', :primary => true
+role :web, 'www.iosel.com'
+role :app, 'www.iosel.com'
+role :db, 'www.iosel.com', :primary => true
 
 default_run_options[:pty] = true
 

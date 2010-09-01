@@ -1,6 +1,6 @@
 #[HOST]
 # Set the host name for URL creation
-SitemapGenerator::Sitemap.default_host = "http://inherit.iwakela.com"
+SitemapGenerator::Sitemap.default_host = "http://www.iosel.com"
 
 SitemapGenerator::Sitemap.add_links do |sitemap|
   # Put links creation logic here.
