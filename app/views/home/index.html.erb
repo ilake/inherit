@@ -21,7 +21,7 @@
   </div>
   <div class='clear'></div>
   <div id='come_in'>
-    <h2><%= link_to t('flow.get_in'), home_url %></h2>
+    <h1><%= link_to t('flow.get_in'), home_url %></h1>
   </div>
   <div class='clear'></div>
   <div id='demo'>
@@ -40,6 +40,10 @@
 <% end %>
 
 <% content_for :bottom_js do %>
-  <%= javascript_include_tag "timeline/timeline_events_#{I18n.locale}.js" %>
+  <script>
+    user_event= <%= @events %>;
+    timeline_start_at = new Date(<%= @working_goals.first.try(:start_at).try(:to_s, :js_date) || Time.now.try(:to_s, :js_date)%>);
+    timeline_default_at = new Date(<%= @working_goals.first.try(:start_at).try(:to_s, :js_date) || Time.now.try(:to_s, :js_date) %>);
+  </script>
   <%= javascript_include_merged :secondary %>
 <% end %>

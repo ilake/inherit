@@ -131,49 +131,4 @@ class ExperiencesController < ApplicationController
     @experiences = current_user.experiences.public_equals(true)
     @question = Question.find(params[:question_id])
   end
-  private
-  def exp_timeline_content(experiences)
-    experiences.map{ |e|
-      #Does not have end_at or start_at equal to end_at
-      end_time_hash = e.end_at_hash
-      {
-      'start' => e.start_at.to_s(:date),
-      'title' => app_helpers.truncate_u(Sanitize.clean(e.content), 10),
-      'description' => "
-      <span class='function'>
-      #{app_helpers.link_to t('action.edit'), edit_experience_path(e) if can? :update, e}
-      #{app_helpers.link_to t('action.destroy'), destroy_experience_path(e) if can? :destroy, e}
-      #{app_helpers.link_to "<strong>#{t('exp.detail')}</strong>", experience_path(e)}
-      </span>
-      <br /> 
-      #{app_helpers.truncate_u(Sanitize.clean(e.content), 100)}",
-      'color' => e.color
-      }.merge!(end_time_hash)
-    }
-  end
-
-  def goal_timeline_content(goals, events)
-     goals.each { |g|
-       events << {
-          'start' => g.start_at.to_s(:date),
-          'title' => "[#{I18n.t('goal.label')}]#{g.title}",
-          'description' => "
-      <span class='function'>
-          #{app_helpers.link_to t('action.edit'), edit_goal_path(g) if can? :update, g}
-          #{app_helpers.link_to t('action.destroy'), destroy_goal_path(g) if can? :destroy, g}
-          #{app_helpers.link_to "<strong>#{t('goal.detail')}</strong>", user_exps_path(@user, g)}
-      </span>
-          <br /> 
-          #{app_helpers.truncate_u(Sanitize.clean(g.content), 100)}",
-          'color' => "##{rand(10)}#{rand(10)}#{rand(10)}"
-       }
-    }
-    return events
-  end
-
-  def timeline_events(experiences, goals)
-    events = exp_timeline_content(experiences)
-    events = goal_timeline_content(goals, events)
-    return events
-  end
 end
