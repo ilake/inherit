@@ -133,19 +133,22 @@ class User < ActiveRecord::Base
         {
       :content => "#{self.showname} #{I18n.t("init.birthday", :locale => self.locale)}",
       :start_at => self.birthday,
-      :tag_list => I18n.t('init.birthday_tags', :locale => self.locale)
+      :tag_list => I18n.t('init.birthday_tags', :locale => self.locale),
+      :public => false
     },
       {
       :content => "#{self.showname} #{I18n.t("init.life_until_now", :locale => self.locale)}",
       :start_at => self.birthday,
       :end_at => Time.now,
       :tag_list => I18n.t("init.life_until_now_tags", :locale => self.locale),
-      :until_now => true
+      :until_now => true,
+      :public => false
     },
       {
       :content =>  "#{self.showname} #{I18n.t("init.meet_us", :locale => self.locale)}",
       :start_at => Time.now,
-      :tag_list => I18n.t("init.meet_us_tags", :locale => self.locale)
+      :tag_list => I18n.t("init.meet_us_tags", :locale => self.locale),
+      :public => false
     }
     ])
   end
