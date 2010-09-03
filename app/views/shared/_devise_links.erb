@@ -1,3 +1,4 @@
+<div class='anchor'>
 <%- if controller_name != 'sessions' %>
   <%= link_to t('devise.sessions.link'), new_session_path(resource_name) %><br />
 <% end -%>
@@ -23,3 +24,4 @@
 <% else %>
   <%= facebook_sign_out_link :user %>
 <% end %>
+</div>

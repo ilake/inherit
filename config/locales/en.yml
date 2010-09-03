@@ -95,6 +95,7 @@ en:
     last: 'Last Record'
     showlist: 'Show record list'
     showone: 'Show one record one time'
+    new_desc: 'You could create a record at sometime , in a range or until now'
   goal:
     label: 'Goal'
     tags: 'Goal tags'

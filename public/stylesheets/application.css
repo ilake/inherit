@@ -60,6 +60,20 @@ label {
   float:right;
 }
 
+.form-input{
+  background-color:#F0F0F0;
+  border:1px solid #AAAAAA;
+  padding:8px 0 8px 8px;
+}
+.form-input input:focus, input.text-input:focus, input.text-input {
+  background-color:#FFFFFF;
+  border:1px solid #FF9445;
+  padding:8px 0 8px 8px;
+}
+div.form-input{
+  margin:10px 0px 10px 0px;
+}
+
 .btn {
   background:none repeat scroll 0 0 #EAEEF1;
   border:1px solid #D0D8DF;
@@ -624,6 +638,11 @@ td.question_title{ width: 400px}
   padding-left:10px;
   padding-right:10px;
   padding-top:10px;
+}
+
+#search_label {
+  color:#073E6F;
+  font-weight:bold;
 }
 
 .search_item_list {

@@ -6,38 +6,38 @@
 
   <% if current_user.init_user_email_username%>
     <!-- 只有facebook的user需要有重新修改username, email的機會 -->
-    <p>
+    <p class='form-input'>
     <%= user_form.label :email, t('user.email') %><%= t'goal.remind' %><br />
-    <%= user_form.text_field :email%>
+    <%= user_form.text_field :email, :class => 'text-input' %>
     </p>
-    <p>
+    <p class='form-input'>
     <%= user_form.label :username, t('registrations.account') %><br />
-    <%= user_form.text_field :username %>
+    <%= user_form.text_field :username, :class => 'text-input'  %>
     </p>
   <% end %>
 
-  <p>
+  <p class='form-input'>
     <%= user_form.label :nickname, t('user.nickname') %><br />
-    <%= user_form.text_field :nickname %>
+    <%= user_form.text_field :nickname, :class => 'text-input'  %>
   </p>
   <% user_form.fields_for :profile do |profile_form| %>
-    <p>
+    <p class='form-input'>
       <%= profile_form.label :birthday, t('user.birthday') %><br />
       <%= profile_form.date_select :birthday, :start_year => 1920, :use_month_numbers => true, :default => {:month => 1, :day => 1} %>
     </p>
-    <p>
+    <p class='form-input'>
       <%= profile_form.label :gender, t('user.gender') %><br />
       <%= profile_form.select :gender, GENDER_TYPE.localize_to_select_options%>
     </p>
-    <p>
+    <p class='form-input'>
       <%= profile_form.label :locale, t('user.locale') %><br />
       <%= profile_form.select :locale, LOCALES_AVAILABLE.map{|locale|[ t(locale), locale]} %>
     </p>
-    <p>
+    <p class='form-input'>
       <label><%= t('user.country') %></label><br />
       <%= localized_country_select('user[profile_attributes]', 'location_list', [], {:selected => user_hometown}, :value => user_hometown) %>
     </p>
-    <p>
+    <p class='form-input'>
       <%= profile_form.label :intro, t('user.intro') %><br />
       <%= profile_form.text_area :intro, :size => '50x15', :class => "mceEditor" %>
     </p>
@@ -45,7 +45,7 @@
       <%= profile_form.label :tag, t('user.tags') %><br />
       <p class='desc'><%= t'user.profile1'%></p>
       <p class='desc'><%= t'user.profile2'%><strong><%= t'user.tag_space'%></strong></p>
-      <%= profile_form.text_field :tag_list, :size => 100 %>
+      <%= profile_form.text_field :tag_list, :size => 100, :class => 'text-input' %>
     </p>
   <% end %>
 

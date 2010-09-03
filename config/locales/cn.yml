@@ -84,7 +84,7 @@ cn:
     public: '公开'
     self_privacy: '私密(自己才看的到)'
     select_goal: '选择所属目标'
-    select_color: '选择你喜欢的颜色'
+    select_color: '选择你喜欢的时间轴颜色'
     tag_desc: '请填上您记录目标的标签, 可以帮你找到更多与你相关的目标'
     guy_encourage_you: '人鼓励你'
     comeback: '回到记录'
@@ -92,6 +92,7 @@ cn:
     last: '最后一笔记录'
     showlist: '一次秀一列'
     showone: '一次秀一笔'
+    new_desc: '可以新增某一个时间，或者某个时间范围甚至到现在仍持续在做的纪录'
   goal:
     label: '目标'
     tags: '目标标签'

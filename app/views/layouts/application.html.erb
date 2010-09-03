@@ -65,7 +65,7 @@
             <li><%= link_to t("site.suggestion"), chats_path %></li>
             <li>
               <% form_tag search_url, :method => :get do %>
-                <%= t('site.search')%>: <%= text_field_tag :search, nil, :size => 10 %>
+                <span id='search_label'><%= t('site.search')%><span>: <%= text_field_tag :search, nil, :size => 10 %>
                 <%= submit_tag t('site.search'), :name => nil %>
               <% end %>
             </li>

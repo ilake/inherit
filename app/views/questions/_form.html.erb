@@ -3,15 +3,15 @@
 <% end %>
 <% form_for @question do |f| %>
   <%= f.error_messages %>
-  <p>
+  <p class='form-input'>
     <%= f.label :title, t('forum.title') %><br />
     <%= f.text_field :title %>
   </p>
-  <p>
+  <p class='form-input'>
     <%= f.label :content, t('forum.content') %><br />
     <%= f.text_area :content, :size => '60x20', :class => "mceEditor" %>
   </p>
-  <p>
+  <p class='form-input'>
   <%= f.label :tag, t('forum.tags') %><%= t('forum.tag_space') %><br />
   <%= f.text_field :tag_list %>
   </p>

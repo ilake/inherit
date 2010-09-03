@@ -7,12 +7,14 @@
   <span class='mustbe'>＊<%= t'form.mustbe' %></span>
   <%= f.error_messages %>
   <div>
-    <p>
+    <div class='form-input'>
+      <h4><%= t'exp.new_desc' %></h4>
+      <p>
       <%= f.label :start_at, t('exp.start_at') %><br />
       <%= f.date_select :start_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :end_year => Time.now.year %>
-    </p>
-    <p>
-    <%= f.label :end_at, t('exp.end_at') %><br />
+      </p>
+      <p>
+      <%= f.label :end_at, t('exp.end_at') %><br />
       <%= f.check_box :end_at_exist %>
       <span id='end_at_date'>
         <%= f.date_select :end_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :end_year => Time.now.year  %>
@@ -21,13 +23,14 @@
         <%= f.check_box :until_now %>
         <strong><%= t'exp.until_now'%></strong>
       </div>
-    </p>
-    <p>
+      </p>
+    </div>
+    <p class='form-input'>
       <span class='mustbe'>＊</span>
       <%= f.label :content, t('exp.content') %><br />
       <%= f.text_area :content, :size => '60x20', :class => "mceEditor" %>
     </p>
-    <p>
+    <p class='form-input'>
       <%= f.radio_button :public, true %>
       <%= f.label :public, t('exp.public') %><br />
 
@@ -36,9 +39,9 @@
     </p>
   </div>
 
-  <%#= f.label :exp_type, '影響' %><br />
+  <%#= f.label :exp_type, '影響' %>
   <%#= f.select :exp_type, EXP_TYPE.to_select_options%>
-  <p>
+  <p class='form-input'>
     <%= f.label :goal_id, t('exp.select_goal') %>
     <span class='anchor'>
       <%= link_to t("goal.new"), new_goal_path(:rel => 'facebox', :state => 'goal'), :rel => "facebox"  %>
@@ -51,10 +54,10 @@
       <%= f.select :goal_id, current_user.goals.map{|g|[g.title, g.id]}, {:include_blank => true}%>
     </span>
   </p>
-  <p>
+  <p class='form-input'>
     <span class='mustbe'>＊</span>
     <%= f.label :tag, t('exp.tag_space') %><%= t'exp.tag_desc'%><br />
-    <%= f.text_field :tag_list %>
+    <%= f.text_field :tag_list, :class =>'text-input' %>
   </p>
   <p>
     <span class='mustbe'>＊</span>

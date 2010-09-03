@@ -83,7 +83,7 @@ tw:
     public: '公開'
     self_privacy: '私密(自己才看的到)'
     select_goal: '選擇所屬目標'
-    select_color: '選擇你喜歡的顏色'
+    select_color: '選擇你喜歡的時間軸顏色'
     tag_desc: '請填上您記錄相關的標籤, 可以幫你找到更多與你相關的紀錄'
     guy_encourage_you: '人鼓勵你'
     comeback: '回到記錄'
@@ -91,6 +91,7 @@ tw:
     last: '最後一筆記錄'
     showlist: '一次秀一列'
     showone: '一次秀一筆'
+    new_desc: '可以新增某一個時間, 或者某個時間範圍甚至到現在仍持續在做的紀錄'
   goal:
     label: '目標'
     tags: '目標標籤'
