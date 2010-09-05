@@ -102,7 +102,7 @@ class Experience < ActiveRecord::Base
 
   def find_related_exps(current_user_location)
      result = Experience.search self.tag_list.rand, :limit => 6 
-     result = (result.blank? || result == [nil]) ? Experience.location_with(current_user_location).descend_by_updated_at.limit(6).all : result
+     result = (result.blank? || result == [nil]) ? Experience.location_with(current_user_location).public.descend_by_updated_at.limit(6).all : result
      result.delete(self)
      return result
   end

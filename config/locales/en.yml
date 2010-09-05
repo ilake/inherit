@@ -20,9 +20,9 @@ en:
     demo: 'This is our goal progress'
     hottest_guy: 'Hottest Guys'
     latest_guy: 'Latest Guys'
-    search_desc: 'Search goals / records you interest'
+    search_desc: 'Search goals / records you have interest'
     forum: 'Forum'
-    contact_us: 'If you want, just mail to us(inherit@gmail.com)'
+    contact_us: 'If you want, just mail to us(iosel.service@gmail.com)'
   flow:
     get_in: 'Take a around'
   sessions: 

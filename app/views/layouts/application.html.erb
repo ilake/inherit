@@ -8,6 +8,7 @@
   <%= yield(:meta_tag) || display_meta_tags(:site => t('site.name')) %>
   <%= stylesheet_link_merged :base %>
   <%= yield(:head) %>
+  <%= google_analytics_script %>
 </head>
 <body>
   <div id='container'>

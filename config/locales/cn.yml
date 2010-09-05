@@ -13,13 +13,13 @@ cn:
     desc: '写下你的目标  记录你为目标做了什么'
     keywords: '传承'
     slogan1: '写下你的目标, 记录你为目标做了什么' 
-    slogan2: '见证梦想的现在进行式' 
+    slogan2: '让我们一起见证梦想的现在进行式' 
     demo: '这就是我们的目标'
     hottest_guy: '热门追踪'
     latest_guy: '最新加入'
     search_desc: '搜寻你有兴趣的目标记录'
     forum: '讨论区'
-    contact_us: '如果你愿意的话, 可以直接写信给我们(inherit@gmail.com)'
+    contact_us: '如果你愿意的话, 可以直接写信给我们(iosel.service@gmail.com)'
   flow:
     get_in: '进来看看'
   sessions: 
