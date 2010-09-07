@@ -98,6 +98,12 @@ namespace :inherit do
     CMD
   end
 
+  task :flush_page_cache, :roles => :app do
+    run <<-CMD
+      rm -rf #{shared_path}/system/cache/*
+    CMD
+  end
+
   task :copy_old_sitemap do
     run "if [ -e #{previous_release}/public/sitemap_index.xml.gz ]; then cp #{previous_release}/public/sitemap* #{current_release}/public/; fi"
   end

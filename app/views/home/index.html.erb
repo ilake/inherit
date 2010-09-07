@@ -25,7 +25,7 @@
   </div>
   <div class='clear'></div>
   <div id='demo'>
-    <h2><%= t'site.demo' %></h2>
+    <h2><%= t'goal.guys' %></h2>
     <div id='exp_chart' style='width:800px'>
     </div>
   </div>
@@ -45,5 +45,5 @@
     timeline_start_at = new Date(<%= @working_goals.first.try(:start_at).try(:to_s, :js_date) || Time.now.try(:to_s, :js_date)%>);
     timeline_default_at = new Date(<%= @working_goals.first.try(:start_at).try(:to_s, :js_date) || Time.now.try(:to_s, :js_date) %>);
   </script>
-  <%= javascript_include_merged :secondary %>
+  <%= javascript_include_tag 'experience_timeline' %>
 <% end %>

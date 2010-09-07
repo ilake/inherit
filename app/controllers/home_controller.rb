@@ -5,7 +5,7 @@ class HomeController < ApplicationController
   def index
     Goal
     @working_goals = Handcache.compressed_get_and_set("explore_goals_#{current_user_location}_working", :expires_in => 60) do  
-      Goal.location_with(current_user_location).public.state_is('working').descend_by_updated_at.limit(10).all
+      Goal.location_with(current_user_location).public.state_is('working').descend_by_updated_at.limit(5).all
     end  
     @events = goal_timeline_content(@working_goals, []).to_json
     render :layout => 'homepage'

@@ -35,7 +35,7 @@ end
 #    rake "-s sitemap:refresh"
 #end
 
-every :sunday, :at => '6 am' do
+every 1.day, :at => '6 am' do
   rake "cache:clear"
 end
 

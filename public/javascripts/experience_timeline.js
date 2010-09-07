@@ -76,4 +76,3 @@ var timeline_data = {  // save as a global variable
       onResize();
     });
 
-        

@@ -7,24 +7,24 @@ en:
   cn: '简体中文'
   
   site:
-    name: 'GOT'
+    name: 'iOsel'
     index: 'Home'
     home: 'Profile'
     suggestion: 'Suggestion'
     excite: 'Random'
     search: 'Search'
     desc: 'Track your Dream, track your goal and track what you do for that'
-    keywords: '傳承'
+    keywords: 'iOsel,dream,goal,experience'
     slogan1: 'Track your Dream, Track your goal and Track what you do for that'
     slogan2: "Watch the dream happening" 
     demo: 'This is our goal progress'
     hottest_guy: 'Hottest Guys'
     latest_guy: 'Latest Guys'
-    search_desc: 'Search goals / records you have interest'
+    search_desc: 'Search goals or records you interest'
     forum: 'Forum'
-    contact_us: 'If you want, just mail to us(iosel.service@gmail.com)'
+    contact_us: 'If you need to contact us, just mail to us(iosel.service@gmail.com)'
   flow:
-    get_in: 'Take a around'
+    get_in: 'Come in'
   sessions: 
     sign_in: 'Sign in'
     sign_out: 'Sign out'
@@ -88,7 +88,7 @@ en:
     self_privacy: 'Private(Just for you)'
     select_goal: 'select goal that record belongs to'
     select_color: 'select the record color'
-    tag_desc: "Please enter some tag about your record, that would help you find many other recrod about it"
+    tag_desc: "Required: Please enter some tag about your record, that would help you find many other recrod about it"
     guy_encourage_you: 'people encourage you'
     comeback: '回到记录'
     first: 'First Record'
@@ -124,7 +124,7 @@ en:
     tag_space: 'tags （space separated）'
     public: 'Public'
     self_privacy: 'Private(Just for you)'
-    tag_desc: "Please enter some tag about your goal, that would help you find many other goal about it"
+    tag_desc: "Required: Please enter some tag about your goal, that would help you find many other goal about it"
     remind: 'We would use this email to remind for your goal'
     moreothers: 'More'
   comment:

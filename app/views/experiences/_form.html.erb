@@ -7,6 +7,19 @@
   <span class='mustbe'>＊<%= t'form.mustbe' %></span>
   <%= f.error_messages %>
   <div>
+    <p class='form-input'>
+    <%= f.label :goal_id, t('exp.select_goal') %>
+    <span class='anchor'>
+      <%= link_to t("goal.new"), new_goal_path(:rel => 'facebox', :state => 'goal'), :rel => "facebox"  %>
+    </span>
+    <span id='action_working_status' class='loading' style='display:none'><%= t'action.increasing'%>...</span>
+    <span id='action_comeplete_status' class='complete' style='display:none'><%= t'action.increased'%></span>
+    <span id='action_fail_status' class='fail' style='display:none'><%= t'action.create_fail'%></span>
+    <br />
+    <span id='exp_categories'>
+      <%= f.select :goal_id, current_user.goals.map{|g|[g.title, g.id]}, {:include_blank => true}%>
+    </span>
+    </p>
     <div class='form-input'>
       <h4><%= t'exp.new_desc' %></h4>
       <p>
@@ -42,21 +55,8 @@
   <%#= f.label :exp_type, '影響' %>
   <%#= f.select :exp_type, EXP_TYPE.to_select_options%>
   <p class='form-input'>
-    <%= f.label :goal_id, t('exp.select_goal') %>
-    <span class='anchor'>
-      <%= link_to t("goal.new"), new_goal_path(:rel => 'facebox', :state => 'goal'), :rel => "facebox"  %>
-    </span>
-    <span id='action_working_status' class='loading' style='display:none'><%= t'action.increasing'%>...</span>
-    <span id='action_comeplete_status' class='complete' style='display:none'><%= t'action.increased'%></span>
-    <span id='action_fail_status' class='fail' style='display:none'><%= t'action.create_fail'%></span>
-    <br />
-    <span id='exp_categories'>
-      <%= f.select :goal_id, current_user.goals.map{|g|[g.title, g.id]}, {:include_blank => true}%>
-    </span>
-  </p>
-  <p class='form-input'>
     <span class='mustbe'>＊</span>
-    <%= f.label :tag, t('exp.tag_space') %><%= t'exp.tag_desc'%><br />
+    <%= f.label :tag, t('exp.tag_space') %><span class='mustbe'><em><%= t'exp.tag_desc'%></em></span><br />
     <%= f.text_field :tag_list, :class =>'text-input' %>
   </p>
   <p>

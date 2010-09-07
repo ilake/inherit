@@ -6,8 +6,6 @@ javascripts:
   - colorPicker
   - facebox
   - menu
-- secondary:
-  - experience_timeline
 stylesheets: 
 - base: 
   - scaffold

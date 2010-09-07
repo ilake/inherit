@@ -162,27 +162,6 @@ input.btn, .btn a, .btn-active button, .btn-active input, .btn-active a {
 #overview h2{
   line-height: 36px;
 }
-#overview h4{
-}
-
-#leftitem {
-  margin-top:20px;
-  width:355px;
-  float:left;
-}
-#leftitem p{
-  line-height: 24px;
-}
-
-#rightitem {
-  margin-top:20px;
-  width:355px;
-  float:right;
-}
-
-#rightitem p{
-  line-height: 24px;
-}
 
 #come_in h1{
   text-align: center;
@@ -661,7 +640,6 @@ td.question_title{ width: 400px}
 .search_item_list h3 a{
   color: #fff;
   float:right;
-  text-decoration: none;
 }
 
 /* cheer */
