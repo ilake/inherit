@@ -84,6 +84,7 @@
   <div id='footer'>
   </div>
   <%= javascript_include_merged :base %>
+  <%= javascript_include_tag 'application' %>
 
   <!-- REQUIRED: Include Facebook Javascript (with current locale). See Facebooker documentation. -->
   <%= fb_connect_javascript_tag(:lang => ::I18n.locale) %>

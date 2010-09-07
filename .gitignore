@@ -20,3 +20,4 @@ tags
 *.swp
 rerun.txt
 vendor/plugins/annotate_models/
+.livereload
