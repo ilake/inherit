@@ -148,9 +148,10 @@ cn:
     prev: '上一笔'
     next: '下一笔'
   message:
-    label: '建议'
+    label: '留言'
     board: '留言板'
     for_site: '站方意见留言板'
+    back: '回到留言板'
   search:
     keyword: '使用的关键字是'
     result_show_all: "{{num}}个结果- 秀全部"

@@ -4,8 +4,8 @@
 
 <p>
 <% if @user %>
-<%= link_to "Back to List", user_chats_path(@user) %>
+<%= link_to t("message.back"), user_chats_path(@user) %>
 <% else %>
-<%= link_to "Back to List", chats_path %>
+<%= link_to t("message.back"), chats_path %>
 <% end %>
 </p>

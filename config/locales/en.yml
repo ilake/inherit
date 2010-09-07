@@ -151,9 +151,10 @@ en:
     prev: 'Previous'
     next: 'Next'
   message:
-    label: 'Suggestion'
+    label: 'Comment'
     board: 'Message Board'
     for_site: 'Any suggestion for us'
+    back: 'Back to message board'
   search:
     keyword: 'The Keyword you use is '
     result_show_all: "{{num}} results- show all"

@@ -147,9 +147,10 @@ tw:
     prev: '上一筆'
     next: '下一筆'
   message:
-    label: '建議'
+    label: '留言'
     board: '留言板'
     for_site: '站方意見留言板'
+    back: '回到留言板'
   search:
     keyword: '使用的關鍵字是'
     result_show_all: "{{num}}個結果- 秀全部▽"

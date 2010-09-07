@@ -239,7 +239,7 @@ input.btn, .btn a, .btn-active button, .btn-active input, .btn-active a {
   height: 65px;
   margin-bottom:10px;
   background-color:#EFEFEF;
-  padding: 0px 0px 6px 6px;
+  padding: 6px 0px 6px 6px;
 }
 
 #menus {
