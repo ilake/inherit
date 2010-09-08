@@ -3,8 +3,8 @@
   <ul>
     <% profiles.each do |p| %>
       <li class='anchor'>
-      <%= link_to_user_home(p.user) %>
-      <%= truncate_u(Sanitize.clean(p.intro || ''), 20)%>
+      <%= link_to_user_home(p.user) if p %>
+      <%= truncate_u(Sanitize.clean(p.intro || ''), 20) if p %>
       </li>
     <% end %>
   </ul>
