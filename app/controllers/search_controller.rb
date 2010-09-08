@@ -24,9 +24,10 @@ class SearchController < ApplicationController
   def random
     #隨機挑個tag出來, 用它的name做search 
     @tag = Tag.find(:first, :offset => (rand Tag.count).to_i)
-    @profiles = Profile.search @tag.name, :limit => 3
-    @goals = Goal.search @tag.name, :limit => 3
-    @experiences = Experience.search @tag.name, :limit => 5
+    tag_name = @tag ? @tag.name : 'iosel'
+    @profiles = Profile.search tag_name, :limit => 3
+    @goals = Goal.search tag_name, :limit => 3
+    @experiences = Experience.search tag_name, :limit => 5
     
     render :action => 'index'
   end
