@@ -9,7 +9,7 @@
   <div class='form-input'>
     <p class='goal_start_at'>
     <%= f.label :start_at, t('goal.start_at') %><br />
-    <%= f.date_select :start_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :end_year => Time.now.year  %>
+    <%= f.date_select :start_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :end_year => Time.now.since(20.year).year  %>
     </p>
     <p class='goal_state'>
     <%= f.label :state, t('goal.state') %><br />
@@ -17,7 +17,7 @@
     </p>
     <p class='goal_end_at'>
     <%= f.label :end_at, t('goal.end_at') %><br />
-    <%= f.date_select :end_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :end_year => Time.now.year %>
+    <%= f.date_select :end_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :end_year => Time.now.since(20.year).year %>
     </p>
   </div>
   <div class='form-input'>
@@ -56,10 +56,10 @@
 
 <%# '表示從facebox 出來' %>
 <% if params[:rel] %>
-  <%= javascript_include_tag 'goal' %>
+  <%#= javascript_include_tag 'goal' %>
   <%= javascript_include_tag 'goal_ajax_create' %>
 <% else %>
   <% content_for :bottom_js do %>
-    <%= javascript_include_tag 'goal' %>
+    <%#= javascript_include_tag 'goal' %>
   <% end %>
 <% end %>
