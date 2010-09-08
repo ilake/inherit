@@ -23,7 +23,6 @@
   <div id='come_in'>
     <h1>
       <%= link_to t('flow.get_in'), home_url %>
-      <%= link_to t('site.about'), about_url %>
     </h1>
   </div>
   <div class='clear'></div>
@@ -45,7 +44,7 @@
 <% content_for :bottom_js do %>
   <script>
     user_event= <%= @events %>;
-    timeline_start_at = new Date(<%= @working_goals.first.try(:start_at).try(:to_s, :js_date) || Time.now.try(:to_s, :js_date)%>);
+    timeline_start_at = new Date(<%= @working_goals.first.try(:start_at) ? (@working_goals.first.try(:start_at) - 4.months).try(:to_s, :js_date) : Time.now.try(:to_s, :js_date)%>);
     timeline_default_at = new Date(<%= @working_goals.first.try(:start_at).try(:to_s, :js_date) || Time.now.try(:to_s, :js_date) %>);
   </script>
   <%= javascript_include_tag 'experience_timeline' %>

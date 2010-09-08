@@ -173,6 +173,7 @@ input.btn, .btn a, .btn-active button, .btn-active input, .btn-active a {
 
 #demo {
   margin-top:70px;
+  margin-bottom:300px;
   text-align: center;
 }
 #demo h2{
