@@ -206,7 +206,6 @@ input.btn, .btn a, .btn-active button, .btn-active input, .btn-active a {
   z-index: 9999;
   border-top: 1px solid #a66;
   line-height: 4em;
-  color: #fff;
 }
 
 #dashboard {
