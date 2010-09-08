@@ -201,7 +201,12 @@
         <a href=<%= experience_path(experience, params_hash) %>>
           <span>
             <li class='exp_list_cell'>
-            <span class='js_time'><%= experience.start_at.to_s(:js_date) if experience.start_at %></span>
+            <% if experience.start_at %>
+              <span class='js_time'><%= experience.start_at.to_s(:js_date)  %></span>
+              <span class='js_year'><%= experience.start_at.to_s(:y) %></span>
+              <span class='js_month'><%= experience.start_at.to_s(:m) %></span>
+              <span class='js_day'><%= experience.start_at.to_s(:d) %></span>
+            <% end %>
             <span class='time'>
               <%= experience.start_at.to_s(:md) if experience.start_at %>
               <%= experience.end_at_date %>
@@ -222,9 +227,7 @@
 <% else %>
   <% params_hash = @current_goal ? {:goal_id => @current_goal.id} : {}%>
   <% @experiences.each_with_index do |experience, i| %>
-    <a href=<%= experience_path(experience, params_hash) %>>
-      <div class='<%= i == 0 ? "" : "exp_position" %> exp_list_cell' id="exp_position_<%= i %>">
-        <span class='js_time'><%= experience.start_at.to_s(:js_date) if experience.start_at %></span>
+      <div class='<%= i == 0 ? "" : "exp_position" %> exp_show_cell' id="exp_position_<%= i %>">
         <span class='time'>
           <%= experience.start_at.to_s(:date) if experience.start_at %>
           <%= experience.end_at_date %>
@@ -234,10 +237,11 @@
           <span><strong><%= experience.comments_count %></strong><%= t'comment.reply' %></span>
         </span>
         <div class='exp-content'>
-          <%= experience.content %>
+          <a href=<%= experience_path(experience, params_hash) %>>
+            <%= experience.content %>
+          </a>
         </div>
       </div>
-    </a>
   <% end %>
 <% end %>
 </div>

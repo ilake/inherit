@@ -20,6 +20,7 @@ cn:
     search_desc: '搜寻你有兴趣的目标记录'
     forum: '讨论区'
     contact_us: '如果你愿意的话, 可以直接写信给我们(iosel.service@gmail.com)'
+    about: '关于我们'
   flow:
     get_in: '进来看看'
   sessions: 

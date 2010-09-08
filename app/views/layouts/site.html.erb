@@ -50,8 +50,9 @@
       </div>
 
       <div id='layout'>
-        <%= yield %>
-        <%= yield :sider %>
+        <%= Handcache.get_and_set("#{params.values.sort.to_s}-#{I18n.locale}") do
+          yield
+        end %>  
       </div>
     <div class='clear'></div>
   </div>

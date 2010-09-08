@@ -20,6 +20,7 @@ tw:
     search_desc: '搜尋你有興趣的目標記錄'
     forum: '討論區'
     contact_us: '如果你願意的話, 可以直接寫信給我們(iosel.service@gmail.com)'
+    about: '關於我們'
   flow:
     get_in: '進來看看'
   sessions: 

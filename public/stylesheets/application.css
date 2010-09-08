@@ -451,7 +451,7 @@ input.btn, .btn a, .btn-active button, .btn-active input, .btn-active a {
   padding:5px;
 }
 
-.js_time {
+.js_time, .js_year, .js_month, .js_day {
   display:none;
 }
 
@@ -460,7 +460,7 @@ input.btn, .btn a, .btn-active button, .btn-active input, .btn-active a {
   border-bottom: 1px solid #E9E9E9;
 }
 
-.exp_list_cell{
+.exp_list_cell, .exp_show_cell{
   padding:15px;
   margin-left:40px;
 }
@@ -541,7 +541,7 @@ input.btn, .btn a, .btn-active button, .btn-active input, .btn-active a {
 /* anchor */
 #exp_list a{
   color: #1259C7;
-  text-decoration: none;
+  text-decoration:underline;
 }
 
 .exp_cell a, #new_exp a, .exp_author a, .goal_author a, .question_title a,  .exp_anchor a, .goal_anchor a, .question_anchor a, .anchor a{
@@ -594,7 +594,6 @@ input.btn, .btn a, .btn-active button, .btn-active input, .btn-active a {
 #questionlist {
   border-collapse:collapse;
   color:#000000;
-  font-family:Verdana,Arial,Helvetica,sans-serif;
   font-size:100%;
   font-size-adjust:none;
   font-style:normal;
@@ -768,8 +767,17 @@ td.question_title{ width: 400px}
   color: #990000;
   font-weight:bold;
 }
+
 #exp-show-style a{
   text-decoration: none;
   color:#CCC;
 }
 
+pre {
+  font-size : 15px;
+  line-height: 2;
+  font-family: Helvetica,Arial,"LiHei Pro","新細明體",sans-serif;
+  color:#222222;
+  margin:1em 0;
+  font-weight:normal;
+}

@@ -12,7 +12,7 @@
 <body>
   <div id='homepage_container'>
     <div id='homepage_content'>
-      <%= Handcache.get_and_set("#{params.values.sort.to_s}-#{I18n.locale}") do
+      <%= Handcache.get_and_set("#{params.values.sort.to_s}-#{I18n.locale}-#{current_user_location}") do
         yield
       end %>  
     </div>

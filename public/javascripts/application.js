@@ -73,7 +73,12 @@ $(document).ready(function(){
       function(){
         $(this).find('.exp-info').show();
         $(this).addClass('even');
-        tl.getBand(0).scrollToCenter(new Date($(this).find('.js_time').html()));
+        tl.getBand(0).scrollToCenter(
+          new Date(
+            $(this).find('.js_year').html(),
+            $(this).find('.js_month').html(),
+            $(this).find('.js_day').html()
+          ));
         
       },
       function(){
