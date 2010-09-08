@@ -2,7 +2,9 @@
   <h3><%= t'exp.relate' %></h3>
   <ul>
     <% experiences.each do |e| %>
-      <li><%= link_to truncate_u(Sanitize.clean(e.content), 40), e%></li>
+      <% if e %>
+        <li><%= link_to truncate_u(Sanitize.clean(e.content), 40), e %></li>
+      <% end %>
     <% end %>
   </ul>
 </div>

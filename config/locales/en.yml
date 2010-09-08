@@ -167,7 +167,7 @@ en:
     unfollow_successfully: 'Unfollow Successfully.'
     unfollow_fail: 'Unfollow Fail.'
   vote:
-    result: 'Thanks for your cheers'
+    result: 'Thanks for your encourage'
     destroy: 'Cancel Successfully'
   can:
     not: 'No Permission'

@@ -228,8 +228,14 @@
   <% params_hash = @current_goal ? {:goal_id => @current_goal.id} : {}%>
   <% @experiences.each_with_index do |experience, i| %>
       <div class='<%= i == 0 ? "" : "exp_position" %> exp_show_cell' id="exp_position_<%= i %>">
+        <% if experience.start_at %>
+          <span class='js_time'><%= experience.start_at.to_s(:js_date)  %></span>
+          <span class='js_year'><%= experience.start_at.to_s(:y) %></span>
+          <span class='js_month'><%= experience.start_at.to_s(:m) %></span>
+          <span class='js_day'><%= experience.start_at.to_s(:d) %></span>
+        <% end %>
         <span class='time'>
-          <%= experience.start_at.to_s(:date) if experience.start_at %>
+          <%= experience.start_at.to_s(:date) %>
           <%= experience.end_at_date %>
         </span>
         <span>

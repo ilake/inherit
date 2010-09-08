@@ -102,7 +102,13 @@ $(document).ready(function(){
         }
         $('#exp_position_'+current_position).fadeIn();
         $('#current_position').html(current_position);
-        tl.getBand(0).scrollToCenter(new Date($('#exp_position_'+current_position).find('.js_time').html()));
+        var exp_pos = $('#exp_position_'+current_position);
+        tl.getBand(0).scrollToCenter(
+          new Date(
+            exp_pos.find('.js_year').html(),
+            exp_pos.find('.js_month').html(),
+            exp_pos.find('.js_day').html()
+          ));
     });
 
     $('#next_position').click(function(){
@@ -116,6 +122,13 @@ $(document).ready(function(){
         }
         $('#exp_position_'+current_position).fadeIn();
         $('#current_position').html(current_position);
-        tl.getBand(0).scrollToCenter(new Date($('#exp_position_'+current_position).find('.js_time').html()));
+        var exp_pos = $('#exp_position_'+current_position);
+
+        tl.getBand(0).scrollToCenter(
+          new Date(
+            exp_pos.find('.js_year').html(),
+            exp_pos.find('.js_month').html(),
+            exp_pos.find('.js_day').html()
+          ));
     });
 });

@@ -2,7 +2,9 @@
   <h3><%= t'goal.relate'%></h3>
   <ul>
     <% goals.each do |g| %>
-      <li><%= link_to truncate_u(g.title), g%></li>
+      <% if g %>
+        <li><%= link_to truncate_u(g.title), g %></li>
+      <% end %>
     <% end %>
   </ul>
 </div>
