@@ -19,7 +19,7 @@
       <h3><%= t'user.label' %><%= link_to t("search.result_show_all", :num => @profiles.total_entries), search_users_path(:search => params[:search]) %></h3>
       <ul>
         <% @profiles.each do |profile|%>
-          <li class='profile_anchor'><%= link_to "#{profile.user.showname} ( #{truncate_u(Sanitize.clean(profile.intro), 15)} )", user_home_path(profile.user.username)%></li>
+          <li class='profile_anchor'><%= link_to "#{profile.user.showname} ( #{truncate_u(Sanitize.clean(profile.intro), 15)} )", user_home_path(profile.user.username) if profile %></li>
         <% end %>
       </ul>
       <%= will_paginate @profiles if action_name == 'users' %>
@@ -30,7 +30,7 @@
       <h3><%= t'goal.label'%><%= link_to t("search.result_show_all", :num => @goals.total_entries), search_goals_path(:search => params[:search]) %></h3>
       <ul>
         <% @goals.each do |goal|%>
-          <li class='goal_anchor'><%= link_to truncate_u(Sanitize.clean(goal.title), 15), goal %></li>
+          <li class='goal_anchor'><%= link_to truncate_u(Sanitize.clean(goal.title), 15), goal if goal %></li>
         <% end %>
       </ul>
       <%= will_paginate @goals if action_name == 'goals' %>
@@ -46,7 +46,7 @@
       <ul>
         <% @experiences.each do |experience|%>
           <li class='exp_anchor'>
-            <%= link_to truncate_u(Sanitize.clean(experience.content), 55), experience %>
+            <%= link_to truncate_u(Sanitize.clean(experience.content), 55), experience if experience%>
           </li>
         <% end %>
       </ul>
