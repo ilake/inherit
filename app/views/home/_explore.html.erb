@@ -9,13 +9,6 @@
   </div>
 
   <div id='home_content'>
-    <h4><%= t'exp.tags' %></h4>
-    <div class='exp_tags'>
-      <% tag_cloud(@exp_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
-        <%= link_to tag.name, tag_url(:id => tag.name, :taggable_type => 'Experience'), :class => css_class %>
-      <% end %>
-    </div>
-
     <h4><%= t'exp.guys'%></h4>
     <div>
       <% @experiences.each do |experience| %>
@@ -34,13 +27,6 @@
     </div>
   </div>
   <div id='home_sidebar'>
-    <h4><%= t'goal.tags'%></h4>
-    <div class='goal_tags'>
-      <% tag_cloud(@goal_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
-        <%= link_to tag.name, tag_url(:id => tag.name, :taggable_type => 'Goal'), :class => css_class %>
-      <% end %>
-    </div>
-
     <h4><%= t'goal.guys' %></h4>
     <ul class="menu">  
       <li id="working" class="active"><%= t'goal.working'%></li>  
