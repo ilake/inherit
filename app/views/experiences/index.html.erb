@@ -10,9 +10,15 @@
 <div id='user_exp_profile'>
   <div class='user_header'>
   <% if @current_goal %>
-    <h1 class='avatared anchor'><%= link_to_user_home(@user)  %> > <%= @current_goal.title %></h1>
+    <h1 class='avatared anchor'>
+      <%= link_to_user_home(@user)  %> > <%= @current_goal.title %>
+      <span id='profile_hide_show' class='profile_<%= user_content_display_state(@current_goal) %>'> &nbsp; &nbsp; &nbsp; </span>
+    </h1>
   <% else %>
-    <h1 class='avatared'><%= "#{h @user.showname}" %></h1>
+    <h1 class='avatared'>
+      <%= "#{h @user.showname}" %>
+      <span id='profile_hide_show' class='profile_<%= user_content_display_state(@current_goal) %>'> &nbsp; &nbsp; &nbsp; </span>
+    </h1>
   <% end %>
   <div id='fans_area'>
     <% if can?(:create, Goal) && @user.is_owner?(current_user)%>
@@ -60,7 +66,6 @@
         <%= link_to @user.user_ifollow_count, ifollow_user_fans_path(@user) %> 
       </span>
     </span>
-    <span id='profile_hide_show' class='profile_<%= user_content_display_state(@current_goal) %>'> &nbsp; &nbsp; &nbsp; </span>
   </div>
 </div>
   <div class='clear'></div>
