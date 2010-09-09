@@ -33,14 +33,14 @@ SitemapGenerator::Sitemap.add_links do |sitemap|
   end
 
   # add all individual experience
-  Experience.find_in_batches(:batch_size => 1000) do |experiences|
+  Experience.public.find_in_batches(:batch_size => 1000) do |experiences|
     experiences.each do |e|
       sitemap.add experience_path(e), :lastmod => e.updated_at
     end
   end
 
   # add all individual goal
-  Goal.find_in_batches(:batch_size => 1000) do |goals|
+  Goal.public.find_in_batches(:batch_size => 1000) do |goals|
     goals.each do |g|
       sitemap.add goal_path(g), :lastmod => g.updated_at
     end

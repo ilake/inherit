@@ -3,7 +3,7 @@
     title "#{@user.nickname} #{t'exp.someone'}"
     description "#{truncate_u(Sanitize.clean(@user.profile.intro || ''), 100)}" 
     keywords @user.profile.tag_list 
-    display_meta_tags :site => t('site.name') 
+    display_meta_tags :site => t('site.name'), :noindex => true, :nofollow => true
   end %>  
 <% end %>
 

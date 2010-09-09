@@ -31,9 +31,9 @@ every :sunday, :at => '4 am' do
   rake "notify:exp_empty"
 end
 
-#every 1.day, :at => '5:00 am' do
-#    rake "-s sitemap:refresh"
-#end
+every 1.day, :at => '5 am' do
+    rake "-s sitemap:refresh"
+end
 
 every 1.day, :at => '6 am' do
   rake "cache:clear"

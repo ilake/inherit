@@ -3,7 +3,11 @@
     title "#{truncate_u(Sanitize.clean(@experience.content), 10)}" 
     description "#{truncate_u(Sanitize.clean(@experience.content), 100)}" 
     keywords @experience.tag_list 
-    display_meta_tags :site => t('site.name') 
+    if @experience.public
+      display_meta_tags :site => t('site.name') 
+    else
+      display_meta_tags :site => t('site.name') , :noindex => true, :nofollow => true
+    end
   end %>  
 <% end %>
 

@@ -1,6 +1,15 @@
-<% title @goal.title %>
-<% description "#{truncate_u(Sanitize.clean(@goal.content), 100)}" %>
-<% keywords @goal.tag_list %>
+<% content_for :meta_tag do%>
+  <%= Handcache.get_and_set("#{params.values.sort.to_s}-#{@goal.updated_at.to_s(:fulltime)}") do
+    title @goal.title
+    description "#{truncate_u(Sanitize.clean(@goal.content), 100)}" 
+    keywords @goal.tag_list 
+    if @goal.public
+      display_meta_tags :site => t('site.name') 
+    else
+      display_meta_tags :site => t('site.name') , :noindex => true, :nofollow => true
+    end
+  end %>  
+<% end %>
 
 <%= facebook_like %>
 <%= share_button %>

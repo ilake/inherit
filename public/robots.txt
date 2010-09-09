@@ -5,4 +5,4 @@
 # Disallow: /
 
 #[HOST]
-#Sitemap: http://www.iosel.com/sitemap_index.xml.gz
+Sitemap: http://www.iosel.com/sitemap_index.xml.gz
