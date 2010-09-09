@@ -29,8 +29,17 @@ class ChatsController < ApplicationController
     @chat = current_user.leave_chats.new(params[:chat])
     if @chat.save
       flash[:notice] = I18n.t("action.create_successfully")
-      if @chat.owner
+      #這是回應
+      if @chat.parent
+        if @chat.parent.owner
+          redirect_to user_chats_path(@chat.parent.owner)
+        else
+          redirect_to chats_path
+        end
+      #這是發在人家留言板
+      elsif @chat.owner
         redirect_to user_chats_path(@chat.owner)
+      #這是直接發在留言板的
       else
         redirect_to chats_path
       end
