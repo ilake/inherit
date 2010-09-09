@@ -17,17 +17,21 @@
 #   runner "AnotherModel.prune_old_records"
 # end
 
+#every :sunday, :at => '4 am' do
+#  rake "notify:exp_empty"
+#end
+
 # Learn more: http://github.com/javan/whenever
 # weekly
 every 1.hour do
   rake "thinking_sphinx:index"
 end
 
-every :sunday, :at => '3 am' do
+every 2.days, :at => '8 am' do
   rake "notify:goal_empty"
 end
 
-every :sunday, :at => '4 am' do
+every 2.days, :at => '8 am' do
   rake "notify:exp_empty"
 end
 

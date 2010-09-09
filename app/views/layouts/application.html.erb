@@ -89,11 +89,11 @@
   <%= javascript_include_tag 'application' %>
 
   <!-- REQUIRED: Include Facebook Javascript (with current locale). See Facebooker documentation. -->
-  <%= fb_connect_javascript_tag(:lang => ::I18n.locale) %>
+  <%#= fb_connect_javascript_tag(:lang => ::I18n.locale) %>
   <!-- REQUIRED: Include devise_facebook_connectable Javascripts. -->
-  <%= javascript_include_tag 'devise.facebook_connectable' %>
+  <%#= javascript_include_tag 'devise.facebook_connectable' %>
   <!-- REQUIRED: Init Facebook Javascript (using jQuery). See Facebooker documentation. -->
-  <%= init_fb_connect :XFBML, :js => :jquery %>
+  <%#= init_fb_connect :XFBML, :js => :jquery %>
 
   <%= yield :bottom_js %>
 </body>

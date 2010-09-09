@@ -1,9 +1,9 @@
 <div class='anchor'>
-<% unless signed_in?(:user) %>
-  <%= facebook_sign_in_link :user %>
-<% else %>
-  <%= facebook_sign_out_link :user %>
-<% end %>
+<#% unless signed_in?(:user) %>
+  <%#= facebook_sign_in_link :user %>
+<%# else %>
+  <%#= facebook_sign_out_link :user %>
+<%# end %>
 
 <%- if controller_name != 'sessions' %>
   <%= link_to t('devise.sessions.link'), new_session_path(resource_name) %><br />
