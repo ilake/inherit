@@ -21,7 +21,7 @@ class NotificationMailer < ActionMailer::Base
 
     bcc           user.email
     from          "notifications@inherit.com"
-    subject       "#{chat.owner.showname} #{I18n.t('mail.message_notify_subject', :locale => user.locale)}"
+    subject       "#{user.showname} #{I18n.t('mail.message_notify_subject', :locale => user.locale)}"
     sent_on       Time.now
     body          :chat => chat, :reply => reply, :user => user, :host => host, :url => user_chat_path(chat.owner, chat)
   end
