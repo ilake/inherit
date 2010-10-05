@@ -5,7 +5,7 @@
         $('#action_working_status').show();
 
         $.ajax({
-          url: $(this).attr("action")+'.js',
+          url: $(this).attr("action"),
           type: 'POST',
           data: $(this).serialize(),
           dataType: 'json',
