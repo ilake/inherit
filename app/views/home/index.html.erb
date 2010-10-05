@@ -19,32 +19,3 @@
     <h2><%= t'site.slogan1' %></h2>
   </div>
   <div class='clear'></div>
-  <div id='come_in'>
-    <h1>
-      <%= link_to t('flow.get_in'), home_url %>
-    </h1>
-  </div>
-  <div class='clear'></div>
-  <div id='demo'>
-    <h2><%= t'goal.guys' %></h2>
-    <div id='exp_chart' style='width:800px'>
-    </div>
-  </div>
-
-<% content_for :head do %>
-  <script>
-    Timeline_ajax_url= '<%= javascript_path "timeline/timeline_ajax/simile-ajax-api.js" %>';
-    Timeline_urlPrefix='<%= "#{ActionController::Base.asset_host}/javascripts/timeline/timeline_js/" %>';
-    Timeline_parameters="bundle=true";
-  </script>
-  <%= javascript_include_tag 'timeline/timeline_js/timeline-api.js' %>
-<% end %>
-
-<% content_for :bottom_js do %>
-  <script>
-    user_event= <%= @events %>;
-    timeline_start_at = new Date(<%= @working_goals.first.try(:start_at) ? (@working_goals.first.try(:start_at) - 4.months).try(:to_s, :js_date) : Time.now.try(:to_s, :js_date)%>);
-    timeline_default_at = new Date(<%= @working_goals.first.try(:start_at).try(:to_s, :js_date) || Time.now.try(:to_s, :js_date) %>);
-  </script>
-  <%= javascript_include_tag 'experience_timeline' %>
-<% end %>

@@ -1,6 +1,6 @@
 class AddPrivacyToExperience < ActiveRecord::Migration
   def self.up
-    add_column :experiences, :public, :boolean, :default => true
+    add_column :experiences, :public, :boolean, :default => false
   end
 
   def self.down

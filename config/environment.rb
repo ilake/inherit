@@ -36,6 +36,7 @@ Rails::Initializer.run do |config|
   config.gem 'facebooker'
   config.gem 'contacts'
   config.gem 'hpricot', :source => 'http://rubygems.org'
+  #config.gem 'mime-types', :lib => 'mime-types'
   #config.gem 'http_accept_language'
   #config.gem 'ryanb-acts-as-list', :lib => 'acts_as_list', :source => 'http://gems.github.com'
 

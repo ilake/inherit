@@ -9,142 +9,36 @@
 
 <div id='user_exp_profile'>
   <div class='user_header'>
-  <% if @current_goal %>
-    <h1 class='avatared anchor'>
-      <%= link_to_user_home(@user)  %> > <%= @current_goal.title %>
-      <span id='profile_hide_show' class='profile_<%= user_content_display_state(@current_goal) %>'> &nbsp; &nbsp; &nbsp; </span>
-    </h1>
-  <% else %>
     <h1 class='avatared'>
       <%= "#{h @user.showname}" %>
-      <span id='profile_hide_show' class='profile_<%= user_content_display_state(@current_goal) %>'> &nbsp; &nbsp; &nbsp; </span>
     </h1>
-  <% end %>
-  <div id='fans_area'>
-    <% if can?(:create, Goal) && @user.is_owner?(current_user)%>
-      <span class='btn btn-expression anchor'>
-        <%= link_to t("goal.new"), new_goal_path(:goal => {'category' => 'goal'}) %>
-      </span>
-    <% end %>
-    <% if can?(:create, Experience) && @user.is_owner?(current_user) %>
-      <span id='new_exp' class='btn btn-expression'>
-        <% if @current_goal %>
-          <%= link_to "#{t('exp.new')}", new_goal_experience_path(@current_goal) %>
-        <% else %>
-          <%= link_to "#{t('exp.new')}", new_user_experience_path(current_user) %>
-        <% end %>
-      </span>
-    <% end %>
-    <% if !@user.is_owner?(current_user)%>
-      <% if @fan.new_record? %>
-        <% form_for @fan, :html => {:id => 'trigger_follow'} do |f| %>
-          <%= f.hidden_field :fannable_id %>
-          <%= f.hidden_field :fannable_type %>
-          <%= f.hidden_field :user_id %>
-          <%= f.submit t("user.sub"), :name => nil, :class => 'btn'%>
-        <% end %>
-      <% else %>
-        <span class='btn'>
-          <%= link_to t('user.unsub'), @fan, :confirm => 'Are you sure?', :method => :delete %>
-        </span>
-      <% end %>
-    <% end %>
-    <span class='btn btn-active'>
-      <%= link_to t("user.message"), user_chats_path(@user), {:class => 'profile'} %>
-    </span>
-
-    <strong><%= @user.likes_count %></strong><%= t'exp.guys_like'%>
-    <span id='exp_follower'>
-      <strong><%= t('user.fans')%></strong>
-      <span class='fans_anchor'>
-        <%= link_to @user.fans_count, user_fans_path(@user) %>
-      </span>
-    </span>
-    <span id='exp_ifollew'>
-      <strong><%= t'user.subscriber' %></strong>
-      <span class='fans_anchor'>
-        <%= link_to @user.user_ifollow_count, ifollow_user_fans_path(@user) %> 
-      </span>
-    </span>
   </div>
-</div>
   <div class='clear'></div>
-  <div id='user_content' class=<%= user_content_display_state(@current_goal)%>>
-    <div class='exp_profile_content anchor'>
-      <% if can? :update, @user.profile %>
-        <span class='function'>
-        <%= link_to t("action.edit"), edit_user_profile_path(current_user)%>
-        </span>
-      <% end %>
-      <div>
-      <strong><%= t'user.birthday'%>:</strong>
-      <%=h @user.profile.birthday %>
-      </div>
-      <div>
-      <strong><%= t'user.gender'%>:</strong>
-      <%= t(GENDER_TYPE[@user.profile.gender.to_s]) %>
-      </div>
-      <div>
-      <strong><%= t'user.country'%>:</strong>
-      <%= @user.profile.location_list %>
-      </div>
-      <div>
-      <strong><%= t'user.intro'%>:</strong>
-      <%= @user.profile.intro %>
-      </div>
-      <div>
-      <strong><%= t'user.tags'%>:</strong>
-      <% exp_tag_list(@user.profile.tag_list) %>
-      </div>
-    </div>
-    <div class='exp_goal_content anchor'>
-      <dl>
-        <dt>
-        <strong><%= t'goal.label'%>:</strong>
-        </dt>
-
-        <% if @goals.size.zero? %>
-          <em><%= t'goal.non'%></em>
-        <% else %>
-          <% for goal in @goals %>
-            <dd class='anchor'>
-            <%=link_to h(goal.title), user_exps_path(@user, goal) %>(<%= t(GOAL_STATES[goal.state]) %>)
-            </dd>
-          <% end %>
+  <div id='user_content' class='exp_goal_content anchor'>
+    <dl>
+      <dt>
+      <strong><%= t'goal.label'%>:</strong>
+      </dt>
+      <dd class='anchor'>
+      <%= link_to_unless_current t("goal.all"), user_home_path(current_user.username)  %>
+      </dd>
+      <% if @goals.size.zero? %>
+        <em><%= t'goal.non'%></em>
+      <% else %>
+        <% for goal in @goals %>
+          <dd class='anchor'>
+          <%=link_to_unless_current h(goal.title), user_exps_path(@user, goal) %>
+          </dd>
         <% end %>
-      </dl>
-    </div>
-    <% if @current_goal %>
-      <div id='goal_desc_area'>
-        <div>
-          <strong><%= GOAL_CATEGORY[@current_goal.category] %><%= t'goal.name'%>:</strong>
-          <span class='anchor'><%= link_to  @current_goal.title, @current_goal %></span>
-          <% unless @current_goal.is_category? %>
-            <div>
-              <strong><%= t'goal.start'%>:</strong>
-              <%= @current_goal.start_at.to_s(:date)%>
-            </div>
-            <div>
-              <strong><%= t'goal.state'%>:</strong>
-              <%= t(GOAL_STATES[@current_goal.state]) %>
-            </div>
-            <div>
-              <strong><%= t'goal.percentage'%>:</strong>
-              <%= ntp(@current_goal.percentage) %>
-            </div>
-          <% end %>
-        </div>
-        <div id='goal_detail'>
-          <span>
-            <%= link_to Sanitize.clean(@current_goal.content), @current_goal %>
-          </span>
-          <span class='anchor'><%= link_to t('goal.more'), @current_goal %></span>
-        </div>
-      </div>
+      <% end %>
+    </dl>
+  </div>
+  <div class='exp_new'>
+    <% form_for([current_user, @experience]) do |f| %>
+      <%= render :partial => 'form', :locals => {:f => f} %>
     <% end %>
   </div>
-</div>
-<div id='exp_chart'>
+
 </div>
 <div id='exp_number' class='anchor'>
   <strong><%= t'exp.number'%></strong>
@@ -152,127 +46,37 @@
 </div>
 <div class='clear'></div>
 
-<% if @current_goal %>
-  <% content_for :sider do %>
-    <%= Handcache.get_and_set("#{params.values.sort.to_s}-#{I18n.locale}-sider", :expires_in => 60 ) do
-      render :partial => 'goals/show_sider', :locals => {:goals => @related_goals}
-    end %>  
-  <% end %>
-<% end %>
-
-<%= facebook_like %>
-<%= share_button %>
-
 <div id='exp_list'>
-  <h2 id='record-label'><%= @current_goal.title if @current_goal %> <%= t'exp.label'%>
-    <% if can?(:create, Experience) && @user.is_owner?(current_user) %>
-      <span id='new_exp' class='btn btn-active'>
-        <% if @current_goal %>
-          <%= link_to "( #{t('action.new')} )", new_goal_experience_path(@current_goal) %>
-        <% else %>
-          <%= link_to "( #{t('action.new')} )", new_user_experience_path(current_user) %>
-        <% end %>
-      </span>
-    <% end %>
-    <% if @current_goal %>
-      <span id='new_exp' class='btn btn-active'>
-        <%= link_to "<strong>#{t'goal.detail'}</strong>", goal_path(@current_goal)%>
-      </span>
-    <% end %>
-  </h2>
-  <div id='exp-show-style'>
-    <% if params[:style] == 'list'%>
-      <a href="?style=one" id='expone'>
-        <%= image_tag("http://png-2.findicons.com/files/icons/941/web_design/32/window_app_list.png", :title => t('exp.showone'), :alt => t('exp.showone'))%>
-      </a>
-    <% else %>
-      <a href="?style=list" id='explist'>
-        <%= image_tag("http://png-2.findicons.com/files/icons/1569/chalkwork_html/32/list_unordered.png", :title => t('exp.showlist'), :alt => t('exp.showlist'))%>
-      </a>
-      <span class='position_action space' id='prev_position'><%= t'action.prev' %></span> / 
-      <span class='position_action space' id='next_position'><%= t'action.next' %></span>
-      <span id='last_position'><%= @experiences.size-1 %></span>
-      <span id='current_position'>0</span>
-    <% end %>
-  </div>
 <div class='clear'></div>
 
-<% if params[:style] == 'list' %>
-  <ul>
-    <% params_hash = @current_goal ? {:goal_id => @current_goal.id} : {}%>
-    <% @experience_groups.keys.each do |time| %>
-      <li><h3><%= time.to_s(:ym)%></h3></li>
-      <% @experience_groups[time].each do |experience| %>
-        <a href=<%= experience_path(experience, params_hash) %>>
-          <span>
-            <li class='exp_list_cell'>
-            <% if experience.start_at %>
-              <span class='js_time'><%= experience.start_at.to_s(:js_date)  %></span>
-              <span class='js_year'><%= experience.start_at.to_s(:y) %></span>
-              <span class='js_month'><%= experience.start_at.to_s(:m) %></span>
-              <span class='js_day'><%= experience.start_at.to_s(:d) %></span>
-            <% end %>
-            <span class='time'>
-              <%= experience.start_at.to_s(:md) if experience.start_at %>
-              <%= experience.end_at_date %>
-            </span>
-            <span class='exp_content'>
-              <%=  truncate_u(Sanitize.clean(experience.content), 30)%>
-            </span>
-            <span class='exp-info'>
-              <span><strong><%= experience.likes_count %></strong><%= t'exp.guys_like'%></span>
-              <span><strong><%= experience.comments_count %></strong><%= t'comment.reply' %></span>
-            </span>
-            </li>
-          </span>
-        </a>
-      <% end %>
-    <% end %>
-  </ul>
-<% else %>
-  <% params_hash = @current_goal ? {:goal_id => @current_goal.id} : {}%>
-  <% @experiences.each_with_index do |experience, i| %>
-      <div class='<%= i == 0 ? "" : "exp_position" %> exp_show_cell' id="exp_position_<%= i %>">
-        <% if experience.start_at %>
-          <span class='js_time'><%= experience.start_at.to_s(:js_date)  %></span>
-          <span class='js_year'><%= experience.start_at.to_s(:y) %></span>
-          <span class='js_month'><%= experience.start_at.to_s(:m) %></span>
-          <span class='js_day'><%= experience.start_at.to_s(:d) %></span>
-        <% end %>
+<ul>
+  <% @experience_groups.keys.each do |time| %>
+    <li><h3><%= time.to_s(:ym)%></h3></li>
+    <% @experience_groups[time].each do |experience| %>
+      <span>
+        <li class='exp_list_cell'>
         <span class='time'>
-          <%= experience.start_at.to_s(:date) %>
+          <%= experience.start_at.to_s(:md) if experience.start_at %>
           <%= experience.end_at_date %>
         </span>
-        <span>
-          <span><strong><%= experience.likes_count %></strong><%= t'exp.guys_like'%></span>
-          <span><strong><%= experience.comments_count %></strong><%= t'comment.reply' %></span>
-        </span>
-        <div class='exp-content'>
-          <a href=<%= experience_path(experience, params_hash) %>>
+        <span class='exp_content'>
             <%= experience.content %>
-          </a>
+        </span>
+        <% if experience.url %>
+          <h4 class='url_title'>
+            <%= link_to experience.url_title, experience.url, :target => '_blank' %>
+          </h4>
+          <p class='url_desc'>
+          <%= experience.url_content %>
+          </p>
+        <% end %>
+        <div class='exp-info function'>
+          <%= link_to t('action.edit'), edit_experience_path(experience) %>
+          <%= link_to t('action.destroy'), experience, :confirm => t('action.confirm'), :method => :delete %>
         </div>
-      </div>
+        </li>
+      </span>
+    <% end %>
   <% end %>
-<% end %>
+</ul>
 </div>
-
-<% content_for :head do %>
-  <script>
-    Timeline_ajax_url= '<%= javascript_path "timeline/timeline_ajax/simile-ajax-api.js" %>';
-    Timeline_urlPrefix='<%= "#{ActionController::Base.asset_host}/javascripts/timeline/timeline_js/" %>';
-    Timeline_parameters="bundle=true";
-  </script>
-  <%= javascript_include_tag 'timeline/timeline_js/timeline-api.js' %>
-<% end %>
-
-<% content_for :bottom_js do %>
-  <script>
-    user_event= <%= @events %>;
-    timeline_start_at = new Date(<%= timeline_start_time(@user) %>);
-    timeline_default_at = new Date(<%= @current_goal.try(:start_at).try(:to_s, :js_date) || @experiences.first.try(:start_at).try(:to_s, :js_date) %>);
-  </script>
-  <%= javascript_include_tag 'experience_timeline' %>
-<% end %>
-
-

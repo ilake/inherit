@@ -13,6 +13,7 @@ ActionController::Routing::Routes.draw do |map|
   map.que_loc ":location/questions", :controller => 'questions', :action => 'index'
   map.chat_loc ":location/chats", :controller => 'chats', :action => 'index'
   map.change_lang "/lang/:locale", :controller => 'languages', :action => 'edit'
+  map.get_rsp "/url", :controller => 'url', :action => 'create'
 
   #因為我解不掉在controller 用link_to 做刪除動作的bug, 所以只好work around 
   map.destroy_experience "experiences/:id/destroy", :controller => 'experiences', :action => 'destroy'

@@ -1,6 +1,6 @@
 class AddPublicToGoal < ActiveRecord::Migration
   def self.up
-    add_column :goals, :public, :boolean, :default => true
+    add_column :goals, :public, :boolean, :default => false
   end
 
   def self.down

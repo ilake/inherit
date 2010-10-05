@@ -1,6 +1,6 @@
 class AddCategoryToGoals < ActiveRecord::Migration
   def self.up
-    add_column :goals, :category, :string, :default => 'goal'
+    add_column :goals, :category, :string, :default => 'category'
 
     add_index :goals, :category
   end

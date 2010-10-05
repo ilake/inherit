@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100823122919
+# Schema version: 20101004155754
 #
 # Table name: comments
 #

@@ -1,23 +1,9 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
-function detect_end_at(){
-  if ($('#experience_end_at_exist').attr('checked')) {
-    $('#end_at_date select').attr('disabled', false);
-    }
-  else {
-    $('#end_at_date select').attr('disabled', true);
-  }
-}
 
-function detect_until_now(){
-  if ($('#experience_until_now').attr('checked')) {
-    $('#end_at_date select').attr('disabled', true);
-    }
-  else {
-    $('#end_at_date select').attr('disabled', false);
-  }
-  $('#experience_end_at_exist').attr('checked', false);
-}
+var parsing = null;
+var content = null;
+var parse_done = false;
 
 function detect_user_date(){
   if ($('#user_date_check').attr('checked')) {
@@ -29,26 +15,94 @@ function detect_user_date(){
     $('#age_end_at').attr('disabled', true);
   }
 }
+
+function trigger_parse(){
+var url = content.match(/\b((https?|ftp|file):\/\/|www\.|ftp\.)[-A-Z0-9+&@#\/%=~_|$?!:,.]*[A-Z0-9+&@#\/%=~_|$]/gi);
+
+  if (url) {
+    parse_done = true;
+    $('#ajax_loading').show();
+
+    $.ajax({
+      url: '/url',
+      type: 'GET',
+      data: 'url='+url[0],
+      dataType:  'html',
+      success: function(html){
+        $('#url_title_desc').html(html);
+        $('#ajax_loading').hide();
+      }
+    });
+  }
+}
+
 $(document).ready(function(){
     $('a[rel*=facebox]').facebox();
 
     detect_user_date();
 
-    detect_end_at();
-    $('#experience_end_at_exist').change(function(){
-      detect_end_at();
-      $('#experience_until_now').attr('checked', false);
+    $('.advance-content').hide();
+    $('.advance-content textarea').attr('disabled', true);
+
+    $('span.advance').click(
+      function(){
+        $('.normal').show();
+        $('.advance').hide();
+        $('.normal-content').hide();
+        $('.advance-content').show();
+        $('#experience_content_tbl').height('400px').width('550px');
+        $('#experience_content_ifr').height('350px');
+        $('.normal-content textarea').attr('disabled', true);
+        $('.advance-content textarea').attr('disabled', false);
+      }
+    );
+
+    $('span.normal').click(
+      function(){
+        $('.advance').show();
+        $('.normal').hide();
+        $('.normal-content').show();
+        $('.advance-content').hide();
+        $('.advance-content textarea').attr('disabled', true);
+        $('.normal-content textarea').attr('disabled', false);
+      }
+    );
+
+//    tinymce.dom.Event.add(document.getElementById("experience_content_ifr"), 'keyup', function(e) {
+//      alert(e.target);
+//    });
+//    tinymce.dom.Event.add(tinyMCE.get('experience_content').getDoc(), 'keyup', function(e) {
+//      alert(e.target);
+//    });
+//    tinyMCE.addEvent(tinyMCE.getInstanceById('experience_content'), 'keydown',alert('keydown'));
+
+    $('.normal-content #experience_content').keyup(function(){
+      if(!parse_done) {
+        content = $(this).attr('value');
+
+        if (parsing !== null) {
+        clearTimeout(parsing);
+        parsing = null;
+        }
+        parsing = setTimeout("trigger_parse()", 1000);
+      }
     });
 
-    $('#experience_until_now').change(function(){
-      detect_until_now();
+    $('.normal-content #experience_content').mouseup(function(){
+      if(!parse_done) {
+        content = $(this).attr('value');
+
+        if (parsing !== null) {
+          clearTimeout(parsing);
+          parsing = null;
+        }
+        parsing = setTimeout("trigger_parse();", 1000);
+      }
     });
 
     $('#user_date_check').change(function(){
       detect_user_date();
     });
-
-    $('#colorPicker').colorPicker();
 
     $('#experience_data_number').change(function(){
         var href = [];
@@ -58,28 +112,10 @@ $(document).ready(function(){
         window.location = url;
     });
 
-    $('#profile_hide_show').click(function(){
-        if( $('#user_content').attr('class') == 'show' ) {
-          $('#profile_hide_show').removeClass('profile_show').addClass('profile_hide')
-          $('#user_content').removeClass('show').addClass('hide')
-        }
-        else {
-          $('#profile_hide_show').removeClass('profile_hide').addClass('profile_show')
-          $('#user_content').removeClass('hide').addClass('show')
-        }
-    });
-
     $('.exp_list_cell').hover(
       function(){
         $(this).find('.exp-info').show();
         $(this).addClass('even');
-        tl.getBand(0).scrollToCenter(
-          new Date(
-            $(this).find('.js_year').html(),
-            $(this).find('.js_month').html(),
-            $(this).find('.js_day').html()
-          ));
-        
       },
       function(){
         $(this).find('.exp-info').hide();
@@ -87,48 +123,4 @@ $(document).ready(function(){
       }
     );
 
-    $('.time_line_point').click(function(){
-        tl.getBand(0).scrollToCenter(new Date($(this).attr('value')));
-    });
-
-    $('#prev_position').click(function(){
-        var current_position = $('#current_position').html();
-        $('#exp_position_'+current_position).hide();
-        if (current_position == '0' ) {
-          current_position = $('#last_position').html();
-        }
-        else {
-        current_position = current_position*1 - 1;
-        }
-        $('#exp_position_'+current_position).fadeIn();
-        $('#current_position').html(current_position);
-        var exp_pos = $('#exp_position_'+current_position);
-        tl.getBand(0).scrollToCenter(
-          new Date(
-            exp_pos.find('.js_year').html(),
-            exp_pos.find('.js_month').html(),
-            exp_pos.find('.js_day').html()
-          ));
-    });
-
-    $('#next_position').click(function(){
-        var current_position = $('#current_position').html();
-        $('#exp_position_'+current_position).hide();
-        if (current_position == $('#last_position').html() ) {
-          current_position = '0';
-        }
-        else {
-          current_position = current_position*1 + 1;
-        }
-        $('#exp_position_'+current_position).fadeIn();
-        $('#current_position').html(current_position);
-        var exp_pos = $('#exp_position_'+current_position);
-
-        tl.getBand(0).scrollToCenter(
-          new Date(
-            exp_pos.find('.js_year').html(),
-            exp_pos.find('.js_month').html(),
-            exp_pos.find('.js_day').html()
-          ));
-    });
 });

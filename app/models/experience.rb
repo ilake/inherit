@@ -1,29 +1,35 @@
 # == Schema Information
-# Schema version: 20100823122919
+# Schema version: 20101004155754
 #
 # Table name: experiences
 #
-#  id         :integer(4)      not null, primary key
-#  content    :text
-#  user_id    :integer(4)
-#  start_at   :datetime
-#  end_at     :datetime
-#  created_at :datetime
-#  updated_at :datetime
-#  goal_id    :integer(4)
-#  exp_type   :string(255)     default("normal")
-#  until_now  :boolean(1)
-#  public     :boolean(1)      default(TRUE)
-#  tags_list  :text
-#  color      :string(7)       default("#64E827")
-#  position   :integer(4)      default(0)
+#  id             :integer(4)      not null, primary key
+#  content        :text
+#  user_id        :integer(4)
+#  start_at       :datetime
+#  end_at         :datetime
+#  created_at     :datetime
+#  updated_at     :datetime
+#  goal_id        :integer(4)
+#  exp_type       :string(255)     default("normal")
+#  until_now      :boolean(1)
+#  public         :boolean(1)      default(TRUE)
+#  tags_list      :text
+#  color          :string(7)       default("#64E827")
+#  position       :integer(4)      default(0)
+#  likes_count    :integer(4)      default(0)
+#  comments_count :integer(4)      default(0)
+#  url_title      :string(64)      default("")
+#  url_content    :text
+#  url            :string(255)     default("")
 #
 
 class Experience < ActiveRecord::Base
   include TagListFunc
 
-  attr_accessible :start_at, :end_at, :content, :goal_id, :tag_list, :exp_type, :location_list, :until_now, :end_at_exist, :public, :color
+  attr_accessible :start_at, :end_at, :content, :goal_id, :tag_list, :exp_type, :location_list, :until_now, :end_at_exist, :public, :color, :url, :url_title, :url_content
 
+  attr_reader :data_number
   acts_as_taggable
   acts_as_taggable_on :tags
   acts_as_taggable_on :locations
@@ -38,10 +44,11 @@ class Experience < ActiveRecord::Base
   has_many :question_experience_relations, :dependent => :destroy
   has_many :answer_questions, :through => :question_experience_relations, :source => :question
 
-  validates_presence_of :user_id, :content, :tag_list
+  validates_presence_of :user_id, :content
 
   #我想讓使用者寫文章時可以用顏色 所以先拿掉過濾
   #before_save :format_content
+  before_create :default_start_at
   after_create :deliver_experience_notification, :if => Proc.new{|exp| exp.public}
   
   #原本Private 變成public會在通知一次                                                    
@@ -58,12 +65,13 @@ class Experience < ActiveRecord::Base
   named_scope :is_belong_one_goal, {:conditions => "goal_id is not NULL"}
 
 
+
   if respond_to? :define_index
     define_index do
       indexes content
-      indexes tags_list
-      indexes comments.comment, :as => :comment_content
-      where "public = '1'"
+      indexes url_title  
+      indexes url_content
+      indexes url        
       group_by "experiences.user_id"
     end
   end
@@ -110,6 +118,10 @@ class Experience < ActiveRecord::Base
   private
   def deliver_experience_notification
     Delayed::Job.enqueue(ExperienceMailingJob.new(self.id, self.user_id))
+  end
+
+  def default_start_at
+    self.start_at ||= Time.now
   end
 end
 

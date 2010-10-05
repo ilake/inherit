@@ -1,25 +1,5 @@
-<% content_for :head do %>
-  <%= include_tiny_mce_if_needed %>
-<% end %>
-
 <% form_for @goal do |f| %>
-  <span class='mustbe'>＊<%= t'form.mustbe' %></span>
-  <%= f.error_messages %>
-  <%= f.hidden_field :category, :value => 'goal' %>
-  <div class='form-input'>
-    <p class='goal_start_at'>
-    <%= f.label :start_at, t('goal.start_at') %><br />
-    <%= f.date_select :start_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :end_year => Time.now.since(20.year).year  %>
-    </p>
-    <p class='goal_state'>
-    <%= f.label :state, t('goal.state') %><br />
-    <%= f.select :state, GOAL_STATES.localize_to_select_options%>
-    </p>
-    <p class='goal_end_at'>
-    <%= f.label :end_at, t('goal.end_at') %><br />
-    <%= f.date_select :end_at, :use_month_numbers => true, :start_year => current_user.try(:birthday).try(:year) || 1950, :end_year => Time.now.since(20.year).year %>
-    </p>
-  </div>
+  <%= f.hidden_field :category, :value => 'category' %>
   <div class='form-input'>
     <p>
     <span class='mustbe'>＊</span>
@@ -27,28 +7,8 @@
     <%= f.text_field :title %>
     </p>
     <p>
-    <span class='mustbe'>＊</span>
     <%= f.label :content, t("goal.content") %><br />
-    <%= f.text_area :content, :size => '60x20', :class => "mceEditor"  %>
-    </p>
-  </div>
-  <div class='form-input'>
-    <p>
-    <span class='mustbe'>＊</span>
-    <%= f.label :percentage, t('goal.percentage')  %>(0 ~ 100)%<br />
-    <%= f.text_field :percentage %>
-    </p>
-    <p>
-    <%= f.radio_button :public, true %>
-    <%= f.label :public, t('goal.public') %><br />
-
-    <%= f.radio_button :public, false %>
-    <%= f.label :public, t('goal.self_privacy') %>
-    </p>
-    <p>
-    <span class='mustbe'>＊</span>
-    <%= f.label :tag, t('goal.tag_space') %><span class='mustbe'><%= t'goal.tag_desc'%></span><br />
-    <%= f.text_field :tag_list %>
+    <%= f.text_area :content, :size => '32x5' %>
     </p>
   </div>
   <p><%= f.submit t("action.submit") %></p>
@@ -56,10 +16,5 @@
 
 <%# '表示從facebox 出來' %>
 <% if params[:rel] %>
-  <%#= javascript_include_tag 'goal' %>
   <%= javascript_include_tag 'goal_ajax_create' %>
-<% else %>
-  <% content_for :bottom_js do %>
-    <%#= javascript_include_tag 'goal' %>
-  <% end %>
 <% end %>

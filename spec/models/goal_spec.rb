@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100823122919
+# Schema version: 20101004155754
 #
 # Table name: goals
 #
@@ -14,7 +14,7 @@
 #  updated_at :datetime
 #  public     :boolean(1)      default(TRUE)
 #  tags_list  :text
-#  category   :string(255)     default("category")
+#  category   :string(255)     default("goal")
 #  percentage :integer(4)      default(0)
 #
 

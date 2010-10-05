@@ -52,6 +52,10 @@ label {
   color: #FF0000;
 }
 
+#ajax_loading {
+  display:none;
+}
+
 .hide {
   display: none;
 }
@@ -338,6 +342,14 @@ input.btn, .btn a, .btn-active button, .btn-active input, .btn-active a {
   padding:6px 3px 3px 3px;
 }
 
+.exp_new {
+  float:left;
+  width:600px;
+}
+.exp_new input {
+  font-size: 20px;
+}
+
 .avatared {
   font-weight:bold;
   height:54px;
@@ -364,19 +376,14 @@ input.btn, .btn a, .btn-active button, .btn-active input, .btn-active a {
   cursor:pointer;
 }
 
-.profile_hide{
-  background: transparent url(http://png-4.findicons.com/files/icons/2226/matte_basic/32/add.png) 0 0 no-repeat scroll;
-  width: 32px;
-  height: 32px;
+.normal {
+  display: none;
 }
 
-.profile_show{
-  background: transparent url(http://png-5.findicons.com/files/icons/1577/danish_royalty_free/32/minus_white.png) 0 0 no-repeat scroll;
-  width: 32px;
-  height: 32px;
-  line-height:32px;
+.content-switch {
+  cursor:pointer;
+  color: #0AA7F8;
 }
-
 
 .exp_profile_cell {
   margin:6px 0px 6px 0px;
@@ -391,7 +398,15 @@ input.btn, .btn a, .btn-active button, .btn-active input, .btn-active a {
   width: 300px;
   float:left;
 }
-
+.exp_content {
+  color: #333333;
+}
+.url_desc {
+  color: #808080;
+}
+.url_title a{
+  color: #3B5998;
+}
 .exp-info {
   display:none;
   color:#000000;
@@ -415,7 +430,6 @@ input.btn, .btn a, .btn-active button, .btn-active input, .btn-active a {
 #user_content {
   overflow-x: hidden;
   overflow-y: auto;
-  height: 202px;
 }
 
 #exp_chart {
@@ -539,11 +553,6 @@ input.btn, .btn a, .btn-active button, .btn-active input, .btn-active a {
   margin-left:30px;
 }
 /* anchor */
-#exp_list a{
-  color: #1259C7;
-  text-decoration:underline;
-}
-
 .exp_cell a, #new_exp a, .exp_author a, .goal_author a, .question_title a,  .exp_anchor a, .goal_anchor a, .question_anchor a, .anchor a{
   color: #0AA7F8;
   text-decoration: none;

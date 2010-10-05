@@ -98,6 +98,7 @@ en:
     showone: 'Show one record one time'
     new_desc: 'You could create a record at sometime , in a range or until now'
   goal:
+    all: 'ALL'
     label: 'Goal'
     tags: 'Goal tags'
     guys: 'Others goals'

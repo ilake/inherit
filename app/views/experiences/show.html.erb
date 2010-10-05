@@ -11,14 +11,6 @@
   end %>  
 <% end %>
 
-<% content_for :sider do %>
-  <%= Handcache.get_and_set("#{params.values.sort.to_s}-#{I18n.locale}-sider", :expires_in => 60 ) do
-    render :partial => 'show_sider', :locals => {:experiences => @related_exps}
-  end %>  
-<% end %>
-
-<%= facebook_like %>
-<%= share_button %>
 <div id='exp_show_main'>
   <p class='exp_author'>
   <%= link_to t("exp.back_to_user", :name => @experience.user.nickname),  @current_goal ?  user_exps_path(:user_id => @experience.user, :goal_id => @current_goal) : user_home_path(@experience.user.username) %>
@@ -71,39 +63,6 @@
       <span class='tags_func'>
         <% tag_link @experience %>
       </span>
-      <div class='cheer_function'>
-        <% if @experience.votes_for > 0%>
-          <strong class='anchor'> <%= link_to @experience.likes_count, experience_votes_url(@experience) %> <%= t'exp.guys_like'%></strong>
-        <% end %>
-
-        <% form_for @vote do |f| %>
-          <%= hidden_field_tag :voteable_type, @vote.voteable_type %>
-          <%= hidden_field_tag :exp_id, @experience.id%>
-          <%= hidden_field_tag :vote, 1 %>
-          <%= f.submit t('action.like') %><span class='cheer space'><%= t'action.like_desc'%></span>
-        <% end %>
-
-      </div>
-      <div class='clear'></div>
-
     </p>
-    <%#= EXP_TYPE[@experience.exp_type] if @experience.exp_type %>
-    <%#= @experience.location_list %>
-
   </div>
-  <hr >
-  <%= render :partial => 'comments/form' %>
-
-  <h3><%= t'comment.label' %></h3>
-  <div class='commentlist'>
-    <% @comments.each do |c| %>
-      <div class='comment'>
-        <h3><span class='exp_author'><%= link_to_user_home(c.user) %></span> <%= t'comment.say'%>...</h3>
-      
-        <div><%= Sanitize.clean(c.comment) %></div>
-      </div>
-    <% end %>
-  </div>
-
-
 </div>
