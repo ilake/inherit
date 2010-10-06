@@ -48,7 +48,7 @@ class GoalsController < ApplicationController
     @goal = current_user.goals.find(params[:id])
     if @goal.update_attributes(params[:goal])
       flash[:notice] = I18n.t("action.update_successfully")
-      redirect_to @goal
+      redirect_to user_home_path(current_user) 
     else
       flash[:error] = I18n.t("action.update_fail")
       render :action => 'edit'

@@ -336,6 +336,10 @@ input.btn, .btn a, .btn-active button, .btn-active input, .btn-active a {
 
 
 /* User experience index page */
+.goal-info {
+  display:none;
+}
+
 #user_exp_profile {
   overflow-x: hidden;
   margin: 3px 0px 10px 0px;

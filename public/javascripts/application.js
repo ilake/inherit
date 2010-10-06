@@ -123,4 +123,15 @@ $(document).ready(function(){
       }
     );
 
+    $('.goal_list_cell').hover(
+      function(){
+        $(this).find('.goal-info').show();
+        $(this).addClass('even');
+      },
+      function(){
+        $(this).find('.goal-info').hide();
+        $(this).removeClass('even');
+      }
+    );
+
 });

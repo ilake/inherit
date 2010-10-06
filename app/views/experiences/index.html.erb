@@ -26,11 +26,16 @@
         <em><%= t'goal.non'%></em>
       <% else %>
         <% for goal in @goals %>
-          <dd class='anchor'>
+          <dd class='anchor goal_list_cell'>
           <%=link_to_unless_current h(goal.title), user_exps_path(@user, goal) %>
+          <div class='goal_function goal-info'>
+            <%= link_to t('action.edit'), edit_goal_path(goal) %>
+            <%= link_to t('action.destroy'), goal, :confirm => t('action.confirm'), :method => :delete %>
+          </div>
           </dd>
         <% end %>
       <% end %>
+      <%= simple_format(@current_goal.try(:content)) %>
     </dl>
   </div>
   <div class='exp_new'>

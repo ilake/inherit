@@ -1,5 +1,5 @@
 class ExperiencesController < ApplicationController
-  uses_tiny_mce(:options => AppConfig.simple_mce_options, :only => [:index]) if defined?(AppConfig)
+  uses_tiny_mce(:options => AppConfig.simple_mce_options, :only => [:index, :edit]) if defined?(AppConfig)
   before_filter :force_set_profile
   before_filter :authenticate_user!
   before_filter :user_selected, :only => [:index]
