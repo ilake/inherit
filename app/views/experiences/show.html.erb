@@ -12,57 +12,31 @@
 <% end %>
 
 <div id='exp_show_main'>
-  <p class='exp_author'>
-  <%= link_to t("exp.back_to_user", :name => @experience.user.nickname),  @current_goal ?  user_exps_path(:user_id => @experience.user, :goal_id => @current_goal) : user_home_path(@experience.user.username) %>
-  </p>
   <div id='exp_show_content'>
     <div>
       <span id='exp_show_time'>
         <%= @experience.start_at.to_s(:date)%>
         <%=h "~ #{@experience.end_at.to_s(:date)}" if @experience.end_at %>
-        <%= "(#{t'exp.private'})" if !@experience.public %>
       </span>
-
-      <% if can? :update, @experience %>
-        <span class='exp_function'>
-          <%= link_to t('action.edit'), edit_experience_path(@experience) %>
-        </span>
-      <% end %>
-      <span class='exp_function'>
-        <% if can? :destroy, @experience %>
-          <%= link_to t('action.destroy'), @experience, :confirm => t('action.confirm'), :method => :delete %>
-        </span>
-      <% end %>
     </div>
 
     <% if @experience.goal %>
       <p class='exp_category'>
       <strong><%= t'exp.belong_goal'%>:</strong>
-        <%= link_to @experience.goal.title, @experience.goal%>
+        <%= @experience.goal.title %>
       </p>
     <% end %>
 
-    <% params_hash = @current_goal ? {:goal_id => @current_goal.to_param} : {}%>
     <p class='exp-content'>
       <%= @experience.content %>
     </p>
-    <p class='function'>
-      <% unless @experience.first? %>
-        <% if can? :show, @experience.prev_item(current_user, @current_goal.try(:id)) %>
-          <%= link_to t('exp.prev'),  experience_path(@experience.prev_item(current_user, @current_goal.try(:id)), params_hash) if @experience.prev_item(current_user, @current_goal.try(:id))%>
-        <% end %>
-      <% end %>
-      <% unless @experience.last? %>
-        <% if can? :show, @experience.next_item(current_user, @current_goal.try(:id)) %>
-          <%= link_to t('exp.next'),  experience_path(@experience.next_item(current_user, @current_goal.try(:id)), params_hash) if @experience.next_item(current_user, @current_goal.try(:id))%>
-        <% end %>
-      <% end %>
-    </p>
-    <p>
-    <strong><%= t'exp.tags' %>: </strong>
-      <span class='tags_func'>
-        <% tag_link @experience %>
-      </span>
-    </p>
+    <% if @experience.url %>
+      <h4 class='url_title'>
+        <%= link_to @experience.url_title, @experience.url, :target => '_blank' %>
+      </h4>
+      <p class='url_desc'>
+      <%= @experience.url_content %>
+      </p>
+    <% end %>
   </div>
 </div>

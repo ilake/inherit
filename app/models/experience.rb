@@ -27,7 +27,7 @@
 class Experience < ActiveRecord::Base
   include TagListFunc
 
-  attr_accessible :start_at, :end_at, :content, :goal_id, :tag_list, :exp_type, :location_list, :until_now, :end_at_exist, :public, :color, :url, :url_title, :url_content
+  attr_accessible :start_at, :end_at, :content, :goal_id, :tag_list, :exp_type, :location_list, :until_now, :end_at_exist, :public, :color, :url, :url_title, :url_content, :share_url, :share_expire_at
 
   attr_reader :data_number
   acts_as_taggable
@@ -63,6 +63,7 @@ class Experience < ActiveRecord::Base
   }
   named_scope :this_week, lambda{{:conditions => {:updated_at => Time.now.ago(7.days)..Time.now}}}
   named_scope :is_belong_one_goal, {:conditions => "goal_id is not NULL"}
+  named_scope :unexpire_shared, lambda{{:conditions => ["share_expire_at > ?", Time.now]}}
 
 
 

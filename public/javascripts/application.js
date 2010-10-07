@@ -138,4 +138,24 @@ $(document).ready(function(){
       }
     );
 
+    $('.share_link').click(function(){
+
+      var current_exp = $(this).parent().parent();
+      current_exp.find('.share_ajax_loading').show();
+      $.ajax({
+        url: $(this).attr('href'),
+        type: 'GET',
+        data: '',
+        dataType:  'html',
+        success: function(html){
+          current_exp.find('.share-link-partial').html(html);
+          current_exp.find('.share_ajax_loading').hide();
+        },
+        error: function(){
+          alert('Fail');
+          current_exp.find('.share_ajax_loading').hide();
+        }
+      });
+      return false;
+    }); 
 });

@@ -25,7 +25,7 @@ ActionController::Routing::Routes.draw do |map|
     goal.resources :experiences, :only => [:new]
   end
 
-  map.resources :experiences, :except => [:index] do |exp|
+  map.resources :experiences, :except => [:index], :member => {:create_share_url => :get } do |exp|
     exp.resources :votes, :only => [:index]
   end
   #map.resource :profile, :only => [:show, :edit, :update]

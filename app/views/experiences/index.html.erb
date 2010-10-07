@@ -60,25 +60,29 @@
     <% @experience_groups[time].each do |experience| %>
       <span>
         <li class='exp_list_cell'>
-        <span class='time'>
-          <%= experience.start_at.to_s(:md) if experience.start_at %>
-          <%= experience.end_at_date %>
-        </span>
-        <span class='exp_content'>
-            <%= experience.content %>
-        </span>
-        <% if experience.url %>
-          <h4 class='url_title'>
-            <%= link_to experience.url_title, experience.url, :target => '_blank' %>
-          </h4>
-          <p class='url_desc'>
-          <%= experience.url_content %>
-          </p>
-        <% end %>
-        <div class='exp-info function'>
-          <%= link_to t('action.edit'), edit_experience_path(experience) %>
-          <%= link_to t('action.destroy'), experience, :confirm => t('action.confirm'), :method => :delete %>
-        </div>
+          <span class='time'>
+            <%= experience.start_at.to_s(:md) if experience.start_at %>
+            <%= experience.end_at_date %>
+          </span>
+          <span class='exp_content'>
+              <%= experience.content %>
+          </span>
+          <% if experience.url %>
+            <h4 class='url_title'>
+              <%= link_to experience.url_title, experience.url, :target => '_blank' %>
+            </h4>
+            <p class='url_desc'>
+            <%= experience.url_content %>
+            </p>
+          <% end %>
+          <div class='exp-info function'>
+            <%= link_to t('action.edit'), edit_experience_path(experience) %>
+            <%= link_to t('action.destroy'), experience, :confirm => t('action.confirm'), :method => :delete %>
+            <%= link_to t('action.share'),  create_share_url_experience_path(experience), :class => 'share_link' %>
+          </div>
+          <%= image_tag('ajax-loader.gif', :class => 'share_ajax_loading') %>
+          <div class='share-link-partial'>
+          </div>
         </li>
       </span>
     <% end %>

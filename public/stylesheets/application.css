@@ -52,7 +52,7 @@ label {
   color: #FF0000;
 }
 
-#ajax_loading {
+#ajax_loading, .share_ajax_loading {
   display:none;
 }
 

@@ -26,4 +26,5 @@ class UrlController < ApplicationController
 
     render :partial => "url_title_desc", :locals => {:title => title, :content => content, :url => params[:url]}
   end
+
 end

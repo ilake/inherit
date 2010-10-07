@@ -71,3 +71,5 @@ begin
 rescue
   CacheStore = Moneta::BasicFile.new(:path => "tmp/cache")
 end
+
+SHARE_URL_SALT= "mw6eiqrdwtjzn4bt5pkdi46jw3n2nrpnr3qhkjnhidwbenq7e5eajwk6cmpfpd83a65w8mj96hzhtf2z5it5w9ja8wpm5rke36jnqi7qb8waqkrarqzib7m3jfcn7mkb"

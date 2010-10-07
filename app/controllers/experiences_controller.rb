@@ -1,9 +1,9 @@
 class ExperiencesController < ApplicationController
   uses_tiny_mce(:options => AppConfig.simple_mce_options, :only => [:index, :edit]) if defined?(AppConfig)
   before_filter :force_set_profile
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:show]
   before_filter :user_selected, :only => [:index]
-  load_and_authorize_resource :nested => :user
+  #load_and_authorize_resource :nested => :user
 
   # GET /experiences
   # GET /experiences.xml
@@ -17,7 +17,7 @@ class ExperiencesController < ApplicationController
     @current_goal = Goal.find_by_id(params[:goal_id])
     @goals = current_user.goals.is_category.descend_by_created_at
 
-    @fan = @user.fan(current_user)
+    #@fan = @user.fan(current_user)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -28,16 +28,16 @@ class ExperiencesController < ApplicationController
   # GET /experiences/1
   # GET /experiences/1.xml
   def show
-    @experience = Experience.find(params[:id])
-    @comments = @experience.comments.recent.find(:all, :include => :user)
-
-    @comment = @experience.comments.new
-    @vote = @experience.votes.new
-    @current_goal = Goal.find_by_id(params[:goal_id]) 
-    @related_exps = @experience.find_related_exps(current_user_location)
+    @experience = Experience.unexpire_shared.find(:first, :conditions => {:share_url => params[:id]})
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html {
+        if @experience 
+          render :action => 'show'
+        else
+          redirect_to root_url
+        end
+      }
       format.xml  { render :xml => @experience }
     end
   end
@@ -65,7 +65,9 @@ class ExperiencesController < ApplicationController
       if @experience.save
         current_user.tag(@experience, :with => @experience.tag_list, :on => :tags)
         flash[:notice] = I18n.t('action.create_successfully')
-        format.html { redirect_to :back }
+        format.html {
+          redirect_to user_home_path(current_user) 
+        }
         format.xml  { render :xml => @experience, :status => :created, :location => @experience }
       else
         flash[:error] = I18n.t('action.create_fail')
@@ -111,5 +113,14 @@ class ExperiencesController < ApplicationController
 
   def select
     @experiences = current_user.experiences.public_equals(true)
+  end
+
+  def create_share_url
+    @experience = current_user.experiences.find(params[:id])
+    @experience.update_attributes(:share_url => Digest::SHA1.hexdigest("#{@experience.id}#{@experience.created_at.to_s(:fulltime)}#{SHARE_URL_SALT}"), :share_expire_at => Time.now + 10.minutes)  
+
+    respond_to do |format|
+      format.js {render :partial => 'share_link', :locals => {:experience => @experience}}
+    end
   end
 end

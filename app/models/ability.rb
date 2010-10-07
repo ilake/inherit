@@ -9,7 +9,8 @@ class Ability
 
       can :read, :all
       can :show, [Experience, Goal] do |obj|
-        obj.try(:public?) || (obj.try(:user) == user)
+        true
+ #       obj.try(:public?) || (obj.try(:user) == user)
       end
 
       if user.is_not_guest?
