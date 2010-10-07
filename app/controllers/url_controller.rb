@@ -6,19 +6,24 @@ class UrlController < ApplicationController
   def create
     #request.env['QUERY_STRING'] would like this "url=http://www.myoops.org/main.php?act=course&id=497"
 
-      doc = Nokogiri::HTML(open(request.env['QUERY_STRING'].sub!(/url=/,'')))
+    rsp = open(request.env['QUERY_STRING'].sub!(/url=/,''))
+    begin 
+      doc = Hpricot.parse(rsp)
+      title = doc.search('title').inner_html
+      if meta_desc = doc.search("meta[@name='description']").first
+        content = meta_desc.attributes['content']
+      end
+      content = Sanitize.clean(doc.search("p").first.try(:inner_html)) if content.blank?
+      content = Sanitize.clean(doc.search("a").first.try(:inner_html)) if content.blank?
+    rescue
+      doc = Nokogiri::HTML(rsp)
       title = doc.search('title').text
       if meta_desc = doc.search("meta[@name='description']").first
         content = meta_desc.values[1]
       end
-
-      if content.blank?
-        content = Sanitize.clean(doc.search("p").first.try(:content))
-      end
-
-      if content.blank?
-        content = Sanitize.clean(doc.search("a").first.try(:content))
-      end
+      content = Sanitize.clean(doc.search("p").first.try(:content)) if content.blank?
+      content = Sanitize.clean(doc.search("a").first.try(:content)) if content.blank?
+    end
 
 #      if image = doc.search("img").first
 #        img = image.values[0]

@@ -1,9 +1,6 @@
 class SearchController < ApplicationController
   def index
-    #@questions = Question.search params[:search], :limit => 3
-    @profiles = Profile.search params[:search], :include => :user, :limit => 3
-    @goals = Goal.search params[:search], :limit => 3
-    @experiences = Experience.search params[:search], :limit => 5
+    @experiences = Experience.search params[:search], :page => params[:page], :per_page => 15, :conditions => {:user_id => current_user.id}
   end
 
   def experiences

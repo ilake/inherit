@@ -1,27 +1,29 @@
 # == Schema Information
-# Schema version: 20101004155754
+# Schema version: 20101007045654
 #
 # Table name: experiences
 #
-#  id             :integer(4)      not null, primary key
-#  content        :text
-#  user_id        :integer(4)
-#  start_at       :datetime
-#  end_at         :datetime
-#  created_at     :datetime
-#  updated_at     :datetime
-#  goal_id        :integer(4)
-#  exp_type       :string(255)     default("normal")
-#  until_now      :boolean(1)
-#  public         :boolean(1)      default(TRUE)
-#  tags_list      :text
-#  color          :string(7)       default("#64E827")
-#  position       :integer(4)      default(0)
-#  likes_count    :integer(4)      default(0)
-#  comments_count :integer(4)      default(0)
-#  url_title      :string(64)      default("")
-#  url_content    :text
-#  url            :string(255)     default("")
+#  id              :integer(4)      not null, primary key
+#  content         :text
+#  user_id         :integer(4)
+#  start_at        :datetime
+#  end_at          :datetime
+#  created_at      :datetime
+#  updated_at      :datetime
+#  goal_id         :integer(4)
+#  exp_type        :string(255)     default("normal")
+#  until_now       :boolean(1)
+#  public          :boolean(1)      default(TRUE)
+#  tags_list       :text
+#  color           :string(7)       default("#64E827")
+#  position        :integer(4)      default(0)
+#  likes_count     :integer(4)      default(0)
+#  comments_count  :integer(4)      default(0)
+#  url_title       :string(64)      default("")
+#  url_content     :text
+#  url             :string(255)     default("")
+#  share_url       :string(255)
+#  share_expire_at :datetime
 #
 
 class Experience < ActiveRecord::Base
@@ -65,14 +67,12 @@ class Experience < ActiveRecord::Base
   named_scope :is_belong_one_goal, {:conditions => "goal_id is not NULL"}
   named_scope :unexpire_shared, lambda{{:conditions => ["share_expire_at > ?", Time.now]}}
 
-
-
   if respond_to? :define_index
     define_index do
       indexes content
       indexes url_title  
       indexes url_content
-      indexes url        
+      indexes user_id
       group_by "experiences.user_id"
     end
   end

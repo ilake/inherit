@@ -9,57 +9,26 @@
     <%= submit_tag t('site.search'), :name => nil %>
   <% end %>
   </div>
-  <strong><%= t'search.keyword'%> <%= params[:search] || @tag.try(:name) %></strong>
-  <span class='btn btn-active'>
-    <%= link_to t("site.excite"), search_rands_path %>
-  </span>
 <div class='search_item_list'>
-  <% if ['users', 'index', 'random'].include?(action_name) %>
-    <div class='search_users_items'>
-      <h3><%= t'user.label' %><%= link_to t("search.result_show_all", :num => @profiles.total_entries), search_users_path(:search => params[:search]) %></h3>
-      <ul>
-        <% @profiles.each do |profile|%>
-          <% if profile %>
-            <li class='profile_anchor'><%= link_to "#{profile.user.showname} ( #{truncate_u(Sanitize.clean(profile.intro), 15)} )", user_home_path(profile.user.username) %></li>
+  <div class='search_exp_items'>
+    <h3><%=t'exp.label'%></h3>
+    <ul>
+      <% @experiences.each do |experience|%>
+        <% if experience %>
+          <li class='exp_anchor'>
+          <%= link_to truncate_u(Sanitize.clean(experience.content), 55), experience %>
+          <% if experience.url %>
+            <h4 class='url_title'>
+              <%= link_to experience.url_title, experience.url, :target => '_blank' %>
+            </h4>
+            <p class='url_desc'>
+            <%= experience.url_content %>
+            </p>
           <% end %>
+          </li>
         <% end %>
-      </ul>
-      <%= will_paginate @profiles if action_name == 'users' %>
-    </div>
-  <% end %>
-  <% if ['goals', 'index', 'random'].include?(action_name) %>
-    <div class='search_goal_items'>
-      <h3><%= t'goal.label'%><%= link_to t("search.result_show_all", :num => @goals.total_entries), search_goals_path(:search => params[:search]) %></h3>
-      <ul>
-        <% @goals.each do |goal|%>
-          <% if goal %>
-            <li class='goal_anchor'><%= link_to truncate_u(Sanitize.clean(goal.title), 15), goal %></li>
-          <% end %>
-        <% end %>
-      </ul>
-      <%= will_paginate @goals if action_name == 'goals' %>
-      <p class='share_function'>
-        <%= link_to t('goal.new'), new_goal_path %>
-      </p>
-    </div>
-  <% end %>
-
-  <% if ['experiences', 'index', 'random'].include?(action_name) %>
-    <div class='search_exp_items'>
-      <h3><%=t'exp.label'%> <%= link_to t("search.result_show_all", :num => @experiences.total_entries), search_exps_path(:search => params[:search]) %></h3>
-      <ul>
-        <% @experiences.each do |experience|%>
-          <% if experience %>
-            <li class='exp_anchor'>
-            <%= link_to truncate_u(Sanitize.clean(experience.content), 55), experience %>
-            </li>
-          <% end %>
-        <% end %>
-      </ul>
-      <%= will_paginate @experiences if action_name == 'experiences' %>
-      <p class='share_function'>
-        <%= link_to t('exp.new'), new_experience_path %>
-      </p>
-    </div>
-  <% end %>
+      <% end %>
+    </ul>
+    <%= will_paginate @experiences  %>
+  </div>
 </div>

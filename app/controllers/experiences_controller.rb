@@ -17,8 +17,6 @@ class ExperiencesController < ApplicationController
     @current_goal = Goal.find_by_id(params[:goal_id])
     @goals = current_user.goals.is_category.descend_by_created_at
 
-    #@fan = @user.fan(current_user)
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @experiences }
