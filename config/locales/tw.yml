@@ -148,6 +148,7 @@ tw:
     increased: '已新增'
     prev: '上一筆'
     next: '下一筆'
+    share: '分享'
   message:
     label: '留言'
     board: '留言板'

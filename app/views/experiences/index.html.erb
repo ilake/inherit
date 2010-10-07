@@ -6,6 +6,9 @@
     display_meta_tags :site => t('site.name'), :noindex => true, :nofollow => true
   end %>  
 <% end %>
+<% content_for :bottom_js do%>
+  <%= javascript_include_tag 'rsp' %>
+<% end %>
 
 <div id='user_exp_profile'>
   <div class='user_header'>
