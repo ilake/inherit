@@ -5,6 +5,6 @@
   <%= link_to content, url, :target => '_blank' %>
 </p>
 <%= hidden_field :experience, :url_title, {:value => title} %>
-<%= hidden_field :experience, :url_content, {:value => content} %>
+<%= hidden_field :experience, :url_content, {:value => "#{content}"} %>
 <%= hidden_field :experience, :url, {:value => url} %>
 

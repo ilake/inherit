@@ -20,7 +20,6 @@ function trigger_parse(){
 var url = content.match(/\b((https?|ftp|file):\/\/|www\.|ftp\.)[-A-Z0-9+&@#\/%=~_|$?!:,.]*[A-Z0-9+&@#\/%=~_|$]/gi);
 
   if (url) {
-    parse_done = true;
     $('#ajax_loading').show();
 
     $.ajax({
@@ -29,7 +28,12 @@ var url = content.match(/\b((https?|ftp|file):\/\/|www\.|ftp\.)[-A-Z0-9+&@#\/%=~
       data: 'url='+url[0],
       dataType:  'html',
       success: function(html){
+        parse_done = true;
         $('#url_title_desc').html(html);
+        $('#ajax_loading').hide();
+      },
+      error: function(){
+        alert('Fail');
         $('#ajax_loading').hide();
       }
     });
