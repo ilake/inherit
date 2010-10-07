@@ -31,6 +31,16 @@
     <div class='normal-content'>
       <%= f.text_area :content, :size => '60x5' %>
     </div>
+    <% if action_name == 'edit' && @experience.url %>
+      <div>
+        <%= f.label :url_title %><br />
+        <%= f.text_field :url_title %>
+      </div>
+      <div>
+        <%= f.label :url_content %><br />
+        <%= f.text_area :url_content, :size => '60x5'  %>
+      </div>
+    <% end %>
     <br />
   </div>
   <%= image_tag('ajax-loader.gif', :id => 'ajax_loading') %>
