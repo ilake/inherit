@@ -408,8 +408,14 @@ input.btn, .btn a, .btn-active button, .btn-active input, .btn-active a {
 .url_desc {
   color: #808080;
 }
+.url_desc a{
+  color: #666666;
+}
 .url_title a{
   color: #3B5998;
+}
+#remove_url {
+  cursor:pointer;
 }
 .exp-info {
   display:none;

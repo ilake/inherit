@@ -20,6 +20,7 @@ var url = content.match(/\b((https?|ftp|file):\/\/|www\.|ftp\.)[-A-Z0-9+&@#\/%=~
         parse_done = true;
         $('#url_title_desc').html(html);
         $('#ajax_loading').hide();
+        remove_url_binding();
       },
       error: function(){
         alert('Fail');
@@ -27,6 +28,13 @@ var url = content.match(/\b((https?|ftp|file):\/\/|www\.|ftp\.)[-A-Z0-9+&@#\/%=~
       }
     });
   }
+}
+
+function remove_url_binding(){
+  $('#remove_url').click(function(){
+      $('#url_title_desc').html("");
+      parse_done = false;
+  });
 }
 
 $(document).ready(function(){
@@ -55,4 +63,5 @@ $(document).ready(function(){
       }
     });
 
+    remove_url_binding();
 });
